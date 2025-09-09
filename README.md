@@ -10,5 +10,10 @@ Pre-study
 
 Project plan
 
+<h2>Standards</h2>
+Standards applied in project:
+<ul><li>ISO</li></ul>
+<ul><li>ARP</li></ul>
+
 <h2>Contributors</h2>
 See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/blob/main/CONTRIBUTORS.md">contributors</a>.
