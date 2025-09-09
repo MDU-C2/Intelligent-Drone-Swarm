@@ -1,5 +1,6 @@
 <h1>Contributors</h1>
 <h2>2025</h2>
+<b>Stakeholder and project owner:</b> <a href="https://www.mdu.se/staff?id=lgr03">Luiz Giacomossi</a> (<a href="mailto:luiz.giacomossi@mdu.se">email</a>)
 <h3>Course code: FLA402</h3>
 <ul>
   <li>Course responsible: Luciana Provenzano</li>
@@ -11,3 +12,4 @@
 <ul><li>Emily Zainali, Validation & Verification Manager</li></ul>
 <ul><li>Esaias Målqvist, Safety Manager</li></ul>
 <ul><li>Yonatan Beyene, Quality & Configuration Manager</li></ul>
+
