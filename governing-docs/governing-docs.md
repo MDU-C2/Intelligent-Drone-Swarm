@@ -1,5 +1,6 @@
 <h1>Governing Documents</h1>
-Text
+Templates for documents needed to start, plan and follow up the project.
+
 <h2>From book "Projektledning"</h2>
 Mandatory governing documents
 <ul>
