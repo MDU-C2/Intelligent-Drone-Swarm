@@ -2,5 +2,5 @@
 <ol>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/pre-study/checklist-project-start.md">Checklist at project start</a></li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/pre-study/assignment-analysis.md">Assignment analysis</a></li>
-  <li>Purpose and Goals</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/pre-study/purpose-goals.md">Purpose and Goals</a></li>
 </ol>
