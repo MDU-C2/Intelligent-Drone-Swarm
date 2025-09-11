@@ -42,24 +42,23 @@ Description of responsibilities and authorities of the roles within the project.
 </ul>
 
 <h2>Quality & Configuration Manager</h2>
-
-<h2>Quality Manager</h2>
 <ul>
-<h3>Tasks</h3>
-Nothing
-<ul>
-    <li>List Item</li>
-  </ul>
-  <h3>Responsibilities</h3>
-  <ul>
-    <li>List Item</li>
-  </ul>
-  <h3>Deliverables</h3>
-  <ul>
-    <li>List Item</li>
+  <h2>Quality Manager</h2>
+    <ul>
+    <h3>Tasks</h3>
+      <ul>
+        <li>List Item</li>
+      </ul>
+    <h3>Responsibilities</h3>
+      <ul>
+        <li>List Item</li>
+      </ul>
+    <h3>Deliverables</h3>
+      <ul>
+        <li>List Item</li>
+      </ul>
   </ul>
 </ul>
-
 
 <h2>Requirements Manager</h2>
 <h3>Tasks</h3>
