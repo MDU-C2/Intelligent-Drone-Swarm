@@ -1,5 +1,5 @@
 <h1>Governing Documents</h1>
-Templates for documents needed to start, plan and follow up the project.
+Templates for documents needed to start, plan and follow up the project (i.e., all phases of the project).
 
 <h2>From book "Projektledning"</h2>
 Examples of governing documents:<br>
