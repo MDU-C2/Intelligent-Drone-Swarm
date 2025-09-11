@@ -1,5 +1,5 @@
 <img src="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/IDS-logo.png" alt="IDS-logo.png">
-<h1>Intelligent Drone Swarm Protocol</h1>
+<h1>Intelligent Replaning Drone Swarm</h1>
 <i>Intelligent Replanning Protocol for a Fail-Operational Drone Swarm</i>
 
 <h2>Introduction</h2>
