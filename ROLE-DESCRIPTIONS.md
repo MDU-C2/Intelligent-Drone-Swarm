@@ -17,6 +17,7 @@ Description of responsibilities and authorities of the roles within the project.
 
 <h2>Quality & Configuration Manager</h2>
 <h3>Tasks</h3>
+Nothing
 <ul>
   <li>List Item</li>
 </ul>
