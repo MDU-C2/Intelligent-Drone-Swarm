@@ -76,7 +76,7 @@ Description of responsibilities and authorities of the roles within the project.
       <ul>
         <li>Develop and maintain the Configuration Management Plan (CMP).</li>
         <li>Manage version control.</li>
-        <li>Identify Configuration Items (CIs) (Decide which artifacts (code, documents, test cases) are under CM control).</li>   
+        <li>Identify Configuration Items (CIs) (Decide which artifacts (code, documents, test cases) are under CM control. CIs can be any artifact produced during the project that needs to be uniquely identified, versioned, and controlled.).</li>   
         <li>Control changes (Process change requests, evaluate impact, approve/reject, and implement changes).</li>
       </ul>
     <h3>Responsibilities</h3>
