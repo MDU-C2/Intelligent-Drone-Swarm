@@ -1,4 +1,4 @@
-<h1>Title of plan</h1>
+<h1>PLAN TEMPLATE</h1>
 
 <h2>Glossary</h2>
 <ul>
