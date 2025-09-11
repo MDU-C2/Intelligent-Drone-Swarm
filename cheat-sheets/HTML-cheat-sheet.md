@@ -5,7 +5,7 @@
 | `<strong>Bold</strong>`    | Bold text (semantic)   |
 | `<i>Italic</i>`            | Italic text            |
 | `<em>Italic</em>`          | Italic text (semantic) |
-| `<u>Underlined</u>`        | Underlined text        |
+| `<ins>Underlined</ins>`    | Underlined text        |
 | `<mark>Highlighted</mark>` | Highlighted text       |
 
 # Headings
