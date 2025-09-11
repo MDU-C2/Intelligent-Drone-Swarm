@@ -1,1 +1,1 @@
-<h1>Validation & Verification Management Plan</h1>
+<h1>Verification & Validation Management Plan</h1>
