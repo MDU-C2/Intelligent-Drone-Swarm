@@ -44,20 +44,57 @@ Description of responsibilities and authorities of the roles within the project.
 <h2>Quality & Configuration Manager</h2>
 <ul>
   <h2>Quality Manager</h2>
-    <ul>
-    <h3>Tasks</h3>
+  Accroding to IEE 730, ISO/IEC/IEE 12207, ISO 9001:2015
+  <ul>
+    <h3>Tasks</h3>   
       <ul>
-        <li>List Item</li>
+        <li>Develop and maintain the Quality Assurance Plan for the project.</li>
+        <li>Conduct reviews and audits of project materials.</li>
+        <li>Track defects, non-conformances, and corrective actions.</li>
+        <li>Support verification & validation activities to ensure product meets requirements.</li>
       </ul>
     <h3>Responsibilities</h3>
       <ul>
-        <li>List Item</li>
+        <li>Ensure project materials meet quality requirements.</li>
+        <li>Maintain process compliance with applicable standards and regulations.</li>
+        <li>Verify that all software development activities follow QA procedures.</li>
+        <li>Identify quality risks and propose mitigation strategies.</li>
       </ul>
     <h3>Deliverables</h3>
       <ul>
-        <li>List Item</li>
+        <li>Quality Assurance Plan(QAP)</li>
+        <li>QA Reports / Audit Reports (Results from reviews, inspections, and audits).</li>
+        <li>Metrics & Dashboards (Defect counts, test coverage, review status).</li>
+        <li>Quality Assurance Plan (QAP)</li>
       </ul>
   </ul>
+
+  <h2>Configuration Manager</h2>
+  Accroding to IEE 730, ISO/IEC/IEE 12207, ISO 9001:2015
+    <ul>
+    <h3>Tasks</h3>   
+      <ul>
+        <li>Develop and maintain the Quality Assurance Plan for the project.</li>
+        <li>Conduct reviews and audits of project materials.</li>
+        <li>Track defects, non-conformances, and corrective actions.</li>
+        <li>Support verification & validation activities to ensure product meets requirements.</li>
+      </ul>
+    <h3>Responsibilities</h3>
+      <ul>
+        <li>Ensure project materials meet quality requirements.</li>
+        <li>Maintain process compliance with applicable standards and regulations.</li>
+        <li>Verify that all software development activities follow QA procedures.</li>
+        <li>Identify quality risks and propose mitigation strategies.</li>
+      </ul>
+    <h3>Deliverables</h3>
+      <ul>
+        <li>Quality Assurance Plan(QAP)</li>
+        <li>QA Reports / Audit Reports (Results from reviews, inspections, and audits).</li>
+        <li>Metrics & Dashboards (Defect counts, test coverage, review status).</li>
+        <li>Quality Assurance Plan (QAP)</li>
+      </ul>
+  </ul>
+  
 </ul>
 
 <h2>Requirements Manager</h2>
