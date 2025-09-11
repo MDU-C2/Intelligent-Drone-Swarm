@@ -1,6 +1,6 @@
 <img src="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/IDS-logo.png" alt="IDS-logo.png">
 <h1>Intelligent Drone Swarm Protocol</h1>
-Intelligent Replanning Protocol for a Fail-Operational Drone Swarm
+<i>Intelligent Replanning Protocol for a Fail-Operational Drone Swarm</i>
 
 <h2>Introduction</h2>
 This project addresses the implementation of swarm-level coordination logic that uses detailed health information to ensure the overall mission can continue with maximum efficiency, even when individual drones are compromised.
