@@ -29,7 +29,13 @@ See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/b
 
 <h2>Meetings</h2>
 <ul>
-  <li>"Daily" Meetings, Tuesday - Friday, 8:40 - 9:00</li>
+  <li>"Daily" Meetings, Tuesday - Friday, 8:40 - 9:00
+  <ul>
+    <li>What did I do yesterday?</li>
+    <li>What am I going to do today?</li>
+    <li>Are there any obstacles?</li>
+  </ul>
+  </li>
   <li>Weekly Meetings, Mondays 9:00 - 10:00</li>
   <li>Booked Meetings: 
     <ul>
