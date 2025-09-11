@@ -39,7 +39,7 @@ See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/b
   <li>Weekly Meetings, Mondays 9:00 - 10:00</li>
   <li>Booked Meetings: 
     <ul>
-    <li>2025-09-12, 14:00 - 15:00, Meeting with Luiz to discuss the project</li>  
+    <li>2025-09-16, 14:00 - 15:00, Meeting with Luiz to discuss the project</li>  
     </ul>
     </li>
 </ul>
