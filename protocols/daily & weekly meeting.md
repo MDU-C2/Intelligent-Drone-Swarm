@@ -1,4 +1,4 @@
-<h1>Protocols from Daily meetings</h1>
+<h1>Protocols from Daily & Weekly meetings</h1>
 
 <h2>2025-09-10</h2>
 In todays meeting we talked about what each role does so that we can have a overview of what everyone is respossible for. 
