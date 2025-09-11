@@ -27,6 +27,17 @@ Standards applied in project:
 <h2>Contributors</h2>
 See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/blob/main/CONTRIBUTORS.md">contributors</a>.
 
+<h2>Meetings</h2>
+<ul>
+  <li>"Daily" Meetings, Tuesday - Friday, 8:40 - 9:00</li>
+  <li>Weekly Meetings, Mondays 9:00 - 10:00</li>
+  <li>Booked Meetings: 
+    <ul>
+    <li>2025-09-12, 14:00 - 15:00, Meeting with Luiz to discuss the project</li>  
+    </ul>
+    </li>
+</ul>
+
 <h2>Important links</h2>
 <ul>
   <li><a href="https://studentmdh.sharepoint.com/:x:/r/sites/IntelligentDroneSwarm/Delade%20dokument/FLA402-Time-Log.xlsx?d=wba6795dc4c9044099e3155889715a648&csf=1&web=1&e=tto7wd">Time Report</a></li>
