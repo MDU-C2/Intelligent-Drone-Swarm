@@ -2,7 +2,18 @@
 Description of responsibilities and authorities of the roles within the project.
 
 <h2>Chief Engineer</h2>
-TEXT
+<h3>Tasks</h3>
+<ul>
+  <li>List Item</li>
+</ul>
+<h3>Responsibilities</h3>
+<ul>
+  <li>List Item</li>
+</ul>
+<h3>Deliverables</h3>
+<ul>
+  <li>List Item</li>
+</ul>
 
 <h2>Quality & Configuration Manager</h2>
 TEXT
