@@ -1,7 +1,8 @@
 <h1>Project Plan</h1>
 <h2>Glossary</h2>
 <ul>
-  <li></li>
+  <li>UAV - Unmanned Aerial Vehicle</li>
+  <li>SAR - Search and Rescue</li>
 </ul>
 
 <h2>Introduction</h2>
@@ -11,7 +12,7 @@
 
 <h2>References</h2>
 <ul>
-  <li></li>
+  <li>SAE ARP</li>
 </ul>
 
 <h2>Objectives</h2>
