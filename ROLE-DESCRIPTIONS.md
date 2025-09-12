@@ -65,7 +65,6 @@ Description of responsibilities and authorities of the roles within the project.
         <li>Quality Assurance Plan(QAP)</li>
         <li>QA Reports / Audit Reports (Results from reviews, inspections, and audits).</li>
         <li>Metrics & Dashboards (Defect counts, test coverage, review status).</li>
-        <li>Quality Assurance Plan (QAP)</li>
       </ul>
   </ul>
 
