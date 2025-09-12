@@ -12,7 +12,8 @@
 
 <h2>References</h2>
 <ul>
-  <li>SAE ARP</li>
+  <li>SAE ARP4754B (V-model)</li>
+  <li>SAE ARP4761A (V-model)</li>
 </ul>
 
 <h2>Objectives</h2>
