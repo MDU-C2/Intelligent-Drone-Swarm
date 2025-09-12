@@ -1,3 +1,5 @@
+<b><ins>NOTE!! PLANS ARE WRITTEN ON OVERLEAF</ins>, and then uploaded to this folder</b>
+
 <h1>PLAN TEMPLATE</h1>
 
 <h2>Glossary</h2>
