@@ -1,4 +1,4 @@
-<h1>Quality & Configuration Management Plan</h1>
+<h1>Configuration Management Plan</h1>
 <h2>Glossary</h2>
 <ul>
   <li></li>
@@ -38,3 +38,4 @@
 <ul>
   <li></li>
 </ul>
+
