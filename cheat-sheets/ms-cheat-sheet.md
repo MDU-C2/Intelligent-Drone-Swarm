@@ -5,6 +5,14 @@
 | Bucket ID "Planned" | 2QXh8mOxM0C7stZ9S5tGEZYAMKjo |
 | Bucket ID "In Progress" | aPcauA28AUOgEAhTDweT0pYABBVG |
 | Bucket ID "Done" | scInLrRWhkiie7Eiwp98DJYAA7y1 |
+|  |  |
+| Plan ID | |
+| Bucket ID "Unassigned" | NuaBbj0noEa49uBYZfqCRpYAEO2o |
+| Bucket ID "Andrea" | 2uVljhBnt0SbgXpTrzffzpYAIWqa |
+| Bucket ID "Claire" | rY8Rh0qLSEaylPUL5E-mJZYALQGc |
+| Bucket ID "Emily" | ktb7ZC5awUi1BAvOV7PEkJYAHYtP |
+| Bucket ID "Esaias" | Mp-XcwSV-U-H7mGrndpAgZYANn85 |
+| Bucket ID "Yonatan" | kMbE6cUjOE-CfEmu48Q2MJYAFLRJ |
 
 # Excel
 ## Format every other row
