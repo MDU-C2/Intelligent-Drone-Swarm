@@ -11,7 +11,7 @@ This project addresses the implementation of swarm-level coordination logic that
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/reference-literature">Reference literature</a> used during the project</li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/cheat-sheets">Cheat sheets</a> for frequently used HTML tags and GitHub code lines</li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/protocols">Protocols</a> from daily and weekly meetings</li>
-  <li>Images used in the project</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/images">Images</a> used in the project</li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/project-phases">Project phases</a></li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/plans">Plans</a></li>
 </ul>
