@@ -1,12 +1,12 @@
 # Planner
 | Name | ID |
 | - | - |
-| Plan ID | -FjOsRy-VUum89rh3vkTmJYAD-J3 |
+| Plan ID "Intelligent Replanning Drone Swarm" | -FjOsRy-VUum89rh3vkTmJYAD-J3 |
 | Bucket ID "Planned" | 2QXh8mOxM0C7stZ9S5tGEZYAMKjo |
 | Bucket ID "In Progress" | aPcauA28AUOgEAhTDweT0pYABBVG |
 | Bucket ID "Done" | scInLrRWhkiie7Eiwp98DJYAA7y1 |
 |  |  |
-| Plan ID | DAFAdRlRkUiwPxBjqKP3w5YAHNqX |
+| Plan ID "CE - Sprint Planning" | DAFAdRlRkUiwPxBjqKP3w5YAHNqX |
 | Bucket ID "Unassigned" | NuaBbj0noEa49uBYZfqCRpYAEO2o |
 | Bucket ID "Andrea" | 2uVljhBnt0SbgXpTrzffzpYAIWqa |
 | Bucket ID "Claire" | rY8Rh0qLSEaylPUL5E-mJZYALQGc |
