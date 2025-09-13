@@ -1,9 +1,20 @@
 <img src="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/IDS-logo.png" alt="IDS-logo.png">
-<h1>Intelligent Replaning Drone Swarm</h1>
+<h1>Intelligent Replanning Drone Swarm</h1>
 <i>Intelligent Replanning Protocol for a Fail-Operational Drone Swarm</i>
 
 <h2>Introduction</h2>
-This project addresses the implementation of swarm-level coordination logic that uses detailed health information to ensure the overall mission can continue with maximum efficiency, even when individual drones are compromised.
+This project addresses the implementation of swarm-level coordination logic that uses detailed health information from all UAVs in the swarm to ensure the overall mission can continue with maximum efficiency, even when individual UAVs are compromised.
+
+<h2>This repository contains</h2>
+<ul>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/role-descriptions">Role descriptions</a> for all roles involved</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/reference-literature">Reference literature</a> used during the project</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/cheat-sheets">Cheat sheets</a> for frequently used HTML tags and GitHub code lines</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/protocols">Protocols</a> from daily and weekly meetings</li>
+  <li>Images used in the project</li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/project-phases">Project phases</a></li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/plans">Plans</a></li>
+</ul>
 
 Pre-study
 
