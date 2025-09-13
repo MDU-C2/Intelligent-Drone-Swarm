@@ -46,6 +46,12 @@ See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/b
     </li>
 </ul>
 
+<h2>Other</h2>
+<ul>
+  <li>Every Thursday 13:15 - 15:00: Bowling and other activities at Västerås 9-pin bowling (Lugna gatan 18)</li>
+  <li>2026-01-08: Robotics students present their projects at C2</li>
+</ul>
+
 <h2>Important links</h2>
 <ul>
   <li><a href="https://studentmdh.sharepoint.com/:x:/r/sites/IntelligentDroneSwarm/Delade%20dokument/FLA402-Time-Log.xlsx?d=wba6795dc4c9044099e3155889715a648&csf=1&web=1&e=tto7wd">Time Report</a></li>
