@@ -9,3 +9,6 @@ Example: my-folder/README.md
 <li>Click Commit changes — the folder now exists in your repository.</li>
 <b>Note:</b> The folder appears only if it contains at least one file. Empty folders cannot exist on GitHub.
 </ol>
+
+# Text Formatting
+<a href="https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet">Go here</a>
