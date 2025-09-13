@@ -16,10 +16,6 @@ This project addresses the implementation of swarm-level coordination logic that
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/plans">Plans</a></li>
 </ul>
 
-Pre-study
-
-Project plan
-
 <h2>Background</h2>
 <b>NOTE: Copied from PDF.</b>
 
@@ -29,11 +25,6 @@ Our previous research, "Design of a Fail-Operational Swarm of Drones for Search 
 <b>NOTE: Copied from PDF.</b>
 
 This project requires students to design, implement, and validate a decentralized protocol for secure and intelligent mission replanning. The primary task is to develop the distributed algorithms that allow the swarm to collectively respond to a drone's broadcasted 'degraded health' status. This involves investigating and implementing a robust consensus mechanism to ensure all agents securely agree on a new plan and designing the logic for re-allocating the compromised drone's tasks (e.g., its search area) to healthy agents. A key challenge is to also re-task the partially failed drone to a less critical but still useful role, such as a communications relay, thereby maximizing the utility of every asset. The final implementation must be validated in a high-fidelity simulation environment using fault-injection techniques to quantitatively measure the improvement in mission continuity.
-
-<h2>Standards</h2>
-Standards applied in project:
-<ul><li>ISO</li></ul>
-<ul><li>ARP</li></ul>
 
 <h2>Contributors</h2>
 See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/blob/main/CONTRIBUTORS.md">contributors</a>.
