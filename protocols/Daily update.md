@@ -21,12 +21,65 @@ Today we:
 <h2>2025-09-15</h2>
 Today we:
 <ul>
-  <li></li>
-  <li></li>
-  <li> </li>
+  <li> worked on the respective role plan.</li>
+  <li> The Cheif Engineer have been working with the project plan. </li>
+  <li> The V&V manager has been working with completing the template based on the Quality managers requirements. </li>
+  <li> The safety manager has been going though standard for the safety management plan. </li>
+  <li> The requirement manager has been working with creating the structure for requirements on SQL. </li>
 </ul>
 
 <h2>2025-09-16</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+
+<h2>2025-09-17</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+<h2>2025-09-18</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+<h2>2025-09-19</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+<h2>2025-09-22</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+<h2>2025-09-23</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+<h2>2025-09-24</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+
+<h2>2025-09-25</h2>
+Today we:
+<ul>
+  <li> </li>
+  <li> </li>
+</ul>
+
+<h2>2025-09-26</h2>
 Today we:
 <ul>
   <li> </li>
