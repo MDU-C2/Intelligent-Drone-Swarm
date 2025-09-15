@@ -3,7 +3,7 @@
 <ul>
   <li>Discuss and identify safety risks</li>
   <li>Find safety goals</li>
-  <li>Identify safety risks risk levels</li>
+  <li>Identify safety risk levels</li>
   <li>Create safety cases</li>
 </ul>
 <h3>Responsibilities</h3>
