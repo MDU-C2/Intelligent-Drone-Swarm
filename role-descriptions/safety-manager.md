@@ -15,5 +15,7 @@
 </ul>
 <h3>Deliverables</h3>
 <ul>
-  <li>List Item</li>
+  <li>Safety management plan</li>
+  <li>Risk level analysis</li>
+  <li>Safety goals and requirements</li>
 </ul>
