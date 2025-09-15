@@ -1,5 +1,5 @@
 <h1> Quility Cheklist </h1>
-<h2> These requirements are from ISO/IEC/IEEE 15289, ISO 9001, IEEE 730, and ISO 10007.</h2>
+<h4> These requirements are from ISO/IEC/IEEE 15289, ISO 9001, IEEE 730, and ISO 10007.</h4>
   <ul>
     <li> All reports shall use the project-approved template and include the required sections.</li>
     <li> Every report shall include a version number, revision history, and approval record.</li>
