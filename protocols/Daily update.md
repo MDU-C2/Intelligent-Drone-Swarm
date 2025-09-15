@@ -21,14 +21,8 @@ Today we:
 <h2>2025-09-15</h2>
 Today we:
 <ul>
-  <li> Had our weekly meetings. Everything is going as planed. Claire presented her SQL system for the requirements.</li>
-  Availability this week: 
-  Claire = 80% (will be working on Wendsday.)
-  Andrea = 100% 
-  Yonatan = 100%
-  Emily = 100% (Will be going on Tuesday to Stockholm to learn about how companys work with risk analysis. The company she is going to is called Multers).
-  Esaias = roughly 80% (Has leacturs on Wensday and Friday on a extra course) 
-  
+  <li></li>
+  <li></li>
   <li> </li>
 </ul>
 
