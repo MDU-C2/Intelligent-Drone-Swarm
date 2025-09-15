@@ -12,10 +12,10 @@ Today we discussed about how things are going. Everything is going as planed and
 <h2>2025-09-15 (Weekly meeting)</h2>
 Had our weekly meetings. Everything is going as planed. Claire presented her SQL system for the requirements.
 Availability this week: 
-<ui>
+<ul>
   <li>Claire = 80% (will be working on Wendsday.) </li>
   <li>Andrea = 100% </li> 
   <li>Yonatan = 100% </li>
   <li>Emily = 100% (Will be going on Tuesday to Stockholm to learn about how companys work with risk analysis. The company she is going to is called Multers).</li> 
   <li>Esaias = roughly 80% (Has leacturs on Wensday and Friday on a extra course)</li>
-</ui>
+</ul>
