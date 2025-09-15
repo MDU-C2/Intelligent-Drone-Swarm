@@ -8,7 +8,10 @@
 </ul>
 <h3>Responsibilities</h3>
 <ul>
-  <li>List Item</li>
+  <li>Responsible for finding safety risks</li>
+  <li>Responsible for define safety goals</li>
+  <li>Responsible for defining risk levels</li>
+  <li>Responsible for creating safety documentation</li>
 </ul>
 <h3>Deliverables</h3>
 <ul>
