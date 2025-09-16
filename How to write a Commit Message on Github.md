@@ -1,8 +1,8 @@
 <h1> How to write a Commit Message </h1>
 
 When commiting a work on Github you get option of writing down a message for that commit. 
-Under "Commit message": <type>: <short summary>
-<type>: 
+Under "Commit message" the text will be structure shuch as "*type*: *short summary*"
+*type*: 
 <ul>
   <li> Create (Use this when creating or uploading a file) </li>
   <li> Fix (Use this when a big change was done)</li>
@@ -10,7 +10,7 @@ Under "Commit message": <type>: <short summary>
   <li> Test </li>
 </ul>
 
-<short summary>: 
+*short summary*: 
   <ul>
     Keep it short and use imperative mood (e.g., “Add test case for login” not “Added” or “Adding”).
   </ul>
