@@ -1,27 +1,17 @@
-<h2>Chief Engineer</h2>
-<h3>Project manager's duties</h3>
-<i>Source: "Projektledning", pg. 50.</i>
+<h1>Chief Engineer</h1>
+<h2>Responsibilities</h2>
 <ul>
-  <li>Make sure that the project goals are achieved</li>
-  <li>Organise and plan the project</li>
-  <li>Delegating and following-up on tasks</li>
-  <li>Solve problems and conflicts</li>
-  <li>Influence and get things done</li>
-  <li>Communicates, engages, and motivates</li>
-  <li>Reports outcomes and manages risks and changes</li>
-  <li>Calls and leads project meetings</li>
-  <li>Applies project tools and project models</li>
+  <li>Overall responsible for the project.</li>
+  <li>High level project management</li>
+  <li>Guide project from initial concept to completion.</li>
+  <li>Assume a leadership role for the rest of the project group and give orders or suggestions when needed.</li>
+  <li>Develop plans to achieve project objectives.</li>
+  <li>Break tasks down in to smaller tasks and delegate them.</li>
+  <li>Plan, direct and perform as necessary, the activities of the project group in carrying out its assigned tasks and responsibilities.</li>
+  <li>Supervise fellow group members while providing support and guidance as necessary.</li>
+  <li>Ensure each assigned task is completed, and keep required records.</li>
 </ul>
-
-<h3>Tasks</h3>
+<h2>Deliverables</h2>
 <ul>
-  <li>List Item</li>
-</ul>
-<h3>Responsibilities</h3>
-<ul>
-  <li>List Item</li>
-</ul>
-<h3>Deliverables</h3>
-<ul>
-  <li>List Item</li>
+  <li>Project Plan</li>
 </ul>
