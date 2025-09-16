@@ -2,6 +2,7 @@
 
 When commiting a work on Github you get option of writing down a message for that commit. 
 Under "Commit message" the text will be structure shuch as "*type*: *short summary*"
+
 *type*: 
 <ul>
   <li> Create (Use this when creating or uploading a file) </li>
@@ -12,5 +13,5 @@ Under "Commit message" the text will be structure shuch as "*type*: *short summa
 
 *short summary*: 
   <ul>
-    Keep it short and use imperative mood (e.g., “Add test case for login” not “Added” or “Adding”).
+    <li> Keep it short and use imperative mood (e.g., “Add test case for login” not “Added” or “Adding”).</li>
   </ul>
