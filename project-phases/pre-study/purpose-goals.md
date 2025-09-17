@@ -4,15 +4,15 @@ Implement swarm-level coordination logic to ensure a Search and Rescue mission c
 
 <h2>What are the goals of the project?</h2>
 <ul>
-    <li>Modify "Drone Swarm in Search Target Scenario" so faults can be injected (e.g., one UAV has degraded health)</li>
-    <li>Investigate a robust consensus mechanism to ensure all agents securely agree on a new plan</li>
+    <li>Modify simulation software so faults can be injected (e.g., one UAV has degraded health).</li>
+    <li>Investigate a robust consensus mechanism to ensure all agents securely agree on a new plan.</li>
     <li>Develop distributed algorithms that allow the swarm to collectively respond to a UAV's broadcasted 'degraded health' status.</li>
     <li>Design a decentralized protocol for secure and intelligent mission replanning.</li>
     <li>Design the logic for re-allocating the compromised UAV's tasks (e.g., its search area) to healthy agents.</li>
-    <li>design the logic to re-task the partially failed UAV to a less critical but still useful role, such as a communications relay, thereby maximizing the utility of every UAV.</li>
-    <li><i>Implement a robust consensus mechanism to ensure all agents securely agree on a new plan</i></li>
+    <li>Design the logic to re-task the partially failed UAV to a less critical but still useful role, such as a communications relay, thereby maximizing the utility of every UAV.</li>
+    <li><i>Implement a robust consensus mechanism to ensure all agents securely agree on a new plan.</i></li>
     <li>Implement a decentralized protocol for secure and intelligent mission replanning.</li>
-    <li>Validate the decentralized protocol using modified "Drone Swarm in Search Target Scenario" for secure and intelligent mission replanning by quantitatively measuring the improvement in mission continuity.</li>
+    <li>Validate the decentralized protocol using modified simulation software for secure and intelligent mission replanning by quantitatively measuring the improvement in mission continuity.</li>
 </ul>
 
 <h2>Are our goals S.M.A.R.T?</h2>
