@@ -20,7 +20,7 @@ According to "V&V - All the Way Through" and SORA
 </ul>
 <h3>Deliverables</h3>
 <ul>
-  <li>Validation Plan</li>
+  <li>Verification and Validation Plan</li>
   <li>Requirements, Design and functional specification (Collaborate with Requirements Manager)</li>
   <li>Network Diagram</li>
   <li>Risk Analysis (Collaborate with Safety Manager)</li>
