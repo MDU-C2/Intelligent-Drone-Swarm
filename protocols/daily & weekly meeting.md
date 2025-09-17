@@ -19,3 +19,6 @@ Availability this week:
   <li>Emily = 100% (Will be going on Tuesday to Stockholm to learn about how companys work with risk analysis. The company she is going to is called Multers).</li> 
   <li>Esaias = roughly 80% (Has leacturs on Wensday and Friday on a extra course)</li>
 </ul>
+
+<h2>2025-09-17</h2>
+Today it was the Cheif Engineer and Quality & Configuration manager in the meeting. The cheif engineer is working with creating sketches of the V-model and the plan that will be included in the project plan. The Quality & Configuration Manager has included some quality checklist and is working on the quality and configuration management plan. 
