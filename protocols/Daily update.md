@@ -31,14 +31,14 @@ Today we:
 <h2>2025-09-16</h2>
 Today we:
 <ul>
-  <li> </li>
+  <li> had a meeting with the project owner Luiz and got answers to some of our questions. </li>
   <li> </li>
 </ul>
 
 <h2>2025-09-17</h2>
 Today we:
 <ul>
-  <li> </li>
+  <li> are all keepts working with respective planning. </li>
   <li> </li>
 </ul>
 <h2>2025-09-18</h2>
