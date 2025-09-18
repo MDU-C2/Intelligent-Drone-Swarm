@@ -60,6 +60,6 @@ See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/b
 <ul>
   <li><a href="https://studentmdh.sharepoint.com/:x:/r/sites/IntelligentDroneSwarm/Delade%20dokument/FLA402-Time-Log.xlsx?d=wba6795dc4c9044099e3155889715a648&csf=1&web=1&e=tto7wd">Time Report</a></li>
   <li><a href="https://planner.cloud.microsoft/webui/v1/plan/-FjOsRy-VUum89rh3vkTmJYAD-J3?tid=a1795b64-dabd-4758-b988-b309292316cf">Kanban (Planner)</a></li>
-  <li><a href="https://studentmdh.sharepoint.com/:u:/r/sites/IntelligentDroneSwarm/Delade%20dokument/V-model-simple.vsdx?d=w94dc7120c6544b908cd717a40861be37&csf=1&web=1&e=BfnIgx">Our V-model (simplified)</a></li>
-  <li><a href="https://drive.google.com/drive/folders/1vXKNkRGslyUG7h9t5cG3s3EqDK8taNg0?usp=sharing">Other drawings</a></li>
+  <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/project-plan/images/V-model-V1.png">Our V-model</a></li>
+  <li><a href="https://drive.google.com/drive/folders/1vXKNkRGslyUG7h9t5cG3s3EqDK8taNg0?usp=sharing">Google Drive folder</a></li>
 </ul>
