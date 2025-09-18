@@ -62,7 +62,7 @@ See list of <a href="https://github.com/Sir-Camp-A-Lot/Intelligent-Drone-Swarm/b
   <li><a href="https://planner.cloud.microsoft/webui/v1/plan/-FjOsRy-VUum89rh3vkTmJYAD-J3?tid=a1795b64-dabd-4758-b988-b309292316cf">Kanban (Planner)</a></li>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/project-plan/images/V-model-V1.png">Our V-model</a></li>
   <ul>
-    <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/project-plan/images/V-model-simple-V1.png">Simple V-model</a></li>
+    <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/project-plan/images/V-model-simple-V1.png">Simple version</a></li>
   </ul>
   <li><a href="https://drive.google.com/drive/folders/1vXKNkRGslyUG7h9t5cG3s3EqDK8taNg0?usp=sharing">Google Drive folder</a></li>
 </ul>
