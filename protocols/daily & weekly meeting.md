@@ -1,16 +1,16 @@
 <h1>Protocols from Daily & Weekly meetings</h1>
 
 <h2>2025-09-10</h2>
-In todays meeting we talked about what each role does so that we can have a overview of what everyone is respossible for. 
+In today's meeting, we talked about what each role does so that we can have an overview of what everyone is responsible for. 
 
 <h2>2025-09-11</h2>
-Today we discussed how things are going and what we should do today and for the rest of the week. We agreed to continue reading through Luiz’s reports on swarm drones, and we have scheduled a meeting with him on 09-12 to ask questions and clarify everything before actually starting the work. 
+Today we discussed our current progress and planned the tasks for today and the rest of the week. We agreed to continue reviewing Luiz’s reports on swarm drones, and we scheduled a meeting with him on 09-12 to ask questions and clarify everything before beginning the work. 
 
 <h2>2025-09-12</h2>
-Today we discussed about how things are going. Everything is going as planed and no one has encountered any difficulties. We spun the wheel today to select who will bring fika for monday weekly meeting and it's Andrea.  
+Today we discussed how things are going. Everything is going as planned, and no one has encountered any difficulties. We spun the wheel to select who will bring fika for Monday’s weekly meeting, and it’s Andrea.  
 
 <h2>2025-09-15 (Weekly meeting)</h2>
-Had our weekly meetings. Everything is going as planed. Claire presented her SQL system for the requirements.
+We had our weekly meeting. Everything is going as planned. Claire presented her SQL system for the requirements.
 Availability this week: 
 <ul>
   <li>Claire = 80% (will be working on Wendsday.) </li>
@@ -21,4 +21,7 @@ Availability this week:
 </ul>
 
 <h2>2025-09-17</h2>
-Today it was the Cheif Engineer and Quality & Configuration manager in the meeting. The cheif engineer is working with creating sketches of the V-model and the plan that will be included in the project plan. The Quality & Configuration Manager has included some quality checklist and is working on the quality and configuration management plan. 
+Today the Chief Engineer and the Quality & Configuration Manager attended the meeting. The Chief Engineer is working on sketches of the V-model and the plan that will be included in the project plan. The Quality & Configuration Manager has added some quality checklists and is working on the quality and configuration management plan. 
+
+<h2>2025-09-18</h2>
+In today’s meeting, we talked about how to sort the requirements links in SQL. The Safety Manager will have a meeting with Julieth Castellanos about the standards we intend to use. 
