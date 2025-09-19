@@ -37,15 +37,37 @@ class req_database:
             """
         )
 
+     
+    def create_drone_swarm_requirements_table (self):
+        self.cursor.execute(
+            """
+            CREATE TABLE drone_swarm_requirements (
+            swarm_req_id VARCHAR PRIMARY KEY,
+            requirement VARCHAR NOT NULL,
+            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
+            effect VARCHAR NOT NULL,
+            rationale VARCHAR,
+            author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
+            review_status TEXT CHECK (review_status IN ('TBR','Reviewed')),
+            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
+            verification_status TEXT CHECK (verification_status IN ('Pending','Pass','Verified','Inconclusive')),
+            verification_method VARCHAR,
+            comment VARCHAR,
+            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)
+            ) 
+            """
+        )
+ 
+
     def create_goal_children_table(self):
         self.cursor.execute(
             """
                 CREATE TABLE goal_children (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 goal_id VARCHAR NOT NULL,
-                sys_req_id VARCHAR UNIQUE NOT NULL,
+                swarm_req_id VARCHAR UNIQUE NOT NULL,
                 FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,
-                FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE
+                FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
                 )
                 """
         )
@@ -59,14 +81,31 @@ class req_database:
                 requirement VARCHAR NOT NULL,
                 priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
                 effect VARCHAR NOT NULL,
+                rationale VARCHAR,
+                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
                 review_status TEXT CHECK (review_status IN ('TBR','Reviewed')),
                 reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
-                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-                FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id)ON DELETE CASCADE      
+                verification_status TEXT CHECK (verification_status IN ('Pending','Pass','Verified','Inconclusive')),
+                verification_method VARCHAR,
+                comment VARCHAR,
+                FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE 
+                FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)     
                 )
                 """
         )
 
+    def create_swarm_req_children_table(self):
+        self.cursor.execute(
+            """
+                CREATE TABLE swarm_req_children (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                swarm_req_id VARCHAR  NOT NULL,
+                sys_req_id VARCHAR UNIQUE NOT NULL,
+                FOREIGN KEY (sys_req_id) REFERENCES system_requirements  (sys_req_id) ON DELETE CASCADE,
+                FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
+                )
+                """
+        )
     def create_subsystem_requirements_table(self):
         self.cursor.execute(
             """
@@ -76,10 +115,16 @@ class req_database:
                 requirement VARCHAR NOT NULL,
                 priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
                 effect VARCHAR NOT NULL,
+                rationale VARCHAR,
+                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
                 review_status TEXT CHECK (review_status IN ('TBR','Reviewed')),
                 reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
-                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')), 
+                verification_status TEXT CHECK (verification_status IN ('Pending','Pass','Verified','Inconclusive')),
+                verification_method VARCHAR,
+                comment VARCHAR,
                 FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE
+                FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)     
+
                 )
                 """
         )
@@ -164,7 +209,7 @@ class req_database:
                 id VARCHAR PRIMARY KEY, 
                 requirement VARCHAR, 
                 author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-                approved_by TEXT CHECK (approved_by IN ('Y.M.B'))       
+                approved_by TEXT CHECK (approved_by IN ('Y.M.B',""))       
                 )
                 """
         )
@@ -181,6 +226,8 @@ class req_database:
         self.create_documents_table()
         self.create_V_join_documents()
         self.create_quality_requirements()
+        self.create_drone_swarm_requirements_table()
+        self.create_swarm_req_children_table()
 
     def insert_goal(
         self, goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id
@@ -193,6 +240,28 @@ class req_database:
             (goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id),
         )
 
+    def insert_drone_swarm_requirements (
+        self,
+        swarm_req_id,
+        requirement,
+        priority,
+        effect,
+        rationale,
+        author,
+        review_status,
+        reviewer, 
+        verification_status,
+        verification_method,
+        comment, 
+     ):
+        self.cursor.execute (
+            """
+            INSERT INTO goals (swarm_req_id, requirement, priority, effect, rationale, author, review_status, reviewer, verification_status, verification_method,comment)
+            VALUES (?,?,?,?,?,?,?,?,?,?)
+            """,
+            (swarm_req_id, requirement, priority, effect, rationale, author, review_status, reviewer, verification_status, verification_method, comment),
+        )
+
     def insert_system_requirements(
         self,
         parent_id,
@@ -200,14 +269,18 @@ class req_database:
         requirement,
         priority,
         effect,
+        rationale,
         author,
         review_status,
         reviewer,
+        verification_status,
+        verification_method,
+        comment,
     ):
         self.cursor.execute(
             """
-            INSERT INTO system_requirements (parent_id, sys_req_id,requirement,priority,effect,author,review_status,reviewer)
-            VALUES (?,?,?,?,?,?,?,?)
+            INSERT INTO system_requirements (parent_id, sys_req_id,requirement,priority,effect, rationale,author,review_status,reviewer,verification_status,verification_method,comment)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (
                 parent_id,
@@ -215,9 +288,13 @@ class req_database:
                 requirement,
                 priority,
                 effect,
+                rationale,
                 author,
                 review_status,
                 reviewer,
+                verification_status,
+                verification_method,
+                comment
             ),
         )
 
@@ -229,7 +306,20 @@ class req_database:
             """,
             (goal_id, sys_req_id),
         )
-
+    def insert_swarm_req_children(
+            self,
+            swarm_req_id,
+            sys_req_id,
+            
+     ):
+          self.cursor.execute (
+            """
+            INSERT INTO swarm_req_children (swarm_req_id, sys_req_id)
+            VALUES (?,?)
+            """,
+            (swarm_req_id, sys_req_id),
+          )
+          
     def insert_subsystem_requirements(
         self,
         parent_id,
@@ -237,13 +327,17 @@ class req_database:
         requirement,
         priority,
         effect,
+        rationale,
         author,
         review_status,
         reviewer,
+        verification_status,
+        verification_method,
+        comment,
     ):
         self.cursor.execute(
             """
-            INSERT INTO subsystem_requirements (parent_id, sub_req_id,requirement,priority,effect,author,review_status,reviewer)
+            INSERT INTO subsystem_requirements (parent_id, sub_req_id,requirement,priority,effect, rationale,author,review_status,reviewer,verification_status,verification_method,comment)
             VALUES (?,?,?,?,?,?,?,?)
             """,
             (
@@ -252,9 +346,13 @@ class req_database:
                 requirement,
                 priority,
                 effect,
+                rationale,
                 author,
                 review_status,
                 reviewer,
+                verification_status,
+                verification_method,
+                comment
             ),
         )
 

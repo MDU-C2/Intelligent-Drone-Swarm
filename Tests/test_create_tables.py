@@ -36,6 +36,9 @@ class TestReqDatabase(unittest.TestCase):
                 "documents",
                 "test_and_verification",
                 "V_join_documents",
+                "Quality_Requirements",
+                "drone_swarm_requirements",
+                "swarm_req_children"
             ]:
                 exists = self.table_exists(db.cursor, table)
                 print(f"Checking table: {table} → Exists: {exists}")
