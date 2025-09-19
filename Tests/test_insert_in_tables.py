@@ -1,5 +1,5 @@
 import unittest
-from Database_code.db_functions import req_database  # adjust path as needed
+from database_code.db_functions import req_database  # adjust path as needed
 
 
 class TestReqDatabaseInserts(unittest.TestCase):

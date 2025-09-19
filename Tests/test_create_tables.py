@@ -1,6 +1,6 @@
 import unittest
 import os
-from Database_code.db_functions import req_database
+from database_code.db_functions import req_database
 
 
 class TestReqDatabase(unittest.TestCase):
