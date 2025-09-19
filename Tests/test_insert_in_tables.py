@@ -13,7 +13,7 @@ class TestReqDatabaseInserts(unittest.TestCase):
         self.db.__exit__(None, None, None)
 
     def test_insert_goal(self):
-        self.db.insert_goal("G1", "Safety", "Operator", "Spec", "Key", "Critical")
+        self.db.insert_goal("G1", "Safety", "Operator", "Spec", "Key", "Critical", "Pending", None)
         self.db.cursor.execute("SELECT * FROM goals WHERE goal_id = 'G1'")
         self.assertIsNotNone(self.db.cursor.fetchone())
 
@@ -34,7 +34,7 @@ class TestReqDatabaseInserts(unittest.TestCase):
         self.assertIsNotNone(self.db.cursor.fetchone())
 
     def test_insert_goal_children(self):
-        self.db.insert_goal("G1", "Safety", "Operator", "Spec", "Key", "Critical")
+        self.db.insert_goal("G1", "Safety", "Operator", "Spec", "Key", "Critical","Pending", None)
         self.db.insert_system_requirements(
             None,
             "SR1",

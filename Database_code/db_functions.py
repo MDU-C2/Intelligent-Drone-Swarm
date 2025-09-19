@@ -29,7 +29,10 @@ class req_database:
             stakeholder VARCHAR,
             origin VARCHAR,
             priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
-            rationale varchar
+            rationale varchar,
+            satisfaction_status TEXT CHECK (satisfaction_status IN ('Pending','Not satisfied','Satisfied')),
+            method_id VARCHAR,
+            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id)
             )
             """
         )
@@ -180,14 +183,14 @@ class req_database:
         self.create_quality_requirements()
 
     def insert_goal(
-        self, goal_id, goal_description, stakeholder, origin, priority, rationale
+        self, goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id
     ):
         self.cursor.execute(
             """
-            INSERT INTO goals (goal_id, goal_description, stakeholder, origin, priority, rationale)
-            VALUES (?,?,?,?,?,?)
+            INSERT INTO goals (goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id)
+            VALUES (?,?,?,?,?,?,?,?)
             """,
-            (goal_id, goal_description, stakeholder, origin, priority, rationale),
+            (goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id),
         )
 
     def insert_system_requirements(
@@ -308,9 +311,9 @@ class req_database:
             """,
             (method_id, doc_id),
         )
+
 # db_name = "test.db"
 
 # with req_database (db_name) as db:
 #     #db.create_all_tables ()
 #     db.insert_subsystem_requirements(None,"SUB01","This requirement shall test the db function","Key","Results","C.N","TBR","")
-
