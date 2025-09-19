@@ -31,27 +31,27 @@ Today we:
 <h2>2025-09-16</h2>
 Today we:
 <ul>
-  <li> had a meeting with the project owner Luiz and got answers to some of our questions. </li>
+  <li> Had a meeting with the project owner Luiz and got answers to some of our questions. </li>
   <li> </li>
 </ul>
 
 <h2>2025-09-17</h2>
 Today we:
 <ul>
-  <li> are all keepts working with respective planning. </li>
+  <li> are all keep working with respective planning. </li>
   <li> </li>
 </ul>
 <h2>2025-09-18</h2>
 Today we:
 <ul>
-  <li> </li>
+  <li> The Safety Manager had a meeting with Julieth about standards.</li>
   <li> </li>
 </ul>
 <h2>2025-09-19</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
+  <li> Talked all about the information safety manager got from the meeting with Julieth about the standards and other qustions. </li>
+  <li>  </li>
 </ul>
 <h2>2025-09-22</h2>
 Today we:
