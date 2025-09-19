@@ -256,8 +256,8 @@ class req_database:
      ):
         self.cursor.execute (
             """
-            INSERT INTO goals (swarm_req_id, requirement, priority, effect, rationale, author, review_status, reviewer, verification_status, verification_method,comment)
-            VALUES (?,?,?,?,?,?,?,?,?,?)
+            INSERT INTO drone_swarm_requirements (swarm_req_id, requirement, priority, effect, rationale, author, review_status, reviewer, verification_status, verification_method,comment)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?)
             """,
             (swarm_req_id, requirement, priority, effect, rationale, author, review_status, reviewer, verification_status, verification_method, comment),
         )
@@ -298,13 +298,13 @@ class req_database:
             ),
         )
 
-    def insert_goal_children(self, goal_id, sys_req_id):
+    def insert_goal_children(self, goal_id, swarm_req_id):
         self.cursor.execute(
             """
-            INSERT INTO goal_children (goal_id, sys_req_id)
+            INSERT INTO goal_children (goal_id, swarm_req_id)
             VALUES (?,?)
             """,
-            (goal_id, sys_req_id),
+            (goal_id, swarm_req_id),
         )
     def insert_swarm_req_children(
             self,
@@ -319,7 +319,7 @@ class req_database:
             """,
             (swarm_req_id, sys_req_id),
           )
-          
+
     def insert_subsystem_requirements(
         self,
         parent_id,
@@ -338,7 +338,7 @@ class req_database:
         self.cursor.execute(
             """
             INSERT INTO subsystem_requirements (parent_id, sub_req_id,requirement,priority,effect, rationale,author,review_status,reviewer,verification_status,verification_method,comment)
-            VALUES (?,?,?,?,?,?,?,?)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (
                 parent_id,

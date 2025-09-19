@@ -1,82 +1,77 @@
-
 import unittest
-from database_code.db_functions import req_database  # adjust import if needed
 
-class TestDatabaseInsertions(unittest.TestCase):
+from database_code.db_functions import req_database
+
+class TestInsertAllTables(unittest.TestCase):
     def setUp(self):
-        # Use in-memory database for testing
-        self.db_name = ":memory:"
-        self.db = req_database(self.db_name)
+        self.db = req_database(":memory:")
         self.db.__enter__()
 
-        # Create necessary tables
-        self.db.create_test_and_verification_table()
-        self.db.create_goals_table()
-        self.db.create_drone_swarm_requirements_table()
-        self.db.create_documents_table()
+        # Create all tables
+        self.db.create_all_tables()
+        
+
+        # Insert shared references
+        self.db.insert_test_and_verification('M1', 'Visual inspection', 'Inspection')
+        self.db.insert_documents('D1', 'Protocol', 'Swarm rules', None, 1, 'E.Z')
+        self.db.insert_item('I1', 'Drone Sensor')
 
     def tearDown(self):
         self.db.__exit__(None, None, None)
 
-    def test_insert_into_test_and_verification(self):
-        self.db.cursor.execute(
-            "INSERT INTO test_and_verification (method_id, description, method_type) VALUES (?, ?, ?)",
-            ("M1", "Visual inspection of drone", "Inspection")
-        )
-        self.db.cursor.execute("SELECT * FROM test_and_verification WHERE method_id = ?", ("M1",))
-        result = self.db.cursor.fetchone()
-        self.assertIsNotNone(result)
-        self.assertEqual(result[0], "M1")
+    def test_insert_all(self):
 
-    def test_insert_into_goals(self):
-        # Insert prerequisite method
-        self.db.cursor.execute(
-            "INSERT INTO test_and_verification (method_id, description, method_type) VALUES (?, ?, ?)",
-            ("M2", "Analysis of flight path", "Analysis")
-        )
-        self.db.cursor.execute(
-            """
-            INSERT INTO goals (goal_id, goal_description, stakeholder, origin, priority, rationale, satisfaction_status, method_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            ("G1", "Ensure safe navigation", "Operator", "Mission Brief", "Mandatory", "Safety critical", "Pending", "M2")
-        )
-        self.db.cursor.execute("SELECT * FROM goals WHERE goal_id = ?", ("G1",))
-        result = self.db.cursor.fetchone()
-        self.assertEqual(result[0], "G1")
 
-    def test_insert_into_drone_swarm_requirements(self):
-        # Insert prerequisite method
-        self.db.cursor.execute(
-            "INSERT INTO test_and_verification (method_id, description, method_type) VALUES (?, ?, ?)",
-            ("M3", "Test swarm coordination", "Test")
-        )
-        self.db.cursor.execute(
-            """
-            INSERT INTO drone_swarm_requirements (
-                swarm_req_id, requirement, priority, effect, rationale,
-                author, review_status, reviewer, verification_status,
-                verification_method, comment
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            ("DS1", "Maintain formation", "Key", "Improved stability", "Essential for coordination",
-             "E.Z", "Reviewed", "C.N", "Verified", "M3", "No issues")
-        )
-        self.db.cursor.execute("SELECT * FROM drone_swarm_requirements WHERE swarm_req_id = ?", ("DS1",))
-        result = self.db.cursor.fetchone()
-        self.assertEqual(result[0], "DS1")
+        # Goal
+        self.db.insert_goal ('G1', 'Avoid collisions', 'Operator', 'Brief', 'Key', 'Safety', 'Pending', 'M1')
+        self.db.insert_drone_swarm_requirements("DS1", "Maintain formation", "Key", "Improved stability", "Essential for coordination",
+             "E.Z", "Reviewed", "C.N", "Verified", "M1", "No issues")
 
-    def test_insert_into_documents(self):
-        self.db.cursor.execute(
-            """
-            INSERT INTO documents (doc_id, title, description, file, version, author)
-            VALUES (?, ?, ?, ?, ?, ?)
-            """,
-            ("D1", "Swarm Protocol", "Defines communication rules", None, 1, "Y.M.B")
-        )
-        self.db.cursor.execute("SELECT * FROM documents WHERE doc_id = ?", ("D1",))
-        result = self.db.cursor.fetchone()
-        self.assertEqual(result[0], "D1")
+        # System Requirement
+        self.db.insert_system_requirements(None, 'SR1', 'Reliable comms', 'Mandatory', 'Robustness', 'Essential',
+                'E.Z', 'Reviewed', 'C.N', 'Pass', 'M1', 'Tested')
+        
+
+        # Subsystem Requirement
+        self.db.insert_subsystem_requirements(None, 'SUB1', 'Encrypt data', 'Key', 'Security', 'Vital',
+                'E.Z', 'Reviewed', 'C.N', 'Verified', 'M1', 'Encrypted')
+    
+
+        # Goal Children
+        self.db.insert_goal_children('G1', 'DS1')
+
+        # Swarm Req Children
+        self.db.insert_swarm_req_children('DS1', 'SR1')
+
+        # SysReq Children
+        self.db.insert_sysreq_children('SR1', 'SUB1')
+
+        # Sys Join Item
+        self.db.insert_sys_join_item('I1', 'SUB1')
+
+
+        # Verification Join Document
+        self.db.insert_V_join_documents('M1', 'D1')
+
+        # Final check
+        self.db.cursor.execute("SELECT COUNT(*) FROM goals")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
+
+        self.db.cursor.execute("SELECT COUNT(*) FROM system_requirements")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
+
+        self.db.cursor.execute("SELECT COUNT(*) FROM subsystem_requirements")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
+
+        self.db.cursor.execute("SELECT COUNT(*) FROM drone_swarm_requirements")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
+
+    
+        self.db.cursor.execute("SELECT COUNT(*) FROM sys_join_item")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
+
+        self.db.cursor.execute("SELECT COUNT(*) FROM V_join_documents")
+        self.assertEqual(self.db.cursor.fetchone()[0], 1)
 
 if __name__ == "__main__":
     unittest.main()
