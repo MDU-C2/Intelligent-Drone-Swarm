@@ -25,3 +25,6 @@ Today the Chief Engineer and the Quality & Configuration Manager attended the me
 
 <h2>2025-09-18</h2>
 In today’s meeting, we talked about how to sort the requirements links in SQL. The Safety Manager will have a meeting with Julieth Castellanos about the standards we intend to use. 
+
+<h2>2025-09-19</h2>
+In today’s meeting, we first discussed how the meeting with Julieth went. We received useful information regarding the standards we use. We also reviewed everyone’s progress and clarified some confusion about our own deadlines for certain tasks. Finally, we spun the wheel, and Claire (Requirements Manager) was selected to bring fika for 2025-09-22.
