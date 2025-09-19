@@ -61,7 +61,7 @@ class req_database:
                 effect VARCHAR NOT NULL,
                 review_status TEXT CHECK (review_status IN ('TBR','Reviewed')),
                 reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
-                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
+                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
                 FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id)ON DELETE CASCADE      
                 )
                 """
@@ -78,7 +78,7 @@ class req_database:
                 effect VARCHAR NOT NULL,
                 review_status TEXT CHECK (review_status IN ('TBR','Reviewed')),
                 reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")),
-                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"")), 
+                author TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H')), 
                 FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE
                 )
                 """
