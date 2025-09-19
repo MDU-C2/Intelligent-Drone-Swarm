@@ -1,6 +1,7 @@
 import unittest
 import os
-from Database_code.db_functions import req_database  
+from Database_code.db_functions import req_database
+
 
 class TestReqDatabase(unittest.TestCase):
     def setUp(self):
@@ -14,7 +15,10 @@ class TestReqDatabase(unittest.TestCase):
             os.remove(self.test_db)
 
     def table_exists(self, cursor, table_name):
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
+        cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+            (table_name,),
+        )
         return cursor.fetchone() is not None
 
     def test_create_all_tables(self):
@@ -31,12 +35,12 @@ class TestReqDatabase(unittest.TestCase):
                 "item",
                 "documents",
                 "test_and_verification",
-                "V_join_documents"
-                
+                "V_join_documents",
             ]:
-                 exists = self.table_exists(db.cursor, table)
-                 print(f"Checking table: {table} → Exists: {exists}")
-                 self.assertTrue(exists, f"Missing table: {table}")
+                exists = self.table_exists(db.cursor, table)
+                print(f"Checking table: {table} → Exists: {exists}")
+                self.assertTrue(exists, f"Missing table: {table}")
+
 
 if __name__ == "__main__":
     unittest.main()
