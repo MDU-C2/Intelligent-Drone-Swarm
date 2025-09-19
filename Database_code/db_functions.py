@@ -149,6 +149,17 @@ class req_database:
                 FOREIGN KEY (doc_id) REFERENCES documents (doc_id) ON DELETE CASCADE
                 )
                 """
+                ) 
+    def create_quality_requirements(self):
+           self.cursor.execute (
+                """
+                CREATE TABLE Quality_Requirements(
+                id VARCHAR PRIMARY KEY, 
+                requirement VARCHAR, 
+                author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
+                approved_by TEXT CHECK (approved_by IN ('Y.M.B'))       
+                )
+                """
                 )    
     def create_all_tables(self):
          self.create_goals_table ()
@@ -161,6 +172,7 @@ class req_database:
          self.create_test_and_verification_table ()
          self.create_documents_table ()
          self.create_V_join_documents ()
+         self.create_quality_requirements()
         
     def insert_goal (self, goal_id, goal_description, stakeholder, origin, priority,rationale):
             self.cursor.execute (
@@ -172,10 +184,10 @@ class req_database:
 
 
 
-# db_name = "test.db"
+db_name = "test.db"
 
-# with req_database (db_name) as db:
-     
+with req_database (db_name) as db:
+    db.create_quality_requirements()
 #      #db.create_documents_table()
 #      #db.create_item_table ()
 #      #db.create_goal_children_table ()
