@@ -1,6 +1,6 @@
 import unittest
 
-from database_code.db_functions import req_database
+from database-code.db_functions import req_database
 
 class TestInsertAllTables(unittest.TestCase):
     def setUp(self):
