@@ -7,6 +7,7 @@
 | Bucket ID "Done" | scInLrRWhkiie7Eiwp98DJYAA7y1 |
 |  |  |
 | Plan ID "CE - Sprint Planning" | DAFAdRlRkUiwPxBjqKP3w5YAHNqX |
+| Bucket ID "All" | obf3W5IsD0aTLvJWM_oRIZYAKO9R |
 | Bucket ID "Unassigned" | NuaBbj0noEa49uBYZfqCRpYAEO2o |
 | Bucket ID "Andrea" | 2uVljhBnt0SbgXpTrzffzpYAIWqa |
 | Bucket ID "Claire" | rY8Rh0qLSEaylPUL5E-mJZYALQGc |
