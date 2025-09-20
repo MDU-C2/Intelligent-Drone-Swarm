@@ -7,7 +7,7 @@
 | Bucket ID "Done" | scInLrRWhkiie7Eiwp98DJYAA7y1 |
 |  |  |
 | Plan ID "CE - Sprint Planning" | DAFAdRlRkUiwPxBjqKP3w5YAHNqX |
-| Bucket ID "Meetings" | -tplbRm4ZEyFkGEG-0uRP5YALQDb |
+| Bucket ID "Common tasks for all" | -tplbRm4ZEyFkGEG-0uRP5YALQDb |
 | Bucket ID "Individual tasks for all" | obf3W5IsD0aTLvJWM_oRIZYAKO9R |
 | Bucket ID "Unassigned" | NuaBbj0noEa49uBYZfqCRpYAEO2o |
 | Bucket ID "Andrea" | 2uVljhBnt0SbgXpTrzffzpYAIWqa |
