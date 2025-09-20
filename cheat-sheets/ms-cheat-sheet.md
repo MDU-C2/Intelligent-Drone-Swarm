@@ -2,7 +2,7 @@
 | Name | ID |
 | - | - |
 | Plan ID "Intelligent Replanning Drone Swarm" | -FjOsRy-VUum89rh3vkTmJYAD-J3 |
-| Bucket ID "Planned" | 2QXh8mOxM0C7stZ9S5tGEZYAMKjo |
+| Bucket ID "To Do" | 2QXh8mOxM0C7stZ9S5tGEZYAMKjo |
 | Bucket ID "In Progress" | aPcauA28AUOgEAhTDweT0pYABBVG |
 | Bucket ID "Done" | scInLrRWhkiie7Eiwp98DJYAA7y1 |
 |  |  |
