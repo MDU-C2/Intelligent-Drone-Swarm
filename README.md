@@ -11,6 +11,9 @@ This project addresses the implementation of swarm-level coordination logic that
 <br><br>
 The project requires students to design, implement, and validate a decentralized protocol for secure and intelligent mission replanning. The primary task is to develop the distributed algorithms that allow the swarm to collectively respond to a UAV's broadcasted 'degraded health' status. This involves investigating and implementing a robust consensus mechanism to ensure all agents securely agree on a new plan and designing the logic for re-allocating the compromised UAV's tasks (e.g., its search area) to healthy agents. A key challenge is to also re-task the partially failed UAV to a less critical but still useful role, such as a communications relay, thereby maximizing the utility of every asset. The final implementation must be validated in a high-fidelity simulation environment using fault-injection techniques to quantitatively measure the improvement in mission continuity.
 
+<h2>Example Drone</h2>
+Harris Aerial, Carrier H6HL: <a href ="https://harrisaerial.com/carrier-drones/carrier-h6hl/">Website</a>, <a href ="https://harrisaerial.com/wp-content/uploads/2025/09/H6HL_brochure_final_2025.pdf">Brochure</a>
+
 <h2>This repository contains</h2>
 <ul>
   <li><a href="https://github.com/MDU-C2/Intelligent-Drone-Swarm/tree/main/role-descriptions">Role descriptions</a> for all roles involved</li>
