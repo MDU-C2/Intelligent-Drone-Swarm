@@ -6,6 +6,7 @@
     <li>Go to the database folder by typing cd database</li>
     <li>Run the command python run_database.py</li>
     <li>Follow the prompts in the terminal</li>
+    <li>NOTE!! Steps after this will be heavily edited!!</li>
     <li>When done: Push your changes to your branch on the repo.</li>
     <li>Create pull request to merge your branch in to main</li>
 </ol>
