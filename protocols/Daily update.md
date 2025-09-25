@@ -56,32 +56,31 @@ Today we:
 <h2>2025-09-22</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
+  <li>Claire brought some fika. </li>
+  <li> Assigned some tasks to the Q&C Manager and the Chief Engineer.  </li>
+  <li>Agrred on which grouill bring what fika to the 'fika assignment'. </li>
 </ul>
 <h2>2025-09-23</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
 </ul>
 <h2>2025-09-24</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
+  <li> Had fika with the class.</li>
+  <li> Had a meeting with Luiz to talk about how things are going. Everything seems to be going fine.</li>
 </ul>
 
 <h2>2025-09-25</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
+  <li> got our hands on two drones that we built in the first year for a project. The idea is that if there is time, to replicate what the drones do in the simulation in real life.</li>
+  <li> Succeeded in implementing a binary tree structure in SQL to visualize the relationships between requirements. </li>
 </ul>
 
 <h2>2025-09-26</h2>
 Today we:
 <ul>
-  <li> </li>
-  <li> </li>
+  <li>  </li>
+  <li>  </li>
 </ul>
