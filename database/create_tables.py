@@ -210,6 +210,7 @@ class create_tables:
     
     def create_all_tables(self):
         # Create each table individually with success messages
+        # Change message depending on IF EXIST
         try:
             self.create_test_and_verification_table()
             print("Table 'test_and_verification' created successfully.")
