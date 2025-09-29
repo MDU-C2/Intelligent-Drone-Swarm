@@ -11,4 +11,4 @@ Once it's confirmed to be a real issue, perform an impact analysis. This is to c
 After completing the impact analysis, bring it up during the daily meeting: what the issue is, what it affects, and suggestions for a complete solution. During the meeting, a consensus from all managers is required.
 
 <h2>Step 4</h2>
-Start implementing the solution. Request a review from the QM, and after the review, approval from both the QM and CM is required.
+Save a copy of the current version before start editing. Implementing the solution. Request a review from the QM & CE and it needs a approval from both before submitting.
