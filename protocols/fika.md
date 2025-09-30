@@ -3,4 +3,8 @@
     We select the person who will bring fika by spining the wheel on firday daily meeting. 
 <h3>2025-09-15: Andrea</h3>
 <h3>2025-09-22: Claire</h3>
+<h3>2025-09-29: Emily</h3>
+<h3>2025-10-06: Esaias</h3>
+
+
 
