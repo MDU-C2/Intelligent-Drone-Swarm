@@ -1,0 +1,74 @@
+% Swedish language package 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{layout}
+\usepackage{tikz}
+\usepackage{float}
+
+% --------- HYPERREF SETUP --------- %
+\newcommand\IEEEhyperrefsetup{
+bookmarks=true,bookmarksnumbered=true,%
+colorlinks=true,linkcolor={black},citecolor={black},urlcolor={black}%
+}
+% Preferred hyperref setup, Michael Shell
+\usepackage[\IEEEhyperrefsetup, pdftex]{hyperref}
+% --------- ------------- --------- %
+
+\usepackage{makecell} % For line break in table cells
+\renewcommand{\cellalign}{l}
+
+% --------- FIGURE AND TABLE CAPTIONS --------- %
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt} % Vertical space between table and table caption
+\captionsetup[figure]{skip=5pt} % Vertical space between figure and figure caption
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
+% --------- ------------------------- --------- %
+
+% --------- GLOSSARY --------- %
+\usepackage{glossaries}
+\setglossarystyle{altlist}
+\renewcommand*{\glsnamefont}[1]{\textbf{#1}}
+\input{setup/glossary} % Generate glossary
+% --------- -------- --------- %
+
+% --------- PAGE LAYOUT CONTROL --------- %
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm} % Example margins
+% --------- ------------------- --------- %
+
+% --------- TITLE AND PARAGRAPH SETUP --------- %
+\usepackage{titlesec}
+% Fix numbering in ToC
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+% Fix numbering on sections
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+% Remove section first paragraph indent
+\titlespacing*{\section}{0pt}{*1}{*1}
+\titleformat*{\section}{\Huge}
+\titlespacing*{\subsection}{0pt}{*1}{*1}
+\titleformat*{\subsection}{\LARGE}
+\titleformat*{\subsubsection}{\Large}
+\titlespacing*{\subsubsection}{}{0pt}{*1}
+% --------- ----------------------- --------- %
+
+% --------- TABLE OF CONTENTS SETUP --------- %
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\Huge} % title font
+% Reduce indentation of subsections in TOC
+\cftsetindents{subsubsection}{1.5em}{2.3em}
+% --------- ----------------------- --------- %
+
+% These packages must be at the end
+\usepackage[nolist,nohyperlinks]{acronym}
+\usepackage{cleveref}
+\graphicspath{{images/}}
