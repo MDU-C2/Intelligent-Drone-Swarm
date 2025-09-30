@@ -1,6 +1,5 @@
 # plot_tree.py
 
-import sqlite3
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -34,7 +33,10 @@ def build_graph():
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
 
-    with connect_database("test.db") as db:
+    with open("db_name.txt") as f:
+        db_name = f.read().strip() 
+
+    with connect_database(db_name) as db:
         tables = create_tables(db.cursor)
         tables.create_all_tables()
 
@@ -88,19 +90,59 @@ def build_graph():
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
-        # # sys_req -> sub_req
-        # db.cursor.execute("""
-        #     SELECT sys_req_id, sub_req_id FROM sysreq_children
-        #     WHERE sys_req_id IS NOT NULL AND sub_req_id IS NOT NULL
-        # """)
-        # for parent, child in db.cursor.fetchall():
-        #     G.add_node(parent, type="sys_req_id")
-        #     G.add_node(child, type="sub_req_id")
-        #     G.add_edge(parent, child)
+        # goal_id -> method_id
+        db.cursor.execute("""
+            SELECT goal_id, method_id FROM goals
+            WHERE goal_id IS NOT NULL AND method_id IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="swarm_req_id")
+            G.add_node(child, type="verification_method")
+            G.add_edge(parent, child)
+
+        # swarm_req_id -> method_id
+        db.cursor.execute("""
+            SELECT swarm_req_id, verification_method FROM drone_swarm_requirements
+            WHERE swarm_req_id IS NOT NULL AND verification_method IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="swarm_req_id")
+            G.add_node(child, type="verification_method")
+            G.add_edge(parent, child)
+
+        # sys_req_id -> method_id
+        db.cursor.execute("""
+            SELECT sys_req_id, verification_method FROM system_requirements
+            WHERE sys_req_id IS NOT NULL AND verification_method IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="sys_req_id")
+            G.add_node(child, type="verification_method")
+            G.add_edge(parent, child)
+
+        # sub_req_id -> verification_method
+        db.cursor.execute("""
+            SELECT sub_req_id, verification_method FROM subsystem_requirements
+            WHERE sub_req_id IS NOT NULL AND verification_method IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="sub_req_id")
+            G.add_node(child, type="verification_method")
+            G.add_edge(parent, child)
+        
+        # method_id -> doc_id
+        db.cursor.execute("""
+            SELECT method_id, doc_id FROM V_join_documents
+            WHERE method_id IS NOT NULL AND doc_id IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="method_id")
+            G.add_node(child, type="doc_id")
+            G.add_edge(parent, child)
     return G
 
 def choose_node_type_and_id(G):
-    """Ask user for node type using numbers and ID (or 'all')."""
+    """Ask user for node type using numbers and ID (or 'all') and optional depth cutoff."""
     node_types = ["goal_id", "swarm_req_id", "sys_req_id", "sub_req_id"]
 
     # Show numbered options
@@ -122,24 +164,53 @@ def choose_node_type_and_id(G):
     print(f"Available {node_type}s:", candidates)
     chosen_id = input(f"Enter {node_type} to visualize (or 'all'): ").strip()
 
-    return node_type, chosen_id, candidates
+    # Ask for max depth
+    print("Select node type to visualize up to:")
+    for i, t in enumerate(node_types, start=1):
+        print(f"{i-1}: {t}")
+    
+    depth_choice = input("Enter number corresponding to node type: ").strip() #input("Enter max depth to expand (or press Enter for no limit): ").strip()
+    max_depth = None
+    if depth_choice.isdigit():
+        max_depth = int(depth_choice)
 
-def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05):
+    return node_type, chosen_id, candidates, max_depth
+
+def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth=None):
     """
-    Fully adaptive plotting of a hierarchy tree.
+    Fully adaptive plotting of a hierarchy tree with optional depth cutoff.
+
+    Parameters:
+        G (nx.DiGraph): Full graph
+        root (str|int): Root node ID
+        save (bool): Save to file instead of show
+        h_padding (float): Horizontal padding (0-0.5)
+        v_padding (float): Vertical padding (0-0.5)
+        max_depth (int|None): Maximum depth to expand children (None = no limit)
     """
-    descendants = nx.descendants(G, root)
-    sub_nodes = {root} | descendants
+    # Collect nodes up to max_depth
+    sub_nodes = {root}
+    frontier = [(root, 0)]  # (node, depth)
+
+    while frontier:
+        node, depth = frontier.pop()
+        if max_depth is not None and depth >= max_depth:
+            continue
+        for child in G.successors(node):
+            sub_nodes.add(child)
+            frontier.append((child, depth + 1))
+
+    # Build subgraph
     H = G.subgraph(sub_nodes).copy()
 
-    # Compute tree depth
-    def max_depth(node, G):
+    # Compute tree depth (relative to H)
+    def max_depth_calc(node, G):
         children = list(G.successors(node))
         if not children:
             return 1
-        return 1 + max(max_depth(child, G) for child in children)
+        return 1 + max(max_depth_calc(child, G) for child in children)
 
-    depth = max_depth(root, H)
+    depth = max_depth_calc(root, H)
     num_nodes = len(H.nodes)
 
     # Dynamic figure size
@@ -172,36 +243,63 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05):
         y = pos[node][1]
         pos[node] = (pos[node][0], v_padding + (y - y_min) / y_range * (1 - 2 * v_padding))
 
-    # Draw the tree
-    nx.draw(H, pos, with_labels=True,
-            node_size=node_size, node_color="lightgreen",
-            font_size=font_size, font_weight="bold",
-            arrowsize=15, edgecolors="black")
+    # Build labels: show only ID
+    labels = {n: str(n) for n in H.nodes}
+
+    # Define a color map per node type
+    type_colors = {
+        "goal_id": "green",
+        "swarm_req_id": "mediumseagreen",
+        "sys_req_id": "limegreen",
+        "sub_req_id": "springgreen",
+        "verification_method": "orange",
+        "method_id": "orange",
+        "doc_id": "indianred"
+    }
+
+    # Assign a color for each node in the subgraph
+    node_colors = [type_colors.get(H.nodes[n].get("type"), "lightgrey") for n in H.nodes]
+
+    # Draw the tree with per-node colors
+    nx.draw(
+        H, pos, labels=labels,
+        node_size=node_size, node_color=node_colors,
+        font_size=font_size, font_weight="bold",
+        arrowsize=15, edgecolors="black"
+    )
+
+    # --- Add legend ---
+    from matplotlib.patches import Patch
+    legend_handles = [Patch(color=color, label=ntype) for ntype, color in type_colors.items()]
+    plt.legend(handles=legend_handles, loc="lower left", bbox_to_anchor=(1, 0))
+
 
     node_type = G.nodes[root].get("type", "unknown")
-    plt.title(f"Hierarchy starting from {node_type}: {root}", fontsize=14)
+    title = f"Hierarchy starting from {node_type}: {root}"
+    if max_depth is not None:
+        title += f" (depth ≤ {max_depth})"
+    plt.title(title, fontsize=14)
 
     if save:
-        filename = f"{node_type}_{root}.png".replace(":", "-")
+        filename = f"{node_type}_{root}_depth{max_depth if max_depth else 'all'}.png".replace(":", "-")
         plt.savefig(filename, bbox_inches="tight")
         print(f"✅ Saved: {filename}")
         plt.close()
     else:
         plt.show()
 
-#if __name__ == "__main__":
 def run_tree_plot():
     """
     Launches the interactive plotting menu:
-    asks for node type and ID, then plots.
+    asks for node type, ID, and depth, then plots.
     """
     G = build_graph()
-    node_type, chosen_id, candidates = choose_node_type_and_id(G)
+    node_type, chosen_id, candidates, max_depth = choose_node_type_and_id(G)
 
     if chosen_id.lower() == "all":
         for root in candidates:
-            plot_subgraph(G, root, save=True)
+            plot_subgraph(G, root, save=True, max_depth=max_depth)
     else:
         if chosen_id not in candidates:
             raise ValueError(f"{chosen_id} not found in {node_type}s")
-        plot_subgraph(G, chosen_id, save=False)
+        plot_subgraph(G, chosen_id, save=False, max_depth=max_depth)

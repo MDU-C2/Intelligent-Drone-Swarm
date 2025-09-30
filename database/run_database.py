@@ -12,7 +12,9 @@ from insert_prompts import (
 )
 
 def main():
-    with connect_database("example.db") as db:
+    with open("db_name.txt") as f:
+        db_name = f.read().strip() 
+    with connect_database(db_name) as db:
         inserter = insert_functions(db.cursor)
 
         while True:
