@@ -34,7 +34,7 @@ def build_graph():
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
 
-    with connect_database("example.db") as db:
+    with connect_database("test.db") as db:
         tables = create_tables(db.cursor)
         tables.create_all_tables()
 
@@ -78,6 +78,25 @@ def build_graph():
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
+         # subsys_req (parent -> child subsys_req)
+        db.cursor.execute("""
+            SELECT parent_id, sub_req_id FROM subsystem_requirements
+            WHERE parent_id IS NOT NULL AND sub_req_id IS NOT NULL
+        """)
+        for parent, child in db.cursor.fetchall():
+            G.add_node(parent, type="sub_req_id")
+            G.add_node(child, type="sub_req_id")
+            G.add_edge(parent, child)
+
+        # # sys_req -> sub_req
+        # db.cursor.execute("""
+        #     SELECT sys_req_id, sub_req_id FROM sysreq_children
+        #     WHERE sys_req_id IS NOT NULL AND sub_req_id IS NOT NULL
+        # """)
+        # for parent, child in db.cursor.fetchall():
+        #     G.add_node(parent, type="sys_req_id")
+        #     G.add_node(child, type="sub_req_id")
+        #     G.add_edge(parent, child)
     return G
 
 def choose_node_type_and_id(G):

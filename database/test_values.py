@@ -56,6 +56,20 @@ with connect_database(db_name) as db:
         None, "B-01", "Test sub sys req", "Key", "function_children",
         None, "C.N", "TBR", "E.Z", "Pending"
     )
+    inserter.insert_subsystem_requirements(
+        None, "B-02", "Test sub sys req", "Key", "function_children",
+        None, "C.N", "TBR", "E.Z", "Pending"
+    )
+    inserter.insert_subsystem_requirements(
+
+        None, "B-03", "Test sub sys req", "Key", "function_children",
+        None, "C.N", "TBR", "E.Z", "Pending"
+    )
+    inserter.insert_subsystem_requirements(
+        
+        "B-03", "B-05", "Test sub sys req", "Key", "function_children",
+        None, "C.N", "TBR", "E.Z", "Pending"
+    )
 
     # --- Insert Goal-Child Relationships ---
     inserter.insert_goal_children("G-01", "SW-01")
@@ -67,3 +81,5 @@ with connect_database(db_name) as db:
 
     # --- Insert System Req → Subsystem Req Relationships ---
     inserter.insert_sysreq_children("CP-03", "B-01")
+    inserter.insert_sysreq_children("CP-04", "B-02")
+    inserter.insert_sysreq_children("CP-03", "B-03")
