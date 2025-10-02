@@ -21,6 +21,8 @@ colorlinks=true,linkcolor={black},citecolor={black},urlcolor={black}%
 % --------- TABLES ----------------------------------- %
 \usepackage{makecell} % For line break in table cells
 \renewcommand{\cellalign}{l}
+\usepackage{array}
+\usepackage{multirow}
 
 
 % --------- FIGURE & TABLE CAPTIONS ------------------ %
@@ -72,9 +74,13 @@ colorlinks=true,linkcolor={black},citecolor={black},urlcolor={black}%
 \usepackage{tocloft}
 \renewcommand{\cfttoctitlefont}{\Huge} % Size of "Contents" title
 \cftsetindents{subsubsection}{3.8em}{2.9em} % Indentation of subsubsections in TOC
-% \setcounter{tocdepth}{2}  % Include only Section and Subsection in TOC
+\setcounter{tocdepth}{2}  % Include only Section and Subsection in TOC
                             % You choose if you want subsubsection
                             %  to be included in your TOC or not ;)
+
+
+% --------- LAST PAGE ------------------------------- %
+\usepackage{lastpage}
 
 
 % --------- CLEVER REFERENCES ----------------------- %
