@@ -29,7 +29,7 @@ def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5)
 
     return _hierarchy_pos(G, root, 0, width, vert_gap, vert_loc, xcenter)
 
-def build_graph():
+def build_graph(include_methods=True, include_docs=True):
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
 
@@ -40,6 +40,7 @@ def build_graph():
         tables = create_tables(db.cursor)
         tables.create_all_tables()
 
+        
         # goal -> swarm_req
         db.cursor.execute("""
             SELECT goal_id, swarm_req_id FROM goal_children
@@ -80,7 +81,7 @@ def build_graph():
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
-         # subsys_req (parent -> child subsys_req)
+        # subsys_req (parent -> child subsys_req)
         db.cursor.execute("""
             SELECT parent_id, sub_req_id FROM subsystem_requirements
             WHERE parent_id IS NOT NULL AND sub_req_id IS NOT NULL
@@ -90,55 +91,84 @@ def build_graph():
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
-        # goal_id -> method_id
-        db.cursor.execute("""
-            SELECT goal_id, method_id FROM goals
-            WHERE goal_id IS NOT NULL AND method_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
-            G.add_node(parent, type="swarm_req_id")
-            G.add_node(child, type="verification_method")
-            G.add_edge(parent, child)
+        if include_methods:
+            # goal_id -> method_id
+            db.cursor.execute("""
+                SELECT goal_id, method_id FROM goals
+                WHERE goal_id IS NOT NULL AND method_id IS NOT NULL
+            """)
+            for parent, child in db.cursor.fetchall():
+                G.add_node(parent, type="swarm_req_id")
+                G.add_node(child, type="verification_method")
+                G.add_edge(parent, child)
 
-        # swarm_req_id -> method_id
-        db.cursor.execute("""
-            SELECT swarm_req_id, verification_method FROM drone_swarm_requirements
-            WHERE swarm_req_id IS NOT NULL AND verification_method IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
-            G.add_node(parent, type="swarm_req_id")
-            G.add_node(child, type="verification_method")
-            G.add_edge(parent, child)
+            # swarm_req_id -> method_id
+            db.cursor.execute("""
+                SELECT swarm_req_id, verification_method FROM drone_swarm_requirements
+                WHERE swarm_req_id IS NOT NULL AND verification_method IS NOT NULL
+            """)
+            for parent, child in db.cursor.fetchall():
+                G.add_node(parent, type="swarm_req_id")
+                G.add_node(child, type="verification_method")
+                G.add_edge(parent, child)
 
-        # sys_req_id -> method_id
-        db.cursor.execute("""
-            SELECT sys_req_id, verification_method FROM system_requirements
-            WHERE sys_req_id IS NOT NULL AND verification_method IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
-            G.add_node(parent, type="sys_req_id")
-            G.add_node(child, type="verification_method")
-            G.add_edge(parent, child)
+            # sys_req_id -> method_id
+            db.cursor.execute("""
+                SELECT sys_req_id, verification_method FROM system_requirements
+                WHERE sys_req_id IS NOT NULL AND verification_method IS NOT NULL
+            """)
+            for parent, child in db.cursor.fetchall():
+                G.add_node(parent, type="sys_req_id")
+                G.add_node(child, type="verification_method")
+                G.add_edge(parent, child)
 
-        # sub_req_id -> verification_method
-        db.cursor.execute("""
-            SELECT sub_req_id, verification_method FROM subsystem_requirements
-            WHERE sub_req_id IS NOT NULL AND verification_method IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
-            G.add_node(parent, type="sub_req_id")
-            G.add_node(child, type="verification_method")
-            G.add_edge(parent, child)
+            # sub_req_id -> verification_method
+            db.cursor.execute("""
+                SELECT sub_req_id, verification_method FROM subsystem_requirements
+                WHERE sub_req_id IS NOT NULL AND verification_method IS NOT NULL
+            """)
+            for parent, child in db.cursor.fetchall():
+                G.add_node(parent, type="sub_req_id")
+                G.add_node(child, type="verification_method")
+                G.add_edge(parent, child)
+            
+        if include_docs:
+            # method_id -> doc_id
+            db.cursor.execute("""
+                SELECT method_id, doc_id FROM V_join_documents
+                WHERE method_id IS NOT NULL AND doc_id IS NOT NULL
+            """)
+            for parent, child in db.cursor.fetchall():
+                G.add_node(parent, type="method_id")
+                G.add_node(child, type="doc_id")
+                G.add_edge(parent, child)
         
-        # method_id -> doc_id
-        db.cursor.execute("""
-            SELECT method_id, doc_id FROM V_join_documents
-            WHERE method_id IS NOT NULL AND doc_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
-            G.add_node(parent, type="method_id")
-            G.add_node(child, type="doc_id")
-            G.add_edge(parent, child)
+        # In build_graph(), after adding nodes:
+
+        # Goals: store satisfaction_status
+        db.cursor.execute("SELECT goal_id, satisfaction_status FROM goals")
+        for gid, status in db.cursor.fetchall():
+            if gid in G.nodes:
+                G.nodes[gid]["status"] = status
+
+        # Drone swarm requirements: store verification_status
+        db.cursor.execute("SELECT swarm_req_id, verification_status FROM drone_swarm_requirements")
+        for sid, status in db.cursor.fetchall():
+            if sid in G.nodes:
+                G.nodes[sid]["status"] = status
+
+        # System requirements: store verification_status
+        db.cursor.execute("SELECT sys_req_id, verification_status FROM system_requirements")
+        for sid, status in db.cursor.fetchall():
+            if sid in G.nodes:
+                G.nodes[sid]["status"] = status
+
+        # Subsystem requirements: store verification_status
+        db.cursor.execute("SELECT sub_req_id, verification_status FROM subsystem_requirements")
+        for sid, status in db.cursor.fetchall():
+            if sid in G.nodes:
+                G.nodes[sid]["status"] = status
+
     return G
 
 def choose_node_type_and_id(G):
@@ -214,13 +244,18 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     num_nodes = len(H.nodes)
 
     # Dynamic figure size
-    width = max(num_nodes / 2, 8)
-    height = max(depth * 1.5, 6)
+    #width = max(num_nodes / 2, 8)
+    width = max(num_nodes / 2, 8) # Påverkar spacing mellan syskon
+    height = max(depth * 1.5, 6) # Spelar ingen roll lol
     plt.figure(figsize=(width, height))
 
+    # NODE SIZE AND FONT SIZE
     # Dynamic node and font size
-    node_size = max(2000 - num_nodes * 20, 500)
-    font_size = max(9 - int(num_nodes / 50), 6)
+    #node_size = max(2000 - num_nodes * 20, 500)
+    #node_size = max(3000 - num_nodes * 20, 800)
+    node_size = max(1500 - num_nodes * 20, 500) # Node size → change the 2000 (base size) and 500 (minimum size).
+    #node_size = 800  # smaller nodes
+    font_size = max(9 - int(num_nodes / 50), 6) # Text size → change the formula or use a fixed value:
 
     # Horizontal layout width
     horiz_width = min(1.0, 0.5 + num_nodes / 50)
@@ -228,8 +263,13 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     xcenter = 0.5
 
     # Compute hierarchical positions
-    pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.15,
-                        width=adjusted_width, xcenter=xcenter)
+    #pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.15,
+    #                    width=adjusted_width, xcenter=xcenter)
+    # vert_gap → adds more space between parent and children
+    # width passed to hierarchy_pos → spreads sibling nodes out more.
+    #pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.25, width=adjusted_width * 1.5, xcenter=xcenter)
+    pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
+
 
     # Apply horizontal padding
     for node in pos:
@@ -246,19 +286,56 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     # Build labels: show only ID
     labels = {n: str(n) for n in H.nodes}
 
-    # Define a color map per node type
+    # Define a color map per node type depending on their verification status
+    status_colors = {
+        "goal_id": {
+            "Satisfied": "green",
+            "Not satisfied": "dimgrey",
+            "Pending": "dimgrey"
+        },
+        "swarm_req_id": {
+            "Verified": "mediumseagreen",
+            "Failed": "red",
+            "Inconclusive": "gray",
+            "Pending": "gray"
+        },
+        "sys_req_id": {
+            "Verified": "limegreen",
+            "Failed": "red",
+            "Inconclusive": "darkgrey",
+            "Pending": "darkgrey"
+        },
+        "sub_req_id": {
+            "Verified": "springgreen",
+            "Failed": "red",
+            "Inconclusive": "lightgrey",
+            "Pending": "lightgrey"
+        }
+    }
+
     type_colors = {
-        "goal_id": "green",
-        "swarm_req_id": "mediumseagreen",
-        "sys_req_id": "limegreen",
-        "sub_req_id": "springgreen",
-        "verification_method": "orange",
-        "method_id": "orange",
-        "doc_id": "indianred"
+        "goal_id": "dimgrey",
+        "swarm_req_id": "gray",
+        "sys_req_id": "darkgrey",
+        "sub_req_id": "lightgrey",
+        "verification_method": "blanchedalmond",
+        "method_id": "blanchedalmond",
+        "doc_id": "moccasin"
     }
 
     # Assign a color for each node in the subgraph
-    node_colors = [type_colors.get(H.nodes[n].get("type"), "lightgrey") for n in H.nodes]
+    #node_colors = [status_colors.get(H.nodes[n].get("type"), "lightgrey") for n in H.nodes]
+    node_colors = []
+    for n in H.nodes:
+        node_type = H.nodes[n].get("type")
+        status = H.nodes[n].get("status")
+
+        if node_type in status_colors and status in status_colors[node_type]:
+            node_colors.append(status_colors[node_type][status])
+        else:
+            # fallback: type color (methods, docs, etc.)
+            node_colors.append(type_colors.get(node_type, "lightgrey"))
+
 
     # Draw the tree with per-node colors
     nx.draw(
@@ -270,7 +347,25 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
 
     # --- Add legend ---
     from matplotlib.patches import Patch
-    legend_handles = [Patch(color=color, label=ntype) for ntype, color in type_colors.items()]
+    #legend_handles = [Patch(color=color, label=ntype) for ntype, color in type_colors.items()]
+    legend_handles = [
+        Patch(color="green", label="Goal Satisfied"),
+        Patch(color="dimgrey", label="Goal Pending / not Satisfied"),
+
+        Patch(color="mediumseagreen", label="Swarm_Req Verified"),
+        Patch(color="gray", label="Swarm_Req Not Verified"),
+
+        Patch(color="limegreen", label="Sys_Req Verified"),
+        Patch(color="darkgrey", label="Sys_Req Not Verified"),
+
+        Patch(color="springgreen", label="Sub_Req Verified"),
+        Patch(color="lightgrey", label="Sub_Req Not Verified"),
+
+        Patch(color="red", label="Failed Testing"),
+        
+        Patch(color="blanchedalmond", label="Verification Method"),
+        Patch(color="moccasin", label="Document"),
+    ]
     plt.legend(handles=legend_handles, loc="lower left", bbox_to_anchor=(1, 0))
 
 
@@ -293,7 +388,15 @@ def run_tree_plot():
     Launches the interactive plotting menu:
     asks for node type, ID, and depth, then plots.
     """
-    G = build_graph()
+    # Ask user about including methods/docs
+    include_methods = input("Include verification methods? (y/n): ").strip().lower() == "y"
+    if include_methods:
+        include_docs = input("Include documents? (y/n): ").strip().lower() == "y"
+    else:
+        include_docs = False
+
+    #G = build_graph()
+    G = build_graph(include_methods=include_methods, include_docs=include_docs)
     node_type, chosen_id, candidates, max_depth = choose_node_type_and_id(G)
 
     if chosen_id.lower() == "all":
