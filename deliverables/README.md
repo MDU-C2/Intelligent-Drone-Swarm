@@ -6,6 +6,8 @@
   - glossary.tex
   - preamble.tex
   - refs.bib
+  - You can find those files [here](main/cheat-sheets/latex)
+    - The .zip in there might have an older version of the above mentioned files.
 - Don't forget to check the [Quality Checklist](main/quality-checklist-report.md)
 
 # Plans
