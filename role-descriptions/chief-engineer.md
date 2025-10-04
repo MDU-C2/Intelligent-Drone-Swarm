@@ -13,5 +13,7 @@
 </ul>
 <h2>Deliverables</h2>
 <ul>
+  <li>Pre-Study</li>
   <li>Project Plan</li>
+  <li>Final Report</li>
 </ul>
