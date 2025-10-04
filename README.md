@@ -26,8 +26,10 @@ Harris Aerial, Carrier H6HL: <a href ="https://harrisaerial.com/carrier-drones/c
   - Microsoft
   - Risk Assessment
 - [Database](database) <i>(and database code)</i>
+- [Deliverables](deliverables)
+  - Project Plan
+  - Management Plans
 - Some [images](images) used in the project
-- [Project Plan and Management Plans](plans)
 - [Protocols](protocols) from daily and weekly meetings
 - [Role descriptions](role-descriptions) for all roles involved
 
