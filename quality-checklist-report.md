@@ -9,5 +9,6 @@
 - Every artefact/deliverable shall undergo peer review before approval.
 - Every artefact/deliverable shall include a version number, document approval *(approval record)*, and document history *(revision history)*.
 - All requirements, test results, or safety concerns in reports shall be traceable.
+- Use "UAV" (Unmanned Aerial Vehicle) instead of "drone".
 
 <b><ins>NOTE:</ins></b> If an artefact/deliverable contains more than 10 cumulative errors in spelling, grammar, capitalisation, or punctuation, the review will be halted and the document returned to the responsible individual for correction.
