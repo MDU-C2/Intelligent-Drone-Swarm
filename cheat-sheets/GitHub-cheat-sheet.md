@@ -10,5 +10,11 @@ Example: my-folder/README.md
 <b>Note:</b> The folder appears only if it contains at least one file. Empty folders cannot exist on GitHub.
 </ol>
 
+# Rename folder
+- Do it through Microsoft Explorer
+- Do not do it through:
+  - GitHub web interface - it's very time-consuming
+  - Visual Studio Code - it does not work well 
+
 # Text Formatting
-<a href="https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet">Go here</a>
+For markdown (.md) files: <a href="https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet">Go here</a>

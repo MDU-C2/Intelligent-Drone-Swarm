@@ -83,7 +83,7 @@ class create_tables:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 swarm_req_id VARCHAR  NOT NULL,
                 sys_req_id VARCHAR UNIQUE NOT NULL,
-                FOREIGN KEY (sys_req_id) REFERENCES system_requirements  (sys_req_id) ON DELETE CASCADE,
+                FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
                 FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
             )
             """
