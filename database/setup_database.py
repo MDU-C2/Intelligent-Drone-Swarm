@@ -8,7 +8,7 @@ from create_tables import create_tables
 
 if __name__ == "__main__":
 
-    print("Please enter the name of the databse you want to open(with .db):\n") 
+    print("Please enter the name of the database you want to create (with .db):\n") 
     db_name = input().strip()
     try:
         if not db_name.endswith(".db"):
