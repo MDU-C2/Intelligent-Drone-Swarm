@@ -48,7 +48,7 @@ Availability this week:
 
 <h2>2025-09-23</h2>
 The chief engineer found a drone that we can use as an example for this project, which the safety manager approved. There was an issue when the chief engineer renamed files on GitHub, which affected the Requirement Manager’s work on SQL, but it has been resolved. As a result, we now have a new rule: if someone works on a task that is assigned to another person, they must add that person as a reviewer before committing on GitHub. 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 <h1>Implementation Phase</h1>
 <h2>2+25-10-06</h2>
 The Safety Manager brought some fika. We discussed what to do during this phase.
