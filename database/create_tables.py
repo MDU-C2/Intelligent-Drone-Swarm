@@ -56,7 +56,7 @@ class create_tables:
                 rationale VARCHAR,
                 author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
                 review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-                reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H',"TBR")),
+                reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
                 verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
                 verification_method VARCHAR,
                 comment VARCHAR,
@@ -177,7 +177,7 @@ class create_tables:
                 doc_id VARCHAR PRIMARY KEY NOT NULL,
                 title VARCHAR NOT NULL,
                 description VARCHAR NOT NULL,
-                file LONGBLOB,
+                file BLOB,
                 version INTEGER,
                 author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   
             )
@@ -222,11 +222,11 @@ class create_tables:
     def create_quality_requirements_table(self):
         self.cursor.execute(
             """
-            CREATE TABLE IF NOT EXISTS Quality_Requirements (
+            CREATE TABLE IF NOT EXISTS quality_requirements (
                 quality_rec_id VARCHAR PRIMARY KEY, 
                 requirement VARCHAR, 
                 author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-                approved_by TEXT CHECK (approved_by IN ('Y.M.B',''))       
+                approved_by TEXT CHECK (approved_by IN ('Y.M.B') OR approved_by IS NULL)       
             )
             """
         )
