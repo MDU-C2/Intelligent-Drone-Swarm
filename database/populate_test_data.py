@@ -1,4 +1,4 @@
-# test.py
+# populate_test_data.py
 
 from connect_database import connect_database
 from create_tables import create_tables

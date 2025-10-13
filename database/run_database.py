@@ -10,7 +10,7 @@ from insert_prompts import (
     prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
     prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary,prompt_update_row
 )
-from other_functions import other_functions
+from db_utilities import db_utilities
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
         
     with connect_database(db_name) as db:
         inserter = insert_functions(db.cursor)
-        other = other_functions(db.cursor)
+        other = db_utilities(db.cursor)
 
         while True:
             print("\nSelect action:")
