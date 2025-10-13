@@ -11,10 +11,8 @@ Run:
 
 from __future__ import annotations
 import os
-import tempfile
-import base64
 import pathlib
-import sqlite3
+import base64
 from typing import Any, Dict, List, Tuple
 
 from db_json_bridge import dump_db_to_json, restore_db_from_json
@@ -62,22 +60,25 @@ def _rows_as_normalized_dicts(cols: List[str], rows: List[Tuple[Any, ...]]) -> L
 
 def _sorted_rows(rows: List[Dict[str, Any]], key_cols: List[str]) -> List[Dict[str, Any]]:
     # Sort rows deterministically by key_cols (fallback to all columns if empty)
+    if not rows:
+        return rows
     if not key_cols:
         # assume first column is ID as in your schema
-        key_cols = list(rows[0].keys()) if rows else []
+        key_cols = [next(iter(rows[0].keys()))]
+
     def sort_key(d):
         return tuple(str(d.get(k)) for k in key_cols)
+
     return sorted(rows, key=sort_key)
 
 
 def test_roundtrip_equivalence(tmp_path: pathlib.Path):
-    # Resolve original DB (your project keeps the active db path in db_name.txt)
+    # Resolve original DB (project keeps active db path in db_name.txt)
     db_name_file = pathlib.Path("db_name.txt")
     assert db_name_file.exists(), "db_name.txt not found; create it with your .db path."
     original_db = db_name_file.read_text().strip()
     assert os.path.exists(original_db), f"Original DB not found at: {original_db}"
 
-    # Temp artifacts
     out_json = tmp_path / "dump.json"
     restored_db = tmp_path / "restored.db"
 
