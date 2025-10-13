@@ -111,7 +111,6 @@ def prompt_subsystem_requirement():
     if "EXIT" in data.values(): return None
     return data
 
-
 def prompt_goal_children():
     print("\nLink goal and swarm requirement (goal_children table):")
     goal_id = prompt_input("Goal ID: ")
@@ -271,3 +270,5 @@ def prompt_update_row():
         "update_column": update_column,
         "new_value": new_value
     }
+
+#Insert Item, Insert test_and_verification, Insert Documents
