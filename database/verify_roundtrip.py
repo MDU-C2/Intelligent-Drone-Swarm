@@ -101,7 +101,7 @@ def main():
                 if o_norm != r_norm:
                     raise SystemExit(f"Row mismatch in table '{t}'.")
 
-        print("✅ Round-trip verification PASSED.")
+        print("Round-trip verification PASSED.")
 
 
 def run_roundtrip_check() -> None:
