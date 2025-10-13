@@ -244,17 +244,13 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     num_nodes = len(H.nodes)
 
     # Dynamic figure size
-    #width = max(num_nodes / 2, 8)
     width = max(num_nodes / 2, 8) # Påverkar spacing mellan syskon
     height = max(depth * 1.5, 6) # Spelar ingen roll lol
     plt.figure(figsize=(width, height))
 
     # NODE SIZE AND FONT SIZE
     # Dynamic node and font size
-    #node_size = max(2000 - num_nodes * 20, 500)
-    #node_size = max(3000 - num_nodes * 20, 800)
-    node_size = max(1500 - num_nodes * 20, 500) # Node size → change the 2000 (base size) and 500 (minimum size).
-    #node_size = 800  # smaller nodes
+    node_size = max(1500 - num_nodes * 20, 500) # Node size → change the 1500 (base size) and 500 (minimum size).
     font_size = max(9 - int(num_nodes / 50), 6) # Text size → change the formula or use a fixed value:
 
     # Horizontal layout width
@@ -263,13 +259,9 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     xcenter = 0.5
 
     # Compute hierarchical positions
-    #pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.15,
-    #                    width=adjusted_width, xcenter=xcenter)
     # vert_gap → adds more space between parent and children
     # width passed to hierarchy_pos → spreads sibling nodes out more.
-    #pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.25, width=adjusted_width * 1.5, xcenter=xcenter)
     pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
-
 
     # Apply horizontal padding
     for node in pos:
@@ -324,7 +316,6 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     }
 
     # Assign a color for each node in the subgraph
-    #node_colors = [status_colors.get(H.nodes[n].get("type"), "lightgrey") for n in H.nodes]
     node_colors = []
     for n in H.nodes:
         node_type = H.nodes[n].get("type")
@@ -336,7 +327,6 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
             # fallback: type color (methods, docs, etc.)
             node_colors.append(type_colors.get(node_type, "lightgrey"))
 
-
     # Draw the tree with per-node colors
     nx.draw(
         H, pos, labels=labels,
@@ -345,9 +335,8 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         arrowsize=15, edgecolors="black"
     )
 
-    # --- Add legend ---
+    # Add legend
     from matplotlib.patches import Patch
-    #legend_handles = [Patch(color=color, label=ntype) for ntype, color in type_colors.items()]
     legend_handles = [
         Patch(color="green", label="Goal Satisfied"),
         Patch(color="dimgrey", label="Goal Pending / not Satisfied"),
@@ -368,7 +357,6 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     ]
     plt.legend(handles=legend_handles, loc="lower left", bbox_to_anchor=(1, 0))
 
-
     node_type = G.nodes[root].get("type", "unknown")
     title = f"Hierarchy starting from {node_type}: {root}"
     if max_depth is not None:
@@ -378,7 +366,7 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     if save:
         filename = f"{node_type}_{root}_depth{max_depth if max_depth else 'all'}.png".replace(":", "-")
         plt.savefig(filename, bbox_inches="tight")
-        print(f"✅ Saved: {filename}")
+        print(f"Saved: {filename}")
         plt.close()
     else:
         plt.show()
@@ -395,7 +383,6 @@ def run_tree_plot():
     else:
         include_docs = False
 
-    #G = build_graph()
     G = build_graph(include_methods=include_methods, include_docs=include_docs)
     node_type, chosen_id, candidates, max_depth = choose_node_type_and_id(G)
 
