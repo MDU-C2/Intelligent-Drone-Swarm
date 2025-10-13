@@ -6,8 +6,6 @@ class db_utilities:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    # --- Existing methods (delete, update, check, etc.) stay the same ---
-
     def list_tables(self):
         """Return a list of user tables (excluding sqlite_sequence)."""
         self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
@@ -100,3 +98,28 @@ class db_utilities:
                 (r[i] if i < len(r) else "").ljust(col_widths[i]) for i in range(max_cols)
             )
             print(line)
+
+    def delete_from_table (self,table_name, condition_column, condition_value): 
+        self.cursor.execute(
+            f"""
+            DELETE FROM {table_name} WHERE {condition_column} = ?
+            """,
+            (condition_value,)
+        ) 
+ 
+    def check_requirement_exists (self, check_table, check_column, check_value):
+        self.cursor.execute(
+            f"SELECT 1 FROM {check_table} WHERE {check_column} = ?",
+            (check_value,)
+        )
+        return self.cursor.fetchone()
+    
+    def update_row(self, table, condition_column, condition_value, update_column, new_value):
+         self.cursor.execute(
+            f"""
+            UPDATE {table}
+            SET {update_column} = ?
+            WHERE {condition_column} = ?
+            """,
+            (new_value, condition_value)
+        )
