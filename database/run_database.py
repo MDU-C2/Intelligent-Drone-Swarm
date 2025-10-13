@@ -24,7 +24,8 @@ INSERT_ID_GLOSSARY = "14"
 PLOT_TREE = "15"
 SEARCH_DB = "16"
 UPDATE_DB_ROW = "17"
-EXIT = "18"
+DELETE_DB_ROW = "18"
+EXIT = "19"
 
 def main():
     with open("db_name.txt", "r") as f:
@@ -53,10 +54,10 @@ def main():
             print("15: Plot tree")
             print("16: Search in Database")
             print("17: Update row in Database")
-            #Delete row in Database
-            print("18: Exit")
+            print("18: Delete row in Database")
+            print("19: Exit")
 
-            choice = input("Enter choice (1-18): ")
+            choice = input("Enter choice (1-19): ")
 
             try:
                 if choice == INSERT_GOAL:
@@ -92,43 +93,28 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_ITEM:
-                    print("\nInsert Item (type 'exit' to cancel)")
-                    item_id = input("Item ID: ").strip()
-                    if item_id.lower() == "exit": 
-                        print("Insertion cancelled.")
+                    data = prompts.prompt_item()
+                    if data:
+                        inserter.insert_item(**data)
+                        print("Item inserted successfully!")
                     else:
-                        item_name = input("Item Name: ").strip()
-                        if item_name.lower() == "exit":
-                            print("Insertion cancelled.")
-                        else:
-                            inserter.insert_item(item_id, item_name)
-                            print("Item inserted successfully!")
+                        print("Insertion cancelled.")
 
                 elif choice == INSERT_DOCUMENT:
-                    print("\nInsert Document (type 'exit' to cancel)")
-                    doc_id = input("Doc ID: ").strip()
-                    if doc_id.lower() == "exit":
-                        print("Insertion cancelled.")
-                    else:
-                        title = input("Title: ").strip()
-                        description = input("Description: ").strip()
-                        version_raw = input("Version (optional integer): ").strip()
-                        version = int(version_raw) if version_raw.isdigit() else None
-                        author = input("Author (E.Z/C.N/Y.M.B/E.M/A.H, optional): ").strip() or None
-                        # Binary file path skipped for now; store as NULL
-                        inserter.insert_documents(doc_id, title, description, None, version, author)
+                    data = prompts.prompt_document()
+                    if data:
+                        inserter.insert_documents(**data)
                         print("Document inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
                 elif choice == INSERT_VV_METHOD:
-                    print("\nInsert V&V Method (type 'exit' to cancel)")
-                    method_id = input("Method ID: ").strip()
-                    if method_id.lower() == "exit":
-                        print("Insertion cancelled.")
-                    else:
-                        description = input("Description: ").strip()
-                        method_type = input("Method Type (Inspection/Analysis/Test): ").strip()
-                        inserter.insert_test_and_verification(method_id, description, method_type)
+                    data = prompts.prompt_vv_method()
+                    if data:
+                        inserter.insert_test_and_verification(**data)
                         print("V&V Method inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
                 elif choice == INSERT_QUALITY_REQ:
                     data = prompts.prompt_quality_requirements()
@@ -137,7 +123,6 @@ def main():
                         print("Quality requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
-
 
                 elif choice == INSERT_GOAL_CHILDREN:
                     data = prompts.prompt_goal_children()
@@ -202,49 +187,7 @@ def main():
                         print(f"Error plotting tree: {e}")
 
                 elif choice == SEARCH_DB:
-                    try:
-                        tables = other.list_tables()
-                        if not tables:
-                            print("No tables found in the database.")
-                            continue
-
-                        print("\nAvailable tables:")
-                        for i, t in enumerate(tables, start=1):
-                            print(f"{i}: {t}")
-
-                        table_choice = input("Select table by number: ").strip()
-                        if not table_choice.isdigit() or not (1 <= int(table_choice) <= len(tables)):
-                            print("Invalid table choice.")
-                            continue
-                        table = tables[int(table_choice) - 1]
-
-                        columns = other.list_columns(table)
-                        if not columns:
-                            print("No columns found for this table.")
-                            continue
-
-                        print("\nAvailable columns:")
-                        for i, c in enumerate(columns, start=1):
-                            print(f"{i}: {c}")
-
-                        column_choice = input("Select column by number: ").strip()
-                        if not column_choice.isdigit() or not (1 <= int(column_choice) <= len(columns)):
-                            print("Invalid column choice.")
-                            continue
-                        column = columns[int(column_choice) - 1]
-
-                        value = input(f"Enter value to search in '{column}': ").strip()
-                        partial = input("Partial match? (y/n): ").strip().lower() == "y"
-
-                        rows = other.search_value(table, column, value, partial=partial)
-                        if rows:
-                            print(f"\nFound {len(rows)} matching row(s):")
-                            other.pretty_print_rows(table, rows)
-                        else:
-                            print("No matches found.")
-
-                    except Exception as e:
-                        print(f"Error searching database: {e}")
+                    other.interactive_search()
 
                 elif choice == UPDATE_DB_ROW:
                         data = prompts.prompt_update_row()
@@ -254,7 +197,15 @@ def main():
                         else:
                             print("Update cancelled.")
 
-                #Delete row in Database
+                elif choice == DELETE_DB_ROW:
+                    data = prompts.prompt_delete_row()
+                    if data:
+                        affected = other.delete_from_table(
+                            data["table"], data["condition_column"], data["condition_value"]
+                        )
+                        print("Row deleted successfully!" if affected else "No rows matched your criteria.")
+                    else:
+                        print("Deletion cancelled.")
 
                 elif choice == EXIT:
                     print("Exiting script.")
