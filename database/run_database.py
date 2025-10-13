@@ -6,6 +6,7 @@ import plot_tree
 import prompts
 from db_utilities import db_utilities
 from db_json_bridge import dump_db_to_json, restore_db_from_json
+from verify_roundtrip import run_roundtrip_check
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -28,7 +29,8 @@ UPDATE_DB_ROW = "17"
 DELETE_DB_ROW = "18"
 EXPORT_TO_JSON = "19"
 RESTORE_FROM_JSON = "20"
-EXIT = "21"
+VERIFY_ROUNDTRIP = "21"
+EXIT = "22"
 
 def main():
     with open("db_name.txt", "r") as f:
@@ -61,10 +63,10 @@ def main():
             print("18: Delete row in Database")
             print("19: Export DB → JSON")
             print("20: Restore JSON → DB")
-            print("21: Exit")
+            print("21: Verify JSON round-trip")
+            print("22: Exit")
 
-            choice = input("Enter choice (1-21): ")
-
+            choice = input("Enter choice (1-22): ")
 
             try:
                 if choice == INSERT_GOAL:
@@ -233,6 +235,17 @@ def main():
                         print(f"Restored '{target_db}' from '{in_path}' (overwrite={overwrite})")
                     except Exception as e:
                         print(f"Restore failed: {e}")
+
+                elif choice == VERIFY_ROUNDTRIP:
+                    print("\n→ Running round-trip verification (dump → restore → compare)…")
+                    try:
+                        run_roundtrip_check()
+                        print("JSON round-trip test PASSED")
+                    except SystemExit as se:
+                        # verify_roundtrip.py raises SystemExit on mismatches
+                        print(f"Round-trip test FAILED: {se}")
+                    except Exception as e:
+                        print(f"Round-trip test error: {e}")
 
                 elif choice == EXIT:
                     print("Exiting script.")
