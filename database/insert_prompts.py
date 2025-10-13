@@ -54,6 +54,34 @@ def prompt_drone_swarm_requirement():
     if "EXIT" in data.values(): return None
     return data
 
+def prompt_system_requirement():
+    print("\nEnter System Requirement (type 'exit' to return to menu):")
+    author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
+    if author == "EXIT": return None
+    reviewer = prompt_input("Reviewer (different from author): ")
+    if reviewer == "EXIT": return None
+    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if verification_status == "EXIT": return None
+    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
+    if verification_method == "EXIT": return None
+
+    data = {
+        "parent_id": prompt_input("PARENT System Req ID: "),
+        "sys_req_id": prompt_input("System Req ID: "),
+        "requirement": prompt_input("Requirement description: "),
+        "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
+        "effect": prompt_input("Effect: "),
+        "rationale": prompt_input("Rationale: "),
+        "author": author,
+        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "reviewer": reviewer,
+        "verification_status": verification_status,
+        "verification_method": verification_method,
+        "comment": prompt_input("Comment (optional): ", optional=True)
+    }
+    if "EXIT" in data.values(): return None
+    return data
+
 def prompt_goal_children():
     print("\nLink goal and swarm requirement (goal_children table):")
     goal_id = prompt_input("Goal ID: ")
