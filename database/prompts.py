@@ -11,7 +11,7 @@ def prompt_input(prompt_text, optional=False):
         return None
     return value
 
-# ----- Prompts for main tables -----
+# ----- PROMPTS FOR ALL TABLES -----
 def prompt_goal():
     print("\nEnter new goal (type 'exit' to return to menu):")
     data = {
@@ -171,6 +171,13 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
+#def prompt_item():
+
+#def prompt_test_and_verification():
+
+#def prompt_documents():
+
+# ----- OTHER PROMPTS -----
 def prompt_update_row():
     print("\nUpdate database row:")
 
@@ -270,5 +277,3 @@ def prompt_update_row():
         "update_column": update_column,
         "new_value": new_value
     }
-
-#Insert Item, Insert test_and_verification, Insert Documents
