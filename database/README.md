@@ -23,3 +23,5 @@ Pre-requisites: VSCode with SQLite3 Extension
 4. cd database
 5. python run_database.py
 6. *Follow prompts*
+- When done
+7. 
