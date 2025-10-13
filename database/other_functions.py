@@ -21,6 +21,14 @@ class other_functions:
             (check_value,)
         )
         return self.cursor.fetchone()
-
-# Update requirement
+    
+    def update_requirement(self, table, condition_column, condition_value, update_column, new_value):
+         self.cursor.execute(
+            f"""
+            UPDATE {table}
+            SET {update_column} = ?
+            WHERE {condition_column} = ?
+            """,
+            (new_value, condition_value)
+        )
 # Finns ett SQL kommando som uppdaterar "originalet"

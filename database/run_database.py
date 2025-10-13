@@ -8,14 +8,18 @@ import plot_tree
 from insert_prompts import (
     prompt_goal, prompt_drone_swarm_requirement, prompt_goal_children,
     prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
-    prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary
+    prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary,prompt_update_requirement
 )
+from other_functions import other_functions
+
 
 def main():
-    with open("db_name.txt") as f:
-        db_name = f.read().strip() 
+    with open("db_name.txt", "r") as f:
+        db_name = f.read().strip()
+        
     with connect_database(db_name) as db:
         inserter = insert_functions(db.cursor)
+        other = other_functions(db.cursor)
 
         while True:
             print("\nSelect action:")
@@ -29,7 +33,8 @@ def main():
             print("8: Insert quality_requirements")
             print("9: Insert id_glossary")
             print("10: Plot tree")
-            print("11: Exit")
+            print("11: Update requirement row")
+            print("12: Exit")
 
             choice = input("Enter choice (1-10): ")
 
@@ -84,8 +89,13 @@ def main():
                         plot_tree.run_tree_plot()
                     except Exception as e:
                         print(f"Error plotting tree: {e}")
-
+                        
                 elif choice == "11":
+                        data = prompt_update_requirement()
+                        if data: other.update_requirement(**data)
+                        print("Requirement updated successfully!")
+                    
+                elif choice == "12":
                     print("Exiting script.")
                     break
 

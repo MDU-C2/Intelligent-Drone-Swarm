@@ -111,3 +111,24 @@ def prompt_id_glossary():
     meaning = prompt_input("Meaning: ")
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
+
+def prompt_update_requirement():
+    print("\nUpdate requirement row:")
+    table = prompt_input("In what table do want to make changes: ")
+    if table == "EXIT": return None
+    condition_column = prompt_input("Choose a column to refer to : ")
+    if condition_column == "EXIT": return None
+    condition_value = prompt_input("What is the current value of that column: ")
+    if condition_value == "EXIT": return None
+    update_column = prompt_input("What column do you want to change: ")
+    if update_column == "EXIT": return None
+    new_value = prompt_input("Insert your changes: ")
+    if new_value == "EXIT": return None
+    return {
+        "table": table,
+        "condition_column": condition_column,
+        "condition_value": condition_value,
+        "update_column": update_column,
+        "new_value": new_value
+    }
+    
