@@ -14,7 +14,7 @@ class create_tables:
         table_name : str
             Name of the table to check in sqlite_master.
         create_sql : str
-            Full CREATE TABLE statement (you may keep or remove IF NOT EXISTS).
+            Full CREATE TABLE statement.
         """
         exists = self.cursor.execute(
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
@@ -30,7 +30,7 @@ class create_tables:
     # ------------------ TABLES ------------------
     def create_goals_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS goals (
+        CREATE TABLE goals (
             goal_id VARCHAR PRIMARY KEY,
             goal_description VARCHAR NOT NULL,
             stakeholder VARCHAR,
@@ -46,7 +46,7 @@ class create_tables:
    
     def create_drone_swarm_requirements_table (self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS drone_swarm_requirements (
+        CREATE TABLE drone_swarm_requirements (
             swarm_req_id VARCHAR PRIMARY KEY,
             requirement VARCHAR NOT NULL,
             priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
@@ -65,7 +65,7 @@ class create_tables:
 
     def create_goal_children_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS goal_children (
+        CREATE TABLE goal_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             goal_id VARCHAR NOT NULL,
             swarm_req_id VARCHAR UNIQUE NOT NULL,
@@ -77,7 +77,7 @@ class create_tables:
 
     def create_system_requirements_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS system_requirements (
+        CREATE TABLE system_requirements (
             parent_id VARCHAR,
             sys_req_id VARCHAR PRIMARY KEY NOT NULL,
             requirement VARCHAR NOT NULL,
@@ -98,7 +98,7 @@ class create_tables:
 
     def create_swarm_req_children_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS swarm_req_children (
+        CREATE TABLE swarm_req_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             swarm_req_id VARCHAR  NOT NULL,
             sys_req_id VARCHAR UNIQUE NOT NULL,
@@ -110,7 +110,7 @@ class create_tables:
 
     def create_subsystem_requirements_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS subsystem_requirements (
+        CREATE TABLE subsystem_requirements (
             parent_id VARCHAR,
             sub_req_id VARCHAR PRIMARY KEY NOT NULL,
             requirement VARCHAR NOT NULL,
@@ -131,7 +131,7 @@ class create_tables:
 
     def create_sysreq_children_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS sysreq_children(
+        CREATE TABLE sysreq_children(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sys_req_id VARCHAR NOT NULL,
             sub_req_id VARCHAR UNIQUE NOT NULL,
@@ -143,7 +143,7 @@ class create_tables:
 
     def create_subsys_join_item_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS sys_join_item (
+        CREATE TABLE sys_join_item (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             item_id VARCHAR NOT NULL,
             sub_req_id VARCHAR UNIQUE NOT NULL,   
@@ -155,7 +155,7 @@ class create_tables:
 
     def create_item_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS item (
+        CREATE TABLE item (
             item_id VARCHAR PRIMARY KEY NOT NULL,
             item_name VARCHAR NOT NULL
         )
@@ -164,7 +164,7 @@ class create_tables:
 
     def create_documents_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS documents (
+        CREATE TABLE documents (
             doc_id VARCHAR PRIMARY KEY NOT NULL,
             title VARCHAR NOT NULL,
             description VARCHAR NOT NULL,
@@ -177,7 +177,7 @@ class create_tables:
          
     def create_test_and_verification_table (self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS test_and_verification (
+        CREATE TABLE test_and_verification (
             method_id VARCHAR PRIMARY KEY NOT NULL,
             description VARCHAR NOT NULL,
             method_type TEXT CHECK (method_type IN ('Inspection','Analysis','Test'))    
@@ -187,7 +187,7 @@ class create_tables:
 
     def create_V_join_documents_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS V_join_documents (
+        CREATE TABLE V_join_documents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             method_id VARCHAR NOT NULL,
             doc_id VARCHAR NOT NULL,  
@@ -199,7 +199,7 @@ class create_tables:
 
     def create_id_glossary_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS id_glossary (
+        CREATE TABLE id_glossary (
             gloss_id INTEGER PRIMARY KEY AUTOINCREMENT,
             prefix VARCHAR NOT NULL,
             meaning VARCHAR NOT NULL  
@@ -209,7 +209,7 @@ class create_tables:
 
     def create_quality_requirements_table(self):
         create_sql = """
-        CREATE TABLE IF NOT EXISTS quality_requirements (
+        CREATE TABLE quality_requirements (
             quality_rec_id VARCHAR PRIMARY KEY, 
             requirement VARCHAR, 
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
