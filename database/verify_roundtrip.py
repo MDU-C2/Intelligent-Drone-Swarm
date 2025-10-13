@@ -100,5 +100,9 @@ def main():
         print("✅ Round-trip verification PASSED.")
 
 
+def run_roundtrip_check() -> None:
+    """Programmatic entry point used by the TUI."""
+    main()
+
 if __name__ == "__main__":
     main()
