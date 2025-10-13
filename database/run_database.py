@@ -8,10 +8,30 @@ import plot_tree
 from insert_prompts import (
     prompt_goal, prompt_drone_swarm_requirement, prompt_goal_children,
     prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
-    prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary,prompt_update_row
+    prompt_V_join_documents, prompt_quality_requirements, 
+    prompt_id_glossary,prompt_update_row
 )
 from db_utilities import db_utilities
 
+# ----- Menu choice constants -----
+INSERT_GOAL = "1"
+INSERT_DRONE_SWARM_REQ = "2"
+INSERT_SYS_REQ = "3"
+INSERT_SUBSYS_REQ = "4"
+INSERT_ITEM = "5"
+INSERT_DOCUMENT = "6"
+INSERT_VV_METHOD = "7"
+INSERT_QUALITY_REQ = "8"
+INSERT_GOAL_CHILDREN = "9"
+INSERT_SWARM_REQ_CHILDREN = "10"
+INSERT_SYSREQ_CHILDREN = "11"
+INSERT_SUBSYS_JOIN_ITEM = "12"
+INSERT_V_JOIN_DOCS = "13"
+INSERT_ID_GLOSSARY = "14"
+PLOT_TREE = "15"
+SEARCH_DB = "16"
+UPDATE_DB_ROW = "17"
+EXIT = "18"
 
 def main():
     with open("db_name.txt", "r") as f:
@@ -25,81 +45,128 @@ def main():
             print("\nSelect action:")
             print("1: Insert a Goal")
             print("2: Insert a Drone Swarm Requirement")
-            #Insert a System Requirement
-            #Insert a Subsystem Requirement
-            #Insert Item
-            #Insert Document
-            print("3: Insert children of Goals")
-            print("4: Insert children of Drone Swarm Requirements")
-            print("5: Insert children of System Requirements")
-            print("6: Insert subsys_join_item") #Connect Item to Subsystem Requirement
-            print("7: Insert V_join_documents") #Connect V&V Method to Document
-            print("8: Insert quality_requirements")
-            print("9: Insert id_glossary") #Add ID to glossary
-            print("10: Plot tree")
-            print("11: Update row in table")
-            print("12: Exit")
+            print("3: Insert a System Requirement")
+            print("4: Insert a Subsystem Requirement")
+            print("5: Insert an Item")
+            print("6: Insert a Document")
+            print("7: Insert a V&V Method")
+            print("8: Insert Quality Requirement")
+            print("9: Connect Drone Swarm Requirement to Goal")
+            print("10: Connect System Requirement to Drone Swarm Requirement")
+            print("11: Connect System Requiement to System or Subsystem Requirement")
+            print("12: Connect Item to Subsystem Requirement")
+            print("13: Connect Document to V&V Method")
+            print("14: Add ID to Glossary")
+            print("15: Plot tree")
+            print("16: Search in Database")
+            print("17: Update row in Database")
+            print("18: Exit")
 
             choice = input("Enter choice (1-11): ")
 
             try:
-                if choice == "1":
+                if choice == INSERT_GOAL:
                     data = prompt_goal()
-                    if data: inserter.insert_goal(**data)
-                    print("Goal inserted successfully!")
+                    if data:
+                        inserter.insert_goal(**data)
+                        print("Goal inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
-                elif choice == "2":
+                elif choice == INSERT_DRONE_SWARM_REQ:
                     data = prompt_drone_swarm_requirement()
-                    if data: inserter.insert_drone_swarm_requirements(**data)
-                    print("Drone swarm requirement inserted successfully!")
+                    if data:
+                        inserter.insert_drone_swarm_requirements(**data)
+                        print("Drone Swarm Requirement inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
-                elif choice == "3":
+                elif choice == INSERT_SYS_REQ:
+                    print("Hello")
+
+                elif choice == INSERT_SUBSYS_REQ:
+                    print("Hello")
+                
+                elif choice == INSERT_ITEM:
+                    print("Hello")
+                
+                elif choice == INSERT_DOCUMENT:
+                    print("Hello")
+
+                elif choice == INSERT_VV_METHOD:
+                    print("Hello")
+                
+                elif choice == INSERT_QUALITY_REQ:
+                    print("Hello")
+
+                elif choice == INSERT_GOAL_CHILDREN:
                     data = prompt_goal_children()
-                    if data: inserter.insert_goal_children(**data)
-                    print("Goal_children record inserted successfully!")
+                    if data:
+                        inserter.insert_goal_children(**data)
+                        print("Successfully connected Drone Swarm Requirement to Goal!")
+                    else:
+                        print("Connection cancelled.")
 
-                elif choice == "4":
+                elif choice == INSERT_SWARM_REQ_CHILDREN:
                     data = prompt_swarm_req_children()
-                    if data: inserter.insert_swarm_req_children(**data)
-                    print("Swarm_req_children record inserted successfully!")
+                    if data:
+                        inserter.insert_swarm_req_children(**data)
+                        print("Successfully connected System Requirement to Drone Swarm Requirement!")
+                    else:
+                        print("Connection cancelled.")
 
-                elif choice == "5":
+                elif choice == INSERT_SYSREQ_CHILDREN:
                     data = prompt_sysreq_children()
-                    if data: inserter.insert_sysreq_children(**data)
-                    print("Sysreq_children record inserted successfully!")
+                    if data:
+                        inserter.insert_sysreq_children(**data)
+                        print("Successfully connected System Requirement to System/Subsystem Requirement!")
+                    else:
+                        print("Connection cancelled.")
 
-                elif choice == "6":
+                elif choice == INSERT_SUBSYS_JOIN_ITEM:
                     data = prompt_subsys_join_item()
-                    if data: inserter.insert_subsys_join_item(**data)
-                    print("Subsys_join_item record inserted successfully!")
+                    if data:
+                        inserter.insert_subsys_join_item(**data)
+                        print("Successfully connected Item to Subsystem Requirement!")
+                    else:
+                        print("Connection cancelled.")
 
-                elif choice == "7":
+                elif choice == INSERT_V_JOIN_DOCS:
                     data = prompt_V_join_documents()
-                    if data: inserter.insert_V_join_documents(**data)
-                    print("V_join_documents record inserted successfully!")
+                    if data:
+                        inserter.insert_V_join_documents(**data)
+                        print("Successfully connected Document to V&V Method!")
+                    else:
+                        print("Connection cancelled.")
 
-                elif choice == "8":
+                elif choice == INSERT_QUALITY_REQ:
                     data = prompt_quality_requirements()
-                    if data: inserter.insert_quality_requirements(**data)
-                    print("Quality requirement inserted successfully!")
+                    if data:
+                        inserter.insert_quality_requirements(**data)
+                        print("Quality requirement inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
-                elif choice == "9":
+                elif choice == INSERT_ID_GLOSSARY:
                     data = prompt_id_glossary()
-                    if data: inserter.insert_id_glossary(**data)
-                    print("ID glossary entry inserted successfully!")
+                    if data:
+                        inserter.insert_id_glossary(**data)
+                        print("ID successfully inserted to ID Glossary!")
+                    else:
+                        print("Insertion cancelled.")
 
-                elif choice == "10":
+                elif choice == PLOT_TREE:
                     try:
                         plot_tree.run_tree_plot()
                     except Exception as e:
                         print(f"Error plotting tree: {e}")
                         
-                elif choice == "11":
+                elif choice == UPDATE_DB_ROW:
                         data = prompt_update_row()
                         if data: other.update_row(**data)
                         print("Row updated successfully!")
                     
-                elif choice == "12":
+                elif choice == EXIT:
                     print("Exiting script.")
                     break
 
