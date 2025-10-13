@@ -1,4 +1,4 @@
-# insert_prompts.py
+# prompts.py
 
 import sqlite3
 

@@ -3,7 +3,7 @@
 from connect_database import connect_database
 from insert_functions import insert_functions
 import plot_tree
-from insert_prompts import (
+from prompts import (
     prompt_goal, prompt_drone_swarm_requirement, prompt_system_requirement, prompt_subsystem_requirement, 
     prompt_goal_children, prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
     prompt_V_join_documents, prompt_quality_requirements, 
