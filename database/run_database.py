@@ -23,20 +23,24 @@ def main():
 
         while True:
             print("\nSelect action:")
-            print("1: Insert a goal")
-            print("2: Insert a drone swarm requirement")
-            print("3: Insert goal_children")
-            print("4: Insert swarm_req_children")
-            print("5: Insert sysreq_children")
-            print("6: Insert subsys_join_item")
-            print("7: Insert V_join_documents")
+            print("1: Insert a Goal")
+            print("2: Insert a Drone Swarm Requirement")
+            #Insert a System Requirement
+            #Insert a Subsystem Requirement
+            #Insert Item
+            #Insert Document
+            print("3: Insert children of Goals")
+            print("4: Insert children of Drone Swarm Requirements")
+            print("5: Insert children of System Requirements")
+            print("6: Insert subsys_join_item") #Connect Item to Subsystem Requirement
+            print("7: Insert V_join_documents") #Connect V&V Method to Document
             print("8: Insert quality_requirements")
-            print("9: Insert id_glossary")
+            print("9: Insert id_glossary") #Add ID to glossary
             print("10: Plot tree")
-            print("11: Update requirement row")
+            print("11: Update row in table")
             print("12: Exit")
 
-            choice = input("Enter choice (1-10): ")
+            choice = input("Enter choice (1-11): ")
 
             try:
                 if choice == "1":
