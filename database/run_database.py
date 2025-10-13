@@ -25,7 +25,9 @@ PLOT_TREE = "15"
 SEARCH_DB = "16"
 UPDATE_DB_ROW = "17"
 DELETE_DB_ROW = "18"
-EXIT = "19"
+EXPORT_TO_JSON = "19"
+RESTORE_FROM_JSON = "20"
+EXIT = "21"
 
 def main():
     with open("db_name.txt", "r") as f:
@@ -55,9 +57,13 @@ def main():
             print("16: Search in Database")
             print("17: Update row in Database")
             print("18: Delete row in Database")
-            print("19: Exit")
+            print("18: Delete row in Database")
+            print("19: Export DB → JSON")
+            print("20: Restore JSON → DB")
+            print("21: Exit")
 
-            choice = input("Enter choice (1-19): ")
+            choice = input("Enter choice (1-21): ")
+
 
             try:
                 if choice == INSERT_GOAL:
@@ -206,6 +212,26 @@ def main():
                         print("Row deleted successfully!" if affected else "No rows matched your criteria.")
                     else:
                         print("Deletion cancelled.")
+                
+                elif choice == EXPORT_TO_JSON:
+                    # use the db currently pointed to by db_name.txt
+                    default_json = "database_dump.json"
+                    out_path = input(f"\nOutput JSON path [{default_json}]: ").strip() or default_json
+                    try:
+                        dump_db_to_json(db_name, out_path)
+                        print(f"Exported '{db_name}' → '{out_path}'")
+                    except Exception as e:
+                        print(f"Export failed: {e}")
+
+                elif choice == RESTORE_FROM_JSON:
+                    in_path = input("\nInput JSON path [database_dump.json]: ").strip() or "database_dump.json"
+                    target_db = input(f"Output DB path [{db_name}]: ").strip() or db_name
+                    overwrite = (input(f"Overwrite '{target_db}' if exists? (y/N): ").strip().lower() == "y")
+                    try:
+                        restore_db_from_json(target_db, in_path, overwrite=overwrite)
+                        print(f"Restored '{target_db}' from '{in_path}' (overwrite={overwrite})")
+                    except Exception as e:
+                        print(f"Restore failed: {e}")
 
                 elif choice == EXIT:
                     print("Exiting script.")
