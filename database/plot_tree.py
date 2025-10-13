@@ -98,7 +98,7 @@ def build_graph(include_methods=True, include_docs=True):
                 WHERE goal_id IS NOT NULL AND method_id IS NOT NULL
             """)
             for parent, child in db.cursor.fetchall():
-                G.add_node(parent, type="swarm_req_id")
+                G.add_node(parent, type="goal_id")
                 G.add_node(child, type="verification_method")
                 G.add_edge(parent, child)
 
