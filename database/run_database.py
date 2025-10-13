@@ -3,12 +3,7 @@
 from connect_database import connect_database
 from insert_functions import insert_functions
 import plot_tree
-from prompts import (
-    prompt_goal, prompt_drone_swarm_requirement, prompt_system_requirement, prompt_subsystem_requirement, 
-    prompt_goal_children, prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
-    prompt_V_join_documents, prompt_quality_requirements, 
-    prompt_id_glossary,prompt_update_row
-)
+import prompts
 from db_utilities import db_utilities
 
 # ----- MENU CHOICE CONSTANTS -----
@@ -64,7 +59,7 @@ def main():
 
             try:
                 if choice == INSERT_GOAL:
-                    data = prompt_goal()
+                    data = prompts.prompt_goal()
                     if data:
                         inserter.insert_goal(**data)
                         print("Goal inserted successfully!")
@@ -72,7 +67,7 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_DRONE_SWARM_REQ:
-                    data = prompt_drone_swarm_requirement()
+                    data = prompts.prompt_drone_swarm_requirement()
                     if data:
                         inserter.insert_drone_swarm_requirements(**data)
                         print("Drone Swarm Requirement inserted successfully!")
@@ -80,7 +75,7 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_SYS_REQ:
-                    data = prompt_system_requirement()
+                    data = prompts.prompt_system_requirement()
                     if data:
                         inserter.insert_system_requirements(**data)
                         print("System Requirement inserted successfully!")
@@ -88,7 +83,7 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_SUBSYS_REQ:
-                    data = prompt_subsystem_requirement()
+                    data = prompts.prompt_subsystem_requirement()
                     if data:
                         inserter.insert_subsystem_requirements(**data)
                         print("Subsystem Requirement inserted successfully!")
@@ -136,7 +131,7 @@ def main():
                         print("V&V Method inserted successfully!")
 
                 elif choice == INSERT_QUALITY_REQ:
-                    data = prompt_quality_requirements()
+                    data = prompts.prompt_quality_requirements()
                     if data:
                         inserter.insert_quality_requirements(**data)
                         print("Quality requirement inserted successfully!")
@@ -145,7 +140,7 @@ def main():
 
 
                 elif choice == INSERT_GOAL_CHILDREN:
-                    data = prompt_goal_children()
+                    data = prompts.prompt_goal_children()
                     if data:
                         inserter.insert_goal_children(**data)
                         print("Successfully connected Drone Swarm Requirement to Goal!")
@@ -153,7 +148,7 @@ def main():
                         print("Connection cancelled.")
 
                 elif choice == INSERT_SWARM_REQ_CHILDREN:
-                    data = prompt_swarm_req_children()
+                    data = prompts.prompt_swarm_req_children()
                     if data:
                         inserter.insert_swarm_req_children(**data)
                         print("Successfully connected System Requirement to Drone Swarm Requirement!")
@@ -161,7 +156,7 @@ def main():
                         print("Connection cancelled.")
 
                 elif choice == INSERT_SYSREQ_CHILDREN:
-                    data = prompt_sysreq_children()
+                    data = prompts.prompt_sysreq_children()
                     if data:
                         inserter.insert_sysreq_children(**data)
                         print("Successfully connected System Requirement to System/Subsystem Requirement!")
@@ -169,7 +164,7 @@ def main():
                         print("Connection cancelled.")
 
                 elif choice == INSERT_SUBSYS_JOIN_ITEM:
-                    data = prompt_subsys_join_item()
+                    data = prompts.prompt_subsys_join_item()
                     if data:
                         inserter.insert_subsys_join_item(**data)
                         print("Successfully connected Item to Subsystem Requirement!")
@@ -177,7 +172,7 @@ def main():
                         print("Connection cancelled.")
 
                 elif choice == INSERT_V_JOIN_DOCS:
-                    data = prompt_V_join_documents()
+                    data = prompts.prompt_V_join_documents()
                     if data:
                         inserter.insert_V_join_documents(**data)
                         print("Successfully connected Document to V&V Method!")
@@ -185,7 +180,7 @@ def main():
                         print("Connection cancelled.")
 
                 elif choice == INSERT_QUALITY_REQ:
-                    data = prompt_quality_requirements()
+                    data = prompts.prompt_quality_requirements()
                     if data:
                         inserter.insert_quality_requirements(**data)
                         print("Quality requirement inserted successfully!")
@@ -193,7 +188,7 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_ID_GLOSSARY:
-                    data = prompt_id_glossary()
+                    data = prompts.prompt_id_glossary()
                     if data:
                         inserter.insert_id_glossary(**data)
                         print("ID successfully inserted to ID Glossary!")
@@ -252,7 +247,7 @@ def main():
                         print(f"Error searching database: {e}")
 
                 elif choice == UPDATE_DB_ROW:
-                        data = prompt_update_row()
+                        data = prompts.prompt_update_row()
                         if data:
                             affected = other.update_row(**data)
                             print("Row updated successfully!" if affected else "No rows matched your criteria.")
