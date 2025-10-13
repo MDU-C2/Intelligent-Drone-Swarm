@@ -71,7 +71,7 @@ class create_tables:
             CREATE TABLE IF NOT EXISTS goal_children (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 goal_id VARCHAR NOT NULL,
-                swarm_req_id VARCHAR UNIQUE NOT NULL,
+                swarm_req_id VARCHAR NOT NULL,
                 FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE
             )
             """
@@ -105,7 +105,7 @@ class create_tables:
             CREATE TABLE IF NOT EXISTS swarm_req_children (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 swarm_req_id VARCHAR  NOT NULL,
-                sys_req_id VARCHAR UNIQUE NOT NULL,
+                sys_req_id VARCHAR NOT NULL,
                 FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
                 FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
             )
