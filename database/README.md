@@ -1,26 +1,25 @@
-<h1>How to run the Database</h1>
-<h2>Running the database for the absolute first time</h2>
-i.e., you don't have the file "example.db"
-<ol>
-    <li>Create your own branch (e.g., "CE-database")</li>
-    <li>Open your branch in Visual Studio Code</li>
-    <li>Open a new terminal</li>
-    <li>Go to the database folder by typing cd database</li>
-    <li>Run the command python setup_database</li>
-    <li>Run the command python test_values.py</li>
-    <li>Run the command python run_database.py</li>
-    <li>Follow the prompts (I suggest option 10 ;-) )</li>
-</ol>
+# How to run the Database
 
-<h2>Running the database after "example.db"</h2>
-<ol>
-    <li>Create your own branch (e.g., "CE-database")</li>
-    <li>Open your branch in Visual Studio Code</li>
-    <li>Open a new terminal</li>
-    <li>Go to the database folder by typing cd database</li>
-    <li>Run the command python run_database.py</li>
-    <li>Follow the prompts in the terminal</li>
-    <li>NOTE!! Steps after this will be heavily edited!!</li>
-    <li>When done: Push your changes to your branch on the repo.</li>
-    <li>Create pull request to merge your branch in to main</li>
-</ol>
+## Admin
+*AKA: Running the database for the **absolute** first time*
+*AKA: You don't have the file "IRDS_requirements.db"*
+
+1. Open the branch "feature/database" in VSCode
+2. Open a New Terminal
+3. cd database
+4. python setup_database.py
+5. *Follow prompts*
+6. Ensure IRDS_requirements.db gets created
+7. Push your local changes to the branch
+8. Done
+
+## User
+*AKA: You want to enter requirements into the database*
+Pre-requisites: VSCode with SQLite3 Extension
+
+1. Create a branch from feature/database (example: feature/database-VVM)
+2. Open your branch in VSCode
+3. Open a New Terminal
+4. cd database
+5. python run_database.py
+6. *Follow prompts*
