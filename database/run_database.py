@@ -60,7 +60,6 @@ def main():
             print("16: Search in Database")
             print("17: Update row in Database")
             print("18: Delete row in Database")
-            print("18: Delete row in Database")
             print("19: Export DB → JSON")
             print("20: Restore JSON → DB")
             print("21: Verify JSON round-trip")
