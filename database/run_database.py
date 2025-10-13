@@ -60,7 +60,7 @@ def main():
             print("17: Update row in Database")
             print("18: Exit")
 
-            choice = input("Enter choice (1-11): ")
+            choice = input("Enter choice (1-18): ")
 
             try:
                 if choice == INSERT_GOAL:
@@ -80,22 +80,93 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_SYS_REQ:
-                    print("Hello")
+                    data = prompt_system_requirement()
+                    if data:
+                        inserter.insert_system_requirements(**data)
+                        print("System Requirement inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
 
                 elif choice == INSERT_SUBSYS_REQ:
-                    print("Hello")
-                
+                    # You can mirror prompt_system_requirement or create a dedicated prompt;
+                    # for now, do a minimal inline prompt to avoid changing insert_prompts.py
+                    print("\nEnter Subsystem Requirement (type 'exit' to cancel):")
+                    def g(s): 
+                        v = input(s).strip()
+                        return None if v == "" else v
+                    author = g("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
+                    if author and author.lower() == "exit": pass
+                    reviewer = g("Reviewer (different from author): ")
+                    verification_status = g("Verification status (Pending/Failed/Verified/Inconclusive): ")
+                    verification_method = g("Verification method ID (optional): ")
+
+                    data = {
+                        "parent_id": g("PARENT Subsystem Req ID (optional): "),
+                        "sub_req_id": g("Subsystem Req ID: "),
+                        "requirement": g("Requirement description: "),
+                        "priority": g("Priority (Key/Mandatory/Optional): "),
+                        "effect": g("Effect: "),
+                        "rationale": g("Rationale (optional): "),
+                        "author": author,
+                        "review_status": g("Review status (TBR/Reviewed/Accepted/Rejected): "),
+                        "reviewer": reviewer,
+                        "verification_status": verification_status,
+                        "verification_method": verification_method,
+                        "comment": g("Comment (optional): ")
+                    }
+                    if any(v is None for k,v in data.items() if k not in ("parent_id","rationale","verification_method","comment")):
+                        print("Insertion cancelled.")
+                    else:
+                        inserter.insert_subsystem_requirements(**data)
+                        print("Subsystem Requirement inserted successfully!")
+
                 elif choice == INSERT_ITEM:
-                    print("Hello")
-                
+                    print("\nInsert Item (type 'exit' to cancel)")
+                    item_id = input("Item ID: ").strip()
+                    if item_id.lower() == "exit": 
+                        print("Insertion cancelled.")
+                    else:
+                        item_name = input("Item Name: ").strip()
+                        if item_name.lower() == "exit":
+                            print("Insertion cancelled.")
+                        else:
+                            inserter.insert_item(item_id, item_name)
+                            print("Item inserted successfully!")
+
                 elif choice == INSERT_DOCUMENT:
-                    print("Hello")
+                    print("\nInsert Document (type 'exit' to cancel)")
+                    doc_id = input("Doc ID: ").strip()
+                    if doc_id.lower() == "exit":
+                        print("Insertion cancelled.")
+                    else:
+                        title = input("Title: ").strip()
+                        description = input("Description: ").strip()
+                        version_raw = input("Version (optional integer): ").strip()
+                        version = int(version_raw) if version_raw.isdigit() else None
+                        author = input("Author (E.Z/C.N/Y.M.B/E.M/A.H, optional): ").strip() or None
+                        # Binary file path skipped for now; store as NULL
+                        inserter.insert_documents(doc_id, title, description, None, version, author)
+                        print("Document inserted successfully!")
 
                 elif choice == INSERT_VV_METHOD:
-                    print("Hello")
-                
+                    print("\nInsert V&V Method (type 'exit' to cancel)")
+                    method_id = input("Method ID: ").strip()
+                    if method_id.lower() == "exit":
+                        print("Insertion cancelled.")
+                    else:
+                        description = input("Description: ").strip()
+                        method_type = input("Method Type (Inspection/Analysis/Test): ").strip()
+                        inserter.insert_test_and_verification(method_id, description, method_type)
+                        print("V&V Method inserted successfully!")
+
                 elif choice == INSERT_QUALITY_REQ:
-                    print("Hello")
+                    data = prompt_quality_requirements()
+                    if data:
+                        inserter.insert_quality_requirements(**data)
+                        print("Quality requirement inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
+
 
                 elif choice == INSERT_GOAL_CHILDREN:
                     data = prompt_goal_children()
@@ -158,11 +229,17 @@ def main():
                         plot_tree.run_tree_plot()
                     except Exception as e:
                         print(f"Error plotting tree: {e}")
-                        
+
+                elif choice == SEARCH_DB:
+                    print("Search is not implemented yet.")
+
                 elif choice == UPDATE_DB_ROW:
                         data = prompt_update_row()
-                        if data: other.update_row(**data)
-                        print("Row updated successfully!")
+                        if data:
+                            affected = other.update_row(**data)
+                            print("Row updated successfully!" if affected else "No rows matched your criteria.")
+                        else:
+                            print("Update cancelled.")
                     
                 elif choice == EXIT:
                     print("Exiting script.")
