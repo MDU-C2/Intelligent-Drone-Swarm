@@ -207,27 +207,51 @@ def main():
                         print(f"Error plotting tree: {e}")
 
                 elif choice == SEARCH_DB:
-                    # Interactive but minimal
-                    table = input("Enter table name: ").strip()
-                    column = input("Enter column name: ").strip()
-                    value = input("Enter value to search for: ").strip()
+                    try:
+                        tables = other.list_tables()
+                        if not tables:
+                            print("No tables found in the database.")
+                            continue
 
-                    if not table or not column or not value:
-                        print("Cancelled or invalid input.")
-                    else:
-                        try:
-                            # Use the boolean checker first
-                            exists = other.check_requirement_exists(table, column, value)
-                            if exists:
-                                print("Match found!")
-                                # Optionally show matching rows
-                                rows = other.search_value(table, column, value)
-                                for r in rows:
-                                    print(r)
-                            else:
-                                print("No match found.")
-                        except Exception as e:
-                            print(f"Error searching database: {e}")
+                        print("\nAvailable tables:")
+                        for i, t in enumerate(tables, start=1):
+                            print(f"{i}: {t}")
+
+                        table_choice = input("Select table by number: ").strip()
+                        if not table_choice.isdigit() or not (1 <= int(table_choice) <= len(tables)):
+                            print("Invalid table choice.")
+                            continue
+                        table = tables[int(table_choice) - 1]
+
+                        columns = other.list_columns(table)
+                        if not columns:
+                            print("No columns found for this table.")
+                            continue
+
+                        print("\nAvailable columns:")
+                        for i, c in enumerate(columns, start=1):
+                            print(f"{i}: {c}")
+
+                        column_choice = input("Select column by number: ").strip()
+                        if not column_choice.isdigit() or not (1 <= int(column_choice) <= len(columns)):
+                            print("Invalid column choice.")
+                            continue
+                        column = columns[int(column_choice) - 1]
+
+                        value = input(f"Enter value to search in '{column}': ").strip()
+                        partial = input("Partial match? (y/n): ").strip().lower() == "y"
+
+                        rows = other.search_value(table, column, value, partial=partial)
+                        if rows:
+                            print(f"\nFound {len(rows)} matching row(s):")
+                            for r in rows:
+                                print(r)
+                        else:
+                            print("No matches found.")
+
+                    except Exception as e:
+                        print(f"Error searching database: {e}")
+
 
 
                 elif choice == UPDATE_DB_ROW:
