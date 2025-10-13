@@ -4,6 +4,29 @@ class create_tables:
     def __init__(self, cursor):
         self.cursor = cursor
 
+    # ------------------ INTERNAL HELPER ------------------
+    def _ensure(self, table_name: str, create_sql: str):
+        """
+        Create a table only if it does not already exist and print an accurate message.
+
+        Parameters
+        ----------
+        table_name : str
+            Name of the table to check in sqlite_master.
+        create_sql : str
+            Full CREATE TABLE statement (you may keep or remove IF NOT EXISTS).
+        """
+        exists = self.cursor.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+            (table_name,)
+        ).fetchone()
+
+        if exists:
+            print(f"Table '{table_name}' already exists (skipped).")
+        else:
+            self.cursor.execute(create_sql)
+            print(f"Table '{table_name}' created successfully.")
+
     # ------------------ TABLES ------------------
     def create_goals_table(self):
         self.cursor.execute(
@@ -209,52 +232,24 @@ class create_tables:
         )
     
     def create_all_tables(self):
-        # Create each table individually with success messages
-        # Change message depending on IF EXIST
+        # Create each table individually
         try:
             self.create_test_and_verification_table()
-            print("Table 'test_and_verification' created successfully.")
-            
             self.create_documents_table()
-            print("Table 'documents' created successfully.")
-            
             self.create_V_join_documents_table()
-            print("Table 'V_join_documents' created successfully.")
-            
             self.create_id_glossary_table()
-            print("Table 'id_glossary' created successfully.")
-            
             self.create_quality_requirements_table()
-            print("Table 'quality_requirements' created successfully.")
-            
             self.create_goals_table()
-            print("Table 'goals' created successfully.")
-            
             self.create_goal_children_table()
-            print("Table 'goal_children' created successfully.")
-            
             self.create_drone_swarm_requirements_table()
-            print("Table 'drone_swarm_requirements' created successfully.")
-            
             self.create_system_requirements_table()
-            print("Table 'system_requirements' created successfully.")
-            
             self.create_subsystem_requirements_table()
-            print("Table 'subsystem_requirements' created successfully.")
-            
             self.create_item_table()
-            print("Table 'item' created successfully.")
-            
             self.create_subsys_join_item_table()
-            print("Table 'sys_join_item' created successfully.")
-            
             self.create_sysreq_children_table()
-            print("Table 'sysreq_children' created successfully.")
-            
             self.create_swarm_req_children_table()
-            print("Table 'swarm_req_children' created successfully.")
             
-            print("\nAll tables created successfully!")
+            print("\nAll required tables are present.")
         
         except Exception as e:
             print(f"Error creating tables: {e}")
