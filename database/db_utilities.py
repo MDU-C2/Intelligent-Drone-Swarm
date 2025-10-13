@@ -1,6 +1,6 @@
-# other_functions.py
+# db_utilities.py
 
-class other_functions:
+class db_utilities:
     def __init__(self, cursor):
         self.cursor = cursor
 
