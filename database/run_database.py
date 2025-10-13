@@ -207,7 +207,28 @@ def main():
                         print(f"Error plotting tree: {e}")
 
                 elif choice == SEARCH_DB:
-                    print("Search is not implemented yet.")
+                    # Interactive but minimal
+                    table = input("Enter table name: ").strip()
+                    column = input("Enter column name: ").strip()
+                    value = input("Enter value to search for: ").strip()
+
+                    if not table or not column or not value:
+                        print("Cancelled or invalid input.")
+                    else:
+                        try:
+                            # Use the boolean checker first
+                            exists = other.check_requirement_exists(table, column, value)
+                            if exists:
+                                print("Match found!")
+                                # Optionally show matching rows
+                                rows = other.search_value(table, column, value)
+                                for r in rows:
+                                    print(r)
+                            else:
+                                print("No match found.")
+                        except Exception as e:
+                            print(f"Error searching database: {e}")
+
 
                 elif choice == UPDATE_DB_ROW:
                         data = prompt_update_row()
