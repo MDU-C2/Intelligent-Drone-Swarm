@@ -99,13 +99,12 @@ class db_utilities:
             )
             print(line)
 
-    def delete_from_table (self,table_name, condition_column, condition_value): 
+    def delete_from_table(self, table_name, condition_column, condition_value):
         self.cursor.execute(
-            f"""
-            DELETE FROM {table_name} WHERE {condition_column} = ?
-            """,
+            f"DELETE FROM {table_name} WHERE {condition_column} = ?",
             (condition_value,)
-        ) 
+        )
+        return self.cursor.rowcount
  
     def check_requirement_exists (self, check_table, check_column, check_value):
         self.cursor.execute(
@@ -115,7 +114,7 @@ class db_utilities:
         return self.cursor.fetchone()
     
     def update_row(self, table, condition_column, condition_value, update_column, new_value):
-         self.cursor.execute(
+        self.cursor.execute(
             f"""
             UPDATE {table}
             SET {update_column} = ?
@@ -123,3 +122,49 @@ class db_utilities:
             """,
             (new_value, condition_value)
         )
+        return self.cursor.rowcount
+
+    def interactive_search(self):
+        try:
+            tables = self.list_tables()
+            if not tables:
+                print("No tables found in the database.")
+                return
+
+            print("\nAvailable tables:")
+            for i, t in enumerate(tables, start=1):
+                print(f"{i}: {t}")
+
+            table_choice = input("Select table by number: ").strip()
+            if not table_choice.isdigit() or not (1 <= int(table_choice) <= len(tables)):
+                print("Invalid table choice.")
+                return
+            table = tables[int(table_choice) - 1]
+
+            columns = self.list_columns(table)
+            if not columns:
+                print("No columns found for this table.")
+                return
+
+            print("\nAvailable columns:")
+            for i, c in enumerate(columns, start=1):
+                print(f"{i}: {c}")
+
+            column_choice = input("Select column by number: ").strip()
+            if not column_choice.isdigit() or not (1 <= int(column_choice) <= len(columns)):
+                print("Invalid column choice.")
+                return
+            column = columns[int(column_choice) - 1]
+
+            value = input(f"Enter value to search in '{column}': ").strip()
+            partial = input("Partial match? (y/n): ").strip().lower() == "y"
+
+            rows = self.search_value(table, column, value, partial=partial)
+            if rows:
+                print(f"\nFound {len(rows)} matching row(s):")
+                self.pretty_print_rows(table, rows)
+            else:
+                print("No matches found.")
+
+        except Exception as e:
+            print(f"Error searching database: {e}")
