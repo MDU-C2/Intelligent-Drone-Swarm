@@ -51,10 +51,14 @@ def _rows_as_normalized_dicts(cols: List[str], rows: List[Tuple[Any, ...]]) -> L
 
 
 def _sorted_rows(rows: List[Dict[str, Any]], key_cols: List[str]) -> List[Dict[str, Any]]:
+    if not rows:
+        return rows
     if not key_cols:
-        key_cols = list(rows[0].keys()) if rows else []
+        key_cols = [next(iter(rows[0].keys()))]
+
     def sort_key(d):
         return tuple(str(d.get(k)) for k in key_cols)
+
     return sorted(rows, key=sort_key)
 
 
@@ -103,6 +107,7 @@ def main():
 def run_roundtrip_check() -> None:
     """Programmatic entry point used by the TUI."""
     main()
+
 
 if __name__ == "__main__":
     main()
