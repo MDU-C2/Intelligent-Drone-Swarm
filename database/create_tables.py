@@ -69,7 +69,7 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             goal_id VARCHAR NOT NULL,
             swarm_req_id VARCHAR UNIQUE NOT NULL,
-            FOREIGN KEY (goal_id) REFERENCES goals (goal_id)
+            FOREIGN KEY (goal_id) REFERENCES goals (goal_id),
             FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id)
         )
         """
