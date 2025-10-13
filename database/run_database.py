@@ -4,7 +4,7 @@ from connect_database import connect_database
 from insert_functions import insert_functions
 import plot_tree
 from insert_prompts import (
-    prompt_goal, prompt_drone_swarm_requirement, prompt_goal_children,
+    prompt_goal, prompt_drone_swarm_requirement, prompt_subsystem_requirement, prompt_goal_children,
     prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
     prompt_V_join_documents, prompt_quality_requirements, 
     prompt_id_glossary,prompt_update_row
@@ -88,37 +88,13 @@ def main():
                         print("Insertion cancelled.")
 
                 elif choice == INSERT_SUBSYS_REQ:
-                    # You can mirror prompt_system_requirement or create a dedicated prompt;
-                    # for now, do a minimal inline prompt to avoid changing insert_prompts.py
-                    print("\nEnter Subsystem Requirement (type 'exit' to cancel):")
-                    def g(s): 
-                        v = input(s).strip()
-                        return None if v == "" else v
-                    author = g("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
-                    if author and author.lower() == "exit": pass
-                    reviewer = g("Reviewer (different from author): ")
-                    verification_status = g("Verification status (Pending/Failed/Verified/Inconclusive): ")
-                    verification_method = g("Verification method ID (optional): ")
-
-                    data = {
-                        "parent_id": g("PARENT Subsystem Req ID (optional): "),
-                        "sub_req_id": g("Subsystem Req ID: "),
-                        "requirement": g("Requirement description: "),
-                        "priority": g("Priority (Key/Mandatory/Optional): "),
-                        "effect": g("Effect: "),
-                        "rationale": g("Rationale (optional): "),
-                        "author": author,
-                        "review_status": g("Review status (TBR/Reviewed/Accepted/Rejected): "),
-                        "reviewer": reviewer,
-                        "verification_status": verification_status,
-                        "verification_method": verification_method,
-                        "comment": g("Comment (optional): ")
-                    }
-                    if any(v is None for k,v in data.items() if k not in ("parent_id","rationale","verification_method","comment")):
-                        print("Insertion cancelled.")
-                    else:
+                    data = prompt_subsystem_requirement()
+                    if data:
                         inserter.insert_subsystem_requirements(**data)
                         print("Subsystem Requirement inserted successfully!")
+                    else:
+                        print("Insertion cancelled.")
+
 
                 elif choice == INSERT_ITEM:
                     print("\nInsert Item (type 'exit' to cancel)")
