@@ -19,7 +19,7 @@ Key scripts:
 * `setup_database.py` — create a new `.db` and all tables, write the DB name to `db_name.txt`.
 * `run_database.py` — the interactive menu (insert/search/update/delete/export/restore/verify/plot).
 * `populate_test_data.py` — optional: fill the DB with demo data.
-* `db_json_bridge.py` — export DB → JSON and restore JSON → DB (also has a CLI).
+* `db_json_bridge.py` — export DB → JSON and restore JSON → DB (also has a Command Line Interface (CLI)).
 * `verify_roundtrip.py` and `tests/test_db_json_roundtrip.py` — integrity checks.
 * `plot_tree.py` — draw the hierarchy (and optionally include methods/documents).
 
@@ -295,8 +295,7 @@ python populate_test_data.py
 ├── run_database.py
 ├── setup_database.py
 ├── verify_roundtrip.py
-├── tests/
-│   └── test_db_json_roundtrip.py
+├── test_db_json_roundtrip.py
 ├── db_name.txt        # points to your active .db
 └── IRDS_requirements.db (example)
 ```
