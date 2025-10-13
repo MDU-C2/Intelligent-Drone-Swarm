@@ -37,7 +37,7 @@ class create_tables:
                 stakeholder VARCHAR,
                 origin VARCHAR,
                 priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),
-                rationale varchar,
+                rationale VARCHAR,
                 satisfaction_status TEXT CHECK (satisfaction_status IN ('Pending','Not satisfied','Satisfied')),
                 method_id VARCHAR,
                 FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id)
