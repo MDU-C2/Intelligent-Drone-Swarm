@@ -1,5 +1,7 @@
 # insert_prompts.py
 
+import sqlite3
+
 def prompt_input(prompt_text, optional=False):
     """Helper to allow typing 'exit' to return to menu"""
     value = input(prompt_text)
@@ -112,23 +114,102 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
-def prompt_update_requirement():
-    print("\nUpdate requirement row:")
-    table = prompt_input("In what table do want to make changes: ")
-    if table == "EXIT": return None
-    condition_column = prompt_input("Choose a column to refer to : ")
-    if condition_column == "EXIT": return None
-    condition_value = prompt_input("What is the current value of that column: ")
-    if condition_value == "EXIT": return None
-    update_column = prompt_input("What column do you want to change: ")
-    if update_column == "EXIT": return None
-    new_value = prompt_input("Insert your changes: ")
-    if new_value == "EXIT": return None
+def prompt_update_row():
+    print("\nUpdate database row:")
+
+    # Read DB name
+    with open("db_name.txt") as f:
+        db_name = f.read().strip()
+
+    conn = sqlite3.connect(db_name)
+    cur = conn.cursor()
+
+    # 1️⃣ List all available tables in the database
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+    tables = [row[0] for row in cur.fetchall() if row[0] != "sqlite_sequence"]
+    if not tables:
+        print("No tables found in the database.")
+        conn.close()
+        return None
+
+    print("\nSelect table to update:")
+    for i, table in enumerate(tables, start=1):
+        print(f"{i}: {table}")
+
+    table_choice = input("Enter number corresponding to the table: ").strip()
+    if not table_choice.isdigit() or not (1 <= int(table_choice) <= len(tables)):
+        print("Invalid choice. Returning to menu.")
+        conn.close()
+        return None
+
+    table = tables[int(table_choice) - 1]
+
+    # 2️⃣ Identify the ID column (first one ending in "_id" or containing "id")
+    cur.execute(f"PRAGMA table_info({table})")
+    columns = [row[1] for row in cur.fetchall()]
+    id_column = next((c for c in columns if c.endswith("_id") or c.lower() == "id"), None)
+
+    if not id_column:
+        print(f"No obvious ID column found for table '{table}'.")
+        print("You’ll need to specify one manually.")
+        id_column = input("Enter the column name that uniquely identifies rows: ").strip()
+
+    print(f"\nYou selected '{table}'. Identifying rows by '{id_column}'.")
+
+    # 3️⃣ Ask for ID value and verify existence
+    condition_value = prompt_input(f"Enter the {id_column} of the row to update: ")
+    if condition_value == "EXIT":
+        conn.close()
+        return None
+
+    cur.execute(f"SELECT * FROM {table} WHERE {id_column} = ? LIMIT 1", (condition_value,))
+    row = cur.fetchone()
+    if not row:
+        print(f"No row found in '{table}' with {id_column} = '{condition_value}'.")
+        conn.close()
+        return None
+
+    # Show current full row
+    print("\nCurrent row data:")
+    for col, val in zip(columns, row):
+        print(f"  {col}: {val}")
+
+    # 4️⃣ Let user pick column to update
+    updatable_columns = [c for c in columns if c != id_column]
+    print("\nSelect the column to update:")
+    for i, col in enumerate(updatable_columns, start=1):
+        print(f"{i}: {col}")
+
+    col_choice = input("Enter number corresponding to the column: ").strip()
+    if not col_choice.isdigit() or not (1 <= int(col_choice) <= len(updatable_columns)):
+        print("Invalid choice. Returning to menu.")
+        conn.close()
+        return None
+
+    update_column = updatable_columns[int(col_choice) - 1]
+
+    # Show current value
+    cur.execute(
+        f"SELECT {update_column} FROM {table} WHERE {id_column} = ? LIMIT 1",
+        (condition_value,)
+    )
+    current_value = cur.fetchone()
+    shown_value = "(NULL)" if not current_value or current_value[0] is None else str(current_value[0])
+    print(f"\nCurrent value of '{update_column}': {shown_value}")
+
+    # 5️⃣ Ask for new value
+    new_value = prompt_input(f"Enter the new value for '{update_column}': ")
+    if new_value == "EXIT":
+        conn.close()
+        return None
+
+    conn.close()
+
+    # 6️⃣ Return update parameters
     return {
         "table": table,
-        "condition_column": condition_column,
+        "condition_column": id_column,
         "condition_value": condition_value,
         "update_column": update_column,
         "new_value": new_value
     }
-    

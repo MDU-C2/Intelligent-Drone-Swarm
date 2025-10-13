@@ -8,7 +8,7 @@ import plot_tree
 from insert_prompts import (
     prompt_goal, prompt_drone_swarm_requirement, prompt_goal_children,
     prompt_swarm_req_children, prompt_sysreq_children, prompt_subsys_join_item,
-    prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary,prompt_update_requirement
+    prompt_V_join_documents, prompt_quality_requirements, prompt_id_glossary,prompt_update_row
 )
 from other_functions import other_functions
 
@@ -91,9 +91,9 @@ def main():
                         print(f"Error plotting tree: {e}")
                         
                 elif choice == "11":
-                        data = prompt_update_requirement()
-                        if data: other.update_requirement(**data)
-                        print("Requirement updated successfully!")
+                        data = prompt_update_row()
+                        if data: other.update_row(**data)
+                        print("Row updated successfully!")
                     
                 elif choice == "12":
                     print("Exiting script.")

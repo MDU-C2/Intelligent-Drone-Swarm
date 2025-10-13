@@ -9,7 +9,7 @@ class connect_database:
         self.cursor = None
 
     def __enter__(self):
-        self.conn = sqlite3.connect(self.db_name)
+        self.conn = sqlite3.connect(self.db_name, isolation_level=None)
         self.cursor = self.conn.cursor()
         self.cursor.execute("PRAGMA foreign_keys = ON;")  # Enforce foreign keys
         return self

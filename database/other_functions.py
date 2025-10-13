@@ -22,7 +22,7 @@ class other_functions:
         )
         return self.cursor.fetchone()
     
-    def update_requirement(self, table, condition_column, condition_value, update_column, new_value):
+    def update_row(self, table, condition_column, condition_value, update_column, new_value):
          self.cursor.execute(
             f"""
             UPDATE {table}
