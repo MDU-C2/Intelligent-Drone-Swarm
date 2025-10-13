@@ -5,6 +5,7 @@ from insert_functions import insert_functions
 import plot_tree
 import prompts
 from db_utilities import db_utilities
+from db_json_bridge import dump_db_to_json, restore_db_from_json
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
