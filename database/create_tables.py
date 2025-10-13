@@ -73,6 +73,7 @@ class create_tables:
                 goal_id VARCHAR NOT NULL,
                 swarm_req_id VARCHAR NOT NULL,
                 FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE
+                FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE
             )
             """
         )
