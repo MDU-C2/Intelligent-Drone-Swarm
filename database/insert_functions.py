@@ -150,7 +150,7 @@ class insert_functions:
     def insert_quality_requirements(self, quality_rec_id, requirement, author, approved_by=None):
         self.cursor.execute(
             """
-            INSERT INTO Quality_Requirements (quality_rec_id, requirement, author, approved_by)
+            INSERT INTO quality_requirements (quality_rec_id, requirement, author, approved_by)
             VALUES (?,?,?,?)
             """,
             (quality_rec_id, requirement, author, approved_by)
