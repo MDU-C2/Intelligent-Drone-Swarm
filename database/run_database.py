@@ -6,7 +6,7 @@ import plot_tree
 import prompts
 from db_utilities import db_utilities
 
-# ----- MENU CHOICE CONSTANTS -----
+# MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
 INSERT_DRONE_SWARM_REQ = "2"
 INSERT_SYS_REQ = "3"
@@ -46,13 +46,14 @@ def main():
             print("8: Insert Quality Requirement")
             print("9: Connect Drone Swarm Requirement to Goal")
             print("10: Connect System Requirement to Drone Swarm Requirement")
-            print("11: Connect System Requiement to System or Subsystem Requirement")
+            print("11: Connect System Requiement to Subsystem Requirement")
             print("12: Connect Item to Subsystem Requirement")
             print("13: Connect Document to V&V Method")
             print("14: Add ID to Glossary")
             print("15: Plot tree")
             print("16: Search in Database")
             print("17: Update row in Database")
+            #Delete row in Database
             print("18: Exit")
 
             choice = input("Enter choice (1-18): ")
@@ -89,7 +90,6 @@ def main():
                         print("Subsystem Requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
-
 
                 elif choice == INSERT_ITEM:
                     print("\nInsert Item (type 'exit' to cancel)")
@@ -159,7 +159,7 @@ def main():
                     data = prompts.prompt_sysreq_children()
                     if data:
                         inserter.insert_sysreq_children(**data)
-                        print("Successfully connected System Requirement to System/Subsystem Requirement!")
+                        print("Successfully connected System Requirement to Subsystem Requirement!")
                     else:
                         print("Connection cancelled.")
 
@@ -253,7 +253,9 @@ def main():
                             print("Row updated successfully!" if affected else "No rows matched your criteria.")
                         else:
                             print("Update cancelled.")
-                    
+
+                #Delete row in Database
+
                 elif choice == EXIT:
                     print("Exiting script.")
                     break
