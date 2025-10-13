@@ -244,15 +244,12 @@ def main():
                         rows = other.search_value(table, column, value, partial=partial)
                         if rows:
                             print(f"\nFound {len(rows)} matching row(s):")
-                            for r in rows:
-                                print(r)
+                            other.pretty_print_rows(table, rows)
                         else:
                             print("No matches found.")
 
                     except Exception as e:
                         print(f"Error searching database: {e}")
-
-
 
                 elif choice == UPDATE_DB_ROW:
                         data = prompt_update_row()
