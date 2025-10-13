@@ -1,6 +1,4 @@
 # run_database.py
-# Usage: Other users can run in terminal "python run_database.py"
-# They don’t need to create tables — just connect to your pre-existing example.db and insert records.
 
 from connect_database import connect_database
 from insert_functions import insert_functions
@@ -13,7 +11,7 @@ from insert_prompts import (
 )
 from db_utilities import db_utilities
 
-# ----- Menu choice constants -----
+# ----- MENU CHOICE CONSTANTS -----
 INSERT_GOAL = "1"
 INSERT_DRONE_SWARM_REQ = "2"
 INSERT_SYS_REQ = "3"
