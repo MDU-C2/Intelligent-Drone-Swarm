@@ -171,11 +171,56 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
-#def prompt_item():
+def prompt_item():
+    print("\nInsert Item (type 'exit' to cancel)")
+    item_id = prompt_input("Item ID: ")
+    if item_id is None or item_id == "EXIT":
+        return None
+    item_name = prompt_input("Item Name: ")
+    if item_name is None or item_name == "EXIT":
+        return None
+    return {"item_id": item_id, "item_name": item_name}
 
-#def prompt_test_and_verification():
+def prompt_document():
+    print("\nInsert Document (type 'exit' to cancel)")
+    doc_id = prompt_input("Doc ID: ")
+    if doc_id is None or doc_id == "EXIT":
+        return None
+    title = prompt_input("Title: ")
+    if title is None or title == "EXIT":
+        return None
+    description = prompt_input("Description: ")
+    if description is None or description == "EXIT":
+        return None
+    version_raw = prompt_input("Version (optional integer): ", optional=True)
+    if version_raw == "EXIT":
+        return None
+    version = int(version_raw) if (isinstance(version_raw, str) and version_raw.isdigit()) else None
+    author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H, optional): ", optional=True)
+    if author == "EXIT":
+        return None
+    # file path omitted -> None
+    return {
+        "doc_id": doc_id,
+        "title": title,
+        "description": description,
+        "file": None,
+        "version": version,
+        "author": author or None
+    }
 
-#def prompt_documents():
+def prompt_vv_method():
+    print("\nInsert V&V Method (type 'exit' to cancel)")
+    method_id = prompt_input("Method ID: ")
+    if method_id is None or method_id == "EXIT":
+        return None
+    description = prompt_input("Description: ")
+    if description is None or description == "EXIT":
+        return None
+    method_type = prompt_input("Method Type (Inspection/Analysis/Test): ")
+    if method_type is None or method_type == "EXIT":
+        return None
+    return {"method_id": method_id, "description": description, "method_type": method_type}
 
 # ----- OTHER PROMPTS -----
 def prompt_update_row():
@@ -276,4 +321,70 @@ def prompt_update_row():
         "condition_value": condition_value,
         "update_column": update_column,
         "new_value": new_value
+    }
+
+def prompt_delete_row():
+    print("\nDelete database row:")
+
+    with open("db_name.txt") as f:
+        db_name = f.read().strip()
+
+    conn = sqlite3.connect(db_name)
+    cur = conn.cursor()
+
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+    tables = [row[0] for row in cur.fetchall() if row[0] != "sqlite_sequence"]
+    if not tables:
+        print("No tables found in the database.")
+        conn.close()
+        return None
+
+    print("\nSelect table to delete from:")
+    for i, table in enumerate(tables, start=1):
+        print(f"{i}: {table}")
+
+    table_choice = input("Enter number corresponding to the table: ").strip()
+    if not table_choice.isdigit() or not (1 <= int(table_choice) <= len(tables)):
+        print("Invalid choice. Returning to menu.")
+        conn.close()
+        return None
+
+    table = tables[int(table_choice) - 1]
+
+    # find likely ID column
+    cur.execute(f"PRAGMA table_info({table})")
+    columns = [row[1] for row in cur.fetchall()]
+    id_column = next((c for c in columns if c.endswith("_id") or c.lower() == "id"), None)
+    if not id_column:
+        print(f"No obvious ID column found for table '{table}'.")
+        id_column = input("Enter the column name that uniquely identifies rows: ").strip()
+
+    print(f"\nYou selected '{table}'. Deleting by '{id_column}'.")
+    condition_value = prompt_input(f"Enter the {id_column} of the row to DELETE: ")
+    if condition_value == "EXIT":
+        conn.close()
+        return None
+
+    # show the row that would be deleted (if exists)
+    cur.execute(f"SELECT * FROM {table} WHERE {id_column} = ? LIMIT 1", (condition_value,))
+    row = cur.fetchone()
+    if not row:
+        print(f"No row found in '{table}' with {id_column} = '{condition_value}'.")
+        conn.close()
+        return None
+
+    print("\nRow to be deleted:")
+    for col, val in zip(columns, row):
+        print(f"  {col}: {val}")
+
+    confirm = input("Are you sure you want to delete this row? (y/N): ").strip().lower()
+    conn.close()
+    if confirm != "y":
+        print("Deletion cancelled.")
+        return None
+
+    return {
+        "table": table,
+        "condition_column": id_column,
+        "condition_value": condition_value
     }
