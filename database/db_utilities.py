@@ -40,9 +40,15 @@ class db_utilities:
             self.cursor.execute(sql, (value,))
         return self.cursor.fetchall()
 
-    def pretty_print_rows(self, table_name, rows):
+    def pretty_print_rows(self, table_name, rows, max_cell_len=60, ellipsis="…"):
         """
         Nicely print query results in a formatted table with column headers.
+
+        Args:
+            table_name (str): Table whose schema will be used for headers.
+            rows (list[tuple]): Result rows to print.
+            max_cell_len (int): Max characters per cell before truncation.
+            ellipsis (str): Ellipsis string to append when truncating.
         """
         if not rows:
             print("No data found.")
@@ -53,29 +59,44 @@ class db_utilities:
         headers = [row[1] for row in self.cursor.fetchall()]
         num_cols = len(headers)
 
-        # Handle case where returned rows may not include all columns
+        # Some queries (SELECT *) will match; safeguard if tuple length differs
         max_cols = max(num_cols, len(rows[0]))
         if len(headers) < max_cols:
             headers += [f"col{i+1}" for i in range(len(headers), max_cols)]
 
-        # Compute max width per column (header vs value)
+        def _to_str(x):
+            return "" if x is None else str(x)
+
+        def _truncate(s):
+            # Truncate at max_cell_len and add ellipsis if needed
+            if len(s) <= max_cell_len:
+                return s
+            # keep room for ellipsis itself
+            cut = max_cell_len - len(ellipsis)
+            return (s[:cut] + ellipsis) if cut > 0 else s[:max_cell_len]
+
+        # Prepare truncated display rows
+        display_rows = []
+        for row in rows:
+            display_rows.append([_truncate(_to_str(row[i])) for i in range(len(row))])
+
+        # Compute max width per column using truncated rows
         col_widths = []
         for i in range(max_cols):
-            col_data = [str(row[i]) if row[i] is not None else "" for row in rows]
-            max_data_len = max([len(h) for h in [headers[i]]] + [len(x) for x in col_data])
-            col_widths.append(max(max_data_len, 8))  # minimum width 8
+            header = headers[i]
+            column_cells = [r[i] for r in display_rows if i < len(r)]
+            max_data_len = max([len(header)] + [len(c) for c in column_cells] or [len(header)])
+            col_widths.append(max(max_data_len, 8))  # minimum width 8 for readability
 
-        # Header line
-        header_line = " | ".join(h.ljust(col_widths[i]) for i, h in enumerate(headers))
+        # Render header
+        header_line = " | ".join(headers[i].ljust(col_widths[i]) for i in range(max_cols))
         divider = "-+-".join("-" * col_widths[i] for i in range(max_cols))
-
         print("\n" + header_line)
         print(divider)
 
-        # Data rows
-        for row in rows:
+        # Render rows
+        for r in display_rows:
             line = " | ".join(
-                (str(row[i]) if row[i] is not None else "").ljust(col_widths[i])
-                for i in range(len(row))
+                (r[i] if i < len(r) else "").ljust(col_widths[i]) for i in range(max_cols)
             )
             print(line)
