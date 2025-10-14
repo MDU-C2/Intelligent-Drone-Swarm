@@ -213,7 +213,7 @@ class create_tables:
             quality_rec_id VARCHAR PRIMARY KEY, 
             requirement VARCHAR, 
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            approved_by TEXT CHECK (approved_by IN ('Y.M.B') OR approved_by IS NULL)       
+            approved_by TEXT CHECK (approved_by IN ('Y.M.B') OR approved_by IS NULL)
         )
         """
         self._ensure("quality_requirements", create_sql)
