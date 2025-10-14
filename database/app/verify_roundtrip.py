@@ -13,8 +13,8 @@ from pathlib import Path
 import base64
 from typing import Any, Dict, List, Tuple
 
-from db_json_bridge import dump_db_to_json, restore_db_from_json
-from connect_database import connect_database
+from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
+from ..core.connect_database import connect_database
 
 
 def _list_user_tables(cur) -> List[str]:
