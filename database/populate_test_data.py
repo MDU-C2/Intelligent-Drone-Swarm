@@ -13,30 +13,40 @@ with connect_database(db_name) as db:
 
     inserter = insert_functions(db.cursor)
 
-    # --- Documents ---
+    # ----- Documents -----
+    # doc_id, title, description, file, version, author ('E.Z','C.N','Y.M.B','E.M','A.H')
     inserter.insert_documents("D-01", "Swarm Test Spec", "Swarm subsystem tests", None, 1, "A.H")
     inserter.insert_documents("D-02", "System V&V Plan", "System-level test plan", None, 1, "C.N")
     inserter.insert_documents("D-03", "Subsystem Spec", "Subsystem test spec", None, 1, "E.Z")
     inserter.insert_documents("D-04", "Quality Plan", "QA plan for all levels", None, 2, "Y.M.B")
 
-    # --- Test & Verification Methods ---
+    # ----- Test & Verification Methods -----
+    # method_id, description, method_type ('Inspection','Analysis','Test')
     inserter.insert_test_and_verification("M-01", "Visual Inspection", "Inspection")
     inserter.insert_test_and_verification("M-02", "Functional Test", "Test")
     inserter.insert_test_and_verification("M-03", "Simulation Analysis", "Analysis")
     inserter.insert_test_and_verification("M-04", "Full Flight Test", "Test")
 
-    # --- Link Methods to Docs ---
+    # ----- Link Methods to Docs -----
+    # id, method_id, doc_id
     inserter.insert_V_join_documents("M-01", "D-01")
     inserter.insert_V_join_documents("M-02", "D-02")
     inserter.insert_V_join_documents("M-03", "D-03")
     inserter.insert_V_join_documents("M-04", "D-04")
 
-    # --- Goals ---
+    # ----- Goals -----
+    # goal_id, goal_description, stakeholder, origin, priority ('Key','Mandatory','Optional'),
+    # rationale, satisfaction_status ('Pending','Not satisfied','Satisfied'), method_id
     inserter.insert_goal("G-01", "Ensure swarm formation control", "C.N", "Spec v1", "Key", "Core feature", "Pending", None)
     inserter.insert_goal("G-02", "Maintain comms integrity", "Y.M.B", "Spec v2", "Mandatory", "Essential for safety", "Not satisfied", "M-02")
     inserter.insert_goal("G-03", "Reduce power consumption", "A.H", "Design v3", "Optional", "Optimization goal", "Satisfied", "M-03")
 
-    # --- Drone Swarm Requirements ---
+    # ----- Drone Swarm Requirements -----
+    # swarm_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale,
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # comment
     inserter.insert_drone_swarm_requirements(
         "SW-01", "Maintain formation at 5m spacing", "Key", "Formation stability", "Core mission behavior",
         "C.N", "TBR", "A.H", "Verified", "M-01", "Basic test done."
@@ -50,7 +60,12 @@ with connect_database(db_name) as db:
         "E.M", "Accepted", "A.H", "Verified", "M-03"
     )
 
-    # --- System Requirements ---
+    # ----- System Requirements -----
+    # parent_id, sys_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale, 
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # comment
     inserter.insert_system_requirements(
         None, "CP-01", "Control CPU handles swarm formation", "Key", "Control logic",
         "Initial version", "Y.M.B", "Reviewed", "E.Z", "Verified", "M-01"
@@ -68,7 +83,12 @@ with connect_database(db_name) as db:
         "System flexibility", "A.H", "TBR", "E.Z", "Failed", "M-04"
     )
 
-    # --- Subsystem Requirements ---
+    # ----- Subsystem Requirements -----
+    # parent_id, sub_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale, 
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # comment
     inserter.insert_subsystem_requirements(
         None, "B-01", "Design motor control firmware", "Key", "Flight performance",
         "Initial design", "C.N", "Reviewed", "A.H", "Verified", "M-02"
@@ -90,12 +110,13 @@ with connect_database(db_name) as db:
         "Ensures stable readings", "E.Z", "Reviewed", "C.N", "Pending"
     )
 
-    # --- Items ---
+    # ----- Items -----
+    # item_id, item_name
     inserter.insert_item("I-01", "Motor Controller Board")
     inserter.insert_item("I-02", "Communication Module")
     inserter.insert_item("I-03", "Battery Pack")
 
-    # --- Joins ---
+    # ----- Joins -----
     inserter.insert_goal_children("G-01", "SW-01")
     inserter.insert_goal_children("G-02", "SW-02")
     inserter.insert_goal_children("G-03", "SW-03")
@@ -112,7 +133,8 @@ with connect_database(db_name) as db:
     inserter.insert_subsys_join_item("I-02", "B-04")
     inserter.insert_subsys_join_item("I-03", "B-05")
 
-    # --- Glossary ---
+    # ----- Glossary -----
+    # gloss_id, prefix, meaning
     inserter.insert_id_glossary("G", "Goal")
     inserter.insert_id_glossary("SW", "Swarm Requirement")
     inserter.insert_id_glossary("CP", "System Requirement")
@@ -121,7 +143,9 @@ with connect_database(db_name) as db:
     inserter.insert_id_glossary("M", "V&V Method")
     inserter.insert_id_glossary("D", "Document")
 
-    # --- Quality Requirements ---
+    # ----- Quality Requirements -----
+    # qualite_rec_id, requirement, author ('E.Z','C.N','Y.M.B','E.M','A.H'), 
+    # approved_by (('Y.M.B') OR NULL))
     inserter.insert_quality_requirements("QR-01", "All communication shall be encrypted", "E.Z", "Y.M.B")
     inserter.insert_quality_requirements("QR-02", "System shall meet 95% uptime", "C.N", "Y.M.B")
 
