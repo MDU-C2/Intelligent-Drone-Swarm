@@ -181,7 +181,10 @@ def handle_delete_with_preview():
     print("  3) System requirement  (system_requirements.sys_req_id)")
     print("  4) Subsystem req       (subsystem_requirements.sub_req_id)")
     print("  5) V&V method          (test_and_verification.method_id)")
-    choice = input("Enter 1-5: ").strip()
+    print("  6) Document            (documents.doc_id)")
+    print("  7) Item                (item.item_id)")
+    print("  8) Quality requirement (quality_requirements.quality_rec_id)")
+    choice = input("Enter 1-8: ").strip()
 
     mapping = {
         "1": ("goal", "Goal ID"),
@@ -189,6 +192,9 @@ def handle_delete_with_preview():
         "3": ("system", "System Req ID"),
         "4": ("subsystem", "Sub Req ID"),
         "5": ("method", "Method ID"),
+        "6": ("document", "Doc ID"),
+        "7": ("item", "Item ID"),
+        "8": ("quality", "Quality Req ID"),
     }
     if choice not in mapping:
         print("Invalid choice.")
@@ -211,6 +217,6 @@ def handle_delete_with_preview():
         if deleted == 1:
             print("Deleted. (Linked rows removed via CASCADE, children detached via SET NULL.)")
         else:
-            print("⚠️ Nothing deleted (ID not found).")
+            print("Nothing deleted (ID not found).")
     except Exception as e:
         print(f"Delete failed: {e}")
