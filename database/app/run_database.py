@@ -124,10 +124,10 @@ def main():
                     menu.handle_delete_with_preview()
 
                 elif choice == EXPORT_TO_JSON:
-                    menu.handle_export_json(db_name)
+                    menu.handle_export_json()
 
                 elif choice == RESTORE_FROM_JSON:
-                    menu.handle_show_restore_instructions(db_name)
+                    menu.handle_show_restore_instructions()
 
                 elif choice == VERIFY_ROUNDTRIP:
                     menu.handle_verify_roundtrip()
