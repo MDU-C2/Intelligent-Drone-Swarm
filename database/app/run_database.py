@@ -1,36 +1,11 @@
 # run_database.py
 
-from connect_database import connect_database
-from insert_functions import insert_functions
-from db_utilities import db_utilities
-
-from menu_actions import (
-    handle_insert_goal,
-    handle_insert_drone_swarm,
-    handle_insert_system,
-    handle_insert_subsystem,
-    handle_insert_item,
-    handle_insert_document,
-    handle_insert_vv_method,
-    handle_insert_quality_requirement,
-    handle_goal_children,
-    handle_swarm_req_children,
-    handle_sysreq_children,
-    handle_subsys_join_item,
-    handle_v_join_documents,
-    handle_id_glossary,
-    handle_plot_tree,
-    handle_search,
-    handle_update,
-    handle_delete,
-    handle_export_json,
-    handle_export_csv,
-    handle_restore_json,
-    handle_verify_roundtrip,
-    handle_delete_with_preview,
-)
-
-from tui_helpers import wait_for_enter
+from pathlib import Path
+from ..core.connect_database import connect_database
+from ..core.insert_functions import insert_functions
+from ..core.db_utilities import db_utilities
+import database.tui.menu_actions as menu
+from ..tui.tui_helpers import wait_for_enter
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -58,7 +33,8 @@ EXPORT_TO_CSV = "22"
 EXIT = "23"
 
 def main():
-    with open("db_name.txt", "r") as f:
+    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+    with open(DB_NAME_PATH, "r") as f:
         db_name = f.read().strip()
 
     with connect_database(db_name) as db:
@@ -95,73 +71,73 @@ def main():
 
             try:
                 if choice == INSERT_GOAL:
-                    handle_insert_goal(inserter)
+                    menu.handle_insert_goal(inserter)
 
                 elif choice == INSERT_DRONE_SWARM_REQ:
-                    handle_insert_drone_swarm(inserter)
+                    menu.handle_insert_drone_swarm(inserter)
 
                 elif choice == INSERT_SYS_REQ:
-                    handle_insert_system(inserter)
+                    menu.handle_insert_system(inserter)
 
                 elif choice == INSERT_SUBSYS_REQ:
-                    handle_insert_subsystem(inserter)
+                    menu.handle_insert_subsystem(inserter)
 
                 elif choice == INSERT_ITEM:
-                    handle_insert_item(inserter)
+                    menu.handle_insert_item(inserter)
 
                 elif choice == INSERT_DOCUMENT:
-                    handle_insert_document(inserter)
+                    menu.handle_insert_document(inserter)
 
                 elif choice == INSERT_VV_METHOD:
-                    handle_insert_vv_method(inserter)
+                    menu.handle_insert_vv_method(inserter)
 
                 elif choice == INSERT_QUALITY_REQ:
-                    handle_insert_quality_requirement(inserter)
+                    menu.handle_insert_quality_requirement(inserter)
 
                 elif choice == INSERT_GOAL_CHILDREN:
-                    handle_goal_children(inserter)
+                    menu.handle_goal_children(inserter)
 
                 elif choice == INSERT_SWARM_REQ_CHILDREN:
-                    handle_swarm_req_children(inserter)
+                    menu.handle_swarm_req_children(inserter)
 
                 elif choice == INSERT_SYSREQ_CHILDREN:
-                    handle_sysreq_children(inserter)
+                    menu.handle_sysreq_children(inserter)
 
                 elif choice == INSERT_SUBSYS_JOIN_ITEM:
-                    handle_subsys_join_item(inserter)
+                    menu.handle_subsys_join_item(inserter)
 
                 elif choice == INSERT_V_JOIN_DOCS:
-                    handle_v_join_documents(inserter)
+                    menu.handle_v_join_documents(inserter)
 
                 elif choice == INSERT_ID_GLOSSARY:
-                    handle_id_glossary(inserter)
+                    menu.handle_id_glossary(inserter)
 
                 elif choice == PLOT_TREE:
-                    handle_plot_tree()
+                    menu.handle_plot_tree()
 
                 elif choice == SEARCH_DB:
-                    handle_search(other)
+                    menu.handle_search(other)
 
                 elif choice == UPDATE_DB_ROW:
-                    handle_update(other)
+                    menu.handle_update(other)
 
                 elif choice == DELETE_DB_ROW:
                     #handle_delete(other)
-                    handle_delete_with_preview()
+                    menu.handle_delete_with_preview()
 
                 elif choice == EXPORT_TO_JSON:
-                    handle_export_json(db_name)
+                    menu.handle_export_json(db_name)
 
                 elif choice == RESTORE_FROM_JSON:
-                    result = handle_restore_json(db_name)
+                    result = menu.handle_restore_json(db_name)
                     if result == "exit":
                         break
 
                 elif choice == VERIFY_ROUNDTRIP:
-                    handle_verify_roundtrip()
+                    menu.handle_verify_roundtrip()
 
                 elif choice == EXPORT_TO_CSV:
-                    handle_export_csv()
+                    menu.handle_export_csv()
 
                 elif choice == EXIT:
                     print("Exiting script.")
