@@ -8,6 +8,7 @@ from db_utilities import db_utilities
 from db_json_bridge import dump_db_to_json, restore_db_from_json
 from verify_roundtrip import run_roundtrip_check
 from export_db_to_csv import export_db_to_csv
+from safe_restore import safe_restore_from_json
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -226,11 +227,10 @@ def main():
                     in_path = input("\nInput JSON path [database_dump.json]: ").strip() or "database_dump.json"
                     target_db = input(f"Output DB path [{db_name}]: ").strip() or db_name
                     overwrite = (input(f"Overwrite '{target_db}' if exists? (y/N): ").strip().lower() == "y")
-                    try:
-                        restore_db_from_json(target_db, in_path, overwrite=overwrite)
-                        print(f"Restored '{target_db}' from '{in_path}' (overwrite={overwrite})")
-                    except Exception as e:
-                        print(f"Restore failed: {e}")
+
+                    result = safe_restore_from_json(db_name, in_path, target_db, overwrite)
+                    if result == "exit":
+                        break  # gracefully exit TUI so locks are released
 
                 elif choice == VERIFY_ROUNDTRIP:
                     print("\n→ Running round-trip verification (dump → restore → compare)…")
