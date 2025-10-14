@@ -67,19 +67,19 @@ with connect_database(db_name) as db:
     # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
     # comment
     inserter.insert_system_requirements(
-        None, "CP-01", "Control CPU handles swarm formation", "Key", "Control logic",
+        None, "SYS-01", "Control CPU handles swarm formation", "Key", "Control logic",
         "Initial version", "Y.M.B", "Reviewed", "E.Z", "Verified", "M-01"
     )
     inserter.insert_system_requirements(
-        "CP-01", "CP-02", "Add fault-tolerant communication module", "Mandatory", "Comms redundancy",
+        "SYS-01", "SYS-02", "Add fault-tolerant communication module", "Mandatory", "Comms redundancy",
         "Ensures resilience", "E.Z", "Reviewed", "C.N", "Pending"
     )
     inserter.insert_system_requirements(
-        None, "CP-03", "Optimize CPU load distribution", "Optional", "Efficiency improvement",
+        None, "SYS-03", "Optimize CPU load distribution", "Optional", "Efficiency improvement",
         "Performance goal", "C.N", "Accepted", "Y.M.B", "Verified", "M-03"
     )
     inserter.insert_system_requirements(
-        None, "CP-04", "Implement OTA update feature", "Mandatory", "Maintainability",
+        None, "SYS-04", "Implement OTA update feature", "Mandatory", "Maintainability",
         "System flexibility", "A.H", "TBR", "E.Z", "Failed", "M-04"
     )
 
@@ -90,23 +90,23 @@ with connect_database(db_name) as db:
     # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
     # comment
     inserter.insert_subsystem_requirements(
-        None, "B-01", "Design motor control firmware", "Key", "Flight performance",
+        None, "SS-01", "Design motor control firmware", "Key", "Flight performance",
         "Initial design", "C.N", "Reviewed", "A.H", "Verified", "M-02"
     )
     inserter.insert_subsystem_requirements(
-        None, "B-02", "Integrate redundant power buses", "Mandatory", "Power stability",
+        None, "SS-02", "Integrate redundant power buses", "Mandatory", "Power stability",
         "Avoid single-point failures", "Y.M.B", "TBR", "E.Z", "Pending"
     )
     inserter.insert_subsystem_requirements(
-        "B-01", "B-03", "Add thermal protection layer", "Optional", "Component safety",
+        "SS-01", "SS-03", "Add thermal protection layer", "Optional", "Component safety",
         "High-temp areas", "E.Z", "Accepted", "C.N", "Verified", "M-03"
     )
     inserter.insert_subsystem_requirements(
-        None, "B-04", "Implement subsystem diagnostics", "Key", "Health monitoring",
+        None, "SS-04", "Implement subsystem diagnostics", "Key", "Health monitoring",
         "Critical for maintenance", "E.M", "Accepted", "Y.M.B", "Verified", "M-04"
     )
     inserter.insert_subsystem_requirements(
-        "B-04", "B-05", "Add signal filtering for sensors", "Mandatory", "Noise reduction",
+        "SS-04", "SS-05", "Add signal filtering for sensors", "Mandatory", "Noise reduction",
         "Ensures stable readings", "E.Z", "Reviewed", "C.N", "Pending"
     )
 
@@ -121,24 +121,24 @@ with connect_database(db_name) as db:
     inserter.insert_goal_children("G-02", "SW-02")
     inserter.insert_goal_children("G-03", "SW-03")
 
-    inserter.insert_swarm_req_children("SW-01", "CP-01")
-    inserter.insert_swarm_req_children("SW-02", "CP-03")
-    inserter.insert_swarm_req_children("SW-03", "CP-04")
+    inserter.insert_swarm_req_children("SW-01", "SYS-01")
+    inserter.insert_swarm_req_children("SW-02", "SYS-03")
+    inserter.insert_swarm_req_children("SW-03", "SYS-04")
 
-    inserter.insert_sysreq_children("CP-01", "B-01")
-    inserter.insert_sysreq_children("CP-02", "B-03")
-    inserter.insert_sysreq_children("CP-03", "B-04")
+    inserter.insert_sysreq_children("SYS-01", "SS-01")
+    inserter.insert_sysreq_children("SYS-02", "SS-03")
+    inserter.insert_sysreq_children("SYS-03", "SS-04")
 
-    inserter.insert_subsys_join_item("I-01", "B-01")
-    inserter.insert_subsys_join_item("I-02", "B-04")
-    inserter.insert_subsys_join_item("I-03", "B-05")
+    inserter.insert_subsys_join_item("I-01", "SS-01")
+    inserter.insert_subsys_join_item("I-02", "SS-04")
+    inserter.insert_subsys_join_item("I-03", "SS-05")
 
     # ----- Glossary -----
     # gloss_id, prefix, meaning
     inserter.insert_id_glossary("G", "Goal")
     inserter.insert_id_glossary("SW", "Swarm Requirement")
-    inserter.insert_id_glossary("CP", "System Requirement")
-    inserter.insert_id_glossary("B", "Subsystem Requirement")
+    inserter.insert_id_glossary("SYS", "System Requirement")
+    inserter.insert_id_glossary("SS", "Subsystem Requirement")
     inserter.insert_id_glossary("I", "Item")
     inserter.insert_id_glossary("M", "V&V Method")
     inserter.insert_id_glossary("D", "Document")
