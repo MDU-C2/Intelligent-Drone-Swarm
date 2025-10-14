@@ -8,7 +8,7 @@ Usage:
 
 import csv
 import os
-import pathlib
+from pathlib import Path
 from connect_database import connect_database
 
 
@@ -23,7 +23,8 @@ def _list_user_tables(cursor):
 
 def export_db_to_csv(output_dir="csv_exports"):
     """Export every user table in the active DB (from db_name.txt) to CSVs."""
-    db_name_file = pathlib.Path("db_name.txt")
+    #db_name_file = pathlib.Path("db_name.txt")
+    db_name_file = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
     if not db_name_file.exists():
         raise FileNotFoundError("db_name.txt not found — run setup_database.py first.")
     db_path = db_name_file.read_text().strip()
