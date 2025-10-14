@@ -132,28 +132,34 @@ def preview_delete(entity_type: str, entity_id: str) -> Dict:
 
 
 def preview_document(cur, doc_id: str) -> Dict:
-    # CASCADE: V_join_documents rows by doc_id will be removed
     vjd = _fetch_list(cur, "SELECT id, method_id FROM V_join_documents WHERE doc_id = ?", (doc_id,))
+    impacted_methods = sorted({m for (_id, m) in vjd})
     return {
         "entity": ("documents", "doc_id", doc_id),
         "cascade_links": {
             "V_join_documents": {"count": len(vjd), "sample": vjd[:10]},
         },
         "detach": {},
-        "set_null": {}  # documents aren’t referenced with SET NULL elsewhere
+        "set_null": {},
+        "impacted": {
+            "methods_losing_link": impacted_methods  # <— NEW
+        }
     }
 
 
 def preview_item(cur, item_id: str) -> Dict:
-    # CASCADE: sys_join_item rows by item_id will be removed
     sji = _fetch_list(cur, "SELECT id, sub_req_id FROM sys_join_item WHERE item_id = ?", (item_id,))
+    impacted_subsystems = sorted({s for (_id, s) in sji})
     return {
         "entity": ("item", "item_id", item_id),
         "cascade_links": {
             "sys_join_item": {"count": len(sji), "sample": sji[:10]},
         },
         "detach": {},
-        "set_null": {}
+        "set_null": {},
+        "impacted": {
+            "subsystems_losing_link": impacted_subsystems  # <— NEW
+        }
     }
 
 
@@ -212,7 +218,7 @@ def print_preview(p: Dict) -> None:
     table, id_col, entity_id = p["entity"]
     print(f"\nDelete preview for {table}.{id_col} = {entity_id}\n" + "-"*55)
 
-    if p["cascade_links"]:
+    if p.get("cascade_links"):
         print("• Link rows that will be REMOVED (via CASCADE):")
         for t, info in p["cascade_links"].items():
             print(f"  - {t}: {info['count']} row(s)")
@@ -221,7 +227,7 @@ def print_preview(p: Dict) -> None:
     else:
         print("• No link rows will be removed.")
 
-    if p["detach"]:
+    if p.get("detach"):
         print("\n• Children that will be DETACHED (parent_id → NULL):")
         for label, info in p["detach"].items():
             print(f"  - {label}: {info['count']} row(s)")
@@ -230,9 +236,21 @@ def print_preview(p: Dict) -> None:
     else:
         print("\n• No children will be detached.")
 
-    if p["set_null"]:
+    if p.get("set_null"):
         print("\n• References that will be SET TO NULL:")
         for label, count in p["set_null"].items():
             print(f"  - {label}: {count} row(s)")
     else:
         print("\n• No references will be set to NULL.")
+
+    # NEW: show counterpart entities that will lose links
+    impacted = p.get("impacted", {})
+    if impacted:
+        print("\n• Other entities that will LOSE links (not deleted):")
+        for label, ids in impacted.items():
+            if not ids:
+                continue
+            # show up to 10 to keep output readable
+            preview_ids = ids[:10]
+            more = f" (+{len(ids)-10} more)" if len(ids) > 10 else ""
+            print(f"  - {label}: {len(ids)} → {preview_ids}{more}")
