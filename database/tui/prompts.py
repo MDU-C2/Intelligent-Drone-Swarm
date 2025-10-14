@@ -1,9 +1,7 @@
 # prompts.py
 
 import sqlite3
-from pathlib import Path
-
-DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+from .paths import DB_NAME_TXT
 
 def prompt_input(prompt_text, optional=False):
     """Helper to allow typing 'exit' to return to menu"""
@@ -229,9 +227,8 @@ def prompt_vv_method():
 def prompt_update_row():
     print("\nUpdate database row:")
 
-    # Read DB name
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    # Read DB name (centralized)
+    db_name = DB_NAME_TXT.read_text().strip()
 
     conn = sqlite3.connect(db_name)
     cur = conn.cursor()
@@ -329,8 +326,7 @@ def prompt_update_row():
 def prompt_delete_row():
     print("\nDelete database row:")
 
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    db_name = DB_NAME_TXT.read_text().strip()
 
     conn = sqlite3.connect(db_name)
     cur = conn.cursor()
