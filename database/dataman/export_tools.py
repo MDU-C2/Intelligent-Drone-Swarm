@@ -6,8 +6,8 @@ Small wrappers to keep run_database.py clean.
 """
 
 import os
-from db_json_bridge import dump_db_to_json
-from export_db_to_csv import export_db_to_csv  # uses delimiter=';' per your update
+from ..dataman.db_json_bridge import dump_db_to_json
+from ..dataman.export_db_to_csv import export_db_to_csv
 
 
 def export_db_to_json_interactive(db_name: str) -> None:
