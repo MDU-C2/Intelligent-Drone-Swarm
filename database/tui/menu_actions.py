@@ -220,3 +220,21 @@ def handle_delete_with_preview():
             print("Nothing deleted (ID not found).")
     except Exception as e:
         print(f"Delete failed: {e}")
+
+# menu_actions.py
+
+def handle_show_restore_instructions(db_name: str):
+    print(rf"""
+================  Restore JSON → DB  ================
+
+1) Choose **23: Exit** to close the database.
+
+2) In the Terminal run:
+   python db_json_bridge.py restore database_dump.json {db_name} --overwrite
+
+   - Replace 'database_dump.json' if your dump has another name.
+   - '{db_name}' is the DB file listed in db_name.txt.
+
+3) Start the app again in the Terminal:
+   python -m database.app.run_database
+""")
