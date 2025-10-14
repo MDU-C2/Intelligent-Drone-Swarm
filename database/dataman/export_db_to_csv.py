@@ -9,7 +9,7 @@ Usage:
 import csv
 import os
 from pathlib import Path
-from connect_database import connect_database
+from ..core.connect_database import connect_database
 
 
 def _list_user_tables(cursor):
