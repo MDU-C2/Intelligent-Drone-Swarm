@@ -7,7 +7,7 @@ Used by run_database.py when user chooses "Restore JSON → DB".
 
 import os
 import uuid
-from db_json_bridge import restore_db_from_json
+from ..dataman.db_json_bridge import restore_db_from_json
 
 
 def safe_restore_from_json(current_db: str, in_path: str, target_db: str, overwrite: bool) -> str:
