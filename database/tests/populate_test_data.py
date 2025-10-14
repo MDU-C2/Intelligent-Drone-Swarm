@@ -1,14 +1,11 @@
 # populate_test_data.py
 
-from pathlib import Path
+from database.app.paths import DB_NAME_TXT
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
 from ..core.insert_functions import insert_functions
 
-DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
-
-with open(DB_NAME_PATH) as f:
-    db_name = f.read().strip()
+db_name = DB_NAME_TXT.read_text().strip()
 
 with connect_database(db_name) as db:
     tables = create_tables(db.cursor)
