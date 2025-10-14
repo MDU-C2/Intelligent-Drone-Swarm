@@ -63,7 +63,7 @@ def main():
             print("17: Update row in Database")
             print("18: Delete row in Database")
             print("19: Export DB → JSON")
-            print("20: Restore JSON → DB")
+            print("20: How to restore JSON → DB")
             print("21: Verify JSON round-trip")
             print("22: Export DB → CSV")
             print("23: Exit")
@@ -130,9 +130,7 @@ def main():
                     menu.handle_export_json(db_name)
 
                 elif choice == RESTORE_FROM_JSON:
-                    result = menu.handle_restore_json(db_name)
-                    if result == "exit":
-                        break
+                    menu.handle_show_restore_instructions(db_name)
 
                 elif choice == VERIFY_ROUNDTRIP:
                     menu.handle_verify_roundtrip()
