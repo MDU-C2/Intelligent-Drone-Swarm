@@ -15,7 +15,7 @@ if __name__ == "__main__":
         if not db_name.endswith(".db"):
             raise ValueError("Database name must end with .db")
 
-        # NEW: ensure data/ exists and place the DB INSIDE it (unless absolute)
+        # Ensure data/ exists and place the DB INSIDE it (unless absolute)
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         db_path = Path(db_name)
         if not db_path.is_absolute():
