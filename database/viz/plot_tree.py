@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
-from .paths import DB_NAME_TXT
+from database.app.paths import DB_NAME_TXT, PLOTS_DIR
 
 
 def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
@@ -331,9 +331,11 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     plt.title(title, fontsize=14)
 
     if save:
+        PLOTS_DIR.mkdir(parents=True, exist_ok=True)
         filename = f"{node_type}_{root}_depth{max_depth if max_depth else 'all'}.png".replace(":", "-")
-        plt.savefig(filename, bbox_inches="tight")
-        print(f"Saved: {filename}")
+        out_path = PLOTS_DIR / filename
+        plt.savefig(out_path, bbox_inches="tight")
+        print(f"Saved: {out_path}")
         plt.close()
     else:
         plt.show()
