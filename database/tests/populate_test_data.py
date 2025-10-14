@@ -6,6 +6,7 @@ from ..core.create_tables import create_tables
 from ..core.insert_functions import insert_functions
 
 DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+
 with open(DB_NAME_PATH) as f:
     db_name = f.read().strip()
 
