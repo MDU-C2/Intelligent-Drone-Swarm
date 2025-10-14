@@ -4,12 +4,12 @@ Handlers for TUI actions to keep run_database.py uncluttered.
 Each handler prints its own success/error messages.
 """
 
-from export_tools import export_db_to_json_interactive, export_db_to_csv_interactive
-from safe_restore import safe_restore_from_json
-from verify_roundtrip import run_roundtrip_check
-import plot_tree
-import prompts
-from delete_preview import preview_delete, print_preview, perform_delete
+from ..dataman.export_tools import export_db_to_json_interactive, export_db_to_csv_interactive
+from ..dataman.safe_restore import safe_restore_from_json
+from ..app.verify_roundtrip import run_roundtrip_check
+import database.viz.plot_tree as plot_tree
+import database.tui.prompts as prompts
+from ..tui.delete_preview import preview_delete, print_preview, perform_delete
 
 def handle_insert_goal(inserter):
     data = prompts.prompt_goal()
