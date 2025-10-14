@@ -131,6 +131,70 @@ def preview_delete(entity_type: str, entity_id: str) -> Dict:
         raise ValueError(f"Unsupported entity_type: {entity_type}")
 
 
+def preview_document(cur, doc_id: str) -> Dict:
+    # CASCADE: V_join_documents rows by doc_id will be removed
+    vjd = _fetch_list(cur, "SELECT id, method_id FROM V_join_documents WHERE doc_id = ?", (doc_id,))
+    return {
+        "entity": ("documents", "doc_id", doc_id),
+        "cascade_links": {
+            "V_join_documents": {"count": len(vjd), "sample": vjd[:10]},
+        },
+        "detach": {},
+        "set_null": {}  # documents aren’t referenced with SET NULL elsewhere
+    }
+
+
+def preview_item(cur, item_id: str) -> Dict:
+    # CASCADE: sys_join_item rows by item_id will be removed
+    sji = _fetch_list(cur, "SELECT id, sub_req_id FROM sys_join_item WHERE item_id = ?", (item_id,))
+    return {
+        "entity": ("item", "item_id", item_id),
+        "cascade_links": {
+            "sys_join_item": {"count": len(sji), "sample": sji[:10]},
+        },
+        "detach": {},
+        "set_null": {}
+    }
+
+
+def preview_quality(cur, quality_rec_id: str) -> Dict:
+    # quality_requirements is standalone (no FK dependents)
+    exists = _fetch_one(cur, "SELECT COUNT(*) FROM quality_requirements WHERE quality_rec_id = ?", (quality_rec_id,))
+    return {
+        "entity": ("quality_requirements", "quality_rec_id", quality_rec_id),
+        "cascade_links": {},
+        "detach": {},
+        "set_null": {},
+        "exists": bool(exists),
+    }
+
+
+def preview_delete(entity_type: str, entity_id: str) -> Dict:
+    """
+    entity_type: 'goal'|'swarm'|'system'|'subsystem'|'method'|'document'|'item'|'quality'
+    """
+    with open("db_name.txt") as f:
+        db_name = f.read().strip()
+    with connect_database(db_name) as db:
+        if entity_type == "goal":
+            return preview_goal(db.cursor, entity_id)
+        if entity_type == "swarm":
+            return preview_swarm(db.cursor, entity_id)
+        if entity_type == "system":
+            return preview_system(db.cursor, entity_id)
+        if entity_type == "subsystem":
+            return preview_subsystem(db.cursor, entity_id)
+        if entity_type == "method":
+            return preview_method(db.cursor, entity_id)
+        if entity_type == "document":
+            return preview_document(db.cursor, entity_id)
+        if entity_type == "item":
+            return preview_item(db.cursor, entity_id)
+        if entity_type == "quality":
+            return preview_quality(db.cursor, entity_id)
+        raise ValueError(f"Unsupported entity_type: {entity_type}")
+
+
 def perform_delete(preview: Dict) -> int:
     """
     Executes the delete for the previewed entity.
