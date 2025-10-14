@@ -1,114 +1,87 @@
-# verify_roundtrip.py
-"""
-Standalone round-trip verifier for environments without pytest.
+# database/app/verify_roundtrip.py
 
-Usage:
-    python verify_roundtrip.py
-"""
 from __future__ import annotations
-import os
-import sys
-import tempfile
+import os, shutil, tempfile, json
 from pathlib import Path
-import base64
-from typing import Any, Dict, List, Tuple
 
 from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
 from ..core.connect_database import connect_database
 
+# Paths
+APP_DIR  = Path(__file__).resolve().parents[1]
+DATA_DIR = APP_DIR / "data"
+DB_NAME_TXT = DATA_DIR / "db_name.txt"
 
-def _list_user_tables(cur) -> List[str]:
+def _read_active_db_path() -> Path:
+    if not DB_NAME_TXT.exists():
+        raise SystemExit(f"db_name.txt not found at {DB_NAME_TXT}")
+    db_path = Path(DB_NAME_TXT.read_text().strip())
+    if not db_path.exists():
+        raise SystemExit(f"Active DB not found: {db_path}")
+    return db_path
+
+def _fetch_all_tables(conn) -> dict[str, list[tuple]]:
+    cur = conn.cursor
     cur.execute("""
         SELECT name FROM sqlite_master
         WHERE type='table' AND name NOT LIKE 'sqlite_%'
         ORDER BY name;
     """)
-    return [r[0] for r in cur.fetchall()]
+    tables = [r[0] for r in cur.fetchall()]
+    snapshot = {}
+    for t in tables:
+        cur.execute(f"PRAGMA table_info({t})")
+        cols = [c[1] for c in cur.fetchall()]
+        cur.execute(f"SELECT * FROM {t} ORDER BY rowid")
+        rows = cur.fetchall()
+        snapshot[t] = (cols, rows)
+    return snapshot
 
+def _compare_snapshots(a: dict, b: dict) -> None:
+    a_tables = set(a.keys())
+    b_tables = set(b.keys())
+    if a_tables != b_tables:
+        missing_in_b = sorted(a_tables - b_tables)
+        extra_in_b   = sorted(b_tables - a_tables)
+        raise SystemExit(f"Table mismatch.\nMissing in restored: {missing_in_b}\nExtra in restored: {extra_in_b}")
 
-def _list_columns(cur, table: str) -> List[str]:
-    cur.execute(f"PRAGMA table_info({table})")
-    return [r[1] for r in cur.fetchall()]
-
-
-def _normalize_value(v: Any) -> Any:
-    if isinstance(v, memoryview):
-        v = bytes(v)
-    if isinstance(v, (bytes, bytearray)):
-        return {"__blob__": True, "base64": base64.b64encode(bytes(v)).decode("ascii")}
-    return v
-
-
-def _fetch_table(cur, table: str) -> Tuple[List[str], List[Tuple[Any, ...]]]:
-    cols = _list_columns(cur, table)
-    cur.execute(f"SELECT * FROM {table}")
-    rows = cur.fetchall()
-    return cols, rows
-
-
-def _rows_as_normalized_dicts(cols: List[str], rows: List[Tuple[Any, ...]]) -> List[Dict[str, Any]]:
-    return [{c: _normalize_value(v) for c, v in zip(cols, r)} for r in rows]
-
-
-def _sorted_rows(rows: List[Dict[str, Any]], key_cols: List[str]) -> List[Dict[str, Any]]:
-    if not rows:
-        return rows
-    if not key_cols:
-        key_cols = [next(iter(rows[0].keys()))]
-
-    def sort_key(d):
-        return tuple(str(d.get(k)) for k in key_cols)
-
-    return sorted(rows, key=sort_key)
-
-
-def main():
-    #db_name_file = pathlib.Path("db_name.txt")
-    db_name_file = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
-    if not db_name_file.exists():
-        print("ERROR: db_name.txt not found; create it with your .db path.")
-        sys.exit(2)
-    original_db = db_name_file.read_text().strip()
-    if not os.path.exists(original_db):
-        print(f"ERROR: Original DB not found: {original_db}")
-        sys.exit(2)
-
-    with tempfile.TemporaryDirectory() as td:
-        out_json = os.path.join(td, "dump.json")
-        restored_db = os.path.join(td, "restored.db")
-
-        print(f"→ Dumping {original_db} → {out_json}")
-        dump_db_to_json(original_db, out_json)
-
-        print(f"→ Restoring {out_json} → {restored_db}")
-        restore_db_from_json(restored_db, out_json, overwrite=True)
-
-        print("→ Comparing tables, columns, and rows …")
-        with connect_database(original_db) as orig, connect_database(restored_db) as rest:
-            orig_tables = _list_user_tables(orig.cursor)
-            rest_tables = _list_user_tables(rest.cursor)
-            if orig_tables != rest_tables:
-                raise SystemExit(f"Tables differ.\nOrig: {orig_tables}\nRest: {rest_tables}")
-
-            for t in orig_tables:
-                o_cols, o_rows = _fetch_table(orig.cursor, t)
-                r_cols, r_rows = _fetch_table(rest.cursor, t)
-                if o_cols != r_cols:
-                    raise SystemExit(f"Columns differ for table {t}.\nOrig: {o_cols}\nRest: {r_cols}")
-
-                id_like = [c for c in o_cols if c.endswith("_id") or c == "id"]
-                o_norm = _sorted_rows(_rows_as_normalized_dicts(o_cols, o_rows), id_like)
-                r_norm = _sorted_rows(_rows_as_normalized_dicts(r_cols, r_rows), id_like)
-                if o_norm != r_norm:
-                    raise SystemExit(f"Row mismatch in table '{t}'.")
-
-        print("Round-trip verification PASSED.")
-
+    for t in sorted(a_tables):
+        a_cols, a_rows = a[t]
+        b_cols, b_rows = b[t]
+        if a_cols != b_cols:
+            raise SystemExit(f"Column mismatch in table '{t}':\n  src={a_cols}\n  dst={b_cols}")
+        if a_rows != b_rows:
+            # Optional: show a tiny diff sample
+            raise SystemExit(f"Row mismatch in table '{t}' (counts: src={len(a_rows)}, dst={len(b_rows)}).")
 
 def run_roundtrip_check() -> None:
-    """Programmatic entry point used by the TUI."""
-    main()
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    db_path = _read_active_db_path()
 
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+        dump_path = tmpdir / "dump.json"
+        restored_db = tmpdir / "restored.db"
+
+        print(f"→ Dumping {db_path.name} → {dump_path}")
+        dump_db_to_json(str(db_path), str(dump_path))
+
+        # Also save a permanent copy under data/ (fixed path)
+        permanent_dump = DATA_DIR / "roundtrip_last_dump.json"
+        shutil.copyfile(dump_path, permanent_dump)
+        print(f"   (Saved copy) {permanent_dump}")
+
+        print(f"→ Restoring {dump_path} → {restored_db}")
+        restore_db_from_json(str(restored_db), str(dump_path), overwrite=True)
+
+        # Compare snapshots
+        print("→ Comparing source vs restored …")
+        with connect_database(str(db_path)) as src, connect_database(str(restored_db)) as dst:
+            snap_src = _fetch_all_tables(src)
+            snap_dst = _fetch_all_tables(dst)
+        _compare_snapshots(snap_src, snap_dst)
+
+    print("✅ Round-trip verification PASSED.")
 
 if __name__ == "__main__":
-    main()
+    run_roundtrip_check()
