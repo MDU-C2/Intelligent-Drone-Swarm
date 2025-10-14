@@ -14,3 +14,4 @@ DB_NAME_TXT     = DATA_DIR / "db_name.txt"              # stores absolute path t
 JSON_DUMP       = DATA_DIR / "database_dump.json"       # “normal” export target
 ROUNDTRIP_DUMP  = DATA_DIR / "roundtrip_last_dump.json" # copy kept by round-trip check
 CSV_DIR         = DATA_DIR / "csv_exports"              # CSV exports folder
+PLOTS_DIR       = DATA_DIR / "plots"
