@@ -103,7 +103,7 @@ _BASE_ORDER = [
 ]
 
 def _phase_insert_self_ref(cursor, table: str, cols: List[str],
-                           rows: List[Dict[str, Any]], parent_col: str) -> None:
+                           rows: List[Dict[str, Any]], parent_col: str, id_col: str) -> None:
     # phase 1: roots (no parent)
     remaining = rows[:]
     phase1 = [r for r in remaining if r.get(parent_col) in (None, "")]
@@ -118,7 +118,7 @@ def _phase_insert_self_ref(cursor, table: str, cols: List[str],
     for _ in range(max_passes):
         if not remaining:
             return
-        cursor.execute(f"SELECT {cols[0]} FROM {table}")   # assumes first col is the id, matches your schema
+        cursor.execute(f"SELECT {id_col} FROM {table}")
         existing = {x[0] for x in cursor.fetchall()}
         ready, pending = [], []
         for r in remaining:
@@ -127,9 +127,14 @@ def _phase_insert_self_ref(cursor, table: str, cols: List[str],
         if ready:
             _insert_rows(cursor, table, cols, ready)
         if len(pending) == len(remaining):
-            missing = sorted({r.get(parent_col) for r in pending})
+            # helpful error that names the children
+            by_parent = {}
+            for r in pending:
+                by_parent.setdefault(r.get(parent_col), []).append(r.get(id_col))
+            missing = ", ".join(f"{p} <- children {by_parent[p]}" for p in sorted(by_parent))
             raise RuntimeError(f"Unresolved parents in {table}: {missing}")
         remaining = pending
+
 
 def restore_db_from_json(db_path: str, json_path: str, overwrite: bool = False) -> None:
     if overwrite and os.path.exists(db_path):
