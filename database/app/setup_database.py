@@ -1,10 +1,14 @@
 # setup_database.py
 
 import os
-from connect_database import connect_database
-from create_tables import create_tables
+from pathlib import Path
+from ..core.connect_database import connect_database
+from ..core.create_tables import create_tables
 
 if __name__ == "__main__":
+
+    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+
     print("Please enter the name of the database you want to create (with .db):\n")
     db_name = input().strip()
     try:
@@ -18,7 +22,7 @@ if __name__ == "__main__":
                 exit(0)
             os.remove(db_name)
 
-        with open("db_name.txt", "w") as f:
+        with open(DB_NAME_PATH, "w", encoding="utf-8") as f:
             f.write(db_name)
         print(f"Database name '{db_name}' successfully written to db_name.txt.")
 
