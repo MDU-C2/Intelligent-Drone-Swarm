@@ -12,7 +12,7 @@ import pathlib
 from connect_database import connect_database
 
 
-def list_user_tables(cursor):
+def _list_user_tables(cursor):
     cursor.execute("""
         SELECT name FROM sqlite_master
         WHERE type='table' AND name NOT LIKE 'sqlite_%'
@@ -33,7 +33,7 @@ def export_db_to_csv(output_dir="csv_exports"):
     os.makedirs(output_dir, exist_ok=True)
 
     with connect_database(db_path) as db:
-        tables = list_user_tables(db.cursor)
+        tables = _list_user_tables(db.cursor)
         if not tables:
             print("No tables found in the database.")
             return
@@ -51,7 +51,7 @@ def export_db_to_csv(output_dir="csv_exports"):
                 writer.writerow(columns)
                 writer.writerows(rows)
 
-            print(f"✅ Exported {table} → {out_path}")
+            print(f"Exported {table} → {out_path}")
 
     print(f"\nAll tables exported successfully to folder: {output_dir}")
 
