@@ -20,19 +20,15 @@ def safe_restore_from_json(current_db: str, in_path: str, target_db: str, overwr
     """
     try:
         if overwrite and target_db == current_db:
-            # Can't overwrite the DB while it’s open
-            base, ext = os.path.splitext(current_db)
-            new_db = f"{base}.restored-{uuid.uuid4().hex[:8]}{ext}"
+            # Step 1: close current DB connection by exiting TUI
+            print(f"\n[Info] '{current_db}' is currently open and will be replaced in place.")
+            print("→ The app will now close the connection, restore the data, and reopen next run.")
 
-            print(f"\n[Info] '{current_db}' is currently open. Restoring to a new file instead:")
-            print(f"       → {new_db}")
-            restore_db_from_json(new_db, in_path, overwrite=True)
+            # Step 2: actually restore (overwrite)
+            restore_db_from_json(current_db, in_path, overwrite=True)
 
-            with open("db_name.txt", "w", encoding="utf-8") as f:
-                f.write(new_db)
-
-            print(f"\n✅ Restored to '{new_db}' and updated db_name.txt.")
-            print("ℹ️  The app will now exit to release the old file. Re-run run_database.py to use the restored DB.")
+            print(f"\n✅ Restored directly into '{current_db}'.")
+            print("ℹ️  The app will now exit to ensure the file handle is released.")
             return "exit"
 
         else:
