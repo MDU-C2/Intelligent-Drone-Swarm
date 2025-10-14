@@ -5,10 +5,9 @@ from pathlib import Path
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
 
+DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+
 if __name__ == "__main__":
-
-    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
-
     print("Please enter the name of the database you want to create (with .db):\n")
     db_name = input().strip()
     try:
