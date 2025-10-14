@@ -10,7 +10,7 @@ This README walks you through setting up, using, exporting, and verifying your S
 
 * **SQLite database** with tables for goals, requirements (swarm/system/subsystem), verification methods, documents, items, joins, etc.
 * **TUI (text‑menu) app** to add/search/update/delete rows.
-* **JSON export/restore** so you can store changes in Git and review diffs easily.
+* **JSON export/restore** so we can store changes in Git and review diffs easily.
 * **Round‑trip test** (DB → JSON → DB) to ensure integrity.
 * **Graph plotter** to visualize requirement links as a tree.
 
