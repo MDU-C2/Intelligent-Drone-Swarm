@@ -3,11 +3,10 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from pathlib import Path
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
+from .paths import DB_NAME_TXT
 
-DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
 
 def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
     """Hierarchical layout for a tree (or DAG)."""
@@ -36,14 +35,13 @@ def build_graph(include_methods=True, include_docs=True):
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
     
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    # centralized DB path
+    db_name = DB_NAME_TXT.read_text().strip()
 
     with connect_database(db_name) as db:
         tables = create_tables(db.cursor)
         tables.create_all_tables()
 
-        
         # goal -> swarm_req
         db.cursor.execute("""
             SELECT goal_id, swarm_req_id FROM goal_children
@@ -146,27 +144,22 @@ def build_graph(include_methods=True, include_docs=True):
                 G.add_node(child, type="doc_id")
                 G.add_edge(parent, child)
         
-        # In build_graph(), after adding nodes:
-
-        # Goals: store satisfaction_status
+        # annotate node statuses for coloring
         db.cursor.execute("SELECT goal_id, satisfaction_status FROM goals")
         for gid, status in db.cursor.fetchall():
             if gid in G.nodes:
                 G.nodes[gid]["status"] = status
 
-        # Drone swarm requirements: store verification_status
         db.cursor.execute("SELECT swarm_req_id, verification_status FROM drone_swarm_requirements")
         for sid, status in db.cursor.fetchall():
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        # System requirements: store verification_status
         db.cursor.execute("SELECT sys_req_id, verification_status FROM system_requirements")
         for sid, status in db.cursor.fetchall():
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        # Subsystem requirements: store verification_status
         db.cursor.execute("SELECT sub_req_id, verification_status FROM subsystem_requirements")
         for sid, status in db.cursor.fetchall():
             if sid in G.nodes:
@@ -178,7 +171,6 @@ def choose_node_type_and_id(G):
     """Ask user for node type using numbers and ID (or 'all') and optional depth cutoff."""
     node_types = ["goal_id", "swarm_req_id", "sys_req_id", "sub_req_id"]
 
-    # Show numbered options
     print("Select node type to visualize from:")
     for i, t in enumerate(node_types, start=1):
         print(f"{i}: {t}")
@@ -189,7 +181,6 @@ def choose_node_type_and_id(G):
 
     node_type = node_types[int(choice) - 1]
 
-    # Collect available nodes of this type
     candidates = [n for n, data in G.nodes(data=True) if data.get("type") == node_type]
     if not candidates:
         raise ValueError(f"No nodes found for type {node_type}")
@@ -197,12 +188,11 @@ def choose_node_type_and_id(G):
     print(f"Available {node_type}s:", candidates)
     chosen_id = input(f"Enter {node_type} to visualize (or 'all'): ").strip()
 
-    # Ask for max depth
     print("Select node type to visualize up to:")
     for i, t in enumerate(node_types, start=1):
         print(f"{i-1}: {t}")
     
-    depth_choice = input("Enter number corresponding to node type: ").strip() #input("Enter max depth to expand (or press Enter for no limit): ").strip()
+    depth_choice = input("Enter number corresponding to node type: ").strip()
     max_depth = None
     if depth_choice.isdigit():
         max_depth = int(depth_choice)
@@ -212,16 +202,7 @@ def choose_node_type_and_id(G):
 def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth=None):
     """
     Fully adaptive plotting of a hierarchy tree with optional depth cutoff.
-
-    Parameters:
-        G (nx.DiGraph): Full graph
-        root (str|int): Root node ID
-        save (bool): Save to file instead of show
-        h_padding (float): Horizontal padding (0-0.5)
-        v_padding (float): Vertical padding (0-0.5)
-        max_depth (int|None): Maximum depth to expand children (None = no limit)
     """
-    # Collect nodes up to max_depth
     sub_nodes = {root}
     frontier = [(root, 0)]  # (node, depth)
 
@@ -233,10 +214,8 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
             sub_nodes.add(child)
             frontier.append((child, depth + 1))
 
-    # Build subgraph
     H = G.subgraph(sub_nodes).copy()
 
-    # Compute tree depth (relative to H)
     def max_depth_calc(node, G):
         children = list(G.successors(node))
         if not children:
@@ -246,31 +225,22 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     depth = max_depth_calc(root, H)
     num_nodes = len(H.nodes)
 
-    # Dynamic figure size
-    width = max(num_nodes / 2, 8) # Påverkar spacing mellan syskon
-    height = max(depth * 1.5, 6) # Spelar ingen roll lol
+    width = max(num_nodes / 2, 8)
+    height = max(depth * 1.5, 6)
     plt.figure(figsize=(width, height))
 
-    # NODE SIZE AND FONT SIZE
-    # Dynamic node and font size
-    node_size = max(1500 - num_nodes * 20, 500) # Node size → change the 1500 (base size) and 500 (minimum size).
-    font_size = max(9 - int(num_nodes / 50), 6) # Text size → change the formula or use a fixed value:
+    node_size = max(1500 - num_nodes * 20, 500)
+    font_size = max(9 - int(num_nodes / 50), 6)
 
-    # Horizontal layout width
     horiz_width = min(1.0, 0.5 + num_nodes / 50)
     adjusted_width = horiz_width * (1 - 2 * h_padding)
     xcenter = 0.5
 
-    # Compute hierarchical positions
-    # vert_gap → adds more space between parent and children
-    # width passed to hierarchy_pos → spreads sibling nodes out more.
     pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
 
-    # Apply horizontal padding
     for node in pos:
         pos[node] = (pos[node][0] * (1 - 2 * h_padding) + h_padding, pos[node][1])
 
-    # Apply vertical padding
     y_values = [y for x, y in pos.values()]
     y_min, y_max = min(y_values), max(y_values)
     y_range = y_max - y_min if y_max != y_min else 1.0
@@ -278,10 +248,8 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         y = pos[node][1]
         pos[node] = (pos[node][0], v_padding + (y - y_min) / y_range * (1 - 2 * v_padding))
 
-    # Build labels: show only ID
     labels = {n: str(n) for n in H.nodes}
 
-    # Define a color map per node type depending on their verification status
     status_colors = {
         "goal_id": {
             "Satisfied": "green",
@@ -318,7 +286,6 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         "doc_id": "moccasin"
     }
 
-    # Assign a color for each node in the subgraph
     node_colors = []
     for n in H.nodes:
         node_type = H.nodes[n].get("type")
@@ -327,10 +294,8 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         if node_type in status_colors and status in status_colors[node_type]:
             node_colors.append(status_colors[node_type][status])
         else:
-            # fallback: type color (methods, docs, etc.)
             node_colors.append(type_colors.get(node_type, "lightgrey"))
 
-    # Draw the tree with per-node colors
     nx.draw(
         H, pos, labels=labels,
         node_size=node_size, node_color=node_colors,
@@ -338,7 +303,6 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         arrowsize=15, edgecolors="black"
     )
 
-    # Add legend
     from matplotlib.patches import Patch
     legend_handles = [
         Patch(color="green", label="Goal Satisfied"),
@@ -375,11 +339,7 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         plt.show()
 
 def run_tree_plot():
-    """
-    Launches the interactive plotting menu:
-    asks for node type, ID, and depth, then plots.
-    """
-    # Ask user about including methods/docs
+    """Launches the interactive plotting menu."""
     include_methods = input("Include verification methods? (y/n): ").strip().lower() == "y"
     if include_methods:
         include_docs = input("Include documents? (y/n): ").strip().lower() == "y"
