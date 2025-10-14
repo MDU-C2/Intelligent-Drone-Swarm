@@ -10,7 +10,7 @@ from ..app.verify_roundtrip import run_roundtrip_check
 import database.viz.plot_tree as plot_tree
 import database.tui.prompts as prompts
 from ..tui.delete_preview import preview_delete, print_preview, perform_delete
-from .paths import DB_NAME_TXT, JSON_DUMP, CSV_DIR
+from database.app.paths import DB_NAME_TXT, JSON_DUMP, CSV_DIR
 from pathlib import Path
 
 def handle_insert_goal(inserter):
