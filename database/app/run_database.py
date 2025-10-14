@@ -7,6 +7,8 @@ from ..core.db_utilities import db_utilities
 import database.tui.menu_actions as menu
 from ..tui.tui_helpers import wait_for_enter
 
+DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
 INSERT_DRONE_SWARM_REQ = "2"
@@ -33,7 +35,6 @@ EXPORT_TO_CSV = "22"
 EXIT = "23"
 
 def main():
-    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
     with open(DB_NAME_PATH, "r") as f:
         db_name = f.read().strip()
 
