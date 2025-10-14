@@ -47,7 +47,7 @@ def export_db_to_csv(output_dir="csv_exports"):
 
             out_path = os.path.join(output_dir, f"{table}.csv")
             with open(out_path, "w", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f)
+                writer = csv.writer(f, delimiter=';')
                 writer.writerow(columns)
                 writer.writerows(rows)
 
