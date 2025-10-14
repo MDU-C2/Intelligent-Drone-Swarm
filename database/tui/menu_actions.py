@@ -10,6 +10,8 @@ from ..app.verify_roundtrip import run_roundtrip_check
 import database.viz.plot_tree as plot_tree
 import database.tui.prompts as prompts
 from ..tui.delete_preview import preview_delete, print_preview, perform_delete
+from .paths import DB_NAME_TXT, JSON_DUMP, CSV_DIR
+from pathlib import Path
 
 def handle_insert_goal(inserter):
     data = prompts.prompt_goal()
@@ -150,18 +152,20 @@ def handle_delete(other):
     else:
         print("Deletion cancelled.")
 
-def handle_export_json(db_name: str):
-    export_db_to_json_interactive(db_name)
+def handle_export_json():
+    db_path = DB_NAME_TXT.read_text().strip()
+    export_db_to_json_interactive(db_path)
 
 def handle_export_csv():
     export_db_to_csv_interactive()
 
-def handle_restore_json(db_name: str) -> str:
-    in_path = input("\nInput JSON path [database_dump.json]: ").strip() or "database_dump.json"
-    target_db = input(f"Output DB path [{db_name}]: ").strip() or db_name
+def handle_restore_json() -> dict:
+    current_db = DB_NAME_TXT.read_text().strip()
+    # if you’ve locked paths, you can skip prompts entirely; otherwise keep them:
+    in_path = input("\nInput JSON path [database/data/database_dump.json]: ").strip() or str(JSON_DUMP)
+    target_db = input(f"Output DB path [{Path(current_db).name}]: ").strip() or current_db
     overwrite = (input(f"Overwrite '{target_db}' if exists? (y/N): ").strip().lower() == "y")
-    result = safe_restore_from_json(db_name, in_path, target_db, overwrite)
-    return result  # "exit" or "continue"
+    return safe_restore_from_json(current_db, in_path, target_db, overwrite)
 
 def handle_verify_roundtrip():
     print("\n→ Running round-trip verification (dump → restore → compare)…")
@@ -221,15 +225,18 @@ def handle_delete_with_preview():
     except Exception as e:
         print(f"Delete failed: {e}")
 
-def handle_show_restore_instructions(db_name: str):
+def handle_show_restore_instructions():
+    db_path = Path(DB_NAME_TXT.read_text().strip())
+    db_file = db_path.name
     print(rf"""
 ================  Restore JSON → DB  ================
 
 1) Choose **23: Exit** to close the database.
 
-2) In the Terminal run:
-   python -m database.dataman.db_json_bridge restore database_dump.json IRDS_requirements.db --overwrite
+2) In the Terminal, run:
+   python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/{db_file} --overwrite
 
-3) Start the app again in the Terminal:
+3) Start the app again:
    python -m database.app.run_database
+=======================================================================
 """)
