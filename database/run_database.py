@@ -27,6 +27,7 @@ from menu_actions import (
     handle_export_csv,
     handle_restore_json,
     handle_verify_roundtrip,
+    handle_delete_with_preview,
 )
 
 from tui_helpers import wait_for_enter
@@ -145,7 +146,8 @@ def main():
                     handle_update(other)
 
                 elif choice == DELETE_DB_ROW:
-                    handle_delete(other)
+                    #handle_delete(other)
+                    handle_delete_with_preview()
 
                 elif choice == EXPORT_TO_JSON:
                     handle_export_json(db_name)
