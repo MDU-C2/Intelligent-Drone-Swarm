@@ -7,6 +7,8 @@ from pathlib import Path
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
 
+DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+
 def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
     """Hierarchical layout for a tree (or DAG)."""
     if root is None:
@@ -33,8 +35,7 @@ def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5)
 def build_graph(include_methods=True, include_docs=True):
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
-
-    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+    
     with open(DB_NAME_PATH) as f:
         db_name = f.read().strip()
 
