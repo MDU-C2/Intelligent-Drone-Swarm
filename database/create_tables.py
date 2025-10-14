@@ -39,7 +39,7 @@ class create_tables:
             rationale VARCHAR,
             satisfaction_status TEXT CHECK (satisfaction_status IN ('Pending','Not satisfied','Satisfied')),
             method_id VARCHAR,
-            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id)
+            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("goals", create_sql)
@@ -58,7 +58,7 @@ class create_tables:
             verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
             verification_method VARCHAR,
             comment VARCHAR,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)
+            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("drone_swarm_requirements", create_sql)
@@ -69,8 +69,8 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             goal_id VARCHAR NOT NULL,
             swarm_req_id VARCHAR UNIQUE NOT NULL,
-            FOREIGN KEY (goal_id) REFERENCES goals (goal_id),
-            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id)
+            FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,
+            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE
         )
         """
         self._ensure("goal_children", create_sql)
@@ -90,8 +90,8 @@ class create_tables:
             verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
             verification_method VARCHAR,
             comment VARCHAR,
-            FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id), 
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)     
+            FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,
+            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("system_requirements", create_sql)
@@ -102,8 +102,8 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             swarm_req_id VARCHAR  NOT NULL,
             sys_req_id VARCHAR UNIQUE NOT NULL,
-            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id),
-            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id)
+            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
+            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
         )
         """
         self._ensure("swarm_req_children", create_sql)
@@ -123,8 +123,8 @@ class create_tables:
             verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
             verification_method VARCHAR,
             comment VARCHAR,
-            FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id),
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id)     
+            FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE SET NULL,
+            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("subsystem_requirements", create_sql)
@@ -135,8 +135,8 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sys_req_id VARCHAR NOT NULL,
             sub_req_id VARCHAR UNIQUE NOT NULL,
-            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id),
-            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id)
+            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
+            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE
         )
         """
         self._ensure("sysreq_children", create_sql)
@@ -147,8 +147,8 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             item_id VARCHAR NOT NULL,
             sub_req_id VARCHAR UNIQUE NOT NULL,   
-            FOREIGN KEY (item_id) REFERENCES item (item_id),
-            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id)                
+            FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
+            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              
         )
         """
         self._ensure("sys_join_item", create_sql)
@@ -191,8 +191,8 @@ class create_tables:
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             method_id VARCHAR NOT NULL,
             doc_id VARCHAR NOT NULL,  
-            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id),
-            FOREIGN KEY (doc_id) REFERENCES documents (doc_id)
+            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id) ON DELETE CASCADE,
+            FOREIGN KEY (doc_id) REFERENCES documents (doc_id) ON DELETE CASCADE
         )
         """
         self._ensure("V_join_documents", create_sql)
