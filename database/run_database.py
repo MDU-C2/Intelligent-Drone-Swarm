@@ -9,6 +9,7 @@ from db_json_bridge import dump_db_to_json, restore_db_from_json
 from verify_roundtrip import run_roundtrip_check
 from export_db_to_csv import export_db_to_csv
 from safe_restore import safe_restore_from_json
+from export_tools import export_db_to_json_interactive, export_db_to_csv_interactive
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -215,13 +216,7 @@ def main():
                         print("Deletion cancelled.")
                 
                 elif choice == EXPORT_TO_JSON:
-                    default_json = "database_dump.json"
-                    out_path = input(f"\nOutput JSON path [{default_json}]: ").strip() or default_json
-                    try:
-                        dump_db_to_json(db_name, out_path)
-                        print(f"Exported '{db_name}' → '{out_path}'")
-                    except Exception as e:
-                        print(f"Export failed: {e}")
+                    export_db_to_json_interactive(db_name)
 
                 elif choice == RESTORE_FROM_JSON:
                     in_path = input("\nInput JSON path [database_dump.json]: ").strip() or "database_dump.json"
@@ -243,12 +238,7 @@ def main():
                         print(f"Round-trip test error: {e}")
 
                 elif choice == EXPORT_TO_CSV:
-                    out_dir_default = "csv_exports"
-                    out_dir = input(f"\nOutput folder for CSVs [{out_dir_default}]: ").strip() or out_dir_default
-                    try:
-                        export_db_to_csv(out_dir)
-                    except Exception as e:
-                        print(f"CSV export failed: {e}")
+                    export_db_to_csv_interactive()
 
                 elif choice == EXIT:
                     print("Exiting script.")
