@@ -230,7 +230,7 @@ def handle_show_restore_instructions(db_name: str):
 1) Choose **23: Exit** to close the database.
 
 2) In the Terminal run:
-   python -m database.app.db_json_bridge restore database_dump.json IRDS_requirements --overwrite
+   python -m database.dataman.db_json_bridge restore database_dump.json IRDS_requirements.db --overwrite
 
 3) Start the app again in the Terminal:
    python -m database.app.run_database
