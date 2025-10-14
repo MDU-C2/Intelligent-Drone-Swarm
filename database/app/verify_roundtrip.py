@@ -9,7 +9,7 @@ from __future__ import annotations
 import os
 import sys
 import tempfile
-import pathlib
+from pathlib import Path
 import base64
 from typing import Any, Dict, List, Tuple
 
@@ -63,7 +63,8 @@ def _sorted_rows(rows: List[Dict[str, Any]], key_cols: List[str]) -> List[Dict[s
 
 
 def main():
-    db_name_file = pathlib.Path("db_name.txt")
+    #db_name_file = pathlib.Path("db_name.txt")
+    db_name_file = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
     if not db_name_file.exists():
         print("ERROR: db_name.txt not found; create it with your .db path.")
         sys.exit(2)
