@@ -7,6 +7,7 @@ import prompts
 from db_utilities import db_utilities
 from db_json_bridge import dump_db_to_json, restore_db_from_json
 from verify_roundtrip import run_roundtrip_check
+from export_db_to_csv import export_db_to_csv
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -30,7 +31,8 @@ DELETE_DB_ROW = "18"
 EXPORT_TO_JSON = "19"
 RESTORE_FROM_JSON = "20"
 VERIFY_ROUNDTRIP = "21"
-EXIT = "22"
+EXPORT_TO_CSV = "22"
+EXIT = "23"
 
 def main():
     with open("db_name.txt", "r") as f:
@@ -63,9 +65,10 @@ def main():
             print("19: Export DB → JSON")
             print("20: Restore JSON → DB")
             print("21: Verify JSON round-trip")
-            print("22: Exit")
+            print("22: Export DB → CSV")  # ⬅️ NEW
+            print("23: Exit")             # ⬅️ shifted
 
-            choice = input("Enter choice (1-22): ")
+            choice = input("Enter choice (1-23): ")
 
             try:
                 if choice == INSERT_GOAL:
@@ -172,14 +175,6 @@ def main():
                     else:
                         print("Connection cancelled.")
 
-                elif choice == INSERT_QUALITY_REQ:
-                    data = prompts.prompt_quality_requirements()
-                    if data:
-                        inserter.insert_quality_requirements(**data)
-                        print("Quality requirement inserted successfully!")
-                    else:
-                        print("Insertion cancelled.")
-
                 elif choice == INSERT_ID_GLOSSARY:
                     data = prompts.prompt_id_glossary()
                     if data:
@@ -198,12 +193,12 @@ def main():
                     other.interactive_search()
 
                 elif choice == UPDATE_DB_ROW:
-                        data = prompts.prompt_update_row()
-                        if data:
-                            affected = other.update_row(**data)
-                            print("Row updated successfully!" if affected else "No rows matched your criteria.")
-                        else:
-                            print("Update cancelled.")
+                    data = prompts.prompt_update_row()
+                    if data:
+                        affected = other.update_row(**data)
+                        print("Row updated successfully!" if affected else "No rows matched your criteria.")
+                    else:
+                        print("Update cancelled.")
 
                 elif choice == DELETE_DB_ROW:
                     data = prompts.prompt_delete_row()
@@ -216,7 +211,6 @@ def main():
                         print("Deletion cancelled.")
                 
                 elif choice == EXPORT_TO_JSON:
-                    # use the db currently pointed to by db_name.txt
                     default_json = "database_dump.json"
                     out_path = input(f"\nOutput JSON path [{default_json}]: ").strip() or default_json
                     try:
@@ -241,10 +235,17 @@ def main():
                         run_roundtrip_check()
                         print("JSON round-trip test PASSED")
                     except SystemExit as se:
-                        # verify_roundtrip.py raises SystemExit on mismatches
                         print(f"Round-trip test FAILED: {se}")
                     except Exception as e:
                         print(f"Round-trip test error: {e}")
+
+                elif choice == EXPORT_TO_CSV:
+                    out_dir_default = "csv_exports"
+                    out_dir = input(f"\nOutput folder for CSVs [{out_dir_default}]: ").strip() or out_dir_default
+                    try:
+                        export_db_to_csv(out_dir)
+                    except Exception as e:
+                        print(f"CSV export failed: {e}")
 
                 elif choice == EXIT:
                     print("Exiting script.")
