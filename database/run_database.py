@@ -34,6 +34,9 @@ VERIFY_ROUNDTRIP = "21"
 EXPORT_TO_CSV = "22"
 EXIT = "23"
 
+def wait_for_enter():
+    input("\nPress ENTER to return to the menu...")
+
 def main():
     with open("db_name.txt", "r") as f:
         db_name = f.read().strip()
@@ -78,6 +81,7 @@ def main():
                         print("Goal inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_DRONE_SWARM_REQ:
                     data = prompts.prompt_drone_swarm_requirement()
@@ -86,6 +90,7 @@ def main():
                         print("Drone Swarm Requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_SYS_REQ:
                     data = prompts.prompt_system_requirement()
@@ -94,6 +99,7 @@ def main():
                         print("System Requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_SUBSYS_REQ:
                     data = prompts.prompt_subsystem_requirement()
@@ -102,6 +108,7 @@ def main():
                         print("Subsystem Requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_ITEM:
                     data = prompts.prompt_item()
@@ -110,6 +117,7 @@ def main():
                         print("Item inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_DOCUMENT:
                     data = prompts.prompt_document()
@@ -118,6 +126,7 @@ def main():
                         print("Document inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_VV_METHOD:
                     data = prompts.prompt_vv_method()
@@ -126,6 +135,7 @@ def main():
                         print("V&V Method inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_QUALITY_REQ:
                     data = prompts.prompt_quality_requirements()
@@ -134,6 +144,7 @@ def main():
                         print("Quality requirement inserted successfully!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_GOAL_CHILDREN:
                     data = prompts.prompt_goal_children()
@@ -142,6 +153,7 @@ def main():
                         print("Successfully connected Drone Swarm Requirement to Goal!")
                     else:
                         print("Connection cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_SWARM_REQ_CHILDREN:
                     data = prompts.prompt_swarm_req_children()
@@ -150,6 +162,7 @@ def main():
                         print("Successfully connected System Requirement to Drone Swarm Requirement!")
                     else:
                         print("Connection cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_SYSREQ_CHILDREN:
                     data = prompts.prompt_sysreq_children()
@@ -158,6 +171,7 @@ def main():
                         print("Successfully connected System Requirement to Subsystem Requirement!")
                     else:
                         print("Connection cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_SUBSYS_JOIN_ITEM:
                     data = prompts.prompt_subsys_join_item()
@@ -166,6 +180,7 @@ def main():
                         print("Successfully connected Item to Subsystem Requirement!")
                     else:
                         print("Connection cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_V_JOIN_DOCS:
                     data = prompts.prompt_V_join_documents()
@@ -174,6 +189,7 @@ def main():
                         print("Successfully connected Document to V&V Method!")
                     else:
                         print("Connection cancelled.")
+                    wait_for_enter()
 
                 elif choice == INSERT_ID_GLOSSARY:
                     data = prompts.prompt_id_glossary()
@@ -182,6 +198,7 @@ def main():
                         print("ID successfully inserted to ID Glossary!")
                     else:
                         print("Insertion cancelled.")
+                    wait_for_enter()
 
                 elif choice == PLOT_TREE:
                     try:
@@ -191,6 +208,7 @@ def main():
 
                 elif choice == SEARCH_DB:
                     other.interactive_search()
+                    wait_for_enter()
 
                 elif choice == UPDATE_DB_ROW:
                     data = prompts.prompt_update_row()
@@ -199,6 +217,7 @@ def main():
                         print("Row updated successfully!" if affected else "No rows matched your criteria.")
                     else:
                         print("Update cancelled.")
+                    wait_for_enter()
 
                 elif choice == DELETE_DB_ROW:
                     data = prompts.prompt_delete_row()
@@ -209,6 +228,7 @@ def main():
                         print("Row deleted successfully!" if affected else "No rows matched your criteria.")
                     else:
                         print("Deletion cancelled.")
+                    wait_for_enter()
                 
                 elif choice == EXPORT_TO_JSON:
                     default_json = "database_dump.json"
@@ -218,6 +238,7 @@ def main():
                         print(f"Exported '{db_name}' → '{out_path}'")
                     except Exception as e:
                         print(f"Export failed: {e}")
+                    wait_for_enter()
 
                 elif choice == RESTORE_FROM_JSON:
                     in_path = input("\nInput JSON path [database_dump.json]: ").strip() or "database_dump.json"
@@ -228,6 +249,7 @@ def main():
                         print(f"Restored '{target_db}' from '{in_path}' (overwrite={overwrite})")
                     except Exception as e:
                         print(f"Restore failed: {e}")
+                    wait_for_enter()
 
                 elif choice == VERIFY_ROUNDTRIP:
                     print("\n→ Running round-trip verification (dump → restore → compare)…")
@@ -238,6 +260,7 @@ def main():
                         print(f"Round-trip test FAILED: {se}")
                     except Exception as e:
                         print(f"Round-trip test error: {e}")
+                    wait_for_enter()
 
                 elif choice == EXPORT_TO_CSV:
                     out_dir_default = "csv_exports"
@@ -246,6 +269,7 @@ def main():
                         export_db_to_csv(out_dir)
                     except Exception as e:
                         print(f"CSV export failed: {e}")
+                    wait_for_enter()
 
                 elif choice == EXIT:
                     print("Exiting script.")
