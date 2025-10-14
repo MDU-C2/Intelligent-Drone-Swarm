@@ -17,6 +17,7 @@ from typing import Any, Dict, List, Tuple
 
 from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
 from ..core.connect_database import connect_database
+from ..app.paths import DB_NAME_TXT
 
 
 def _list_user_tables(cur) -> List[str]:
@@ -73,11 +74,10 @@ def _sorted_rows(rows: List[Dict[str, Any]], key_cols: List[str]) -> List[Dict[s
 
 
 def test_roundtrip_equivalence(tmp_path: pathlib.Path):
-    # Resolve original DB (project keeps active db path in db_name.txt)
-    db_name_file = pathlib.Path("db_name.txt")
-    assert db_name_file.exists(), "db_name.txt not found; create it with your .db path."
-    original_db = db_name_file.read_text().strip()
-    assert os.path.exists(original_db), f"Original DB not found at: {original_db}"
+    # Resolve original DB via centralized path file
+    assert DB_NAME_TXT.exists(), f"{DB_NAME_TXT} not found — run setup_database.py first."
+    original_db = DB_NAME_TXT.read_text().strip()
+    assert os.path.exists(original_db), f"Active DB not found at: {original_db}"
 
     out_json = tmp_path / "dump.json"
     restored_db = tmp_path / "restored.db"
