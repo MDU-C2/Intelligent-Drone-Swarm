@@ -158,9 +158,9 @@ def restore_db_from_json(db_path: str, json_path: str, overwrite: bool = False) 
             rows = info["rows"]
 
             if t == "system_requirements" and "parent_id" in cols:
-                _phase_insert_self_ref(db.cursor, t, cols, rows, parent_col="parent_id")
+                _phase_insert_self_ref(db.cursor, t, cols, rows, parent_col="parent_id", id_col="sys_req_id")
             elif t == "subsystem_requirements" and "parent_id" in cols:
-                _phase_insert_self_ref(db.cursor, t, cols, rows, parent_col="parent_id")
+                _phase_insert_self_ref(db.cursor, t, cols, rows, parent_col="parent_id", id_col="sub_req_id")
             else:
                 _insert_rows(db.cursor, t, cols, rows)
 
