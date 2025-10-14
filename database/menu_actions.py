@@ -9,6 +9,7 @@ from safe_restore import safe_restore_from_json
 from verify_roundtrip import run_roundtrip_check
 import plot_tree
 import prompts
+from delete_preview import preview_delete, print_preview, perform_delete
 
 def handle_insert_goal(inserter):
     data = prompts.prompt_goal()
@@ -171,3 +172,45 @@ def handle_verify_roundtrip():
         print(f"Round-trip test FAILED: {se}")
     except Exception as e:
         print(f"Round-trip test error: {e}")
+
+def handle_delete_with_preview():
+    print("\nDelete with preview:")
+    print("Select entity type:")
+    print("  1) Goal                (goals.goal_id)")
+    print("  2) Swarm requirement   (drone_swarm_requirements.swarm_req_id)")
+    print("  3) System requirement  (system_requirements.sys_req_id)")
+    print("  4) Subsystem req       (subsystem_requirements.sub_req_id)")
+    print("  5) V&V method          (test_and_verification.method_id)")
+    choice = input("Enter 1-5: ").strip()
+
+    mapping = {
+        "1": ("goal", "Goal ID"),
+        "2": ("swarm", "Swarm Req ID"),
+        "3": ("system", "System Req ID"),
+        "4": ("subsystem", "Sub Req ID"),
+        "5": ("method", "Method ID"),
+    }
+    if choice not in mapping:
+        print("Invalid choice.")
+        return
+
+    entity_type, label = mapping[choice]
+    entity_id = input(f"Enter {label}: ").strip()
+    if not entity_id:
+        print("Cancelled.")
+        return
+
+    try:
+        p = preview_delete(entity_type, entity_id)
+        print_preview(p)
+        confirm = input(f"\nType the exact ID ({entity_id}) to CONFIRM delete, or press ENTER to cancel: ").strip()
+        if confirm != entity_id:
+            print("Cancelled.")
+            return
+        deleted = perform_delete(p)
+        if deleted == 1:
+            print("Deleted. (Linked rows removed via CASCADE, children detached via SET NULL.)")
+        else:
+            print("⚠️ Nothing deleted (ID not found).")
+    except Exception as e:
+        print(f"Delete failed: {e}")
