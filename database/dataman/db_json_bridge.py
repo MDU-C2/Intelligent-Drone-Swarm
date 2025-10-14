@@ -11,8 +11,8 @@ from __future__ import annotations
 import json, base64, os, datetime
 from typing import Any, Dict, List
 
-from connect_database import connect_database         # enforces PRAGMA foreign_keys=ON
-from create_tables import create_tables               # canonical schema builder
+from ..core.connect_database import connect_database         # enforces PRAGMA foreign_keys=ON
+from ..core.create_tables import create_tables               # canonical schema builder
 
 
 # ---------- helpers ----------
