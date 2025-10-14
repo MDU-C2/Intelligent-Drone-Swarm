@@ -1,7 +1,7 @@
 # prompts.py
 
 import sqlite3
-from .paths import DB_NAME_TXT
+from database.app.paths import DB_NAME_TXT
 
 def prompt_input(prompt_text, optional=False):
     """Helper to allow typing 'exit' to return to menu"""
