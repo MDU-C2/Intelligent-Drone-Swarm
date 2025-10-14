@@ -8,6 +8,7 @@ Used by run_database.py when user chooses "Restore JSON → DB".
 import os
 import uuid
 from ..dataman.db_json_bridge import restore_db_from_json
+from database.app.paths import DB_NAME_TXT  # ← centralized path to db_name.txt
 
 
 def safe_restore_from_json(current_db: str, in_path: str, target_db: str, overwrite: bool) -> str:
@@ -28,11 +29,10 @@ def safe_restore_from_json(current_db: str, in_path: str, target_db: str, overwr
             print(f"       → {new_db}")
             restore_db_from_json(new_db, in_path, overwrite=True)
 
-            with open("db_name.txt", "w", encoding="utf-8") as f:
-                f.write(new_db)
+            DB_NAME_TXT.write_text(new_db, encoding="utf-8")  # ← use centralized path
 
             print(f"\nRestored to '{new_db}' and updated db_name.txt.")
-            print("The app will now exit to release the old file. Re-run run_database.py to use the restored DB.")
+            print("The app will now exit to release the old file. Re-run: python -m database.app.run_database")
             return "exit"
 
         else:
@@ -43,8 +43,7 @@ def safe_restore_from_json(current_db: str, in_path: str, target_db: str, overwr
             if target_db != current_db:
                 use_now = input(f"\nSwitch to '{target_db}' now? (y/N): ").strip().lower() == "y"
                 if use_now:
-                    with open("db_name.txt", "w", encoding="utf-8") as f:
-                        f.write(target_db)
+                    DB_NAME_TXT.write_text(target_db, encoding="utf-8")  # ← use centralized path
                     print("✅ Updated db_name.txt. The app will exit; restart to use the new DB.")
                     return "exit"
 
