@@ -3,8 +3,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from connect_database import connect_database
-from create_tables import create_tables
+from pathlib import Path
+from ..core.connect_database import connect_database
+from ..core.create_tables import create_tables
 
 def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
     """Hierarchical layout for a tree (or DAG)."""
@@ -33,8 +34,9 @@ def build_graph(include_methods=True, include_docs=True):
     """Builds the full directed graph from database relationships with type info."""
     G = nx.DiGraph()
 
-    with open("db_name.txt") as f:
-        db_name = f.read().strip() 
+    DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+    with open(DB_NAME_PATH) as f:
+        db_name = f.read().strip()
 
     with connect_database(db_name) as db:
         tables = create_tables(db.cursor)
