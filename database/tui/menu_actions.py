@@ -221,8 +221,6 @@ def handle_delete_with_preview():
     except Exception as e:
         print(f"Delete failed: {e}")
 
-# menu_actions.py
-
 def handle_show_restore_instructions(db_name: str):
     print(rf"""
 ================  Restore JSON → DB  ================
