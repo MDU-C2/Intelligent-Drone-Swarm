@@ -8,11 +8,9 @@ Assumes your updated schema:
 - verification_method/method_id uses ON DELETE SET NULL
 """
 
-from pathlib import Path
 from ..core.connect_database import connect_database
 from typing import Dict, Tuple, List
-
-DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
+from database.app.paths import DB_NAME_TXT
 
 def _fetch_one(cur, sql: str, params=()) -> int:
     cur.execute(sql, params)
@@ -117,8 +115,7 @@ def preview_delete(entity_type: str, entity_id: str) -> Dict:
     """
     entity_type: one of 'goal','swarm','system','subsystem','method'
     """
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    db_name = DB_NAME_TXT.read_text().strip()
     with connect_database(db_name) as db:
         if entity_type == "goal":
             return preview_goal(db.cursor, entity_id)
@@ -181,8 +178,7 @@ def preview_delete(entity_type: str, entity_id: str) -> Dict:
     """
     entity_type: 'goal'|'swarm'|'system'|'subsystem'|'method'|'document'|'item'|'quality'
     """
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    db_name = DB_NAME_TXT.read_text().strip()
     with connect_database(db_name) as db:
         if entity_type == "goal":
             return preview_goal(db.cursor, entity_id)
@@ -209,8 +205,7 @@ def perform_delete(preview: Dict) -> int:
     Returns number of core rows deleted (0 or 1). Cascades happen automatically.
     """
     table, id_col, entity_id = preview["entity"]
-    with open(DB_NAME_PATH) as f:
-        db_name = f.read().strip()
+    db_name = DB_NAME_TXT.read_text().strip()
     with connect_database(db_name) as db:
         db.cursor.execute(f"DELETE FROM {table} WHERE {id_col} = ?", (entity_id,))
         return db.cursor.rowcount
