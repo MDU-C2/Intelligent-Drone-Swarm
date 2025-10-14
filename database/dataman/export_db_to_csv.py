@@ -1,15 +1,12 @@
 # export_db_to_csv.py
 """
 Export all user tables from the active SQLite database to CSV files.
-
-Usage:
-    python export_db_to_csv.py
 """
 
 import csv
 import os
-from pathlib import Path
 from ..core.connect_database import connect_database
+from ..app.paths import DB_NAME_TXT, CSV_DIR
 
 
 def _list_user_tables(cursor):
@@ -21,16 +18,16 @@ def _list_user_tables(cursor):
     return [r[0] for r in cursor.fetchall()]
 
 
-def export_db_to_csv(output_dir="csv_exports"):
-    """Export every user table in the active DB (from db_name.txt) to CSVs."""
-    #db_name_file = pathlib.Path("db_name.txt")
-    db_name_file = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
-    if not db_name_file.exists():
-        raise FileNotFoundError("db_name.txt not found — run setup_database.py first.")
-    db_path = db_name_file.read_text().strip()
+def export_db_to_csv(output_dir: str | None = None):
+    """Export every user table in the active DB (from database/data/db_name.txt) to CSVs."""
+    if not DB_NAME_TXT.exists():
+        raise FileNotFoundError(f"{DB_NAME_TXT} not found — run setup_database.py first.")
+    db_path = DB_NAME_TXT.read_text().strip()
     if not os.path.exists(db_path):
         raise FileNotFoundError(f"Database not found: {db_path}")
 
+    if output_dir is None:
+        output_dir = str(CSV_DIR)
     os.makedirs(output_dir, exist_ok=True)
 
     with connect_database(db_path) as db:
@@ -48,11 +45,11 @@ def export_db_to_csv(output_dir="csv_exports"):
 
             out_path = os.path.join(output_dir, f"{table}.csv")
             with open(out_path, "w", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f, delimiter=';')
+                writer = csv.writer(f, delimiter=';')  # semicolon delimiter
                 writer.writerow(columns)
                 writer.writerows(rows)
 
-            print(f"Exported {table} → {out_path}")
+            print(f"✅ Exported {table} → {out_path}")
 
     print(f"\nAll tables exported successfully to folder: {output_dir}")
 
