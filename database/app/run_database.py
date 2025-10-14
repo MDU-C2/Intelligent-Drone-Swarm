@@ -1,13 +1,11 @@
 # run_database.py
 
-from pathlib import Path
+from database.app.paths import DB_NAME_TXT
 from ..core.connect_database import connect_database
 from ..core.insert_functions import insert_functions
 from ..core.db_utilities import db_utilities
 import database.tui.menu_actions as menu
 from ..tui.tui_helpers import wait_for_enter
-
-DB_NAME_PATH = Path(__file__).resolve().parents[1] / "data" / "db_name.txt"
 
 # MENU CHOICE CONSTANTS
 INSERT_GOAL = "1"
@@ -35,8 +33,7 @@ EXPORT_TO_CSV = "22"
 EXIT = "23"
 
 def main():
-    with open(DB_NAME_PATH, "r") as f:
-        db_name = f.read().strip()
+    db_name = DB_NAME_TXT.read_text().strip()
 
     with connect_database(db_name) as db:
         inserter = insert_functions(db.cursor)
