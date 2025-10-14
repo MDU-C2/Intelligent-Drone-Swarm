@@ -10,16 +10,14 @@ def export_db_to_json_interactive(db_name: str) -> None:
         database/data/database_dump.json
     """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DATA_DIR / "database_dump.json"          # fixed
-    dump_db_to_json(db_name, str(out_path))
-    print(f"✅ Exported JSON → {out_path}")
+    dump_db_to_json(db_name, str(JSON_DUMP))
+    print(f"✅ Exported JSON → {JSON_DUMP}")
 
 def export_db_to_csv_interactive() -> None:
     """
     Export all tables → CSVs into a fixed folder:
         database/data/csv_exports/
     """
-    out_dir = DATA_DIR / "csv_exports"                  # fixed
-    out_dir.mkdir(parents=True, exist_ok=True)
-    export_db_to_csv(str(out_dir))  # your writer uses delimiter=';'
-    print(f"✅ Exported CSVs → {out_dir}")
+    CSV_DIR.mkdir(parents=True, exist_ok=True)
+    export_db_to_csv(str(CSV_DIR))  # delimiter=';' already set in your exporter
+    print(f"✅ Exported CSVs → {CSV_DIR}")
