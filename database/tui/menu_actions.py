@@ -229,7 +229,7 @@ def handle_show_restore_instructions():
     db_path = Path(DB_NAME_TXT.read_text().strip())
     db_file = db_path.name
     print(rf"""
-================  Restore JSON → DB  ================
+================  Restore JSON → DB  ==================================
 
 1) Choose **23: Exit** to close the database.
 
