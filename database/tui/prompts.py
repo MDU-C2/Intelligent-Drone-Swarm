@@ -51,7 +51,6 @@ def prompt_goal():
         "method_id": method_id,
     }
 
-
 def prompt_drone_swarm_requirement():
     print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
@@ -92,7 +91,7 @@ def prompt_system_requirement():
 
     data = {
         "parent_id": prompt_input("PARENT System Req ID: "),
-        "sys_req_id": prompt_input("System Req ID: "),
+        "sys_req_id": prompt_input("System Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
         "effect": prompt_input("Effect: "),
@@ -121,7 +120,7 @@ def prompt_subsystem_requirement():
 
     data = {
         "parent_id": prompt_input("PARENT Subsystem Req ID (optional): ", optional=True),
-        "sub_req_id": prompt_input("Subsystem Req ID: "),
+        "sub_req_id": prompt_input("Subsystem Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
         "effect": prompt_input("Effect: "),
@@ -178,7 +177,7 @@ def prompt_V_join_documents():
 
 def prompt_quality_requirements():
     print("\nInsert quality requirement (type 'exit' to cancel):")
-    quality_rec_id = prompt_input("Quality Requirement ID: ")
+    quality_rec_id = prompt_input("Quality Req ID (leave blank for auto): ", optional=True)
     if quality_rec_id == "EXIT": return None
     requirement = prompt_input("Requirement description: ")
     if requirement == "EXIT": return None
@@ -198,24 +197,24 @@ def prompt_id_glossary():
 
 def prompt_item():
     print("\nInsert Item (type 'exit' to cancel)")
-    item_id = prompt_input("Item ID: ")
-    if item_id is None or item_id == "EXIT":
+    item_id = prompt_input("Item ID (leave blank for auto): ", optional=True)
+    if item_id == "EXIT":
         return None
     item_name = prompt_input("Item Name: ")
-    if item_name is None or item_name == "EXIT":
+    if item_name == "EXIT":
         return None
     return {"item_id": item_id, "item_name": item_name}
 
 def prompt_document():
     print("\nInsert Document (type 'exit' to cancel)")
-    doc_id = prompt_input("Doc ID: ")
-    if doc_id is None or doc_id == "EXIT":
+    doc_id = prompt_input("Document ID (leave blank for auto): ", optional=True)
+    if doc_id == "EXIT":
         return None
     title = prompt_input("Title: ")
-    if title is None or title == "EXIT":
+    if title == "EXIT":
         return None
     description = prompt_input("Description: ")
-    if description is None or description == "EXIT":
+    if description == "EXIT":
         return None
     version_raw = prompt_input("Version (optional integer): ", optional=True)
     if version_raw == "EXIT":
@@ -236,14 +235,14 @@ def prompt_document():
 
 def prompt_vv_method():
     print("\nInsert V&V Method (type 'exit' to cancel)")
-    method_id = prompt_input("Method ID: ")
-    if method_id is None or method_id == "EXIT":
+    method_id = prompt_input("Method ID (leave blank for auto): ", optional=True)
+    if method_id == "EXIT":
         return None
     description = prompt_input("Description: ")
-    if description is None or description == "EXIT":
+    if description == "EXIT":
         return None
     method_type = prompt_input("Method Type (Inspection/Analysis/Test): ")
-    if method_type is None or method_type == "EXIT":
+    if method_type == "EXIT":
         return None
     return {"method_id": method_id, "description": description, "method_type": method_type}
 
