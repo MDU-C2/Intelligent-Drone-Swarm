@@ -165,7 +165,7 @@ def handle_restore_json() -> dict:
     in_path = input("\nInput JSON path [database/data/database_dump.json]: ").strip() or str(JSON_DUMP)
     target_db = input(f"Output DB path [{Path(current_db).name}]: ").strip() or current_db
     overwrite = (input(f"Overwrite '{target_db}' if exists? (y/N): ").strip().lower() == "y")
-    return safe_restore_from_json(current_db, in_path, target_db, overwrite)
+    return safe_restore_from_json(current_db, in_path, target_db, overwrite) # type: ignore
 
 def handle_verify_roundtrip():
     print("\n→ Running round-trip verification (dump → restore → compare)…")
