@@ -37,11 +37,11 @@ def export_db_to_csv(output_dir: str | None = None):
             return
 
         for table in tables:
-            db.cursor.execute(f"PRAGMA table_info({table})")
-            columns = [col[1] for col in db.cursor.fetchall()]
+            db.cursor.execute(f"PRAGMA table_info({table})") # type: ignore
+            columns = [col[1] for col in db.cursor.fetchall()] # type: ignore
 
-            db.cursor.execute(f"SELECT * FROM {table}")
-            rows = db.cursor.fetchall()
+            db.cursor.execute(f"SELECT * FROM {table}") # type: ignore
+            rows = db.cursor.fetchall() # type: ignore
 
             out_path = os.path.join(output_dir, f"{table}.csv")
             with open(out_path, "w", newline="", encoding="utf-8") as f:
