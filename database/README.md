@@ -2,6 +2,9 @@
 
 This README walks you through setting up, using, exporting, and verifying our SQLite requirements database — even if you’ve never touched SQLite or Python before.
 
+### NOTE
+Our actual database is IRDS_requirements.db located in the branch `feature/database`
+
 ---
 
 ## 0) What’s in the database folder?
@@ -59,13 +62,13 @@ python -m database.app.run_database
 (still on your own branch in VS Code)
 1. In the Terminal run `python -m database.app.run_database`
 2. Choose **Export DB → JSON**
-3. Exit `run_database`
-4. Delete `local.db` and keep `database_dump.json`
-5. Commit your changes
-6. Push your changes to GitHub and open a Pull Request requesting to merge your branch to `feature/database`
-7. If there are no conflicts you can go ahead and squash merge. But if there are conflicts ask for help from the Chief Engineer ;)
+3. Exit
+4. Commit your changes
+5. Push your changes to GitHub and open a Pull Request requesting to merge your branch to `feature/database`
+6. If there are no conflicts you can go ahead and squash merge. But if there are conflicts ask for help from the Chief Engineer ;)
+(Note: Conflicts on `local.db` has no impact on our actual database, but conflicts on `database_dump.json` does)
 
-**Note:** The Chief Engineer and/or the Requirements Manager are in charge of restoring the `database_dump.json` to `IRDS_requirements.db` in the `feature/database` branch :)
+**Note:** The Chief Engineer and/or the Requirements Manager are in charge of inserting `database_dump.json` to `IRDS_requirements.db` in the `feature/database` branch :)
 
 ---
 
