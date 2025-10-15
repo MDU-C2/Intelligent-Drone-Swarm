@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
-from database.app.paths import DB_NAME_TXT, PLOTS_DIR
+from database.core.paths import DB_NAME_TXT, PLOTS_DIR
 
 
 def hierarchy_pos(G, root=None, width=1., vert_gap=0.2, vert_loc=0, xcenter=0.5):
