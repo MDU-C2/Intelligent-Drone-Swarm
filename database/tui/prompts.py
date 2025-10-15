@@ -15,18 +15,42 @@ def prompt_input(prompt_text, optional=False):
 # ----- PROMPTS FOR ALL TABLES -----
 def prompt_goal():
     print("\nEnter new goal (type 'exit' to cancel):")
-    data = {
-        "goal_id": prompt_input("Goal ID: "),
-        "goal_description": prompt_input("Description: "),
-        "stakeholder": prompt_input("Stakeholder: "),
-        "origin": prompt_input("Origin: "),
-        "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
-        "rationale": prompt_input("Rationale: "),
-        "satisfaction_status": prompt_input("Satisfaction status (Pending/Not satisfied/Satisfied): "),
-        "method_id": prompt_input("Method ID (optional): ", optional=True)
+
+    goal_id = prompt_input("Goal ID: ")
+    if goal_id == "EXIT": return None
+
+    goal_description = prompt_input("Description: ")
+    if goal_description == "EXIT": return None
+
+    stakeholder = prompt_input("Stakeholder: ")
+    if stakeholder == "EXIT": return None
+
+    origin = prompt_input("Origin: ")
+    if origin == "EXIT": return None
+
+    priority = prompt_input("Priority (Key/Mandatory/Optional): ")
+    if priority == "EXIT": return None
+
+    rationale = prompt_input("Rationale: ")
+    if rationale == "EXIT": return None
+
+    satisfaction_status = prompt_input("Satisfaction status (Pending/Not satisfied/Satisfied): ")
+    if satisfaction_status == "EXIT": return None
+
+    method_id = prompt_input("Method ID (optional): ", optional=True)
+    if method_id == "EXIT": return None
+
+    return {
+        "goal_id": goal_id,
+        "goal_description": goal_description,
+        "stakeholder": stakeholder,
+        "origin": origin,
+        "priority": priority,
+        "rationale": rationale,
+        "satisfaction_status": satisfaction_status,
+        "method_id": method_id,
     }
-    if "EXIT" in data.values(): return None
-    return data
+
 
 def prompt_drone_swarm_requirement():
     print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
