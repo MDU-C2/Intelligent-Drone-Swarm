@@ -73,7 +73,6 @@ Why JSON? It produces clean diffs in pull requests and **preserves relationships
 
 1. Run `python -m database.app.run_database`
 2. Choose **Export DB → JSON**
-3. Pick an output path (default `database_dump.json`)
 
 The JSON contains:
 
@@ -85,12 +84,12 @@ Commit the JSON to GitHub to review changes over time.
 
 ---
 
-## 5) Restore JSON → DB (to get the latest data)
+## 5) How to restore JSON → DB (to get the latest data)
 
 1. Run `python -m database.app.run_database`
 2. Choose **Restore JSON → DB**
-3. Provide the JSON path and the target DB path (press Enter to reuse the current DB)
-4. Choose whether to overwrite if it exists
+3. Follow the instructions
+4. The command you will be told to use is `python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/IRDS_requirements.db --overwrite`
 
 During restore:
 
