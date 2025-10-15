@@ -131,7 +131,8 @@ class db_utilities:
                 print("No tables found in the database.")
                 return
 
-            print("\nAvailable tables:")
+            print("\n================  SEARCH  ================")
+            print("Available tables:")
             for i, t in enumerate(tables, start=1):
                 print(f"{i}: {t}")
 
