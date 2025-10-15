@@ -4,7 +4,7 @@ from pathlib import Path
 
 from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
 from ..core.connect_database import connect_database
-from database.app.paths import DATA_DIR, DB_NAME_TXT, ROUNDTRIP_DUMP
+from database.core.paths import DATA_DIR, DB_NAME_TXT, ROUNDTRIP_DUMP
 
 def _read_active_db_path() -> Path:
     if not DB_NAME_TXT.exists():
