@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
-from database.app.paths import DATA_DIR, DB_NAME_TXT  # DATA_DIR = .../database/data ; DB_NAME_TXT = .../database/data/db_name.txt
+from database.core.paths import DATA_DIR, DB_NAME_TXT  # DATA_DIR = .../database/data ; DB_NAME_TXT = .../database/data/db_name.txt
 
 DEFAULT_DB_NAME = "testing.db"
 
