@@ -160,7 +160,7 @@ def prompt_sysreq_children():
     return {"sys_req_id": sys_req_id, "sub_req_id": sub_req_id}
 
 def prompt_subsys_join_item():
-    print("\nLink subsystem requirement and item (sys_join_item table (type 'exit' to cancel)):")
+    print("\nLink subsystem requirement and item (subsys_join_item table (type 'exit' to cancel)):")
     item_id = prompt_input("Item ID: ")
     if item_id == "EXIT": return None
     sub_req_id = prompt_input("Subsystem Req ID: ")
