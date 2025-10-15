@@ -63,13 +63,13 @@ def dump_db_to_json(db_path: str, json_path: str) -> None:
 
     with connect_database(db_path) as db:
         for t in _list_user_tables(db.cursor):
-            db.cursor.execute(
+            db.cursor.execute( # type: ignore
                 "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (t,)
             )
-            create_sql = (db.cursor.fetchone() or [None])[0]
+            create_sql = (db.cursor.fetchone() or [None])[0] # type: ignore
             cols = _list_columns(db.cursor, t)
-            db.cursor.execute(f"SELECT * FROM {t}")
-            rows = db.cursor.fetchall()
+            db.cursor.execute(f"SELECT * FROM {t}") # type: ignore
+            rows = db.cursor.fetchall() # type: ignore
             rows_as_dicts = [{c: _serialize_cell(v) for c, v in zip(cols, r)} for r in rows]
             payload["tables"][t] = {
                 "create_sql": create_sql,   # informational
