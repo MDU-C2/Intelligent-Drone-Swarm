@@ -35,34 +35,36 @@ python -m database.app.setup_database.py
 
 Follow the prompts:
 
-* Enter a name like `IRDS_requirements.db` (must end with `.db`).
+* Enter a name like `IRDS_requirements`.
 * If the file exists, you’ll be asked whether to overwrite.
 * The script writes the chosen name into `db_name.txt` and creates all tables.
 
-You should now see your `.db` file in the folder.
+You should now see your `.db` file in the `data` folder.
 
 ---
 
 ## 3) Start the interactive app
 
-Run the menu‑driven app:
+Open a Terminal in VS Code and run the menu‑driven app:
 
 ```bash
 python -m database.app.run_database
 ```
 
-You’ll see numbered actions like **Insert Goal**, **Insert System Requirement**, **Search**, **Export DB → JSON**, **Restore JSON → DB**, **Verify round‑trip**, **Plot tree**, etc. Type the number and follow the prompts. Type `exit` during a prompt to cancel and return to the main menu.
+You’ll see numbered actions like **Insert Goal**, **Insert System Requirement**, **Search**, **Export DB → JSON**, **Restore JSON → DB**, **Verify round‑trip**, **Plot tree**, etc. 
+Type the number and follow the prompts. 
+Type `exit` during a prompt to cancel and return to the main menu.
 
 ### Notes while inserting data
 
-* **Authors vs. Reviewers:** they must be different (the tool enforces this).
+* **Authors vs. Reviewers:** they must be different *(this is enforced in the code)*.
 * **Verification status:** if not `Pending`, you must supply a verification method ID that already exists.
 * Many fields use fixed choices (e.g., `Priority` is `Key/Mandatory/Optional`; statuses have limited options). Follow the on‑screen hints.
 
 ### Search, Update, Delete
 
 * **Search** lets you interactively pick a table/column and look for exact or partial matches.
-* **Update/Delete** walk you through choosing the table, the row by its ID, then the column/value.
+* **Update/Delete** walks you through choosing the table, the row by its ID, then the column/value.
 
 ---
 
@@ -70,6 +72,7 @@ You’ll see numbered actions like **Insert Goal**, **Insert System Requirement*
 
 Why JSON? It produces clean diffs in pull requests and **preserves relationships**.
 
+Open a Terminal in VS Code and:
 1. Run `python -m database.app.run_database`
 2. Choose **Export DB → JSON**
 
@@ -84,11 +87,11 @@ Commit the JSON to GitHub to review changes over time.
 ---
 
 ## 5) How to restore JSON → DB (to get the latest data)
-
+Open a Terminal in VS Code and: 
 1. Run `python -m database.app.run_database`
 2. Choose **Restore JSON → DB**
 3. Follow the instructions
-4. The command you will be told to use is `python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/IRDS_requirements.db --overwrite`
+(The command you will be told to use is `python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/IRDS_requirements.db --overwrite`)
 
 During restore:
 
@@ -163,7 +166,8 @@ database/
 │ ├── connect_database.py # Handles database connections
 │ ├── create_tables.py # Defines tables and foreign keys
 │ ├── insert_functions.py # Insert helpers for each table
-│ └── db_utilities.py # Shared database utility functions
+│ ├── db_utilities.py # Shared database utility functions
+│ └── paths.py # Paths used
 │
 ├── dataman/ # Import/export and backup management
 │ ├── db_json_bridge.py # Convert DB ↔ JSON
