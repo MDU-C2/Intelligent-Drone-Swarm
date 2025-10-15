@@ -12,7 +12,7 @@ class insert_functions:
             "drone_swarm_requirements": ("SW", 2),
             "system_requirements": ("SYS", 2),
             "subsystem_requirements": ("SS", 2),
-            "items": ("I", 2),
+            "item": ("I", 2),
             "test_and_verification": ("M", 2),
             "documents": ("D", 2),
             "quality_requirements": ("QR", 2)
@@ -137,7 +137,7 @@ class insert_functions:
 
     def insert_item(self, item_id, item_name):
         if not item_id:
-            item_id = self._next_id("items", "item_id")
+            item_id = self._next_id("item", "item_id")
         self.cursor.execute(
             """
             INSERT INTO item (item_id, item_name)
