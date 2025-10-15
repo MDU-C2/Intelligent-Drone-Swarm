@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-15T18:50:31Z",
+    "exported_at": "2025-10-15T18:57:35Z",
     "source_db": "IRDS_requirements.db"
   },
   "tables": {
@@ -63,7 +63,28 @@
         "satisfaction_status",
         "method_id"
       ],
-      "rows": []
+      "rows": [
+        {
+          "goal_id": "G-01",
+          "goal_description": "test1",
+          "stakeholder": "test1",
+          "origin": "test1",
+          "priority": "Key",
+          "rationale": "test1",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-02",
+          "goal_description": "test1",
+          "stakeholder": "test1",
+          "origin": "test1",
+          "priority": "Mandatory",
+          "rationale": "test1",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        }
+      ]
     },
     "id_glossary": {
       "create_sql": "CREATE TABLE id_glossary (\n            gloss_id INTEGER PRIMARY KEY AUTOINCREMENT,\n            prefix VARCHAR NOT NULL,\n            meaning VARCHAR NOT NULL  \n        )",
