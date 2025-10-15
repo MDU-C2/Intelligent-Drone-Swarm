@@ -16,8 +16,8 @@ class connect_database:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type:
-            self.conn.rollback()
+            self.conn.rollback() # type: ignore
         else:
-            self.conn.commit()
-        self.conn.close()
+            self.conn.commit() # type: ignore
+        self.conn.close() # type: ignore
         
