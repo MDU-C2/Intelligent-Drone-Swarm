@@ -6,7 +6,7 @@ Export all user tables from the active SQLite database to CSV files.
 import csv
 import os
 from ..core.connect_database import connect_database
-from database.app.paths import DB_NAME_TXT, CSV_DIR
+from database.core.paths import DB_NAME_TXT, CSV_DIR
 
 
 def _list_user_tables(cursor):
