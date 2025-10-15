@@ -19,8 +19,8 @@ Key scripts:
 
 ## 1) Prerequisites
 
-1. **Python 3.10+** installed (not 3.13 though)
-2. VS Code and the **SQLite** extension
+1. **Python 3.10+** installed *(not 3.13 though)*
+2. **VS Code** and the **SQLite** extension
 
 ---
 
@@ -30,7 +30,6 @@ This creates a database file and all required tables.
 Open a Terminal in VS Code:
 
 ```bash
-cd database
 python -m database.app.setup_database.py
 ```
 
