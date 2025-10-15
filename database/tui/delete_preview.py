@@ -111,7 +111,7 @@ def preview_method(cur, method_id: str) -> Dict:
     }
 
 
-def preview_delete(entity_type: str, entity_id: str) -> Dict:
+def preview_delete(entity_type: str, entity_id: str) -> Dict: # type: ignore
     """
     entity_type: one of 'goal','swarm','system','subsystem','method'
     """
@@ -207,8 +207,8 @@ def perform_delete(preview: Dict) -> int:
     table, id_col, entity_id = preview["entity"]
     db_name = DB_NAME_TXT.read_text().strip()
     with connect_database(db_name) as db:
-        db.cursor.execute(f"DELETE FROM {table} WHERE {id_col} = ?", (entity_id,))
-        return db.cursor.rowcount
+        db.cursor.execute(f"DELETE FROM {table} WHERE {id_col} = ?", (entity_id,)) # type: ignore
+        return db.cursor.rowcount # type: ignore
 
 
 def print_preview(p: Dict) -> None:
