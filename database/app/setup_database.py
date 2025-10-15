@@ -7,7 +7,7 @@ from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
 from database.core.paths import DATA_DIR, DB_NAME_TXT  # DATA_DIR = .../database/data ; DB_NAME_TXT = .../database/data/db_name.txt
 
-DEFAULT_DB_NAME = "testing.db"
+DEFAULT_DB_NAME = "local.db"
 
 def _sanitize_filename(name: str) -> str:
     """Ensure we only use a filename (strip any directories) and end with .db."""
@@ -21,7 +21,7 @@ def main():
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
     # Ask for DB filename (no directories). Always place it under data/
-    print(f"Enter database filename (no path) [{DEFAULT_DB_NAME}]: ", end="")
+    print(f"Enter database filename [press ENTER for {DEFAULT_DB_NAME}]: ", end="")
     user_in = input().strip() or DEFAULT_DB_NAME
     filename = _sanitize_filename(user_in)
     db_path = (DATA_DIR / filename).resolve()
