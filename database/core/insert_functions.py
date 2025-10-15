@@ -23,11 +23,13 @@ class insert_functions:
         """
         Mint the next ID like 'G-01', 'SYS-02', etc.
         Looks up prefix and padding width automatically from PREFIX_INFO.
-        Uses BEGIN IMMEDIATE to avoid two writers grabbing the same number.
+        Uses BEGIN IMMEDIATE to avoid two writers grabbing the same number,
+        but only if we're not already inside a transaction.
         """
         prefix, width = self.PREFIX_INFO.get(table, ("X", 2))
 
-        if self.conn:
+        # Only start a write lock if we're not already in a transaction.
+        if self.conn and not getattr(self.conn, "in_transaction", False):
             self.conn.execute("BEGIN IMMEDIATE")
 
         row = self.cursor.execute(
