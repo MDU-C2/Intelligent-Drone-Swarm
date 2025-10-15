@@ -16,7 +16,7 @@ def prompt_input(prompt_text, optional=False):
 def prompt_goal():
     print("\nEnter new goal (type 'exit' to cancel):")
 
-    goal_id = prompt_input("Goal ID: ")
+    goal_id = prompt_input("Goal ID (leave blank for auto): ", optional=True)
     if goal_id == "EXIT": return None
 
     goal_description = prompt_input("Description: ")
@@ -64,7 +64,7 @@ def prompt_drone_swarm_requirement():
     if verification_method == "EXIT": return None
 
     data = {
-        "swarm_req_id": prompt_input("Swarm Req ID: "),
+        "swarm_req_id": prompt_input("Swarm Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
         "effect": prompt_input("Effect: "),
