@@ -2,7 +2,7 @@
 
 from ..dataman.db_json_bridge import dump_db_to_json
 from ..dataman.export_db_to_csv import export_db_to_csv
-from database.app.paths import DATA_DIR, JSON_DUMP, CSV_DIR
+from database.core.paths import DATA_DIR, JSON_DUMP, CSV_DIR
 
 def export_db_to_json_interactive(db_name: str) -> None:
     """
