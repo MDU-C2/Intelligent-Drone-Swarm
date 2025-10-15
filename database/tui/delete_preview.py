@@ -72,14 +72,14 @@ def preview_system(cur, sys_req_id: str) -> Dict:
 def preview_subsystem(cur, sub_req_id: str) -> Dict:
     # CASCADE links
     syc = _fetch_list(cur, "SELECT id, sys_req_id FROM sysreq_children WHERE sub_req_id = ?", (sub_req_id,))
-    sji = _fetch_list(cur, "SELECT id, item_id FROM sys_join_item WHERE sub_req_id = ?", (sub_req_id,))
+    sji = _fetch_list(cur, "SELECT id, item_id FROM subsys_join_item WHERE sub_req_id = ?", (sub_req_id,))
     # SET NULL dependents
     det = _fetch_list(cur, "SELECT sub_req_id FROM subsystem_requirements WHERE parent_id = ?", (sub_req_id,))
     return {
         "entity": ("subsystem_requirements", "sub_req_id", sub_req_id),
         "cascade_links": {
             "sysreq_children": {"count": len(syc), "sample": syc[:10]},
-            "sys_join_item": {"count": len(sji), "sample": sji[:10]},
+            "subsys_join_item": {"count": len(sji), "sample": sji[:10]},
         },
         "detach": {
             "subsystem_requirements.children(parent_id)": {"count": len(det), "sample": det[:10]},
@@ -147,12 +147,12 @@ def preview_document(cur, doc_id: str) -> Dict:
 
 
 def preview_item(cur, item_id: str) -> Dict:
-    sji = _fetch_list(cur, "SELECT id, sub_req_id FROM sys_join_item WHERE item_id = ?", (item_id,))
+    sji = _fetch_list(cur, "SELECT id, sub_req_id FROM subsys_join_item WHERE item_id = ?", (item_id,))
     impacted_subsystems = sorted({s for (_id, s) in sji})
     return {
         "entity": ("item", "item_id", item_id),
         "cascade_links": {
-            "sys_join_item": {"count": len(sji), "sample": sji[:10]},
+            "subsys_join_item": {"count": len(sji), "sample": sji[:10]},
         },
         "detach": {},
         "set_null": {},

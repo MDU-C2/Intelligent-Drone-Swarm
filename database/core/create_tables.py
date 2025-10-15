@@ -143,7 +143,7 @@ class create_tables:
 
     def create_subsys_join_item_table(self):
         create_sql = """
-        CREATE TABLE sys_join_item (
+        CREATE TABLE subsys_join_item (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             item_id VARCHAR NOT NULL,
             sub_req_id VARCHAR UNIQUE NOT NULL,   
@@ -151,7 +151,7 @@ class create_tables:
             FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              
         )
         """
-        self._ensure("sys_join_item", create_sql)
+        self._ensure("subsys_join_item", create_sql)
 
     def create_item_table(self):
         create_sql = """

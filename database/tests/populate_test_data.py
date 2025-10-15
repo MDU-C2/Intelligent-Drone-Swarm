@@ -11,7 +11,7 @@ with connect_database(db_name) as db:
     tables = create_tables(db.cursor)
     tables.create_all_tables()
 
-    inserter = insert_functions(db.cursor)
+    inserter = insert_functions(db.cursor, db.conn)
 
     # ----- Documents -----
     # doc_id, title, description, file, version, author ('E.Z','C.N','Y.M.B','E.M','A.H')
