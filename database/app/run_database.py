@@ -37,7 +37,8 @@ def main():
     db_name = DB_NAME_TXT.read_text().strip()
 
     with connect_database(db_name) as db:
-        inserter = insert_functions(db.cursor)
+        # Pass both cursor and connection so ID generation can serialize writers.
+        inserter = insert_functions(db.cursor, db.conn)
         other = db_utilities(db.cursor)
 
         while True:
