@@ -1,6 +1,6 @@
 # run_database.py
 
-from database.app.paths import DB_NAME_TXT
+from database.core.paths import DB_NAME_TXT
 from ..core.connect_database import connect_database
 from ..core.insert_functions import insert_functions
 from ..core.db_utilities import db_utilities
