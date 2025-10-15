@@ -222,7 +222,7 @@ class insert_functions:
     def insert_subsys_join_item(self, item_id, sub_req_id):
         self.cursor.execute(
             """
-            INSERT INTO sys_join_item (item_id, sub_req_id)
+            INSERT INTO subsys_join_item (item_id, sub_req_id)
             VALUES (?,?)
             """,
             (item_id, sub_req_id)
