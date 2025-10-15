@@ -97,7 +97,7 @@ _BASE_ORDER = [
     "subsystem_requirements",     # self-referential via parent_id
     "V_join_documents",
     "sysreq_children",
-    "sys_join_item",
+    "subsys_join_item",
     "goal_children",
     "swarm_req_children",
 ]
