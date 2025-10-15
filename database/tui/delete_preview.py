@@ -10,7 +10,7 @@ Assumes your updated schema:
 
 from ..core.connect_database import connect_database
 from typing import Dict, Tuple, List
-from database.app.paths import DB_NAME_TXT
+from database.core.paths import DB_NAME_TXT
 
 def _fetch_one(cur, sql: str, params=()) -> int:
     cur.execute(sql, params)
