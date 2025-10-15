@@ -43,125 +43,145 @@ def build_graph(include_methods=True, include_docs=True):
         tables.create_all_tables()
 
         # goal -> swarm_req
-        db.cursor.execute("""
+        db.cursor.execute( # type: ignore
+            """
             SELECT goal_id, swarm_req_id FROM goal_children
             WHERE goal_id IS NOT NULL AND swarm_req_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
+            """
+            )
+        for parent, child in db.cursor.fetchall(): # type: ignore
             G.add_node(parent, type="goal_id")
             G.add_node(child, type="swarm_req_id")
             G.add_edge(parent, child)
 
         # swarm_req -> sys_req
-        db.cursor.execute("""
+        db.cursor.execute( # type: ignore
+            """
             SELECT swarm_req_id, sys_req_id FROM swarm_req_children
             WHERE swarm_req_id IS NOT NULL AND sys_req_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
+            """
+            )
+        for parent, child in db.cursor.fetchall(): # type: ignore
             G.add_node(parent, type="swarm_req_id")
             G.add_node(child, type="sys_req_id")
             G.add_edge(parent, child)
 
         # sys_req (parent -> child sys_req)
-        db.cursor.execute("""
+        db.cursor.execute( # type: ignore
+            """
             SELECT parent_id, sys_req_id FROM system_requirements
             WHERE parent_id IS NOT NULL AND sys_req_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
+            """
+            )
+        for parent, child in db.cursor.fetchall(): # type: ignore
             G.add_node(parent, type="sys_req_id")
             G.add_node(child, type="sys_req_id")
             G.add_edge(parent, child)
 
         # sys_req -> sub_req
-        db.cursor.execute("""
+        db.cursor.execute( # type: ignore
+            """
             SELECT sys_req_id, sub_req_id FROM sysreq_children
             WHERE sys_req_id IS NOT NULL AND sub_req_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
+            """
+            )
+        for parent, child in db.cursor.fetchall(): # type: ignore
             G.add_node(parent, type="sys_req_id")
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
         # subsys_req (parent -> child subsys_req)
-        db.cursor.execute("""
+        db.cursor.execute( # type: ignore
+            """
             SELECT parent_id, sub_req_id FROM subsystem_requirements
             WHERE parent_id IS NOT NULL AND sub_req_id IS NOT NULL
-        """)
-        for parent, child in db.cursor.fetchall():
+            """
+            )
+        for parent, child in db.cursor.fetchall(): # type: ignore
             G.add_node(parent, type="sub_req_id")
             G.add_node(child, type="sub_req_id")
             G.add_edge(parent, child)
 
         if include_methods:
             # goal_id -> method_id
-            db.cursor.execute("""
+            db.cursor.execute( # type: ignore
+                """
                 SELECT goal_id, method_id FROM goals
                 WHERE goal_id IS NOT NULL AND method_id IS NOT NULL
-            """)
-            for parent, child in db.cursor.fetchall():
+                """
+                )
+            for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="goal_id")
                 G.add_node(child, type="verification_method")
                 G.add_edge(parent, child)
 
             # swarm_req_id -> method_id
-            db.cursor.execute("""
+            db.cursor.execute( # type: ignore
+                """
                 SELECT swarm_req_id, verification_method FROM drone_swarm_requirements
                 WHERE swarm_req_id IS NOT NULL AND verification_method IS NOT NULL
-            """)
-            for parent, child in db.cursor.fetchall():
+                """
+                )
+            for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="swarm_req_id")
                 G.add_node(child, type="verification_method")
                 G.add_edge(parent, child)
 
             # sys_req_id -> method_id
-            db.cursor.execute("""
+            db.cursor.execute( # type: ignore
+                """
                 SELECT sys_req_id, verification_method FROM system_requirements
                 WHERE sys_req_id IS NOT NULL AND verification_method IS NOT NULL
-            """)
-            for parent, child in db.cursor.fetchall():
+                """
+                )
+            for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="sys_req_id")
                 G.add_node(child, type="verification_method")
                 G.add_edge(parent, child)
 
             # sub_req_id -> verification_method
-            db.cursor.execute("""
+            db.cursor.execute( # type: ignore
+                """
                 SELECT sub_req_id, verification_method FROM subsystem_requirements
                 WHERE sub_req_id IS NOT NULL AND verification_method IS NOT NULL
-            """)
-            for parent, child in db.cursor.fetchall():
+                """
+                )
+            for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="sub_req_id")
                 G.add_node(child, type="verification_method")
                 G.add_edge(parent, child)
             
         if include_docs:
             # method_id -> doc_id
-            db.cursor.execute("""
+            db.cursor.execute( # type: ignore
+                """
                 SELECT method_id, doc_id FROM V_join_documents
                 WHERE method_id IS NOT NULL AND doc_id IS NOT NULL
-            """)
-            for parent, child in db.cursor.fetchall():
+                """
+                )
+            for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="method_id")
                 G.add_node(child, type="doc_id")
                 G.add_edge(parent, child)
         
         # annotate node statuses for coloring
-        db.cursor.execute("SELECT goal_id, satisfaction_status FROM goals")
-        for gid, status in db.cursor.fetchall():
+        db.cursor.execute("SELECT goal_id, satisfaction_status FROM goals") # type: ignore
+        for gid, status in db.cursor.fetchall(): # type: ignore
             if gid in G.nodes:
                 G.nodes[gid]["status"] = status
 
-        db.cursor.execute("SELECT swarm_req_id, verification_status FROM drone_swarm_requirements")
-        for sid, status in db.cursor.fetchall():
+        db.cursor.execute("SELECT swarm_req_id, verification_status FROM drone_swarm_requirements") # type: ignore
+        for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        db.cursor.execute("SELECT sys_req_id, verification_status FROM system_requirements")
-        for sid, status in db.cursor.fetchall():
+        db.cursor.execute("SELECT sys_req_id, verification_status FROM system_requirements") # type: ignore
+        for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        db.cursor.execute("SELECT sub_req_id, verification_status FROM subsystem_requirements")
-        for sid, status in db.cursor.fetchall():
+        db.cursor.execute("SELECT sub_req_id, verification_status FROM subsystem_requirements") # type: ignore
+        for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
@@ -236,7 +256,7 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     adjusted_width = horiz_width * (1 - 2 * h_padding)
     xcenter = 0.5
 
-    pos = hierarchy_pos(H, root=root, vert_loc=1.0, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
+    pos = hierarchy_pos(H, root=root, vert_loc=1, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
 
     for node in pos:
         pos[node] = (pos[node][0] * (1 - 2 * h_padding) + h_padding, pos[node][1])
