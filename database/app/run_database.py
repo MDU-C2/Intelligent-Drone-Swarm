@@ -28,9 +28,10 @@ UPDATE_DB_ROW = "17"
 DELETE_DB_ROW = "18"
 EXPORT_TO_JSON = "19"
 RESTORE_FROM_JSON = "20"
-VERIFY_ROUNDTRIP = "21"
-EXPORT_TO_CSV = "22"
-EXIT = "23"
+EXPORT_TO_CSV = "21"
+EXIT = "22"
+
+VERIFY_ROUNDTRIP = "23"
 
 def main():
     db_name = DB_NAME_TXT.read_text().strip()
@@ -61,11 +62,10 @@ def main():
             print("18: Delete row in Database")
             print("19: Export DB → JSON")
             print("20: How to restore JSON → DB")
-            print("21: Verify JSON round-trip")
-            print("22: Export DB → CSV")
-            print("23: Exit")
+            print("21: Export DB → CSV")
+            print("22: Exit")
 
-            choice = input("Enter choice (1-23): ").strip()
+            choice = input("Enter choice (1-22): ").strip()
 
             try:
                 if choice == INSERT_GOAL:
