@@ -59,6 +59,7 @@ class insert_functions:
             (goal_id, goal_description, stakeholder, origin, priority,
              rationale, satisfaction_status, method_id)
         )
+        return goal_id
 
     def insert_drone_swarm_requirements(self, swarm_req_id, requirement, priority,
                                         effect, rationale, author, review_status,
@@ -75,6 +76,7 @@ class insert_functions:
             (swarm_req_id, requirement, priority, effect, rationale, author,
              review_status, reviewer, verification_status, verification_method, comment)
         )
+        return swarm_req_id
 
     def insert_system_requirements(self, parent_id, sys_req_id, requirement,
                                    priority, effect, rationale, author, review_status,
@@ -91,6 +93,7 @@ class insert_functions:
             (parent_id, sys_req_id, requirement, priority, effect, rationale, author,
              review_status, reviewer, verification_status, verification_method, comment)
         )
+        return sys_req_id
 
     def insert_subsystem_requirements(self, parent_id, sub_req_id, requirement,
                                       priority, effect, rationale, author, review_status,
@@ -107,6 +110,7 @@ class insert_functions:
             (parent_id, sub_req_id, requirement, priority, effect, rationale, author,
              review_status, reviewer, verification_status, verification_method, comment)
         )
+        return sub_req_id
 
     def insert_item(self, item_id, name, specification, allocated_to=None):
         if not item_id:
@@ -115,6 +119,7 @@ class insert_functions:
             "INSERT INTO items (item_id, name, specification, allocated_to) VALUES (?,?,?,?)",
             (item_id, name, specification, allocated_to)
         )
+        return item_id
 
     def insert_test_and_verification(self, method_id, description, method_type):
         if not method_id:
@@ -123,6 +128,7 @@ class insert_functions:
             "INSERT INTO test_and_verification (method_id, description, method_type) VALUES (?,?,?)",
             (method_id, description, method_type)
         )
+        return method_id
 
     def insert_documents(self, doc_id, title, description, file=None, version=None, author=None):
         if not doc_id:
@@ -131,6 +137,7 @@ class insert_functions:
             "INSERT INTO documents (doc_id, title, description, file, version, author) VALUES (?,?,?,?,?,?)",
             (doc_id, title, description, file, version, author)
         )
+        return doc_id
 
     def insert_quality_requirements(self, quality_rec_id, requirement, author, approved_by=None):
         if not quality_rec_id:
@@ -139,3 +146,4 @@ class insert_functions:
             "INSERT INTO quality_requirements (quality_rec_id, requirement, author, approved_by) VALUES (?,?,?,?)",
             (quality_rec_id, requirement, author, approved_by)
         )
+        return quality_rec_id
