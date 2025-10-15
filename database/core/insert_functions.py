@@ -28,10 +28,6 @@ class insert_functions:
         """
         prefix, width = self.PREFIX_INFO.get(table, ("X", 2))
 
-        # Only start a write lock if we're not already in a transaction.
-        if self.conn and not getattr(self.conn, "in_transaction", False):
-            self.conn.execute("BEGIN IMMEDIATE")
-
         row = self.cursor.execute(
             f"""
             SELECT {col}
