@@ -17,7 +17,7 @@ def handle_insert_goal(inserter):
     data = prompts.prompt_goal()
     if data:
         inserter.insert_goal(**data)
-        print("Goal inserted successfully!")
+        print("✅ Goal inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -25,7 +25,7 @@ def handle_insert_drone_swarm(inserter):
     data = prompts.prompt_drone_swarm_requirement()
     if data:
         inserter.insert_drone_swarm_requirements(**data)
-        print("Drone Swarm Requirement inserted successfully!")
+        print("✅ Drone Swarm Requirement inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -33,7 +33,7 @@ def handle_insert_system(inserter):
     data = prompts.prompt_system_requirement()
     if data:
         inserter.insert_system_requirements(**data)
-        print("System Requirement inserted successfully!")
+        print("✅ System Requirement inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -41,7 +41,7 @@ def handle_insert_subsystem(inserter):
     data = prompts.prompt_subsystem_requirement()
     if data:
         inserter.insert_subsystem_requirements(**data)
-        print("Subsystem Requirement inserted successfully!")
+        print("✅ Subsystem Requirement inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -49,7 +49,7 @@ def handle_insert_item(inserter):
     data = prompts.prompt_item()
     if data:
         inserter.insert_item(**data)
-        print("Item inserted successfully!")
+        print("✅ Item inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -57,7 +57,7 @@ def handle_insert_document(inserter):
     data = prompts.prompt_document()
     if data:
         inserter.insert_documents(**data)
-        print("Document inserted successfully!")
+        print("✅ Document inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -65,7 +65,7 @@ def handle_insert_vv_method(inserter):
     data = prompts.prompt_vv_method()
     if data:
         inserter.insert_test_and_verification(**data)
-        print("V&V Method inserted successfully!")
+        print("✅ V&V Method inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -73,7 +73,7 @@ def handle_insert_quality_requirement(inserter):
     data = prompts.prompt_quality_requirements()
     if data:
         inserter.insert_quality_requirements(**data)
-        print("Quality requirement inserted successfully!")
+        print("✅ Quality requirement inserted successfully!")
     else:
         print("Insertion cancelled.")
 
@@ -81,7 +81,7 @@ def handle_goal_children(inserter):
     data = prompts.prompt_goal_children()
     if data:
         inserter.insert_goal_children(**data)
-        print("Successfully connected Drone Swarm Requirement to Goal!")
+        print("✅ Successfully connected Drone Swarm Requirement to Goal!")
     else:
         print("Connection cancelled.")
 
@@ -89,7 +89,7 @@ def handle_swarm_req_children(inserter):
     data = prompts.prompt_swarm_req_children()
     if data:
         inserter.insert_swarm_req_children(**data)
-        print("Successfully connected System Requirement to Drone Swarm Requirement!")
+        print("✅ Successfully connected System Requirement to Drone Swarm Requirement!")
     else:
         print("Connection cancelled.")
 
@@ -97,7 +97,7 @@ def handle_sysreq_children(inserter):
     data = prompts.prompt_sysreq_children()
     if data:
         inserter.insert_sysreq_children(**data)
-        print("Successfully connected System Requirement to Subsystem Requirement!")
+        print("✅ Successfully connected System Requirement to Subsystem Requirement!")
     else:
         print("Connection cancelled.")
 
@@ -105,7 +105,7 @@ def handle_subsys_join_item(inserter):
     data = prompts.prompt_subsys_join_item()
     if data:
         inserter.insert_subsys_join_item(**data)
-        print("Successfully connected Item to Subsystem Requirement!")
+        print("✅ Successfully connected Item to Subsystem Requirement!")
     else:
         print("Connection cancelled.")
 
@@ -113,7 +113,7 @@ def handle_v_join_documents(inserter):
     data = prompts.prompt_V_join_documents()
     if data:
         inserter.insert_V_join_documents(**data)
-        print("Successfully connected Document to V&V Method!")
+        print("✅ Successfully connected Document to V&V Method!")
     else:
         print("Connection cancelled.")
 
@@ -121,7 +121,7 @@ def handle_id_glossary(inserter):
     data = prompts.prompt_id_glossary()
     if data:
         inserter.insert_id_glossary(**data)
-        print("ID successfully inserted to ID Glossary!")
+        print("✅ ID successfully inserted to ID Glossary!")
     else:
         print("Insertion cancelled.")
 
@@ -138,7 +138,7 @@ def handle_update(other):
     data = prompts.prompt_update_row()
     if data:
         affected = other.update_row(**data)
-        print("Row updated successfully!" if affected else "No rows matched your criteria.")
+        print("✅ Row updated successfully!" if affected else "No rows matched your criteria.")
     else:
         print("Update cancelled.")
 
@@ -148,7 +148,7 @@ def handle_delete(other):
         affected = other.delete_from_table(
             data["table"], data["condition_column"], data["condition_value"]
         )
-        print("Row deleted successfully!" if affected else "No rows matched your criteria.")
+        print("✅ Row deleted successfully!" if affected else "No rows matched your criteria.")
     else:
         print("Deletion cancelled.")
 
@@ -171,7 +171,7 @@ def handle_verify_roundtrip():
     print("\n→ Running round-trip verification (dump → restore → compare)…")
     try:
         run_roundtrip_check()
-        print("JSON round-trip test PASSED")
+        print("✅ JSON round-trip test PASSED")
     except SystemExit as se:
         print(f"Round-trip test FAILED: {se}")
     except Exception as e:
@@ -180,14 +180,14 @@ def handle_verify_roundtrip():
 def handle_delete_with_preview():
     print("\nDelete with preview:")
     print("Select entity type:")
-    print("  1) Goal                (goals.goal_id)")
-    print("  2) Swarm requirement   (drone_swarm_requirements.swarm_req_id)")
-    print("  3) System requirement  (system_requirements.sys_req_id)")
-    print("  4) Subsystem req       (subsystem_requirements.sub_req_id)")
-    print("  5) V&V method          (test_and_verification.method_id)")
-    print("  6) Document            (documents.doc_id)")
-    print("  7) Item                (item.item_id)")
-    print("  8) Quality requirement (quality_requirements.quality_rec_id)")
+    print("  1) Goal")
+    print("  2) Drone Swarm requirement")
+    print("  3) System requirement")
+    print("  4) Subsystem requirement")
+    print("  5) V&V method")
+    print("  6) Document")
+    print("  7) Item")
+    print("  8) Quality requirement")
     choice = input("Enter 1-8: ").strip()
 
     mapping = {
