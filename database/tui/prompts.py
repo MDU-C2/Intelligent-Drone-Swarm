@@ -56,7 +56,7 @@ def prompt_drone_swarm_requirement():
     print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author): ")
+    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
     if reviewer == "EXIT": return None
     verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
     if verification_status == "EXIT": return None
@@ -83,7 +83,7 @@ def prompt_system_requirement():
     print("\nEnter System Requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author): ")
+    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
     if reviewer == "EXIT": return None
     verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
     if verification_status == "EXIT": return None
@@ -112,7 +112,7 @@ def prompt_subsystem_requirement():
 
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author): ")
+    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
     if reviewer == "EXIT": return None
     verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
     if verification_status == "EXIT": return None
