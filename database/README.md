@@ -24,17 +24,31 @@ Key scripts:
 
 ---
 
-## 2) Start the interactive app
+## 2) Start inserting data
 
-Open a Terminal in VS Code and run the menu‑driven app:
+1. Create your own branch from the branch `feature/database` (example: feature/database-VVM)
+2. Open your branch in VS Code
+3. Open a Terminal and run:
+```bash
+python -m database.app.setup_database
+```
+(This will create your own local copy of the database (do not pick `IRDS_requirements` as the name of your db)
 
+4. In the Terminal run:
+
+```bash
+python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/{NAME-OF-YOUR-DB}.db --overwrite
+```
+Switch out `{NAME-OF-YOUR-DB}`with the name you chose for your db
+
+4. Right-click on `{NAME-OF-YOUR-DB}.db` (in the `data` folder) and choose "Open Database"
+5. In the Terminal run:
 ```bash
 python -m database.app.run_database
 ```
-
-You’ll see numbered actions like **Insert Goal**, **Insert System Requirement**, **Search**, **Export DB → JSON**, **Restore JSON → DB**, **Verify round‑trip**, **Plot tree**, etc. 
-Type the number and follow the prompts. 
-Type `exit` during a prompt to cancel and return to the main menu.
+6. Follow the prompts
+(Type `exit` during a prompt to cancel and return to the main menu.)
+7. When you're done inputting data follow the instructions under **3) Export DB → JSON, and then push to GitHub**
 
 ### Notes while inserting data
 
@@ -49,46 +63,21 @@ Type `exit` during a prompt to cancel and return to the main menu.
 
 ---
 
-## 3) Export DB → JSON (for GitHub diffs)
-
-Why JSON? It produces clean diffs in pull requests and **preserves relationships**.
-
-Open a Terminal in VS Code and:
-1. Run `python -m database.app.run_database`
+## 3) Export DB → JSON, and then push to GitHub
+(still on your own branch in VS Code)
+1. In the Terminal run `python -m database.app.run_database`
 2. Choose **Export DB → JSON**
+3. Exit `run_database`
+4. Delete `{NAME-OF-YOUR-DB}.db` and keep `database_dump.json`
+5. Commit your changes
+6. Push your changes to GitHub and open a Pull Request requesting to merge your branch to `feature/database`
+7. If there are no conflicts you can go ahead and squash merge. But if there are conflicts ask for help from the Chief Engineer ;)
 
-The JSON contains:
-
-* `meta` (export timestamp, source DB)
-* For each table: column list and all rows
-* Any BLOBs are base64‑encoded so they’re JSON‑safe
-
-Commit the JSON to GitHub to review changes over time.
-
----
-
-## 4) How to restore JSON → DB (to get the latest data)
-Open a Terminal in VS Code and: 
-1. Run `python -m database.app.run_database`
-2. Choose **Restore JSON → DB**
-3. Follow the instructions
-(The command you will be told to use is `python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/IRDS_requirements.db --overwrite`)
-
-During restore:
-
-* The canonical schema is (re)created.
-* Self‑referencing tables (system/subsystem requirements) are inserted in safe phases.
+**Note:** The Chief Engineer and/or the Requirements Manager are in charge of restoring the `database_dump.json` to `IRDS_requirements.db` in the `feature/database` branch :)
 
 ---
 
-## 5) Repo hygiene tips
-
-* Commit `database_dump.json` updates when you change data so reviewers can see diffs.
-* Use branches when making large data edits (e.g., `feature/database‑VVM`).
-
----
-
-## 6) Troubleshooting
+## 4) Troubleshooting
 
 **Foreign key constraint failed**
 
@@ -112,29 +101,36 @@ During restore:
 
 ---
 
-## 7) Handy copy‑paste snippets
+## 5) Handy copy‑paste snippets
 
-Create DB & tables
-
+Set up local database (do not pick `IRDS_requirements` as the name of your db)
 ```bash
 python -m database.app.setup_database
 ```
 
-Run interactive menu
+Load JSON to DB (switch out `{NAME-OF-YOUR-DB}`with the name you chose for your db)
+```bash
+python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/{NAME-OF-YOUR-DB}.db --overwrite
+```
 
+Run interactive menu
 ```bash
 python -m database.app.run_database
 ```
 
-Load demo data
-
+Create DB & tables
 ```bash
-python -m database.app.populate_test_data
+python -m database.app.setup_database
+```
+
+Load demo data
+```bash
+python -m database.tests.populate_test_data
 ```
 
 ---
 
-## 8) File/Folder overview
+## 6) File/Folder overview
 
 ```
 database/
@@ -176,7 +172,8 @@ database/
 ```
 
 ---
-## 9) First‑time setup (create a brand‑new DB)
+## 7) First‑time setup (create a brand‑new DB)
+**Note:** Only the CE or the RM does this.
 
 This creates a database file and all required tables.
 Open a Terminal in VS Code:
