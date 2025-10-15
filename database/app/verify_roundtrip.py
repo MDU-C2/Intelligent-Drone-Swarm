@@ -1,6 +1,7 @@
 from __future__ import annotations
 import shutil, tempfile
 from pathlib import Path
+from collections import Counter
 
 from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
 from ..core.connect_database import connect_database
@@ -43,12 +44,21 @@ def _compare_snapshots(a: dict, b: dict) -> None:
         if a_cols != b_cols:
             raise SystemExit(f"Column mismatch in table '{t}':\n  src={a_cols}\n  dst={b_cols}")
 
-        # ✅ Ignore insertion order differences
-        if sorted(a_rows) != sorted(b_rows):
-            raise SystemExit(
-                f"Row mismatch in table '{t}' "
-                f"(counts: src={len(a_rows)}, dst={len(b_rows)})."
-            )
+        # Treat rows as multisets to ignore order but still catch duplicates and value diffs
+        ca = Counter(a_rows)
+        cb = Counter(b_rows)
+        if ca != cb:
+            # Helpful tiny diff
+            extra = list((cb - ca).elements())
+            missing = list((ca - cb).elements())
+            msg = [
+                f"Row mismatch in table '{t}' (counts: src={len(a_rows)}, dst={len(b_rows)}).",
+            ]
+            if missing:
+                msg.append(f"  Missing in restored (first 3): {missing[:3]}")
+            if extra:
+                msg.append(f"  Extra in restored (first 3): {extra[:3]}")
+            raise SystemExit("\n".join(msg))
 
 def run_roundtrip_check() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
