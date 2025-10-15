@@ -225,7 +225,8 @@ def prompt_vv_method():
 
 # ----- OTHER PROMPTS -----
 def prompt_update_row():
-    print("\nUpdate database row (type 'exit' to cancel):")
+    print("\n================  UPDATE  ================")
+    print("Update database row (type 'exit' to cancel):")
 
     # Read DB name (centralized)
     db_name = DB_NAME_TXT.read_text().strip()
