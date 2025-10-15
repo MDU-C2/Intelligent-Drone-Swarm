@@ -41,7 +41,7 @@ def main():
         other = db_utilities(db.cursor)
 
         while True:
-            print("\nSelect action:")
+            print("\n================  Select action  ================")
             print("1:  Insert a Goal")
             print("2:  Insert a Drone Swarm Requirement")
             print("3:  Insert a System Requirement")
@@ -65,7 +65,7 @@ def main():
             print("21: Export DB → CSV")
             print("22: Exit")
 
-            choice = input("Enter choice (1-22): ").strip()
+            choice = input("===  Enter choice (1-22): ").strip()
 
             try:
                 if choice == INSERT_GOAL:
