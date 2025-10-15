@@ -66,6 +66,16 @@
       "rows": [
         {
           "goal_id": "G-01",
+          "goal_description": "test1",
+          "stakeholder": "test1",
+          "origin": "test1",
+          "priority": "Key",
+          "rationale": "test1",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-02",
           "goal_description": "TEST2",
           "stakeholder": "TEST2",
           "origin": "TEST2",
@@ -75,7 +85,17 @@
           "method_id": null
         },
         {
-          "goal_id": "G-02",
+          "goal_id": "G-03",
+          "goal_description": "test1",
+          "stakeholder": "test1",
+          "origin": "test1",
+          "priority": "Mandatory",
+          "rationale": "test1",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-04",
           "goal_description": "TEST2",
           "stakeholder": "TEST2",
           "origin": "TEST2",
