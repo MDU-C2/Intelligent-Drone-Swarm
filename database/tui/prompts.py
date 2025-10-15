@@ -4,7 +4,7 @@ import sqlite3
 from database.core.paths import DB_NAME_TXT
 
 def prompt_input(prompt_text, optional=False):
-    """Helper to allow typing 'exit' to return to menu"""
+    """Helper to allow typing 'exit' to cancel"""
     value = input(prompt_text)
     if value.lower() == "exit":
         return "EXIT"
@@ -14,7 +14,7 @@ def prompt_input(prompt_text, optional=False):
 
 # ----- PROMPTS FOR ALL TABLES -----
 def prompt_goal():
-    print("\nEnter new goal (type 'exit' to return to menu):")
+    print("\nEnter new goal (type 'exit' to cancel):")
     data = {
         "goal_id": prompt_input("Goal ID: "),
         "goal_description": prompt_input("Description: "),
@@ -29,7 +29,7 @@ def prompt_goal():
     return data
 
 def prompt_drone_swarm_requirement():
-    print("\nEnter new drone swarm requirement (type 'exit' to return to menu):")
+    print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
     reviewer = prompt_input("Reviewer (different from author): ")
@@ -56,7 +56,7 @@ def prompt_drone_swarm_requirement():
     return data
 
 def prompt_system_requirement():
-    print("\nEnter System Requirement (type 'exit' to return to menu):")
+    print("\nEnter System Requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
     reviewer = prompt_input("Reviewer (different from author): ")
@@ -84,7 +84,7 @@ def prompt_system_requirement():
     return data
 
 def prompt_subsystem_requirement():
-    print("\nEnter Subsystem Requirement (type 'exit' to return to menu):")
+    print("\nEnter Subsystem Requirement (type 'exit' to cancel):")
 
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
@@ -113,7 +113,7 @@ def prompt_subsystem_requirement():
     return data
 
 def prompt_goal_children():
-    print("\nLink goal and swarm requirement (goal_children table):")
+    print("\nLink goal and swarm requirement (goal_children table (type 'exit' to cancel)):")
     goal_id = prompt_input("Goal ID: ")
     if goal_id == "EXIT": return None
     swarm_req_id = prompt_input("Swarm Req ID: ")
@@ -121,7 +121,7 @@ def prompt_goal_children():
     return {"goal_id": goal_id, "swarm_req_id": swarm_req_id}
 
 def prompt_swarm_req_children():
-    print("\nLink swarm requirement and system requirement (swarm_req_children table):")
+    print("\nLink swarm requirement and system requirement (swarm_req_children table (type 'exit' to cancel)):")
     swarm_req_id = prompt_input("Swarm Req ID: ")
     if swarm_req_id == "EXIT": return None
     sys_req_id = prompt_input("System Req ID: ")
@@ -129,7 +129,7 @@ def prompt_swarm_req_children():
     return {"swarm_req_id": swarm_req_id, "sys_req_id": sys_req_id}
 
 def prompt_sysreq_children():
-    print("\nLink system requirement and subsystem requirement (sysreq_children table):")
+    print("\nLink system requirement and subsystem requirement (sysreq_children table (type 'exit' to cancel)):")
     sys_req_id = prompt_input("System Req ID: ")
     if sys_req_id == "EXIT": return None
     sub_req_id = prompt_input("Subsystem Req ID: ")
@@ -137,7 +137,7 @@ def prompt_sysreq_children():
     return {"sys_req_id": sys_req_id, "sub_req_id": sub_req_id}
 
 def prompt_subsys_join_item():
-    print("\nLink subsystem requirement and item (sys_join_item table):")
+    print("\nLink subsystem requirement and item (sys_join_item table (type 'exit' to cancel)):")
     item_id = prompt_input("Item ID: ")
     if item_id == "EXIT": return None
     sub_req_id = prompt_input("Subsystem Req ID: ")
@@ -145,7 +145,7 @@ def prompt_subsys_join_item():
     return {"item_id": item_id, "sub_req_id": sub_req_id}
 
 def prompt_V_join_documents():
-    print("\nLink test/verification and document (V_join_documents table):")
+    print("\nLink test/verification and document (V_join_documents table (type 'exit' to cancel)):")
     method_id = prompt_input("Method ID: ")
     if method_id == "EXIT": return None
     doc_id = prompt_input("Document ID: ")
@@ -153,7 +153,7 @@ def prompt_V_join_documents():
     return {"method_id": method_id, "doc_id": doc_id}
 
 def prompt_quality_requirements():
-    print("\nInsert quality requirement:")
+    print("\nInsert quality requirement (type 'exit' to cancel):")
     quality_rec_id = prompt_input("Quality Requirement ID: ")
     if quality_rec_id == "EXIT": return None
     requirement = prompt_input("Requirement description: ")
@@ -165,7 +165,7 @@ def prompt_quality_requirements():
     return {"quality_rec_id": quality_rec_id, "requirement": requirement, "author": author, "approved_by": approved_by}
 
 def prompt_id_glossary():
-    print("\nInsert glossary entry:")
+    print("\nInsert glossary entry (type 'exit' to cancel):")
     prefix = prompt_input("Prefix: ")
     if prefix == "EXIT": return None
     meaning = prompt_input("Meaning: ")
@@ -225,7 +225,7 @@ def prompt_vv_method():
 
 # ----- OTHER PROMPTS -----
 def prompt_update_row():
-    print("\nUpdate database row:")
+    print("\nUpdate database row (type 'exit' to cancel):")
 
     # Read DB name (centralized)
     db_name = DB_NAME_TXT.read_text().strip()
@@ -324,7 +324,7 @@ def prompt_update_row():
     }
 
 def prompt_delete_row():
-    print("\nDelete database row:")
+    print("\nDelete database row (type 'exit' to cancel):")
 
     db_name = DB_NAME_TXT.read_text().strip()
 
