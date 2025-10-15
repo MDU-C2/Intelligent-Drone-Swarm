@@ -1,6 +1,6 @@
 # populate_test_data.py
 
-from database.app.paths import DB_NAME_TXT
+from database.core.paths import DB_NAME_TXT
 from ..core.connect_database import connect_database
 from ..core.create_tables import create_tables
 from ..core.insert_functions import insert_functions
