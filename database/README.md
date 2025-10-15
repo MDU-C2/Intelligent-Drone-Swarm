@@ -26,40 +26,32 @@ Key scripts:
 
 ## 2) Start inserting data
 
-1. Create your own branch from the branch `feature/database` (example: feature/database-VVM)
+1. Create your own branch from the branch `feature/database` (example: `feature/database-VVM`)
 2. Open your branch in VS Code
 3. Open a Terminal and run:
+(press ENTER instead of inserting a .db name)
 ```bash
 python -m database.app.setup_database
 ```
-(This will create your own local copy of the database (do not pick `IRDS_requirements` as the name of your db)
-
 4. In the Terminal run:
-
 ```bash
-python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/{NAME-OF-YOUR-DB}.db --overwrite
+python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/local.db --overwrite
 ```
-Switch out `{NAME-OF-YOUR-DB}`with the name you chose for your db
 
-4. Right-click on `{NAME-OF-YOUR-DB}.db` (in the `data` folder) and choose "Open Database"
-5. In the Terminal run:
+
+6. Right-click on `local.db` (in the `data` folder) and choose "Open Database"
+7. In the Terminal run:
 ```bash
 python -m database.app.run_database
 ```
 6. Follow the prompts
 (Type `exit` during a prompt to cancel and return to the main menu.)
-7. When you're done inputting data follow the instructions under **3) Export DB → JSON, and then push to GitHub**
+7. When you're done inserting data follow the instructions under **3) Export DB → JSON, and then push to GitHub**
 
 ### Notes while inserting data
 
 * **Authors vs. Reviewers:** they must be different *(this is enforced in the code)*.
 * **Verification status:** if not `Pending`, you must supply a verification method ID that already exists.
-* Many fields use fixed choices (e.g., `Priority` is `Key/Mandatory/Optional`; statuses have limited options). Follow the on‑screen hints.
-
-### Search, Update, Delete
-
-* **Search** lets you interactively pick a table/column and look for exact or partial matches.
-* **Update/Delete** walks you through choosing the table, the row by its ID, then the column/value.
 
 ---
 
@@ -68,7 +60,7 @@ python -m database.app.run_database
 1. In the Terminal run `python -m database.app.run_database`
 2. Choose **Export DB → JSON**
 3. Exit `run_database`
-4. Delete `{NAME-OF-YOUR-DB}.db` and keep `database_dump.json`
+4. Delete `local.db` and keep `database_dump.json`
 5. Commit your changes
 6. Push your changes to GitHub and open a Pull Request requesting to merge your branch to `feature/database`
 7. If there are no conflicts you can go ahead and squash merge. But if there are conflicts ask for help from the Chief Engineer ;)
@@ -103,14 +95,14 @@ python -m database.app.run_database
 
 ## 5) Handy copy‑paste snippets
 
-Set up local database (do not pick `IRDS_requirements` as the name of your db)
+Set up local database (press ENTER instead of inserting a .db name)
 ```bash
 python -m database.app.setup_database
 ```
 
-Load JSON to DB (switch out `{NAME-OF-YOUR-DB}`with the name you chose for your db)
+Load JSON to DB
 ```bash
-python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/{NAME-OF-YOUR-DB}.db --overwrite
+python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/local.db --overwrite
 ```
 
 Run interactive menu
@@ -118,19 +110,34 @@ Run interactive menu
 python -m database.app.run_database
 ```
 
-Create DB & tables
+---
+## 6) Restoring JSON → DB
+**For CE/RM eyes only**
+1. Open `feature/database` in VS Code
+2. Open a Terminal and run:
 ```bash
-python -m database.app.setup_database
+python -m database.dataman.db_json_bridge restore database/data/database_dump.json database/data/IRDS_requirements.db --overwrite
 ```
+3. Push changes to GitHub (`IRDS_requirements.db` should be the only change)
+4. Done!
+
+---
+## 7) Other
 
 Load demo data
 ```bash
 python -m database.tests.populate_test_data
 ```
+or
+```bash
+python -m database.tests.pop_test_data
+```
+
+Both commands load in the same data, but the first command hard codes IDs and the other command uses automatic IDs
 
 ---
 
-## 6) File/Folder overview
+## 8) File/Folder overview
 
 ```
 database/
@@ -170,24 +177,3 @@ database/
 │
 └── README.md
 ```
-
----
-## 7) First‑time setup (create a brand‑new DB)
-**Note:** Only the CE or the RM does this.
-
-This creates a database file and all required tables.
-Open a Terminal in VS Code:
-
-```bash
-python -m database.app.setup_database.py
-```
-
-Follow the prompts:
-
-* Enter a name like `IRDS_requirements`.
-* If the file exists, you’ll be asked whether to overwrite.
-* The script writes the chosen name into `db_name.txt` and creates all tables.
-
-You should now see your `.db` file in the `data` folder.
-
----
