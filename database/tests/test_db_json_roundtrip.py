@@ -17,7 +17,7 @@ from typing import Any, Dict, List, Tuple
 
 from ..dataman.db_json_bridge import dump_db_to_json, restore_db_from_json
 from ..core.connect_database import connect_database
-from database.app.paths import DB_NAME_TXT
+from database.core.paths import DB_NAME_TXT
 
 
 def _list_user_tables(cur) -> List[str]:
