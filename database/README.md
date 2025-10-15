@@ -24,26 +24,7 @@ Key scripts:
 
 ---
 
-## 2) First‑time setup (create a brand‑new DB)
-
-This creates a database file and all required tables.
-Open a Terminal in VS Code:
-
-```bash
-python -m database.app.setup_database.py
-```
-
-Follow the prompts:
-
-* Enter a name like `IRDS_requirements`.
-* If the file exists, you’ll be asked whether to overwrite.
-* The script writes the chosen name into `db_name.txt` and creates all tables.
-
-You should now see your `.db` file in the `data` folder.
-
----
-
-## 3) Start the interactive app
+## 2) Start the interactive app
 
 Open a Terminal in VS Code and run the menu‑driven app:
 
@@ -68,7 +49,7 @@ Type `exit` during a prompt to cancel and return to the main menu.
 
 ---
 
-## 4) Export DB → JSON (for GitHub diffs)
+## 3) Export DB → JSON (for GitHub diffs)
 
 Why JSON? It produces clean diffs in pull requests and **preserves relationships**.
 
@@ -86,7 +67,7 @@ Commit the JSON to GitHub to review changes over time.
 
 ---
 
-## 5) How to restore JSON → DB (to get the latest data)
+## 4) How to restore JSON → DB (to get the latest data)
 Open a Terminal in VS Code and: 
 1. Run `python -m database.app.run_database`
 2. Choose **Restore JSON → DB**
@@ -100,14 +81,14 @@ During restore:
 
 ---
 
-## 6) Repo hygiene tips
+## 5) Repo hygiene tips
 
 * Commit `database_dump.json` updates when you change data so reviewers can see diffs.
 * Use branches when making large data edits (e.g., `feature/database‑VVM`).
 
 ---
 
-## 7) Troubleshooting
+## 6) Troubleshooting
 
 **Foreign key constraint failed**
 
@@ -131,7 +112,7 @@ During restore:
 
 ---
 
-## 8) Handy copy‑paste snippets
+## 7) Handy copy‑paste snippets
 
 Create DB & tables
 
@@ -153,7 +134,7 @@ python -m database.app.populate_test_data
 
 ---
 
-## 9) File/Folder overview
+## 8) File/Folder overview
 
 ```
 database/
@@ -193,3 +174,23 @@ database/
 │
 └── README.md
 ```
+
+---
+## 9) First‑time setup (create a brand‑new DB)
+
+This creates a database file and all required tables.
+Open a Terminal in VS Code:
+
+```bash
+python -m database.app.setup_database.py
+```
+
+Follow the prompts:
+
+* Enter a name like `IRDS_requirements`.
+* If the file exists, you’ll be asked whether to overwrite.
+* The script writes the chosen name into `db_name.txt` and creates all tables.
+
+You should now see your `.db` file in the `data` folder.
+
+---
