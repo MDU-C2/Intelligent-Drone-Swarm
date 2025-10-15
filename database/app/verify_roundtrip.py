@@ -37,12 +37,18 @@ def _compare_snapshots(a: dict, b: dict) -> None:
         missing_in_b = sorted(a_tables - b_tables)
         extra_in_b   = sorted(b_tables - a_tables)
         raise SystemExit(f"Table mismatch.\nMissing in restored: {missing_in_b}\nExtra in restored: {extra_in_b}")
+
     for t in sorted(a_tables):
         a_cols, a_rows = a[t]; b_cols, b_rows = b[t]
         if a_cols != b_cols:
             raise SystemExit(f"Column mismatch in table '{t}':\n  src={a_cols}\n  dst={b_cols}")
-        if a_rows != b_rows:
-            raise SystemExit(f"Row mismatch in table '{t}' (counts: src={len(a_rows)}, dst={len(b_rows)}).")
+
+        # ✅ Ignore insertion order differences
+        if sorted(a_rows) != sorted(b_rows):
+            raise SystemExit(
+                f"Row mismatch in table '{t}' "
+                f"(counts: src={len(a_rows)}, dst={len(b_rows)})."
+            )
 
 def run_roundtrip_check() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
