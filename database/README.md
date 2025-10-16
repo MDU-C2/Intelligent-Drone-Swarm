@@ -3,7 +3,8 @@
 This README walks you through setting up, using, exporting, and verifying our SQLite requirements database — even if you’ve never touched SQLite or Python before.
 
 ### NOTE
-Our actual database is IRDS_requirements.db located in the branch `feature/database`
+- Our actual database is IRDS_requirements.db located in the branch `feature/database`
+- A graphical representation of the work flow can be seen at the bottom of this page
 
 ---
 
@@ -180,3 +181,10 @@ database/
 │
 └── README.md
 ```
+
+## 9) Decision Tree
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/images/db-decision-tree-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/images/db-decision-tree-light.png">
+  <img alt="Decision Tree" src="https://github.com/MDU-C2/Intelligent-Drone-Swarm/blob/main/images/db-decision-tree-dark.png">
+</picture>
