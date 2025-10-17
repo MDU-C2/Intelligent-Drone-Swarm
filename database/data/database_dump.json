@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-17T08:03:02Z",
+    "exported_at": "2025-10-17T11:47:26Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -70,7 +70,7 @@
           "stakeholder": "Project owner",
           "origin": "Kaos model",
           "priority": "Mandatory",
-          "rationale": "",
+          "rationale": "HELLO :D",
           "satisfaction_status": "Pending",
           "method_id": null
         },
@@ -171,6 +171,26 @@
           "origin": "G-04",
           "priority": "Mandatory",
           "rationale": "Collective decision-making implies the absence of a central controller, requiring agents to operate autonomously. Therefore, agents must be capable of making independent decisions when necessary, including the ability to self-remove from the swarm in response to failure, inefficiency, or conflict with global objectives.",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-12",
+          "goal_description": "aesgdhj",
+          "stakeholder": "hjkl",
+          "origin": "fghjkl",
+          "priority": "Key",
+          "rationale": "fghjk",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-13",
+          "goal_description": "gshgser",
+          "stakeholder": "iopu",
+          "origin": "iojiohi",
+          "priority": "Optional",
+          "rationale": "uouipoig",
           "satisfaction_status": "Pending",
           "method_id": null
         }
