@@ -1,7 +1,7 @@
 {
   "meta": {
-    "exported_at": "2025-10-15T18:50:31Z",
-    "source_db": "IRDS_requirements.db"
+    "exported_at": "2025-10-17T08:03:02Z",
+    "source_db": "local.db"
   },
   "tables": {
     "V_join_documents": {
@@ -63,7 +63,118 @@
         "satisfaction_status",
         "method_id"
       ],
-      "rows": []
+      "rows": [
+        {
+          "goal_id": "G-01",
+          "goal_description": "Design logic to assign an appropriate task to each agent at the start of the mission.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-02",
+          "goal_description": "Ensure that when an agent fails, its assigned tasks are automatically reassigned to other functional agents, if system resources permit.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-03",
+          "goal_description": "Ensure that correct behaviour is maintained across the swarm despite failure or inconsistencies in the output of a single agent.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-04",
+          "goal_description": "Ensure that the swarm reaches a collective decision for each task that requires coordination.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "A decentralised protocol means that the swarm has no leader and hence should be able to make collective decisions.",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-05",
+          "goal_description": "Ensure coordination among all agents when distributing the search area.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-06",
+          "goal_description": "Ensure that the provided simulation software is modified so that the implemented replanning protocol can be tested in that simulation environment.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-07",
+          "goal_description": "Enable the application of fault injection within the simulation to test system resilience and fault tolerance.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-08",
+          "goal_description": "Demonstrate that the swarm can maintain mission continuity despite disruptions, failures, or changes in agent availability while operating under the chosen protocol.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-09",
+          "goal_description": "Demonstrate that the swarm can recover from individual agent failures and continue operating effectively as a collective.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-10",
+          "goal_description": "Measure the time required to locate the target subject using the newly implemented chosen protocol, in order to evaluate its performance.",
+          "stakeholder": "Project owner",
+          "origin": "Kaos model",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "G-11",
+          "goal_description": "Ensure that agents can make individual decisions in appropriate situations.",
+          "stakeholder": "Project owner",
+          "origin": "G-04",
+          "priority": "Mandatory",
+          "rationale": "Collective decision-making implies the absence of a central controller, requiring agents to operate autonomously. Therefore, agents must be capable of making independent decisions when necessary, including the ability to self-remove from the swarm in response to failure, inefficiency, or conflict with global objectives.",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        }
+      ]
     },
     "id_glossary": {
       "create_sql": "CREATE TABLE id_glossary (\n            gloss_id INTEGER PRIMARY KEY AUTOINCREMENT,\n            prefix VARCHAR NOT NULL,\n            meaning VARCHAR NOT NULL  \n        )",
