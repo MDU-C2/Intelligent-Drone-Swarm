@@ -1,6 +1,6 @@
 ### A
 - Ad-hoc = Created or done for a specific purpose or situation without prior planning or structure
-- Agent = A single UAV that is a member of a UAV swarm
+- Agent = A single UAV that is a **member** of a Swarm
 - ARC = initial Air Risk Class 
 
 ### B
@@ -53,6 +53,7 @@
 - PR = Pull Request
 - Protocol = Set of rules or procedures that defines how a system communicates
 - PSA = Preliminary Safety Assessment
+- Pulse = A signal/message that an Agent sends out *(to neighbours)* to indicate that they're still "alive"
 
 ### Q
 - QA = Quality Assurance
@@ -64,6 +65,9 @@
 - RM = Requirements Manager
 - RMP = Requirements Management Plan
 - Rumour Mill = Method to spread messages in a Swarm
+- Rumour Source = A role an Agent can have. It is also the name for the message from an agent that *(potentially)* needs to be spread through the Swarm
+- Rumour Starter = A role an Agent can have. Agents become rumour starters when they pick up a Rumour Source *(message)* that needs to be spread to the rest of the Swarm through a rumour *(message)*
+- Rumour Spreader = A role an Agent can have. Agents become Rumour Spreaders when they pick up rumours from a Rumour Starter and/or a Rumour Spreader
 
 ### S
 - SA = Safety Assessment
@@ -77,6 +81,7 @@
 - SMP = Safety Management Plan
 - SRS = System Requirements Specification
 - Subject = Missing person(s)
+- Swarm = Collection of Agents
 
 ### T
 - TMPR = Tactical Mitigation Performance Requirement
