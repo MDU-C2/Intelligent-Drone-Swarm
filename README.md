@@ -1,4 +1,4 @@
-#Follow the steps bellow to get started
+# Follow the steps bellow to get started
 
 ## gym-pybullet-drones
 
