@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-28T12:04:18Z",
+    "exported_at": "2025-10-28T15:34:10Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -321,6 +321,11 @@
           "gloss_id": 2,
           "prefix": "SW-",
           "meaning": "Requirements pertaining to the drone swarm"
+        },
+        {
+          "gloss_id": 3,
+          "prefix": "PM-",
+          "meaning": "Protocol Module"
         }
       ]
     },
@@ -403,7 +408,22 @@
         "verification_method",
         "comment"
       ],
-      "rows": []
+      "rows": [
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-01",
+          "requirement": "The protocol module shall define the procedures will be taken so that all agents are aware of the prevailing mission state.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        }
+      ]
     },
     "test_and_verification": {
       "create_sql": "CREATE TABLE test_and_verification (\n            method_id VARCHAR PRIMARY KEY NOT NULL,\n            description VARCHAR NOT NULL,\n            method_type TEXT CHECK (method_type IN ('Inspection','Analysis','Test'))    \n        )",
