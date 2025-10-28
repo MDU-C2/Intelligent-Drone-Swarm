@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-23T12:19:37Z",
+    "exported_at": "2025-10-28T12:04:18Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -48,8 +48,8 @@
           "effect": "Task assignment",
           "rationale": "When operating with a heterogeneous swarm, task assignment shall account for both the mission plan and the specific capabilities of each agent, ensuring that differences in agent capabilities are explicitly considered.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -61,8 +61,8 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -74,8 +74,8 @@
           "effect": "Task re-assignment",
           "rationale": "As the stakeholder has requested maximum efficiency, this requirement ensures that tasks are assigned optimally according to both the mission plan and agent capabilities.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -87,8 +87,8 @@
           "effect": "Decision-making",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -100,8 +100,8 @@
           "effect": "Decision-making",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -113,8 +113,8 @@
           "effect": "Search mechanism",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -126,8 +126,8 @@
           "effect": "Decision-making",
           "rationale": "Since the swarm has no leader, agents should be able to make independent decision when necessary.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
           "verification_status": "Pending",
           "verification_method": null,
           "comment": null
@@ -412,7 +412,13 @@
         "description",
         "method_type"
       ],
-      "rows": []
+      "rows": [
+        {
+          "method_id": "M-01",
+          "description": "test",
+          "method_type": "Test"
+        }
+      ]
     }
   }
 }
