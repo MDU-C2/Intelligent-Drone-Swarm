@@ -26,7 +26,7 @@
       "rows": []
     },
     "drone_swarm_requirements": {
-      "create_sql": "CREATE TABLE drone_swarm_requirements (\n            swarm_req_id VARCHAR PRIMARY KEY,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),\n            verification_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
+      "create_sql": "CREATE TABLE drone_swarm_requirements (\n            swarm_req_id VARCHAR PRIMARY KEY,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),\n            vv_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
       "columns": [
         "swarm_req_id",
         "requirement",
@@ -34,10 +34,10 @@
         "effect",
         "rationale",
         "author",
-        "review_status",
-        "reviewer",
         "verification_status",
-        "verification_method",
+        "verifier",
+        "validation_status",
+        "vv_method",
         "comment"
       ],
       "rows": [
@@ -48,10 +48,10 @@
           "effect": "Task assignment",
           "rationale": "When operating with a heterogeneous swarm, task assignment shall account for both the mission plan and the specific capabilities of each agent, ensuring that differences in agent capabilities are explicitly considered.",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -61,10 +61,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -74,10 +74,10 @@
           "effect": "Task re-assignment",
           "rationale": "As the stakeholder has requested maximum efficiency, this requirement ensures that tasks are assigned optimally according to both the mission plan and agent capabilities.",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -87,10 +87,10 @@
           "effect": "Decision-making",
           "rationale": "",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -100,10 +100,10 @@
           "effect": "Decision-making",
           "rationale": "",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -113,10 +113,10 @@
           "effect": "Search mechanism",
           "rationale": "",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -126,10 +126,10 @@
           "effect": "Decision-making",
           "rationale": "Since the swarm has no leader, agents should be able to make independent decision when necessary.",
           "author": "C.N",
-          "review_status": "Accepted",
-          "reviewer": "E.Z",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         }
       ]
@@ -357,7 +357,7 @@
       "rows": []
     },
     "subsystem_requirements": {
-      "create_sql": "CREATE TABLE subsystem_requirements (\n            parent_id VARCHAR,\n            sub_req_id VARCHAR PRIMARY KEY NOT NULL,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),\n            verification_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE SET NULL,\n            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
+      "create_sql": "CREATE TABLE subsystem_requirements (\n            parent_id VARCHAR,\n            sub_req_id VARCHAR PRIMARY KEY NOT NULL,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),\n            vv_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE SET NULL,\n            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
       "columns": [
         "parent_id",
         "sub_req_id",
@@ -366,10 +366,10 @@
         "effect",
         "rationale",
         "author",
-        "review_status",
-        "reviewer",
         "verification_status",
-        "verification_method",
+        "verifier",
+        "validation_status",
+        "vv_method",
         "comment"
       ],
       "rows": []
@@ -499,7 +499,7 @@
       "rows": []
     },
     "system_requirements": {
-      "create_sql": "CREATE TABLE system_requirements (\n            parent_id VARCHAR,\n            sys_req_id VARCHAR PRIMARY KEY NOT NULL,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),\n            verification_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,\n            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
+      "create_sql": "CREATE TABLE system_requirements (\n            parent_id VARCHAR,\n            sys_req_id VARCHAR PRIMARY KEY NOT NULL,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),\n            vv_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,\n            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
       "columns": [
         "parent_id",
         "sys_req_id",
@@ -508,10 +508,10 @@
         "effect",
         "rationale",
         "author",
-        "review_status",
-        "reviewer",
         "verification_status",
-        "verification_method",
+        "verifier",
+        "validation_status",
+        "vv_method",
         "comment"
       ],
       "rows": [
@@ -523,24 +523,24 @@
           "effect": "Synchronisation",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
           "parent_id": null,
           "sys_req_id": "PM-02",
-          "requirement": "The protocol module shall define th e procedures that all agents shall follow to share the mission plan.",
+          "requirement": "The protocol module shall define the procedures that all agents shall follow to share the mission plan.",
           "priority": "Mandatory",
           "effect": "Synchronisation",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -551,24 +551,24 @@
           "effect": "Task assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
           "parent_id": null,
           "sys_req_id": "PM-04",
-          "requirement": "The protocol module shall define the procedures that all agents shall follow icate their (all agents) capabilities.",
+          "requirement": "The protocol module shall define the procedures that all agents shall follow to indicate their (all agents) capabilities.",
           "priority": "Mandatory",
           "effect": "Capability assessment ",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -579,10 +579,10 @@
           "effect": "Capability assessment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -593,10 +593,10 @@
           "effect": "Capability assessment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -607,10 +607,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -621,10 +621,10 @@
           "effect": "Task re-assignment",
           "rationale": "the module must define both rules and procedures for task re-assignment.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -635,10 +635,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -649,10 +649,10 @@
           "effect": "Synchronisation",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -663,10 +663,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -677,10 +677,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -691,10 +691,10 @@
           "effect": "Task re-assignment",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -705,10 +705,10 @@
           "effect": "Fault tolerance",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -719,10 +719,10 @@
           "effect": "Fault tolerance",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -733,10 +733,10 @@
           "effect": "Fault tolerance",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -747,10 +747,10 @@
           "effect": "Consesus mechanism ",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -761,10 +761,10 @@
           "effect": "Consensus",
           "rationale": "PM-16 and PM-15 are important to highlight the need for both rules and procedures.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -775,10 +775,10 @@
           "effect": "Search mechanism",
           "rationale": "this requirement intends to ensure that the final design avoid overlap of search areas among agents.",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -789,10 +789,10 @@
           "effect": "Search mechanism",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -803,10 +803,10 @@
           "effect": "Synchronisation",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -817,10 +817,10 @@
           "effect": "Independent behaviour",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         },
         {
@@ -831,10 +831,10 @@
           "effect": "Synchronisation",
           "rationale": "",
           "author": "C.N",
-          "review_status": "TBR",
-          "reviewer": "TBR",
-          "verification_status": "Pending",
-          "verification_method": null,
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
           "comment": null
         }
       ]

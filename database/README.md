@@ -82,9 +82,9 @@ python -m database.app.run_database
 
 * You may have inserted a child that references a non‑existent parent. Create the parent first.
 
-**“Author and reviewer must be different” error**
+**“Author and verifier must be different” error**
 
-* Choose different people for `author` and `reviewer`.
+* Choose different people for `author` and `verifier`.
 
 **“Verification method must be provided if status is not pending”**
 

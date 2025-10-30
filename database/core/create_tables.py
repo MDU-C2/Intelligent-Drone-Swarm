@@ -53,12 +53,12 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("drone_swarm_requirements", create_sql)
@@ -85,13 +85,13 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
             FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("system_requirements", create_sql)
@@ -118,13 +118,13 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
             FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE SET NULL,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("subsystem_requirements", create_sql)
