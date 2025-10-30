@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-17T11:47:26Z",
+    "exported_at": "2025-10-28T12:04:18Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -40,7 +40,99 @@
         "verification_method",
         "comment"
       ],
-      "rows": []
+      "rows": [
+        {
+          "swarm_req_id": "SW-01",
+          "requirement": "When a mission is started, the swarm shall assign tasks to agents according to the mission plan,considering any available differences in agent capability.",
+          "priority": "Mandatory",
+          "effect": "Task assignment",
+          "rationale": "When operating with a heterogeneous swarm, task assignment shall account for both the mission plan and the specific capabilities of each agent, ensuring that differences in agent capabilities are explicitly considered.",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-02",
+          "requirement": "If an agent experiences a degradation in its functionality, the swarm shall reassign that agent's tasks to other functional agents, depending on the available resources of the functional agents.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-03",
+          "requirement": "If an agent experiences a degradation in its functionality, the agent shall take on less critical task(s), provided the agent is capable of performing these task(s).",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "As the stakeholder has requested maximum efficiency, this requirement ensures that tasks are assigned optimally according to both the mission plan and agent capabilities.",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-04",
+          "requirement": "The swarm shall employ a consensus mechanism that ensures correct collective behaviour, even if at least one agent provides incorrect data.",
+          "priority": "Mandatory",
+          "effect": "Decision-making",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-05",
+          "requirement": "The swarm shall reach a collective decision for each task that requires coordination.",
+          "priority": "Mandatory",
+          "effect": "Decision-making",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-06",
+          "requirement": "The swarm shall coordinate all agents to distribute the search area such that each agent searches a different portion the search area.",
+          "priority": "Mandatory",
+          "effect": "Search mechanism",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SW-07",
+          "requirement": "When local conditions of an agent require immediate action,the swarm shall allow the agent to make independent decisions",
+          "priority": "Mandatory",
+          "effect": "Decision-making",
+          "rationale": "Since the swarm has no leader, agents should be able to make independent decision when necessary.",
+          "author": "C.N",
+          "review_status": "Accepted",
+          "reviewer": "E.Z",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        }
+      ]
     },
     "goal_children": {
       "create_sql": "CREATE TABLE goal_children (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            goal_id VARCHAR NOT NULL,\n            swarm_req_id VARCHAR UNIQUE NOT NULL,\n            FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,\n            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE\n        )",
@@ -49,7 +141,43 @@
         "goal_id",
         "swarm_req_id"
       ],
-      "rows": []
+      "rows": [
+        {
+          "id": 1,
+          "goal_id": "G-01",
+          "swarm_req_id": "SW-01"
+        },
+        {
+          "id": 2,
+          "goal_id": "G-02",
+          "swarm_req_id": "SW-02"
+        },
+        {
+          "id": 3,
+          "goal_id": "G-02",
+          "swarm_req_id": "SW-03"
+        },
+        {
+          "id": 4,
+          "goal_id": "G-03",
+          "swarm_req_id": "SW-04"
+        },
+        {
+          "id": 5,
+          "goal_id": "G-04",
+          "swarm_req_id": "SW-05"
+        },
+        {
+          "id": 6,
+          "goal_id": "G-05",
+          "swarm_req_id": "SW-06"
+        },
+        {
+          "id": 7,
+          "goal_id": "G-11",
+          "swarm_req_id": "SW-07"
+        }
+      ]
     },
     "goals": {
       "create_sql": "CREATE TABLE goals (\n            goal_id VARCHAR PRIMARY KEY,\n            goal_description VARCHAR NOT NULL,\n            stakeholder VARCHAR,\n            origin VARCHAR,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            rationale VARCHAR,\n            satisfaction_status TEXT CHECK (satisfaction_status IN ('Pending','Not satisfied','Satisfied')),\n            method_id VARCHAR,\n            FOREIGN KEY (method_id) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
@@ -70,7 +198,7 @@
           "stakeholder": "Project owner",
           "origin": "Kaos model",
           "priority": "Mandatory",
-          "rationale": "HELLO :D",
+          "rationale": "",
           "satisfaction_status": "Pending",
           "method_id": null
         },
@@ -173,26 +301,6 @@
           "rationale": "Collective decision-making implies the absence of a central controller, requiring agents to operate autonomously. Therefore, agents must be capable of making independent decisions when necessary, including the ability to self-remove from the swarm in response to failure, inefficiency, or conflict with global objectives.",
           "satisfaction_status": "Pending",
           "method_id": null
-        },
-        {
-          "goal_id": "G-12",
-          "goal_description": "aesgdhj",
-          "stakeholder": "hjkl",
-          "origin": "fghjkl",
-          "priority": "Key",
-          "rationale": "fghjk",
-          "satisfaction_status": "Pending",
-          "method_id": null
-        },
-        {
-          "goal_id": "G-13",
-          "goal_description": "gshgser",
-          "stakeholder": "iopu",
-          "origin": "iojiohi",
-          "priority": "Optional",
-          "rationale": "uouipoig",
-          "satisfaction_status": "Pending",
-          "method_id": null
         }
       ]
     },
@@ -203,7 +311,18 @@
         "prefix",
         "meaning"
       ],
-      "rows": []
+      "rows": [
+        {
+          "gloss_id": 1,
+          "prefix": "G-",
+          "meaning": "Goals derived from project task description"
+        },
+        {
+          "gloss_id": 2,
+          "prefix": "SW-",
+          "meaning": "Requirements pertaining to the drone swarm"
+        }
+      ]
     },
     "item": {
       "create_sql": "CREATE TABLE item (\n            item_id VARCHAR PRIMARY KEY NOT NULL,\n            item_name VARCHAR NOT NULL\n        )",
@@ -293,7 +412,13 @@
         "description",
         "method_type"
       ],
-      "rows": []
+      "rows": [
+        {
+          "method_id": "M-01",
+          "description": "test",
+          "method_type": "Test"
+        }
+      ]
     }
   }
 }
