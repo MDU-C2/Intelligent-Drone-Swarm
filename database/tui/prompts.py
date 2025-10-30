@@ -86,11 +86,11 @@ def prompt_system_requirement():
     if reviewer == "EXIT": return None
     verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
     if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
+    verification_method = prompt_input("Verification method ID (optional):", optional=True)
     if verification_method == "EXIT": return None
 
     data = {
-        "parent_id": prompt_input("PARENT System Req ID: ", optional=True),
+        "parent_id": prompt_input("PARENT System Req ID:", optional=True),
         "sys_req_id": prompt_input("System Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
@@ -115,11 +115,11 @@ def prompt_subsystem_requirement():
     if reviewer == "EXIT": return None
     verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
     if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
+    verification_method = prompt_input("Verification method ID (optional):", optional=True)
     if verification_method == "EXIT": return None
 
     data = {
-        "parent_id": prompt_input("PARENT Subsystem Req ID (optional): ", optional=True),
+        "parent_id": prompt_input("PARENT Subsystem Req ID (optional):", optional=True),
         "sub_req_id": prompt_input("Subsystem Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
