@@ -145,46 +145,77 @@ Both commands load in the same data, but the first command hard codes IDs and th
 
 ---
 
-## 8) File/Folder overview
+## File/Folder overview
 
-```
-database/
-├── app/ # Scripts you run (entry points)
-│ ├── run_database.py # Main interactive interface
-│ ├── setup_database.py # Creates the database and tables
-│ └── verify_roundtrip.py # Tests DB ↔ JSON conversion integrity
-│
-├── core/ # Core database logic and schema
-│ ├── connect_database.py # Handles database connections
-│ ├── create_tables.py # Defines tables and foreign keys
-│ ├── insert_functions.py # Insert helpers for each table
-│ ├── db_utilities.py # Shared database utility functions
-│ └── paths.py # Paths used
-│
-├── dataman/ # Import/export and backup management
-│ ├── db_json_bridge.py # Convert DB ↔ JSON
-│ ├── export_db_to_csv.py # Export DB tables to CSV
-│ ├── export_tools.py # Interactive export utilities
-│ └── safe_restore.py # Safely restore DB from JSON
-│
-├── tui/ # Text-based interface (menus, prompts)
-│ ├── menu_actions.py # Handles user menu selections
-│ ├── prompts.py # Input prompts for adding/editing data
-│ ├── delete_preview.py # Safe delete with preview
-│ └── tui_helpers.py # Common TUI helper functions
-│
-├── viz/ # Visualization tools
-│ └── plot_tree.py # Plots requirement tree relationships
-│
-├── tests/ # Automated test scripts
-│ ├── test_db_json_roundtrip.py
-│ └── populate_test_data.py # Fills DB with example data
-│
-├── data/ # Stores runtime data
-│ └── db_name.txt # Name of DB
-│
-└── README.md
-```
+### database/app
+Entry point scripts.
+- `app/run_database.py`
+  Main interactive interface
+- `app/setup_database.py`
+  Sanitizes filepath, creates database and tables
+- `app/verify_roundtrip.py`
+  Tests DB ↔ JSON conversion integrity
+
+### database/core
+Core database logic and schema
+- `core/connect_database.py`
+  Handles database connections
+- `core/create_tables.py`
+  Defines tables and foreign keys
+- `core/db_utilities.py`
+  delete_from_table, update_row, interactive_search
+- `core/insert_functions.py`
+  Insert helpers for each table
+- `core/paths.py`
+  Paths used
+
+### database/data
+
+- `data/IRDS_requirements.db`
+  Main database
+- `data/database_dump.json`
+  JSON version of main database
+- `data/db_name.txt`
+  Filepath to and name of DB
+- `data/local.db`
+  Local database
+
+### database/dataman
+Import/export and backup management
+- `dataman/db_json_bridge.py`
+  Convert DB ↔ JSON
+- `dataman/export_db_to_csv.py`
+  Export DB tables to CSV (Excel)
+- `dataman/export_tools.py`
+  export_db_to_json_interactive, export_db_to_csv_interactive
+- `dataman/safe_restore.py`
+  Safe restore helper for Windows (avoids file-lock issues during DB restore)
+
+### database/tests
+Automated test scripts
+- `tests/pop_test_data.py`
+  Fills DB with example data
+- `tests/populate_test_data.py`
+  Fills DB with example data
+- `tests/test_db_json_roundtrip.py`
+
+### database/tui
+Text-based interface (menus, prompts)
+- `tui/delete_preview.py`
+  Safe delete with preview
+- `tui/menu_actions.py`
+  Handlers for TUI actions to keep run_database.py uncluttered
+- `tui/prompts.py`
+  Input prompts for adding/editing data
+- `tui/tui_helpers.py`
+  wait_for_enter
+
+### database/viz
+
+- `viz/plot_tree.py`
+  Plots requirement tree relationships
+
+---
 
 ## Decision Tree
 <picture>
