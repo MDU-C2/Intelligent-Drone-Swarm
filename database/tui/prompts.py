@@ -90,7 +90,7 @@ def prompt_system_requirement():
     if verification_method == "EXIT": return None
 
     data = {
-        "parent_id": prompt_input("PARENT System Req ID: "),
+        "parent_id": prompt_input("PARENT System Req ID: ", optional=True),
         "sys_req_id": prompt_input("System Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
