@@ -43,9 +43,9 @@ with connect_database(db_name) as db:
 
     # ----- Drone Swarm Requirements -----
     # swarm_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale,
-    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
-    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
-    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), verification_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # verifier ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # validation_status ('Pending','Failed','Verified','Inconclusive'), vv_method,
     # comment
     inserter.insert_drone_swarm_requirements(
         "SW-01", "Maintain formation at 5m spacing", "Key", "Formation stability", "Core mission behavior",
@@ -62,9 +62,9 @@ with connect_database(db_name) as db:
 
     # ----- System Requirements -----
     # parent_id, sys_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale, 
-    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
-    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
-    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), verification_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # verifier ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # validation_status ('Pending','Failed','Verified','Inconclusive'), vv_method,
     # comment
     inserter.insert_system_requirements(
         None, "SYS-01", "Control CPU handles swarm formation", "Key", "Control logic",
@@ -85,9 +85,9 @@ with connect_database(db_name) as db:
 
     # ----- Subsystem Requirements -----
     # parent_id, sub_req_id, requirement, priority ('Key','Mandatory','Optional'), effect, rationale, 
-    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), review_status ('TBR','Reviewed','Accepted', 'Rejected')
-    # reviewer ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
-    # verification_status ('Pending','Failed','Verified','Inconclusive'), verification_method,
+    # author ('E.Z','C.N','Y.M.B','E.M','A.H'), verification_status ('TBR','Reviewed','Accepted', 'Rejected')
+    # verifier ('E.Z','C.N','Y.M.B','E.M','A.H','TBR'), 
+    # validation_status ('Pending','Failed','Verified','Inconclusive'), vv_method,
     # comment
     inserter.insert_subsystem_requirements(
         None, "SS-01", "Design motor control firmware", "Key", "Flight performance",

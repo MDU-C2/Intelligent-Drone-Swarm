@@ -55,12 +55,12 @@ def prompt_drone_swarm_requirement():
     print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional): ", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
         "swarm_req_id": prompt_input("Swarm Req ID (leave blank for auto): ", optional=True),
@@ -69,10 +69,10 @@ def prompt_drone_swarm_requirement():
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale: "),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
@@ -82,12 +82,12 @@ def prompt_system_requirement():
     print("\nEnter System Requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional):", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional):", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
         "parent_id": prompt_input("PARENT System Req ID:", optional=True),
@@ -97,10 +97,10 @@ def prompt_system_requirement():
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale: "),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
@@ -111,12 +111,12 @@ def prompt_subsystem_requirement():
 
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional):", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional):", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
         "parent_id": prompt_input("PARENT Subsystem Req ID (optional):", optional=True),
@@ -126,10 +126,10 @@ def prompt_subsystem_requirement():
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale (optional): ", optional=True),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
