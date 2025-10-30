@@ -532,7 +532,7 @@
         {
           "parent_id": null,
           "sys_req_id": "PM-02",
-          "requirement": "The protocol module shall define th e procedures that all agents shall follow to share the mission plan.",
+          "requirement": "The protocol module shall define the procedures that all agents shall follow to share the mission plan.",
           "priority": "Mandatory",
           "effect": "Synchronisation",
           "rationale": "",
@@ -560,7 +560,7 @@
         {
           "parent_id": null,
           "sys_req_id": "PM-04",
-          "requirement": "The protocol module shall define the procedures that all agents shall follow icate their (all agents) capabilities.",
+          "requirement": "The protocol module shall define the procedures that all agents shall follow to indicate their (all agents) capabilities.",
           "priority": "Mandatory",
           "effect": "Capability assessment ",
           "rationale": "",
