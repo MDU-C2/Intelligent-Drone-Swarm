@@ -10,7 +10,7 @@ class insert_functions:
         self.PREFIX_INFO = {
             "goals": ("G", 2),
             "drone_swarm_requirements": ("SW", 2),
-            "system_requirements": ("P", 2),
+            "system_requirements": ("PM", 2),
             "subsystem_requirements": ("SS", 2),
             "item": ("I", 2),
             "test_and_verification": ("M", 2),
