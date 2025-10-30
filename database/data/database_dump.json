@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-10-28T12:04:18Z",
+    "exported_at": "2025-10-28T20:28:16Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -321,6 +321,11 @@
           "gloss_id": 2,
           "prefix": "SW-",
           "meaning": "Requirements pertaining to the drone swarm"
+        },
+        {
+          "gloss_id": 3,
+          "prefix": "PM-",
+          "meaning": "Protocol Module"
         }
       ]
     },
@@ -376,7 +381,113 @@
         "swarm_req_id",
         "sys_req_id"
       ],
-      "rows": []
+      "rows": [
+        {
+          "id": 1,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-01"
+        },
+        {
+          "id": 2,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-02"
+        },
+        {
+          "id": 3,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-03"
+        },
+        {
+          "id": 4,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-04"
+        },
+        {
+          "id": 5,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-05"
+        },
+        {
+          "id": 6,
+          "swarm_req_id": "SW-01",
+          "sys_req_id": "PM-06"
+        },
+        {
+          "id": 7,
+          "swarm_req_id": "SW-02",
+          "sys_req_id": "PM-07"
+        },
+        {
+          "id": 8,
+          "swarm_req_id": "SW-02",
+          "sys_req_id": "PM-08"
+        },
+        {
+          "id": 9,
+          "swarm_req_id": "SW-02",
+          "sys_req_id": "PM-09"
+        },
+        {
+          "id": 10,
+          "swarm_req_id": "SW-02",
+          "sys_req_id": "PM-10"
+        },
+        {
+          "id": 11,
+          "swarm_req_id": "SW-03",
+          "sys_req_id": "PM-11"
+        },
+        {
+          "id": 12,
+          "swarm_req_id": "SW-03",
+          "sys_req_id": "PM-12"
+        },
+        {
+          "id": 13,
+          "swarm_req_id": "SW-03",
+          "sys_req_id": "PM-13"
+        },
+        {
+          "id": 14,
+          "swarm_req_id": "SW-04",
+          "sys_req_id": "PM-14"
+        },
+        {
+          "id": 15,
+          "swarm_req_id": "SW-05",
+          "sys_req_id": "PM-15"
+        },
+        {
+          "id": 16,
+          "swarm_req_id": "SW-05",
+          "sys_req_id": "PM-16"
+        },
+        {
+          "id": 17,
+          "swarm_req_id": "SW-06",
+          "sys_req_id": "PM-17"
+        },
+        {
+          "id": 18,
+          "swarm_req_id": "SW-06",
+          "sys_req_id": "PM-18"
+        },
+        {
+          "id": 19,
+          "swarm_req_id": "SW-07",
+          "sys_req_id": "PM-19"
+        },
+        {
+          "id": 20,
+          "swarm_req_id": "SW-07",
+          "sys_req_id": "PM-20"
+        },
+        {
+          "id": 21,
+          "swarm_req_id": "SW-07",
+          "sys_req_id": "PM-21"
+        }
+      ]
     },
     "sysreq_children": {
       "create_sql": "CREATE TABLE sysreq_children(\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            sys_req_id VARCHAR NOT NULL,\n            sub_req_id VARCHAR UNIQUE NOT NULL,\n            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,\n            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE\n        )",
@@ -403,7 +514,330 @@
         "verification_method",
         "comment"
       ],
-      "rows": []
+      "rows": [
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-01",
+          "requirement": "The protocol module shall define the procedures will be taken so that all agents are aware of the prevailing mission state.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-02",
+          "requirement": "The protocol module shall define th e procedures that all agents shall follow to share the mission plan.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-03",
+          "requirement": "The protocol module shall define procedures on how tasks are assigned to agents depending on the mission plan.",
+          "priority": "Mandatory",
+          "effect": "Task assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-04",
+          "requirement": "The protocol module shall define the procedures that all agents shall follow icate their (all agents) capabilities.",
+          "priority": "Mandatory",
+          "effect": "Capability assessment ",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-05",
+          "requirement": "The protocol module shall define the message formats that all agents shall use to communicate their (all agents) capabilities.",
+          "priority": "Mandatory",
+          "effect": "Capability assessment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-06",
+          "requirement": "The protocol module shall define the procedures that all agents follow to assign tasks to agents based on the agents' capabilities.",
+          "priority": "Mandatory",
+          "effect": "Capability assessment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-07",
+          "requirement": "The protocol module shall define the rules that all agents will adhere to when re-assigning tasks.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-08",
+          "requirement": "The protocol module shall define the procedures that agents follow to exchange task re-assignment proposals.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "the module must define both rules and procedures for task re-assignment.",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-09",
+          "requirement": "The protocol module shall define the message format that all agents will use to exchange task re-assignment proposals.",
+          "priority": "Key",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-10",
+          "requirement": "The protocol module shall define the procedure that agents experiencing degrade functionality shall follow so as to communicate their degraded status to other agents.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-11",
+          "requirement": "The protocol module shall define the rules that agents follow to identify the criticality of tasks.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-12",
+          "requirement": "The protocol module shall define procedures that agents follow toassign high-criticality tasks to fully functional agents when any agent's functionality becomes degraded.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-13",
+          "requirement": "The protocol module shall define procedures that agents follow to assign lower-criticality tasks to agents experiencing degraded functionality based on their (the degraded agent(s)) prevailing capabilities.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-14",
+          "requirement": "The protocol module shall define the rules that agents follow to reach agreement on correct data, even if at least one agent provides incorret data.",
+          "priority": "Mandatory",
+          "effect": "Fault tolerance",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": "PM-14",
+          "sys_req_id": "PM-14B",
+          "requirement": "The protocol module shall define procedures that allow agents to mitigate incorrect data received from at least one agent during consensus.",
+          "priority": "Mandatory",
+          "effect": "Fault tolerance",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": "PM-14",
+          "sys_req_id": "PM-14C",
+          "requirement": "The protocol module shall define the rules that ensure agents base their consensus decisions only on verified data.",
+          "priority": "Mandatory",
+          "effect": "Fault tolerance",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-15",
+          "requirement": "The protocol module shall define the rules that agents will follow to reach a collective decision for tasks that require coordination.",
+          "priority": "Mandatory",
+          "effect": "Consesus mechanism ",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-16",
+          "requirement": "The protocol module shall define the procedures that agents will follow to reach a collective decision for tasks that require coordination.",
+          "priority": "Mandatory",
+          "effect": "Consensus",
+          "rationale": "PM-16 and PM-15 are important to highlight the need for both rules and procedures.",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-17",
+          "requirement": "The protocol module shall define the rules that agents follow to share information about the boundaries of their assigned search areas.",
+          "priority": "Mandatory",
+          "effect": "Search mechanism",
+          "rationale": "this requirement intends to ensure that the final design avoid overlap of search areas among agents.",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-18",
+          "requirement": "The protocol module shall define the message-exchange rules that enable agents and agree on which agent searches what portion of the area.",
+          "priority": "Mandatory",
+          "effect": "Search mechanism",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-19",
+          "requirement": "The protocol module shall define the conditions under which an agent is permitted to make independent decisions without prior consensus.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-20",
+          "requirement": "The protocol module shall define the procedures that agents follow to notify other agents after taking an independent action.",
+          "priority": "Mandatory",
+          "effect": "Independent behaviour",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "PM-21",
+          "requirement": "The protocol module shall define the rules that agents follow to reintegrate independent decisions into the swarm’s shared state once the communication with other agents is resumed.",
+          "priority": "Mandatory",
+          "effect": "Synchronisation",
+          "rationale": "",
+          "author": "C.N",
+          "review_status": "TBR",
+          "reviewer": "TBR",
+          "verification_status": "Pending",
+          "verification_method": null,
+          "comment": null
+        }
+      ]
     },
     "test_and_verification": {
       "create_sql": "CREATE TABLE test_and_verification (\n            method_id VARCHAR PRIMARY KEY NOT NULL,\n            description VARCHAR NOT NULL,\n            method_type TEXT CHECK (method_type IN ('Inspection','Analysis','Test'))    \n        )",
