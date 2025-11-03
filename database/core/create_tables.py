@@ -141,27 +141,6 @@ class create_tables:
         """
         self._ensure("sysreq_children", create_sql)
 
-    def create_subsys_join_item_table(self):
-        create_sql = """
-        CREATE TABLE subsys_join_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            item_id VARCHAR NOT NULL,
-            sub_req_id VARCHAR UNIQUE NOT NULL,   
-            FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
-            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              
-        )
-        """
-        self._ensure("subsys_join_item", create_sql)
-
-    def create_item_table(self):
-        create_sql = """
-        CREATE TABLE item (
-            item_id VARCHAR PRIMARY KEY NOT NULL,
-            item_name VARCHAR NOT NULL
-        )
-        """
-        self._ensure("item", create_sql)
-
     def create_documents_table(self):
         create_sql = """
         CREATE TABLE documents (
@@ -231,8 +210,6 @@ class create_tables:
             self.create_drone_swarm_requirements_table()
             self.create_system_requirements_table()
             self.create_subsystem_requirements_table()
-            self.create_item_table()
-            self.create_subsys_join_item_table()
             self.create_sysreq_children_table()
             self.create_swarm_req_children_table()
             

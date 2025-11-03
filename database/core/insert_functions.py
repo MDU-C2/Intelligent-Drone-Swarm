@@ -12,7 +12,6 @@ class insert_functions:
             "drone_swarm_requirements": ("SW", 2),
             "system_requirements": ("PM", 2),
             "subsystem_requirements": ("SS", 2),
-            "item": ("I", 2),
             "test_and_verification": ("M", 2),
             "documents": ("D", 2),
             "quality_requirements": ("QR", 2)
@@ -131,18 +130,6 @@ class insert_functions:
         )
         return sub_req_id
 
-    def insert_item(self, item_id, item_name):
-        if not item_id:
-            item_id = self._next_id("item", "item_id")
-        self.cursor.execute(
-            """
-            INSERT INTO item (item_id, item_name)
-            VALUES (?,?)
-            """,
-            (item_id, item_name)
-        )
-        return item_id
-
     def insert_test_and_verification(self, method_id, description, method_type):
         if not method_id:
             method_id = self._next_id("test_and_verification", "method_id")
@@ -215,14 +202,6 @@ class insert_functions:
             (sys_req_id, sub_req_id)
         )
     
-    def insert_subsys_join_item(self, item_id, sub_req_id):
-        self.cursor.execute(
-            """
-            INSERT INTO subsys_join_item (item_id, sub_req_id)
-            VALUES (?,?)
-            """,
-            (item_id, sub_req_id)
-        )
     
     def insert_V_join_documents(self, method_id, doc_id):
         self.cursor.execute(
