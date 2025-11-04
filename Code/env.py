@@ -13,6 +13,7 @@ class SearchAreaAviary(CtrlAviary):
                  grid_size=(10, 10),
                  cell_size=1.0,
                  home_position=(0, 0),
+                 search_area_offset=(5, 0),   # <-- NEW
                  *args, **kwargs):
         """
         grid_size : tuple(int, int)
@@ -25,10 +26,12 @@ class SearchAreaAviary(CtrlAviary):
         self.grid_size = grid_size
         self.cell_size = cell_size
         self.home_position = home_position
+        self.search_area_offset = search_area_offset  # store it
 
         super().__init__(*args, **kwargs)
 
         self._create_green_ground()
+        self._create_search_area_overlay()  # <--- add this line
         self._create_grid_lines()
         self._create_helipad(self.home_position)
 
@@ -36,6 +39,81 @@ class SearchAreaAviary(CtrlAviary):
         """Loads and colors the ground plane green."""
         p.resetBasePositionAndOrientation(self.PLANE_ID, [0, 0, 0], [0, 0, 0, 1], physicsClientId=self.CLIENT)
         p.changeVisualShape(self.PLANE_ID, -1, rgbaColor=[0, 1, 0, 1], physicsClientId=self.CLIENT)
+
+    def _create_search_area_overlay(self):
+        """Creates a white rectangular area overlay within the green ground."""
+        width_x, width_y = self.grid_size
+        half_x = width_x * self.cell_size / 2
+        half_y = width_y * self.cell_size / 2
+
+        # Compute where to place the search area
+        center_x = self.home_position[0] + self.search_area_offset[0]
+        center_y = self.home_position[1] + self.search_area_offset[1]
+
+        overlay_visual = p.createVisualShape(
+            shapeType=p.GEOM_BOX,
+            halfExtents=[half_x, half_y, 0.001],
+            rgbaColor=[1, 1, 1, 1],
+            physicsClientId=self.CLIENT
+        )
+
+        p.createMultiBody(
+            baseMass=0,
+            baseVisualShapeIndex=overlay_visual,
+            basePosition=[center_x, center_y, 0.001],
+            physicsClientId=self.CLIENT
+        )
+
+        # Optional: black outline
+        for x in [-half_x, half_x]:
+            p.addUserDebugLine(
+                [center_x + x, center_y - half_y, 0.02],
+                [center_x + x, center_y + half_y, 0.02],
+                [0, 0, 0], 2, 0, physicsClientId=self.CLIENT
+            )
+        for y in [-half_y, half_y]:
+            p.addUserDebugLine(
+                [center_x - half_x, center_y + y, 0.02],
+                [center_x + half_x, center_y + y, 0.02],
+                [0, 0, 0], 2, 0, physicsClientId=self.CLIENT
+            )
+            # --- Add grid lines to show sections clearly ---
+        rows, cols = self.grid_size
+
+        # Draw vertical grid lines
+        for i in range(1, cols):
+            x = center_x - half_x + i * self.cell_size
+            p.addUserDebugLine(
+                [x, center_y - half_y, 0.021],
+                [x, center_y + half_y, 0.021],
+                [0, 0, 0], 2, 0, physicsClientId=self.CLIENT
+            )
+
+        # Draw horizontal grid lines
+        for j in range(1, rows):
+            y = center_y - half_y + j * self.cell_size
+            p.addUserDebugLine(
+                [center_x - half_x, y, 0.021],
+                [center_x + half_x, y, 0.021],
+                [0, 0, 0], 2, 0, physicsClientId=self.CLIENT
+            )
+
+        # Optional: label each cell in the grid
+        cell_id = 0
+        for i in range(rows):
+            for j in range(cols):
+                cell_x = center_x - half_x + (i + 0.5) * self.cell_size
+                cell_y = center_y - half_y + (j + 0.5) * self.cell_size
+                p.addUserDebugText(
+                    str(cell_id),
+                    [cell_x, cell_y, 0.05],
+                    textColorRGB=[0, 0, 0],
+                    textSize=1.5,
+                    lifeTime=0,
+                    physicsClientId=self.CLIENT
+                )
+                cell_id += 1
+
 
     def get_grid_cell_centers(grid_size, cell_size):
         centers = []
