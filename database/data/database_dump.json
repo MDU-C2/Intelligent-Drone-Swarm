@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-03T07:37:23Z",
+    "exported_at": "2025-11-04T15:01:31Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -135,7 +135,7 @@
       ]
     },
     "goal_children": {
-      "create_sql": "CREATE TABLE goal_children (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            goal_id VARCHAR NOT NULL,\n            swarm_req_id VARCHAR UNIQUE NOT NULL,\n            FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,\n            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE\n        )",
+      "create_sql": "CREATE TABLE goal_children (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            goal_id VARCHAR NOT NULL,\n            swarm_req_id VARCHAR NOT NULL,\n            FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,\n            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE\n        )",
       "columns": [
         "id",
         "goal_id",
@@ -349,14 +349,6 @@
         }
       ]
     },
-    "item": {
-      "create_sql": "CREATE TABLE item (\n            item_id VARCHAR PRIMARY KEY NOT NULL,\n            item_name VARCHAR NOT NULL\n        )",
-      "columns": [
-        "item_id",
-        "item_name"
-      ],
-      "rows": []
-    },
     "quality_requirements": {
       "create_sql": "CREATE TABLE quality_requirements (\n            quality_rec_id VARCHAR PRIMARY KEY, \n            requirement VARCHAR, \n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            approved_by TEXT CHECK (approved_by IN ('Y.M.B') OR approved_by IS NULL)\n        )",
       "columns": [
@@ -364,15 +356,6 @@
         "requirement",
         "author",
         "approved_by"
-      ],
-      "rows": []
-    },
-    "subsys_join_item": {
-      "create_sql": "CREATE TABLE subsys_join_item (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            item_id VARCHAR NOT NULL,\n            sub_req_id VARCHAR UNIQUE NOT NULL,   \n            FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,\n            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              \n        )",
-      "columns": [
-        "id",
-        "item_id",
-        "sub_req_id"
       ],
       "rows": []
     },
@@ -843,7 +826,7 @@
         },
         {
           "parent_id": null,
-          "sub_req_id": "MSG-011",
+          "sub_req_id": "MSG-11",
           "requirement": "The messaging sub-module shall define the procedures for exchanging task re-assignment messages between agents.",
           "priority": "Mandatory",
           "effect": "Message exchange",
@@ -862,7 +845,7 @@
           "priority": "Key",
           "effect": "Message format",
           "rationale": null,
-          "author": "C.N",         
+          "author": "C.N",
           "verification_status": "TBR",
           "verifier": "TBR",
           "validation_status": "Pending",
@@ -945,20 +928,6 @@
           "requirement": "The task allocation sub-module shall define procedures for identifying fully functional agents eligible to take over high-criticality tasks.",
           "priority": "Mandatory",
           "effect": "Task assignment",
-          "rationale": null,
-          "author": "C.N",
-          "verification_status": "TBR",
-          "verifier": "TBR",
-          "validation_status": "Pending",
-          "vv_method": null,
-          "comment": null
-        },
-        {
-          "parent_id": "TAL-08",
-          "sub_req_id": "TAL-08A",
-          "requirement": "The task allocation sub-module shall assign each high-criticality task only to agents whose capabilities match the task requirements.",
-          "priority": "Mandatory",
-          "effect": "Task re-assignment",
           "rationale": null,
           "author": "C.N",
           "verification_status": "TBR",
@@ -1260,11 +1229,25 @@
           "validation_status": "Pending",
           "vv_method": null,
           "comment": null
+        },
+        {
+          "parent_id": "TAL-08",
+          "sub_req_id": "TAL-08A",
+          "requirement": "The task allocation sub-module shall assign each high-criticality task only to agents whose capabilities match the task requirements.",
+          "priority": "Mandatory",
+          "effect": "Task re-assignment",
+          "rationale": null,
+          "author": "C.N",
+          "verification_status": "TBR",
+          "verifier": "TBR",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
         }
       ]
     },
     "swarm_req_children": {
-      "create_sql": "CREATE TABLE swarm_req_children (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            swarm_req_id VARCHAR  NOT NULL,\n            sys_req_id VARCHAR UNIQUE NOT NULL,\n            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,\n            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE\n        )",
+      "create_sql": "CREATE TABLE swarm_req_children (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            swarm_req_id VARCHAR  NOT NULL,\n            sys_req_id VARCHAR NOT NULL,\n            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,\n            FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE\n        )",
       "columns": [
         "id",
         "swarm_req_id",
@@ -1379,13 +1362,349 @@
       ]
     },
     "sysreq_children": {
-      "create_sql": "CREATE TABLE sysreq_children(\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            sys_req_id VARCHAR NOT NULL,\n            sub_req_id VARCHAR UNIQUE NOT NULL,\n            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,\n            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE\n        )",
+      "create_sql": "CREATE TABLE sysreq_children(\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            sys_req_id VARCHAR NOT NULL,\n            sub_req_id VARCHAR NOT NULL,\n            FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,\n            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE\n        )",
       "columns": [
         "id",
         "sys_req_id",
         "sub_req_id"
       ],
-      "rows": []
+      "rows": [
+        {
+          "id": 1,
+          "sys_req_id": "PM-01",
+          "sub_req_id": "SIS-01"
+        },
+        {
+          "id": 2,
+          "sys_req_id": "PM-01",
+          "sub_req_id": "MSG-01"
+        },
+        {
+          "id": 3,
+          "sys_req_id": "PM-01",
+          "sub_req_id": "INF-01"
+        },
+        {
+          "id": 4,
+          "sys_req_id": "PM-01",
+          "sub_req_id": "CON-01"
+        },
+        {
+          "id": 5,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "MSG-02"
+        },
+        {
+          "id": 6,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "MSG-03"
+        },
+        {
+          "id": 7,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "MSG-04"
+        },
+        {
+          "id": 8,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "INF-02"
+        },
+        {
+          "id": 9,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "INF-03"
+        },
+        {
+          "id": 10,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "CON-02"
+        },
+        {
+          "id": 11,
+          "sys_req_id": "PM-02",
+          "sub_req_id": "SIS-02"
+        },
+        {
+          "id": 12,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "TAL-01"
+        },
+        {
+          "id": 13,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "TAL-02"
+        },
+        {
+          "id": 14,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "MSG-05"
+        },
+        {
+          "id": 15,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "MSG-06"
+        },
+        {
+          "id": 16,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "MSG-07"
+        },
+        {
+          "id": 17,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "INF-04"
+        },
+        {
+          "id": 18,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "CON-03"
+        },
+        {
+          "id": 19,
+          "sys_req_id": "PM-03",
+          "sub_req_id": "SIS-03"
+        },
+        {
+          "id": 20,
+          "sys_req_id": "PM-04",
+          "sub_req_id": "MSG-08"
+        },
+        {
+          "id": 21,
+          "sys_req_id": "PM-04",
+          "sub_req_id": "MSG-09"
+        },
+        {
+          "id": 22,
+          "sys_req_id": "PM-04",
+          "sub_req_id": "INF-05"
+        },
+        {
+          "id": 23,
+          "sys_req_id": "PM-04",
+          "sub_req_id": "SIS-04"
+        },
+        {
+          "id": 24,
+          "sys_req_id": "PM-05",
+          "sub_req_id": "MSG-09"
+        },
+        {
+          "id": 25,
+          "sys_req_id": "PM-06",
+          "sub_req_id": "INF-06"
+        },
+        {
+          "id": 26,
+          "sys_req_id": "PM-06",
+          "sub_req_id": "CON-04"
+        },
+        {
+          "id": 27,
+          "sys_req_id": "PM-06",
+          "sub_req_id": "CON-05"
+        },
+        {
+          "id": 28,
+          "sys_req_id": "PM-06",
+          "sub_req_id": "TAL-03"
+        },
+        {
+          "id": 29,
+          "sys_req_id": "PM-07",
+          "sub_req_id": "MSG-10"
+        },
+        {
+          "id": 30,
+          "sys_req_id": "PM-07",
+          "sub_req_id": "INF-07"
+        },
+        {
+          "id": 31,
+          "sys_req_id": "PM-07",
+          "sub_req_id": "CON-06"
+        },
+        {
+          "id": 32,
+          "sys_req_id": "PM-07",
+          "sub_req_id": "TAL-04"
+        },
+        {
+          "id": 33,
+          "sys_req_id": "PM-07",
+          "sub_req_id": "TAL-05"
+        },
+        {
+          "id": 34,
+          "sys_req_id": "PM-08",
+          "sub_req_id": "MSG-10"
+        },
+        {
+          "id": 35,
+          "sys_req_id": "PM-08",
+          "sub_req_id": "MSG-11"
+        },
+        {
+          "id": 36,
+          "sys_req_id": "PM-09",
+          "sub_req_id": "MSG-12"
+        },
+        {
+          "id": 37,
+          "sys_req_id": "PM-10",
+          "sub_req_id": "MSG-13"
+        },
+        {
+          "id": 38,
+          "sys_req_id": "PM-10",
+          "sub_req_id": "MSG-14"
+        },
+        {
+          "id": 39,
+          "sys_req_id": "PM-10",
+          "sub_req_id": "INF-05"
+        },
+        {
+          "id": 40,
+          "sys_req_id": "PM-11",
+          "sub_req_id": "INF-08"
+        },
+        {
+          "id": 41,
+          "sys_req_id": "PM-11",
+          "sub_req_id": "TAL-06"
+        },
+        {
+          "id": 42,
+          "sys_req_id": "PM-11",
+          "sub_req_id": "TAL-07"
+        },
+        {
+          "id": 43,
+          "sys_req_id": "PM-12",
+          "sub_req_id": "TAL-08"
+        },
+        {
+          "id": 44,
+          "sys_req_id": "PM-13",
+          "sub_req_id": "TAL-09"
+        },
+        {
+          "id": 45,
+          "sys_req_id": "PM-13",
+          "sub_req_id": "TAL-10"
+        },
+        {
+          "id": 46,
+          "sys_req_id": "PM-14",
+          "sub_req_id": "CON-07"
+        },
+        {
+          "id": 47,
+          "sys_req_id": "PM-14",
+          "sub_req_id": "CON-08"
+        },
+        {
+          "id": 48,
+          "sys_req_id": "PM-14",
+          "sub_req_id": "CON-09"
+        },
+        {
+          "id": 49,
+          "sys_req_id": "PM-15",
+          "sub_req_id": "CON-09"
+        },
+        {
+          "id": 50,
+          "sys_req_id": "PM-15",
+          "sub_req_id": "CON-10"
+        },
+        {
+          "id": 51,
+          "sys_req_id": "PM-16",
+          "sub_req_id": "CON-09"
+        },
+        {
+          "id": 52,
+          "sys_req_id": "PM-16",
+          "sub_req_id": "CON-11"
+        },
+        {
+          "id": 53,
+          "sys_req_id": "PM-17",
+          "sub_req_id": "MSG-15"
+        },
+        {
+          "id": 54,
+          "sys_req_id": "PM-17",
+          "sub_req_id": "MSG-16"
+        },
+        {
+          "id": 55,
+          "sys_req_id": "PM-17",
+          "sub_req_id": "INF-08"
+        },
+        {
+          "id": 56,
+          "sys_req_id": "PM-18",
+          "sub_req_id": "MSG-17"
+        },
+        {
+          "id": 57,
+          "sys_req_id": "PM-18",
+          "sub_req_id": "CON-12"
+        },
+        {
+          "id": 58,
+          "sys_req_id": "PM-18",
+          "sub_req_id": "TAL-11"
+        },
+        {
+          "id": 59,
+          "sys_req_id": "PM-19",
+          "sub_req_id": "CON-13"
+        },
+        {
+          "id": 60,
+          "sys_req_id": "PM-19",
+          "sub_req_id": "CON-14"
+        },
+        {
+          "id": 61,
+          "sys_req_id": "PM-19",
+          "sub_req_id": "SIS-05"
+        },
+        {
+          "id": 62,
+          "sys_req_id": "PM-19",
+          "sub_req_id": "SIS-06"
+        },
+        {
+          "id": 63,
+          "sys_req_id": "PM-20",
+          "sub_req_id": "MSG-18"
+        },
+        {
+          "id": 64,
+          "sys_req_id": "PM-20",
+          "sub_req_id": "MSG-19"
+        },
+        {
+          "id": 65,
+          "sys_req_id": "PM-20",
+          "sub_req_id": "MSG-20"
+        },
+        {
+          "id": 66,
+          "sys_req_id": "PM-21",
+          "sub_req_id": "CON-15"
+        },
+        {
+          "id": 67,
+          "sys_req_id": "PM-21",
+          "sub_req_id": "INF-09"
+        }
+      ]
     },
     "system_requirements": {
       "create_sql": "CREATE TABLE system_requirements (\n            parent_id VARCHAR,\n            sys_req_id VARCHAR PRIMARY KEY NOT NULL,\n            requirement VARCHAR NOT NULL,\n            priority TEXT CHECK (priority IN ('Key','Mandatory','Optional')),\n            effect VARCHAR NOT NULL,\n            rationale VARCHAR,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),\n            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),\n            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),\n            vv_method VARCHAR,\n            comment VARCHAR,\n            FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,\n            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL\n        )",
