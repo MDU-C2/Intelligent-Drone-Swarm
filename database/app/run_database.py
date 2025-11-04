@@ -51,7 +51,7 @@ def main():
             print("7:  Insert Quality Requirement")
             print("8:  Connect Drone Swarm Requirement to Goal")
             print("9:  Connect System Requirement to Drone Swarm Requirement")
-            print("10: Connect System Requiement to Subsystem Requirement")
+            print("10: Connect System Requirement to Subsystem Requirement")
             print("11: Connect Document to V&V Method")
             print("12: Delete table")
             print("13: Add ID to Glossary")
