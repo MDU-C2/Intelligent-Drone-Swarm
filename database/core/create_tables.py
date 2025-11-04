@@ -68,7 +68,7 @@ class create_tables:
         CREATE TABLE goal_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             goal_id VARCHAR NOT NULL,
-            swarm_req_id VARCHAR UNIQUE NOT NULL,
+            swarm_req_id VARCHAR NOT NULL,
             FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,
             FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE
         )
@@ -101,7 +101,7 @@ class create_tables:
         CREATE TABLE swarm_req_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             swarm_req_id VARCHAR  NOT NULL,
-            sys_req_id VARCHAR UNIQUE NOT NULL,
+            sys_req_id VARCHAR NOT NULL,
             FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
             FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
         )
@@ -134,33 +134,12 @@ class create_tables:
         CREATE TABLE sysreq_children(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sys_req_id VARCHAR NOT NULL,
-            sub_req_id VARCHAR UNIQUE NOT NULL,
+            sub_req_id VARCHAR NOT NULL,
             FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
             FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE
         )
         """
         self._ensure("sysreq_children", create_sql)
-
-    def create_subsys_join_item_table(self):
-        create_sql = """
-        CREATE TABLE subsys_join_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            item_id VARCHAR NOT NULL,
-            sub_req_id VARCHAR UNIQUE NOT NULL,   
-            FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
-            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              
-        )
-        """
-        self._ensure("subsys_join_item", create_sql)
-
-    def create_item_table(self):
-        create_sql = """
-        CREATE TABLE item (
-            item_id VARCHAR PRIMARY KEY NOT NULL,
-            item_name VARCHAR NOT NULL
-        )
-        """
-        self._ensure("item", create_sql)
 
     def create_documents_table(self):
         create_sql = """
@@ -231,8 +210,6 @@ class create_tables:
             self.create_drone_swarm_requirements_table()
             self.create_system_requirements_table()
             self.create_subsystem_requirements_table()
-            self.create_item_table()
-            self.create_subsys_join_item_table()
             self.create_sysreq_children_table()
             self.create_swarm_req_children_table()
             

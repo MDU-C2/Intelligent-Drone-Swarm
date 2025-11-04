@@ -159,14 +159,6 @@ def prompt_sysreq_children():
     if sub_req_id == "EXIT": return None
     return {"sys_req_id": sys_req_id, "sub_req_id": sub_req_id}
 
-def prompt_subsys_join_item():
-    print("\nLink subsystem requirement and item (subsys_join_item table (type 'exit' to cancel)):")
-    item_id = prompt_input("Item ID: ")
-    if item_id == "EXIT": return None
-    sub_req_id = prompt_input("Subsystem Req ID: ")
-    if sub_req_id == "EXIT": return None
-    return {"item_id": item_id, "sub_req_id": sub_req_id}
-
 def prompt_V_join_documents():
     print("\nLink test/verification and document (V_join_documents table (type 'exit' to cancel)):")
     method_id = prompt_input("Method ID: ")
@@ -195,15 +187,6 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
-def prompt_item():
-    print("\nInsert Item (type 'exit' to cancel)")
-    item_id = prompt_input("Item ID (leave blank for auto): ", optional=True)
-    if item_id == "EXIT":
-        return None
-    item_name = prompt_input("Item Name: ")
-    if item_name == "EXIT":
-        return None
-    return {"item_id": item_id, "item_name": item_name}
 
 def prompt_document():
     print("\nInsert Document (type 'exit' to cancel)")
@@ -232,6 +215,12 @@ def prompt_document():
         "version": version,
         "author": author or None
     }
+def prompt_delete_table():
+    print("\nDelete Table (type 'exit' to cancel)")
+    table_name = prompt_input("Table Name: ")
+    if table_name == "EXIT":
+        return None
+    return {"table_name": table_name}
 
 def prompt_vv_method():
     print("\nInsert V&V Method (type 'exit' to cancel)")
