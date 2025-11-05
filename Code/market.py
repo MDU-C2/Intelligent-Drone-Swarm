@@ -1,0 +1,195 @@
+# market.py
+import numpy as np
+
+class MarketSystem:
+    """
+    Market system where drones buy unsearched sections and gain reward points
+    equal to the section's worth once the section has been searched.
+    """
+
+    def __init__(self, num_drones, area, starting_points=3.0, base_value=2.0):
+        self.num_drones = num_drones
+        self.area = area
+        self.base_value = base_value
+        self.points = {i: starting_points for i in range(num_drones)}
+        self.transactions = []  # market logs
+        self.phase = "initial"  # 'initial' or 'dynamic'
+
+        # Each section has its state
+        self.sections = [
+            {
+                "id": s.id,
+                "pos": np.array(s.position),
+                "owner": None,
+                "value": base_value,
+                "available": True,
+                "searched": False
+            }
+            for s in self.area.sections
+        ]
+
+    # ---------------------------------------------------------------------
+    def compute_dynamic_price(self, drone_pos, section_pos):
+        """Price increases with distance (only in dynamic phase)."""
+        dist = np.linalg.norm(drone_pos[:2] - section_pos[:2])
+        return round(self.base_value * (1 + dist / 10.0), 2)
+
+    # ---------------------------------------------------------------------
+    def open_market(self, drone_positions):
+        """
+        Initial market phase: all sections cost the same.
+        drones take turns buying until they run out of points.
+        """
+        print("🟢 Opening initial market...")
+        self.phase = "initial"
+        equal_price = self.base_value
+
+        turn = 0
+        while any(s["available"] and not s["searched"] for s in self.sections):
+            drone_id = turn % self.num_drones
+            affordable = [
+                s for s in self.sections
+                if s["available"] and not s["searched"] and self.points[drone_id] >= equal_price
+            ]
+            if not affordable:
+                turn += 1
+                if turn > self.num_drones * 2:
+                    break
+                continue
+
+            chosen = np.random.choice(affordable)
+            self.buy_section(drone_id, chosen["id"], equal_price)
+            turn += 1
+
+        self.transactions.append("Initial market completed (equal pricing).")
+
+    # ---------------------------------------------------------------------
+    def enable_dynamic_pricing(self):
+        """Enable distance-based dynamic pricing."""
+        if self.phase != "dynamic":
+            self.phase = "dynamic"
+            self.transactions.append("Market switched to dynamic pricing.")
+
+    # ---------------------------------------------------------------------
+    def dynamic_update(self, drone_positions):
+        """Let drones buy newly available sections during mission."""
+        if self.phase != "dynamic":
+            self.enable_dynamic_pricing()
+
+        bids = []
+        for s in self.sections:
+            if not s["available"] or s["searched"]:
+                continue
+            for drone_id, pos in enumerate(drone_positions):
+                price = self.compute_dynamic_price(pos, s["pos"])
+                bids.append((s["id"], drone_id, price))
+
+        bids.sort(key=lambda b: b[2])
+
+        for section_id, drone_id, price in bids:
+            sec = next(x for x in self.sections if x["id"] == section_id)
+            if not sec["available"] or sec["searched"]:
+                continue
+            if self.points[drone_id] < price:
+                continue
+            self.buy_section(drone_id, section_id, price)
+
+    # ---------------------------------------------------------------------
+    def buy_section(self, drone_id, section_id, price=None):
+        """Buy a section if available and enough points."""
+        sec = next(s for s in self.sections if s["id"] == section_id)
+        if not sec["available"] or sec["searched"]:
+            return False
+        if price is None:
+            price = sec["value"]
+        if self.points[drone_id] < price:
+            return False
+
+        sec["owner"] = drone_id
+        sec["available"] = False
+        sec["value"] = price
+        self.points[drone_id] -= price
+
+        # Reflect in SearchArea
+        for s in self.area.sections:
+            if s.id == section_id:
+                s.assigned_drone = drone_id
+
+        self.transactions.append(
+            f"drone {drone_id} bought Section {section_id} for {price:.2f} pts."
+        )
+        return True
+
+    # ---------------------------------------------------------------------
+    def reward_and_remove_section(self, drone_id, section_id):
+        """
+        Called when an drone completes searching a section.
+        The drone earns reward points equal to the section's value.
+        The section is removed permanently from the market.
+        """
+        sec = next(s for s in self.sections if s["id"] == section_id)
+        if sec["searched"]:
+            return False  # already done
+
+        reward = sec["value"]
+        self.points[drone_id] += reward
+        sec["searched"] = True
+        sec["available"] = False
+        sec["owner"] = None
+
+        # Update SearchArea to reflect it's searched
+        for s in self.area.sections:
+            if s.id == section_id:
+                s.searched = True
+                s.assigned_drone = None
+
+        self.transactions.append(
+            f"🏁 drone {drone_id} completed Section {section_id}, earned {reward:.2f} pts (removed from market)."
+        )
+        return True
+
+    # ---------------------------------------------------------------------
+    def release_drone_sections(self, drone_id):
+        """
+        Called when an drone crashes or emergency lands.
+        All sections that were owned (and not yet searched)
+        become available again on the market.
+        """
+        for sec in self.sections:
+            if sec["owner"] == drone_id and not sec["searched"]:
+                sec["owner"] = None
+                sec["available"] = True
+                # Reflect in SearchArea
+                for s in self.area.sections:
+                    if s.id == sec["id"]:
+                        s.assigned_drone = None
+                        s.searched = False
+                self.transactions.append(
+                    f"drone {drone_id} released Section {sec['id']} "
+                    f"(available again after emergency landing)."
+                )
+
+    # ---------------------------------------------------------------------
+    def get_market_status(self):
+        """Formatted market status for GUI display."""
+        lines = []
+        lines.append(f"Market phase: {self.phase.upper()}\n")
+        lines.append("drone Balances:")
+        for a in range(self.num_drones):
+            lines.append(f"  drone {a}: {self.points[a]:.2f} pts")
+
+        lines.append("\nSection Ownership:")
+        for s in self.sections:
+            if s["searched"]:
+                state = "✅ Done"
+            elif not s["available"]:
+                state = f"Owned by drone {s['owner']}"
+            else:
+                state = "Available"
+            lines.append(f"  Section {s['id']}: {state} (Value {s['value']:.2f})")
+
+        if self.transactions:
+            lines.append("\nRecent Transactions:")
+            lines += [f"  {t}" for t in self.transactions[-5:]]
+
+        return "\n".join(lines)

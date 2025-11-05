@@ -20,9 +20,9 @@ class DroneControlUI(QWidget):
 
         # --- Drone count control ---
         h_layout = QHBoxLayout()
-        h_layout.addWidget(QLabel("Number of Drones:"))
+        h_layout.addWidget(QLabel("Number of Agents:"))
         self.drone_count = QSpinBox()
-        self.drone_count.setRange(1, 50)
+        self.drone_count.setRange(4, 9)
         self.drone_count.setValue(4)
         h_layout.addWidget(self.drone_count)
         layout.addLayout(h_layout)
@@ -45,17 +45,17 @@ class DroneControlUI(QWidget):
 
         # Left column (broadcast)
         left_layout = QVBoxLayout()
-        self.broadcast_label = QLabel("Drone Broadcast Information")
+        self.broadcast_label = QLabel("Agent Broadcast Information")
         self.broadcast_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #0080ff;")
         self.broadcast_display = QTextEdit()
         self.broadcast_display.setReadOnly(True)
-        self.broadcast_display.setPlaceholderText("Drone Broadcast Information...")
+        self.broadcast_display.setPlaceholderText("Agent Broadcast Information...")
         left_layout.addWidget(self.broadcast_label)
         left_layout.addWidget(self.broadcast_display)
 
         # Middle column: Health reports + fault injection controls
         middle_layout = QVBoxLayout()
-        self.health_label = QLabel("Drone Health & Retasking")
+        self.health_label = QLabel("Agent Health & Retasking")
         self.health_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #cc0000;")
         middle_layout.addWidget(self.health_label)
 
@@ -66,7 +66,7 @@ class DroneControlUI(QWidget):
         middle_layout.addWidget(self.health_display)
 
         # --- Fault Injection Controls ---
-        inject_label = QLabel("Inject Drone Fault")
+        inject_label = QLabel("Inject Agent Fault")
         inject_label.setStyleSheet("font-weight: bold; color: #444;")
         middle_layout.addWidget(inject_label)
 
@@ -74,7 +74,7 @@ class DroneControlUI(QWidget):
 
         # Drone selector
         self.drone_selector = QComboBox()
-        self.drone_selector.setToolTip("Select which drone to inject fault into")
+        self.drone_selector.setToolTip("Select which agent to inject fault into")
         self.drone_selector.addItems([str(i) for i in range(0, 10)])  # Adjust max if needed
         fault_row.addWidget(QLabel("Drone ID:"))
         fault_row.addWidget(self.drone_selector)
@@ -97,21 +97,44 @@ class DroneControlUI(QWidget):
 
         # Right column (assignments)
         right_layout = QVBoxLayout()
-        self.assignment_label = QLabel("Drone–Section Assignments")
+        self.assignment_label = QLabel("Agent–Section Assignments")
         self.assignment_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #0080ff;")
         self.assignment_display = QTextEdit()
         self.assignment_display.setReadOnly(True)
-        self.assignment_display.setPlaceholderText("Drone Section Assignments...")
+        self.assignment_display.setPlaceholderText("Agent Section Assignments...")
         right_layout.addWidget(self.assignment_label)
         right_layout.addWidget(self.assignment_display)
+
+        # Extra column (searched sections)
+        searched_layout = QVBoxLayout()
+        self.searched_label = QLabel("Searched Sections")
+        self.searched_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #008000;")
+        self.searched_display = QTextEdit()
+        self.searched_display.setReadOnly(True)
+        self.searched_display.setPlaceholderText("Searched sections will appear here...")
+        searched_layout.addWidget(self.searched_label)
+        searched_layout.addWidget(self.searched_display)
+
+        # Market display
+        market_layout = QVBoxLayout()
+        self.market_label = QLabel("Market")
+        self.market_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #aa6600;")
+        self.market_display = QTextEdit()
+        self.market_display.setReadOnly(True)
+        self.market_display.setPlaceholderText("Market activity and ownership...")
+        market_layout.addWidget(self.market_label)
+        market_layout.addWidget(self.market_display)
 
         info_layout.addLayout(left_layout)
         info_layout.addLayout(middle_layout)
         info_layout.addLayout(right_layout)
+        info_layout.addLayout(searched_layout)
+        info_layout.addLayout(market_layout)
+
         layout.addLayout(info_layout)
 
         self.setLayout(layout)
-        self.setWindowTitle("Drone Swarm Control Panel")
+        self.setWindowTitle("Agent Swarm Control Panel")
 
         # --- Timer to refresh info from controller ---
         self.timer = QTimer()
@@ -130,6 +153,12 @@ class DroneControlUI(QWidget):
         self.broadcast_display.setPlainText(controller.broadcast_text)
         self.assignment_display.setPlainText(controller.assignment_text)
 
+        if hasattr(controller, "searched_text"):
+            self.searched_display.setPlainText(controller.searched_text)
+
+        if hasattr(controller, "market_text"):
+            self.market_display.setPlainText(controller.market_text)
+
         # Show latest health/retasking info
         if hasattr(controller, "middle_text"):
             current = self.health_display.toPlainText()
@@ -142,13 +171,13 @@ class DroneControlUI(QWidget):
         """Send a fault injection command to the controller (and thus to test.py)."""
         import controller
 
-        drone_id = int(self.drone_selector.currentText())
+        agent_id = int(self.drone_selector.currentText())
         # Get the selected code from the data role
         health_code = self.health_selector.currentData()
-        controller.injected_fault = (drone_id, health_code)
+        controller.injected_fault = (agent_id, health_code)
         name = self.health_selector.currentText()
-        print(f"[GUI] Injected fault {name} for Drone {drone_id}")
-        self.health_display.append(f"[GUI] Injected fault {name} for Drone {drone_id}")
+        print(f"[GUI] Injected fault {name} for Agent {agent_id}")
+        self.health_display.append(f"[GUI] Injected fault {name} for Agent {agent_id}")
 
 
 if __name__ == "__main__":

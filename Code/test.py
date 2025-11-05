@@ -11,12 +11,13 @@ from gym_pybullet_drones.FLA402.avoidance import avoidance_from_borders
 from gym_pybullet_drones.FLA402.avoidance import get_all_positions
 from gym_pybullet_drones.FLA402.retasking import RetaskingSystem
 from gym_pybullet_drones.FLA402.tables import get_all_health_codes, get_health_name
+from gym_pybullet_drones.FLA402.market import MarketSystem
 
 #NUM_D
 # RONES = 4
 HOME_POSITION = (0, 0)
 FLY_HEIGHT = 1.0
-CELL_SWEEP_STEPS = 4
+SECTION_SWEEP_STEPS = 4
 SEARCH_OFFSET = (6, 4)
 
 WAYPOINT_TOLERANCE = 0.10
@@ -24,12 +25,13 @@ HOVER_TIME = 0.2
 MAX_SPEED = 6.0
 CTRL_FREQ = 60
 BROADCAST_PERIOD = 5.0  # seconds
+RETURN_TIMEOUT = 10.0                   # seconds before sections are released
 
-def generate_lawnmower_points(center, cell_size, steps):
-    """Generate lawn-mower pattern fully inside each cell."""
+def generate_lawnmower_points(center, section_size, steps):
+    """Generate lawn-mower pattern fully inside each sectio."""
     cx, cy = center
-    half = cell_size / 2
-    margin = 0.30 * cell_size   # keep 20% margin
+    half = section_size / 2
+    margin = 0.30 * section_size   # keep 20% margin
     x1, x2 = cx - half + margin, cx + half - margin
     y1, y2 = cy - half + margin, cy + half - margin
     ys = np.linspace(y1, y2, steps)
@@ -56,10 +58,10 @@ def find_nearest_drone(failed_idx, swarm):
             min_dist, nearest = dist, j
     return nearest
 
-def clamp_xy_to_area(x, y, grid_size=(3,3), cell_size=1.5, offset=(6,4), margin=0.25):
+def clamp_xy_to_area(x, y, grid_size=(3,3), section_size=1.5, offset=(6,4), margin=0.25):
     rows, cols = grid_size
-    half_x = cols * cell_size / 2.0
-    half_y = rows * cell_size / 2.0
+    half_x = cols * section_size / 2.0
+    half_y = rows * section_size / 2.0
     cx, cy = offset
     min_x = cx - half_x + margin
     max_x = cx + half_x - margin
@@ -67,6 +69,25 @@ def clamp_xy_to_area(x, y, grid_size=(3,3), cell_size=1.5, offset=(6,4), margin=
     max_y = cy + half_y - margin
     return np.clip(x, min_x, max_x), np.clip(y, min_y, max_y)
 
+def rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones):
+    """
+    Rebuild each drone's iterator of sections based on current MARKET ownership.
+    Orders sections by distance from the drone's current position.
+    """
+    for drone_id in range(num_drones):
+        owned = [s for s in market.sections if s["owner"] == drone_id and not s["searched"]]
+        if not owned:
+            drone_tasks[drone_id] = iter([])
+            continue
+
+        drone_xy = np.array(swarm[drone_id].position)[:2]
+        owned.sort(key=lambda s: np.linalg.norm(drone_xy - s["pos"][:2]))
+
+        paths = []
+        for sec in owned:
+            path = generate_lawnmower_points(sec["pos"], area.section_size, SECTION_SWEEP_STEPS)
+            paths.append((sec["id"], path))
+        drone_tasks[drone_id] = iter(paths)
 
 def main(num_drones = 4):
     print("Initializing environment...")
@@ -76,25 +97,22 @@ def main(num_drones = 4):
         initial_xyzs=initial_xyzs,
         gui=True,
         grid_size=(3, 3),
-        cell_size=1.5,
+        section_size=1.5,
         home_position=(0, 0),
         search_area_offset=(6, 4)
     )
 
-    area = SearchArea(grid_size=(3, 3), cell_size=1.5, home=SEARCH_OFFSET)
-    area.assign_drones(num_drones)
+    area = SearchArea(grid_size=(3, 3), section_size=1.5, home=SEARCH_OFFSET)
+
     swarm = [Drone(i, env, initial_xyzs[i]) for i in range(num_drones)]
+    market = MarketSystem(num_drones, area)
+    market_initialized = False
+    drone_tasks = {i: iter([]) for i in range(num_drones)}
+    return_timer = [0.0] * num_drones       # countdown for drones sent home
+    return_active = [False] * num_drones    # whether that drone’s timer is running
 
-    drone_tasks = {}
-    for drone_id in range(num_drones):
-        my_cells = area.get_unsearched_cells(drone_id)
-        paths = []
-        for cell in my_cells:
-            path = generate_lawnmower_points(cell.position, area.cell_size, CELL_SWEEP_STEPS)
-            paths.append((cell.id, path))
-        drone_tasks[drone_id] = iter(paths)
 
-    print("Mission started. Drones searching assigned cells...")
+    print("Mission started. drones searching assigned sections...")
     current_targets = [None] * num_drones
     path_progress = [0] * num_drones
     last_reach_time = [0] * num_drones
@@ -127,7 +145,7 @@ def main(num_drones = 4):
             health_status[fault_drone] = fault_code
             controller.injected_fault = None  # reset
             fault_name = get_health_name(fault_code)
-            print(f"[GUI Inject] Drone {fault_drone} fault set to {fault_name}")
+            print(f"[GUI Inject] drone {fault_drone} fault set to {fault_name}")
 
 
          # --- GUI control ---
@@ -140,6 +158,16 @@ def main(num_drones = 4):
         if not controller.search_active and not returning_home:
             time.sleep(0.1)
             continue
+
+        # First tick after Start Search: open market once, build tasks
+        if not market_initialized:
+            drone_positions = [drone.position for drone in swarm]
+            market.open_market(drone_positions)
+            controller.market_text = market.get_market_status()
+
+            rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones)
+            
+            market_initialized = True
 
         for i, drone in enumerate(swarm):
             state = drone.update()
@@ -160,26 +188,38 @@ def main(num_drones = 4):
                             next_pos = current_pos + 0.3 * diff  # move toward home
                         else:
                             next_pos = target_pos
+
                         rpm = drone.step_toward(next_pos)
                         actions[i, :] = rpm
+                        
+                        if not return_active[i]:
+                            return_active[i] = True
+                            return_timer[i] = time.time()
+                            print(f"🕒 drone {i} returning home — market release countdown started.")
                         continue  # skip normal search
 
                     elif action == "LAND_NOW":
-                        # emergency land at current spot
+                        # Emergency land at current spot
                         target_pos = np.array([current_pos[0], current_pos[1], 0.05])
                         next_pos = current_pos + 0.2 * (target_pos - current_pos)
                         rpm = drone.step_toward(next_pos)
                         actions[i, :] = rpm
 
-                        # --- Reassign this drone's sections to a nearby drone ---
-                        neighbor = find_nearest_drone(i, swarm)
-                        if neighbor is not None:
-                            area.reassign_cells_from_drone(i, neighbor)
-                            controller.middle_text = f"Drone {i} emergency landed. Sections reassigned to Drone {neighbor}."
-                        else:
-                            print(f"No available neighbor to take Drone {i}'s sections.")
+                        # --- Release this drone's sections back to the market ---
+                        market.release_drone_sections(i)
+                        controller.market_text = market.get_market_status()
 
-                        continue  # skip normal search for this drone
+                        # --- Trigger dynamic rebuy for other drones ---
+                        drone_positions = [d.position for d in swarm]
+                        market.dynamic_update(drone_positions)
+                        controller.market_text = market.get_market_status()
+
+                        # --- Rebuild tasks to reflect new market ownership ---
+                        rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones)
+
+                        controller.middle_text = f"drone {i} emergency landed — sections returned to market."
+                        continue  # skip search logic for this drone
+
                         
                     elif action in ("HOVER", "REDUCED_ROLE", "HOVER_AND_RECONNECT"):
                         # just hover in place
@@ -192,9 +232,9 @@ def main(num_drones = 4):
                 if current_pos[2] <= 0.1:  # near ground
                     if crash_timer[i] == 0.0:
                         crash_timer[i] = time.time()
-                    elif time.time() - crash_timer[i] > 6.0:  # stayed low for >1s
+                    elif time.time() - crash_timer[i] > 6.0:  # stayed low for >6s
                         crashed[i] = True
-                        print(f"Drone {i} has crashed! Altitude={current_pos[2]:.2f}")
+                        print(f"drone {i} has crashed! Altitude={current_pos[2]:.2f}")
                         p.addUserDebugText(
                             "CRASHED",
                             [current_pos[0], current_pos[1], 0.1],
@@ -203,6 +243,29 @@ def main(num_drones = 4):
                             lifeTime=0,
                             physicsClientId=env.CLIENT
                         )
+
+                        # --- Reassign this drone's sections to a nearby drone ---
+                        neighbor = find_nearest_drone(i, swarm)
+                        if neighbor is not None:
+                            area.reassign_cells_from_drone(i, neighbor)
+                            controller.middle_text = f"drone {i} crashed! Sections reassigned to drone {neighbor}."
+                            print(f"drone {i} crashed! Sections reassigned to drone {neighbor}.")
+                            market.release_drone_sections(i)
+                            controller.market_text = market.get_market_status()
+                            rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones)
+                            
+                            # --- Rebuild the neighbor's path iterator ---
+                            my_new_cells = area.get_unsearched_cells(neighbor)
+                            paths = []
+                            for sectio in my_new_cells:
+                                path = generate_lawnmower_points(sectio.position, area.section_size, SECTION_SWEEP_STEPS)
+                                paths.append((sectio.id, path))
+                            drone_tasks[neighbor] = iter(paths)
+
+                        else:
+                            print(f"No available neighbor to take drone {i}'s sections.")
+
+
                         continue  # skip all control for this drone
                 else:
                     crash_timer[i] = 0.0
@@ -211,8 +274,8 @@ def main(num_drones = 4):
 
            # Broadcast every 5 seconds
             if t - last_broadcast[i] >= BROADCAST_PERIOD:
-                msg = drone.broadcast()  # uses Drone.broadcast()
-                print(f"[Broadcast] Drone {msg['ID']} at {msg['Pos']} | Time: {msg['Timer']}s")
+                msg = drone.broadcast()  # uses drone.broadcast()
+                print(f"[Ping] drone {msg['ID']} at {msg['Pos']} | Time: {msg['Timer']}s")
                 last_broadcast[i] = t
 
             # --- Return-home behavior ---
@@ -233,12 +296,24 @@ def main(num_drones = 4):
                 try:
                     cell_id, path = next(drone_tasks[i])
                 except StopIteration:
+                    # No more tasks -> hover and wait
+                    hover_target = np.array([current_pos[0], current_pos[1], FLY_HEIGHT])
+                    rpm = drone.step_toward(hover_target)
+                    actions[i, :] = rpm
                     continue
+
                 current_targets[i] = path
                 path_progress[i] = 0
                 current_cell[i] = cell_id
                 last_reach_time[i] = time.time()  # prevent initial hover pause
-                print(f"Drone {i} → new cell {cell_id}")
+                print(f"drone {i} → new section {cell_id}")
+
+            # If drone has finished its tasks, just hover and wait
+            if current_targets[i] is None:
+                hover_target = np.array([current_pos[0], current_pos[1], FLY_HEIGHT])
+                rpm = drone.step_toward(hover_target)
+                actions[i, :] = rpm
+                continue
 
             target_pos = current_targets[i][path_progress[i]]
             diff = np.array(target_pos) - current_pos
@@ -255,7 +330,12 @@ def main(num_drones = 4):
                                              margin=0.3, gain=0.6, max_push=0.6)
             next_pos = next_pos + 0.5 * (push_drones + push_border)
             
-            rpm = drone.step_toward(next_pos)
+            if int(t) % 60 == 0:
+                drone.controller.reset()
+            
+            next_pos[2] = FLY_HEIGHT
+
+            rpm =drone.step_toward(next_pos)
             actions[i, :] = rpm
 
             if dist < WAYPOINT_TOLERANCE:
@@ -264,30 +344,81 @@ def main(num_drones = 4):
                     last_reach_time[i] = time.time()
                     if path_progress[i] >= len(current_targets[i]):
                         area.mark_searched(current_cell[i])
-                        print(f"Drone {i} finished cell {current_cell[i]}")
+                        print(f"drone {i} finished section {current_cell[i]}")
+
+                        # 1) reward and remove from market
+                        market.reward_and_remove_section(i, current_cell[i])
+                        controller.market_text = market.get_market_status()
+
+                        # 2) let market re-allocate any available sections
+                        drone_positions = [d.position for d in swarm]
+                        market.dynamic_update(drone_positions)
+                        controller.market_text = market.get_market_status()
+
+                        # 3) rebuild all drones' task iterators from current market ownership
+                        rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones)
+
+                        # 4) IMMEDIATELY try to assign a new section to THIS drone
                         current_targets[i] = None
+                        path_progress[i] = 0
+                        last_reach_time[i] = time.time()
+
+                        try:
+                            cell_id, path = next(drone_tasks[i])   # pull a fresh section now
+                            current_cell[i] = cell_id
+                            current_targets[i] = path
+                            # (no hover — we will fly to it right away)
+                        except StopIteration:
+                            # nothing to do right now — hover this frame
+                            hover_target = np.array([current_pos[0], current_pos[1], FLY_HEIGHT])
+                            rpm = drone.step_toward(hover_target)
+                            actions[i, :] = rpm
+                            continue
+
 
         # --- Update GUI displays via controller ---
         broadcast_lines = []
         for i, drone in enumerate(swarm):
             msg = drone.broadcast()
             broadcast_lines.append(
-                f"Drone {msg['ID']}: Pos={tuple(np.round(msg['Pos'],2))}, Time={msg['Timer']}s"
+                f"Agnet {msg['ID']}: Pos={tuple(np.round(msg['Pos'],2))}, Time={msg['Timer']}s"
             )
         controller.broadcast_text = "\n".join(broadcast_lines)
 
         assign_lines = []
         for i in range(num_drones):
-            cells = [c.id for c in area.cells if c.assigned_drone == i]
-            assign_lines.append(f"Drone {i}: Cells {cells}")
+            sections = [c.id for c in area.sections if c.assigned_drone == i]
+            assign_lines.append(f"drone {i}: Sections {sections}")
         controller.assignment_text = "\n".join(assign_lines)
+
+                # --- Update searched sections display ---
+        searched_lines = []
+        for c in area.sections:
+            status = "✅ Done" if c.searched else "🔲 Searching"
+            searched_lines.append(f"Section {c.id}: {status}")
+        controller.searched_text = "\n".join(searched_lines)
+
+        # --- Handle drones that went home (timeout → release sections) ---
+        for j in range(num_drones):
+            if return_active[j]:
+                if time.time() - return_timer[j] >= RETURN_TIMEOUT:
+                    print(f"drone {j}'s return-home timeout reached — releasing owned sections.")
+                    return_active[j] = False
+                    market.release_drone_sections(j)
+                    controller.market_text = market.get_market_status()
+
+                    # allow other drones to buy them
+                    drone_positions = [d.position for d in swarm]
+                    market.dynamic_update(drone_positions)
+                    controller.market_text = market.get_market_status()
+                    rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_drones)
 
         env.step(actions)
         time.sleep(1 / CTRL_FREQ)
 
-        # --- Check if all cells are searched ---
-        if all(c.searched for c in area.cells) and not returning_home:
-            print("All cells searched! Drones will return home together...")
+        # --- Check if all sections are searched ---
+        if all(c.searched for c in area.sections) and not returning_home:
+            print("The search area is searched! drones will return home together...")
             returning_home = True
             time.sleep(1.5)  # small pause before returning
 
@@ -296,7 +427,7 @@ def main(num_drones = 4):
             for i in range(num_drones):
                 if crashed[i]:
                     continue #here we are skipping a crashed drone
-                pos = np.array(env._getDroneStateVector(i)[0:3])
+                pos = np.array(env._getdronestateVector(i)[0:3])
                 dist = np.linalg.norm(pos[:2] - home_targets[i][:2])
                 distances.append(dist)
             
@@ -305,7 +436,7 @@ def main(num_drones = 4):
                 print("All drones returned home. Mission complete!")
                  # Gradually descend to z=0
 
-                for _ in range(int(CTRL_FREQ * 40)):  # ~15 seconds descent
+                for _ in range(int(CTRL_FREQ * 30)):  # ~30 seconds descent
                     actions = np.zeros((num_drones, 4))
                     for i, drone in enumerate(swarm):
                         if crashed[i]:
