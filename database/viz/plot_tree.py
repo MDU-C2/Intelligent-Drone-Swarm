@@ -246,17 +246,17 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     num_nodes = len(H.nodes)
 
     width = max(num_nodes / 2, 8)
-    height = max(depth * 1.5, 6)
+    height = max(depth * 1, 6)
     plt.figure(figsize=(width, height))
 
-    node_size = max(1500 - num_nodes * 20, 500)
-    font_size = max(9 - int(num_nodes / 50), 6)
+    node_size = max(1300 - num_nodes * 15, 600)
+    font_size = max(4 - int(num_nodes / 65), 5)
 
-    horiz_width = min(1.0, 0.5 + num_nodes / 50)
-    adjusted_width = horiz_width * (1 - 2 * h_padding)
+    horiz_width = min(1.0, 0.5 + num_nodes / 100)
+    adjusted_width = horiz_width * (1 - 5 * h_padding)
     xcenter = 0.5
 
-    pos = hierarchy_pos(H, root=root, vert_loc=1, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
+    pos = hierarchy_pos(H, root=root, vert_loc=1, vert_gap=0.002, width=adjusted_width * 100, xcenter=xcenter)
 
     for node in pos:
         pos[node] = (pos[node][0] * (1 - 2 * h_padding) + h_padding, pos[node][1])
