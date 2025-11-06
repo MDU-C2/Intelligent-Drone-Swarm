@@ -1,5 +1,5 @@
 import threading
-import test
+import main
 
 # Control flags
 simulation_running = False
@@ -45,5 +45,5 @@ def run_simulation(num_drones=4):
     mission_aborted = False
 
     print(f"Launching simulation with {num_drones} drones...")
-    thread = threading.Thread(target=test.main, args=(num_drones,))
+    thread = threading.Thread(target=main.main, args=(num_drones,))
     thread.start()
