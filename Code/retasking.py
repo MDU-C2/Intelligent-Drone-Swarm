@@ -22,7 +22,8 @@ class RetaskingSystem:
         return func(drone_id, name)
 
     def _low_battery(self, i, _):
-        return {"drone_id": i, "action": "PREPARE_RETURN",
+        #the value being returned is dictionary 
+        return {"drone_id": i, "action": "RETURN_HOME",
                 "message": f"Drone {i}: Low battery – preparing to return soon."}
 
     def _bad_battery(self, i, _):
@@ -36,7 +37,7 @@ class RetaskingSystem:
 
     def _comm_fail(self, i, _):
         return {"drone_id": i, "action": "LAND_NOW",
-               }
+               "message": f"Drone {i}: communication failure – emergency landing!."}
 
     def _gps_fail(self, i, _):
         return {"drone_id": i, "action": "LAND_NOW",
@@ -48,4 +49,4 @@ class RetaskingSystem:
 
     def _unknown(self, i, name):
         return {"drone_id": i, "action": "IDLE",
-                "message": f"Drone {i}: Unknown status '{name}' – idling."}
+                "message": f"Drone {i}: Unknown status '{name}' – emergency landing!."}

@@ -13,7 +13,7 @@ class SearchAreaAviary(CtrlAviary):
                  grid_size=(10, 10),
                  section_size=1.0,
                  home_position=(0, 0),
-                 search_area_offset=(5, 0),   # <-- NEW
+                 search_area_offset=(5, 0),  
                  *args, **kwargs):
         """
         grid_size : tuple(int, int)
