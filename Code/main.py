@@ -2,6 +2,7 @@ import time
 import numpy as np
 import pybullet as p
 import controller
+import sys
 from gym_pybullet_drones.FLA402.env import SearchAreaAviary
 from gym_pybullet_drones.FLA402.searchArea import SearchArea
 from gym_pybullet_drones.FLA402.drone import Drone
@@ -27,8 +28,10 @@ BROADCAST_PERIOD = 5.0  # seconds
 RETURN_TIMEOUT = 10.0                   
 # return_timeout is the time before sections are released from the drone returning home. It will act like a timeout for a drone returning home since soemthing can happen to a drone while returning home.
 
-def generate_drone_positions(num_agents, radius, home_xy):
-    #in this function, we define position the drones will spawn in
+def generate_drone_positions(num_agents, home_xy):
+
+    # Adaptive radius: increases slowly with sqrt(N)
+    radius = 0.8 + 0.25 * np.sqrt(num_agents)
     positions = []
     for i in range(num_agents):
         angle = (2 * np.pi / num_agents) * i
@@ -36,8 +39,9 @@ def generate_drone_positions(num_agents, radius, home_xy):
         y = home_xy[1] + radius * np.sin(angle)
         z = 0.03
         positions.append([x, y, z])
-    return np.array(positions)
+    return np.array(positions), radius
 
+    
 def generate_lawnmower_points(center, section_size, steps):
     #Generate lawn-mower pattern fully inside each sectio.
     cx, cy = center
@@ -73,21 +77,32 @@ def rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_agents):
             paths.append((sec["id"], path))
         drone_tasks[drone_id] = iter(paths)
 
-def main(num_agents = 4):
+def main(num_agents = 4, grid_size = 4):
     start_time = time.time()
     print("Initializing environment...")
-    initial_xyz_agent = generate_drone_positions(num_agents, 0.4, HOME_POSITION)
+    initial_xyz_agent, formation_radius = generate_drone_positions(num_agents, HOME_POSITION)
+
+    # Since there was a problem with the grid comming to close to home pad when it gets bigger, we need to increase the grid offset based on grid size.
+    offset_x = 4 + 1.0 * formation_radius + 0.75 * grid_size 
+    offset_y = 2 + 0.5 * formation_radius + 0.5 * grid_size
+
     env = SearchAreaAviary(
         num_drones=num_agents,
         initial_xyzs=initial_xyz_agent,
         gui=True,
-        grid_size=(3, 3),
+        grid_size=(grid_size, grid_size),
         section_size=1.5,
         home_position=(0, 0),
-        search_area_offset=(6, 4)
+        search_area_offset=(offset_x, offset_y),
+        helipad_radius=formation_radius 
     )
 
-    area = SearchArea(grid_size=(3, 3), section_size=1.5, home=SEARCH_OFFSET)
+    charged_complete = [False] * num_agents  # True once the drone has been charged successfully
+    search_offset = (offset_x, offset_y)
+    area = SearchArea(grid_size=(grid_size, grid_size), section_size=1.5, home=search_offset)
+    return_reason = [""] * num_agents   # reason for returning home
+    battery_return_start = {}           # tracks timestamp when battery-change started
+    battery_late = set()                # drones that exceeded 1 min charge time
 
     swarm = [Drone(i, env, initial_xyz_agent[i]) for i in range(num_agents)]
     market = MarketSystem(num_agents, area)
@@ -104,7 +119,7 @@ def main(num_agents = 4):
     last_broadcast = [0.0] * num_agents
 
     returning_home = False
-    home_targets = generate_drone_positions(num_agents, 0.4, HOME_POSITION)
+    home_targets, _ = generate_drone_positions(num_agents, HOME_POSITION)
     crashed = [False] * num_agents
     crash_timer = [0.0] * num_agents
 
@@ -150,10 +165,51 @@ def main(num_agents = 4):
             
             market_initialized = True
 
+                # --- Battery change timeout: if >60s at home without charge, release sections ---
+        for j in range(num_agents):
+            if return_reason[j] == "battery" and not charged_complete[j]:
+                if j in battery_return_start and (time.time() - battery_return_start[j]) > 60.0:
+                    if j not in battery_late:
+                        print(f"[Battery Timeout] Drone {j} took too long to change battery. Releasing sections.")
+                        battery_late.add(j)
+                        market.release_drone_sections(j)
+                        controller.market_text = market.get_market_status()
+
+                        # Allow others to rebuy
+                        drone_positions = [d.position for d in swarm]
+                        market.dynamic_update(drone_positions)
+                        controller.market_text = market.get_market_status()
+                        rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_agents)
+
+
         for i, drone in enumerate(swarm):
             state = drone.update()
             current_pos = np.array(state[0:3])
             
+            if i in controller.charged_drones:
+                print(f"[MAIN] Drone {i} recharged — rejoining mission.")
+                controller.charged_drones.remove(i)
+                health_status[i] = 0
+                controller.home_ready[i] = False
+                charged_complete[i] = True
+                battery_return_start.pop(i, None)  # clear battery timer
+                return_reason[i] = ""              # reset reason
+
+
+                if i in battery_late:
+                    print(f"[Penalty] Drone {i} took too long to charge. Must buy section (cost 2 points).")
+                    # Apply penalty and force market purchase ignoring distance
+                    market.force_buy_section(i, cost=2)
+                    battery_late.remove(i)
+                else:
+                    # Normal return: resume with previous sections if any
+                    drone_positions = [d.position for d in swarm]
+                    market.dynamic_update(drone_positions)
+
+                controller.market_text = market.get_market_status()
+                rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_agents)
+                continue
+
             # --- Retasking / fault handling ---
             if health_status[i] != 0:  # non-OK health
                 result = retasker.handle(i, health_status[i])
@@ -161,23 +217,31 @@ def main(num_agents = 4):
                     action = result["action"]
 
                     if action in ("RETURN_HOME"):
-                        # fly back home smoothly
                         target_pos = np.array(home_targets[i])
                         diff = target_pos - current_pos
                         dist = np.linalg.norm(diff)
                         if dist > 0.05:
-                            next_pos = current_pos + 0.3 * diff  # move toward home
+                            next_pos = current_pos + 0.3 * diff
                         else:
                             next_pos = target_pos
-
                         rpm = drone.step_toward(next_pos)
+                        # --- Detect if drone reached home (close enough) ---
+                        if dist < 0.2:  # within 20 cm of home pad
+                            controller.home_ready[i] = True
+                        else:
+                            controller.home_ready[i] = False
+
                         actions[i, :] = rpm
-                        
+
                         if not return_active[i]:
                             return_active[i] = True
                             return_timer[i] = time.time()
-                            print(f"Agent {i} returning home — market release countdown started.")
-                        continue  # skip normal search
+                            charged_complete[i] = False
+                            return_reason[i] = "battery"
+                            battery_return_start[i] = time.time()
+                            print(f"Agent {i} returning home for battery change.")
+                        continue
+
 
                     elif action == "LAND_NOW":
                         # Emergency land at current spot
@@ -306,7 +370,7 @@ def main(num_agents = 4):
                     # --- Apply potential-field avoidance ---
             push_drones = avoidance_from_drones(current_pos, all_positions, i,
                                             radius=0.5, gain=0.4, max_push=0.6)
-            push_border = avoidance_from_borders(current_pos, (3, 3), 1.5, (6, 4),
+            push_border = avoidance_from_borders(current_pos, (grid_size, grid_size), 1.5, search_offset,
                                              margin=0.3, gain=0.6, max_push=0.6)
             next_pos = next_pos + 0.5 * (push_drones + push_border)
             
@@ -324,6 +388,9 @@ def main(num_agents = 4):
                     last_reach_time[i] = time.time()
                     if path_progress[i] >= len(current_targets[i]):
                         area.mark_searched(current_section[i])
+                        # --- VISUAL: color searched section green ---
+                        cell_center = area.sections[current_section[i]].position  # use .position, not .pos or .cells
+                        env.mark_section_as_searched(cell_center)
                         print(f"drone {i} finished section {current_section[i]}")
 
                         # 1) reward and remove from market
@@ -361,7 +428,7 @@ def main(num_agents = 4):
         for i, drone in enumerate(swarm):
             msg = drone.broadcast()
             broadcast_lines.append(
-                f"Agnet {msg['ID']}: Pos={tuple(np.round(msg['Pos'],2))}, Time={msg['Timer']}s"
+                f"Agent {msg['ID']}: Pos={tuple(np.round(msg['Pos'],2))}, Time={msg['Timer']}s"
             )
         controller.broadcast_text = "\n".join(broadcast_lines)
 
@@ -377,21 +444,6 @@ def main(num_agents = 4):
             status = "✅ Done" if c.searched else "🔲 Searching"
             searched_lines.append(f"Section {c.id}: {status}")
         controller.searched_text = "\n".join(searched_lines)
-
-        # --- Handle drones that went home (timeout → release sections) ---
-        for j in range(num_agents):
-            if return_active[j]:
-                if time.time() - return_timer[j] >= RETURN_TIMEOUT:
-                    print(f"drone {j}'s return-home timeout reached — releasing owned sections.")
-                    return_active[j] = False
-                    market.release_drone_sections(j)
-                    controller.market_text = market.get_market_status()
-
-                    # allow other drones to buy them
-                    drone_positions = [d.position for d in swarm]
-                    market.dynamic_update(drone_positions)
-                    controller.market_text = market.get_market_status()
-                    rebuild_tasks_from_market(drone_tasks, market, area, swarm, num_agents)
 
         env.step(actions)
         time.sleep(1 / CTRL_FREQ)
@@ -430,10 +482,30 @@ def main(num_agents = 4):
                     env.step(actions)
                     time.sleep(1 / CTRL_FREQ)
 
-                print("All functioning drones landed (z≈0). Mission complete.")
+                # Final landing and power-off
+                for i, drone in enumerate(swarm):
+                    if crashed[i]:
+                        continue
+                    state = drone.update()
+                    current_pos = np.array(state[0:3])
+                    if current_pos[2] > 0.05:
+                        # Force final descent
+                        p.resetBasePositionAndOrientation(
+                            env.DRONE_IDS[i],
+                            [home_targets[i][0], home_targets[i][1], 0.05],
+                            [0, 0, 0, 1],
+                            physicsClientId=env.CLIENT
+                        )
+                    # Stop all motion
+                    p.resetBaseVelocity(env.DRONE_IDS[i], [0, 0, 0], [0, 0, 0], physicsClientId=env.CLIENT)
+
+                print("✅ All drones landed and motors shut down.")
                 controller.search_active = False
                 controller.simulation_running = False
                 break
+
+
+
 
 if __name__ == "__main__":
     main()

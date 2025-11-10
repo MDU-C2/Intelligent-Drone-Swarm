@@ -9,7 +9,6 @@ from PyQt5.QtCore import QTimer
 import controller
 from gym_pybullet_drones.FLA402.tables import get_all_health_codes
 
-
 class DroneControlUI(QWidget):
     def __init__(self):
         super().__init__()
@@ -18,14 +17,24 @@ class DroneControlUI(QWidget):
     def initUI(self):
         layout = QVBoxLayout()
 
-        # --- Drone count control ---
-        h_layout = QHBoxLayout()
-        h_layout.addWidget(QLabel("Number of Agents:"))
+        # --- Grid size control ---
+        grid_layout = QHBoxLayout()
+        grid_layout.addWidget(QLabel("Grid Size (NxN):"))
+        self.grid_size_spin = QSpinBox()
+        self.grid_size_spin.setRange(2, 10)
+        self.grid_size_spin.setValue(4)
+        self.grid_size_spin.valueChanged.connect(self.update_drone_limit)
+        grid_layout.addWidget(self.grid_size_spin)
+        layout.addLayout(grid_layout)
+
+        # --- Agent count control ---
+        agent_layout = QHBoxLayout()
+        agent_layout.addWidget(QLabel("Number of Agents:"))
         self.drone_count = QSpinBox()
-        self.drone_count.setRange(4, 9)
+        self.drone_count.setRange(4, 16)
         self.drone_count.setValue(4)
-        h_layout.addWidget(self.drone_count)
-        layout.addLayout(h_layout)
+        agent_layout.addWidget(self.drone_count)
+        layout.addLayout(agent_layout)
 
         # --- Buttons ---
         self.sim_btn = QPushButton("Run Simulation")
@@ -71,13 +80,26 @@ class DroneControlUI(QWidget):
         middle_layout.addWidget(inject_label)
 
         fault_row = QHBoxLayout()
+        
+        # Charge button
+        self.charge_btn = QPushButton("Charge Drone")
+        self.charge_btn.setEnabled(False)  # disabled by default
+        self.charge_btn.setStyleSheet("background-color: gray; color: white;")
+        self.charge_btn.clicked.connect(self.charge_drone)
+        middle_layout.addWidget(self.charge_btn)
 
         # Drone selector
         self.drone_selector = QComboBox()
         self.drone_selector.setToolTip("Select which agent to inject fault into")
-        self.drone_selector.addItems([str(i) for i in range(0, 10)])  # Adjust max if needed
+        self.drone_selector.addItems([str(i) for i in range(0, 100)])  # Adjust max if needed
         fault_row.addWidget(QLabel("Drone ID:"))
         fault_row.addWidget(self.drone_selector)
+
+        # Search Are size selector
+        self.searchArea_selector = QComboBox()
+        self.searchArea_selector.setToolTip("Select how big the search are shall be.")
+        self.searchArea_selector.addItems([str(i) for i in range(0, 9)])  # Adjust max if needed
+        fault_row.addWidget(self.searchArea_selector)
 
         # Health selector (codes and names)
         self.health_selector = QComboBox()
@@ -145,13 +167,40 @@ class DroneControlUI(QWidget):
 
     def run_simulation_with_count(self):
         num = self.drone_count.value()
-        threading.Thread(target=controller.run_simulation, args=(num,)).start()
-        print(f"Starting simulation with {num} drones...")
+        grid_size = self.grid_size_spin.value()
+        threading.Thread(target=controller.run_simulation, args=(num, grid_size)).start()
+        print(f"Starting simulation with {num} agents on a {grid_size}x{grid_size} grid...")
+    
+    def charge_drone(self):
+        """User manually 'charges' a drone that's at home."""
+        import controller
+        drone_id = int(self.drone_selector.currentText())
+        controller.mark_drone_charged(drone_id)
+        print(f"[GUI] Drone {drone_id} charged and ready to rejoin mission.")
+        self.charge_btn.setEnabled(False)
+        self.charge_btn.setStyleSheet("background-color: gray; color: white;")
+
+
+    def update_drone_limit(self):
+        """Update the maximum number of agents based on grid size."""
+        grid_size = self.grid_size_spin.value()
+        max_agents = grid_size * grid_size
+        self.drone_count.setMaximum(max_agents)
+        self.drone_count.setMinimum(4)
+        if self.drone_count.value() > max_agents:
+            self.drone_count.setValue(max_agents)
 
     def update_displays(self):
         """Pull live text data from controller."""
         self.broadcast_display.setPlainText(controller.broadcast_text)
         self.assignment_display.setPlainText(controller.assignment_text)
+        # --- Enable charge button if any drone is home waiting ---
+        if hasattr(controller, "home_ready") and any(controller.home_ready):
+            self.charge_btn.setEnabled(True)
+            self.charge_btn.setStyleSheet("background-color: green; color: white;")
+        else:
+            self.charge_btn.setEnabled(False)
+            self.charge_btn.setStyleSheet("background-color: gray; color: white;")
 
         if hasattr(controller, "searched_text"):
             self.searched_display.setPlainText(controller.searched_text)

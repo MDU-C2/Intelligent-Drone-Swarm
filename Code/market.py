@@ -28,19 +28,46 @@ class MarketSystem:
             for s in self.area.sections
         ]
 
-    # ---------------------------------------------------------------------
     def compute_dynamic_price(self, drone_pos, section_pos):
         """Price increases with distance (only in dynamic phase)."""
         dist = np.linalg.norm(drone_pos[:2] - section_pos[:2])
         return round(self.base_value * (1 + dist / 10.0), 2)
 
-    # ---------------------------------------------------------------------
+    def force_buy_section(self, drone_id, cost=2):
+        """
+        Force the given drone to buy one random available section,
+        ignoring distance and costing a specified point penalty.
+        """
+        available = [s for s in self.sections if not s["searched"] and s["owner"] is None]
+        if not available:
+            print(f"[Market] No available sections for forced purchase.")
+            return False
+
+        sec = np.random.choice(available)
+        sec["owner"] = drone_id
+        sec["available"] = False
+
+        # Deduct penalty points
+        self.points[drone_id] = self.points.get(drone_id, 0) - cost
+
+        # Reflect in SearchArea
+        for s in self.area.sections:
+            if s.id == sec["id"]:
+                s.assigned_drone = drone_id
+
+        self.transactions.append(
+            f"[Penalty] drone {drone_id} forcibly bought Section {sec['id']} for {cost} pts (late battery)."
+        )
+        print(f"[Market] Drone {drone_id} bought section {sec['id']} with penalty {cost} points.")
+        return True
+
+
     def open_market(self, drone_positions):
         """
         Initial market phase: all sections cost the same.
         drones take turns buying until they run out of points.
         """
-        print("🟢 Opening initial market...")
+        print("Opening initial market...")
         self.phase = "initial"
         equal_price = self.base_value
 
