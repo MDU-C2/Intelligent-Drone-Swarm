@@ -240,8 +240,8 @@ def prompt_document():
         "file": file_bytes,          # BLOB or None
         "version": version,
         "author": author or None,
-        "file_name": file_name,      # NEW
-        "mime_type": mime_type       # NEW
+        "file_name": file_name,
+        "mime_type": mime_type
     }
 
 def prompt_delete_table():
