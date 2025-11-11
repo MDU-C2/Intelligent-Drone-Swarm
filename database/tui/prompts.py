@@ -234,7 +234,7 @@ def prompt_document():
             print("⚠️  File not found; leaving file as None.")
 
     return {
-        "doc_id": doc_id or None,
+        "doc_id": doc_id,
         "title": title,
         "description": description,
         "file": file_bytes,          # BLOB or None
