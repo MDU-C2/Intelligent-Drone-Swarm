@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-04T15:01:31Z",
+    "exported_at": "2025-11-11T14:55:34Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -14,14 +14,16 @@
       "rows": []
     },
     "documents": {
-      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   \n        )",
+      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            file_name TEXT,\n            mime_type TEXT\n        )",
       "columns": [
         "doc_id",
         "title",
         "description",
         "file",
         "version",
-        "author"
+        "author",
+        "file_name",
+        "mime_type"
       ],
       "rows": []
     },
