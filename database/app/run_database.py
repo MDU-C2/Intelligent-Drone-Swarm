@@ -28,7 +28,8 @@ DELETE_DB_ROW = "17"
 EXPORT_TO_JSON = "18"
 RESTORE_FROM_JSON = "19"
 EXPORT_TO_CSV = "20"
-EXIT = "21"
+EXPORT_DOC = "21"
+EXIT = "22"
 
 VERIFY_ROUNDTRIP = "22"
 
@@ -62,7 +63,8 @@ def main():
             print("18: Export DB → JSON")
             print("19: How to restore JSON → DB")
             print("20: Export DB → CSV")
-            print("21: Exit")
+            print("21: Export Document File")
+            print("22: Exit")
 
             choice = input("===  Enter choice (1-21): ").strip()
 
@@ -130,6 +132,10 @@ def main():
 
                 elif choice == EXPORT_TO_CSV:
                     menu.handle_export_csv()
+                
+                elif choice == EXPORT_DOC:
+                    menu.handle_export_document_file()
+
 
                 elif choice == EXIT:
                     print("Exiting script.")
