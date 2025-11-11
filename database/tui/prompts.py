@@ -221,7 +221,7 @@ def prompt_document():
         if p.is_file():
             try:
                 # optional: size guard
-                max_bytes = 50 * 1024 * 1024
+                max_bytes = 50 * 1024 * 1024 # 50 MB
                 if p.stat().st_size > max_bytes:
                     print("⚠️  File is too large; skipping file.")
                 else:
