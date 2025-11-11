@@ -31,7 +31,7 @@ EXPORT_TO_CSV = "20"
 EXPORT_DOC = "21"
 EXIT = "22"
 
-VERIFY_ROUNDTRIP = "22"
+VERIFY_ROUNDTRIP = "23"
 
 def main():
     db_name = DB_NAME_TXT.read_text().strip()
