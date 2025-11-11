@@ -1,5 +1,6 @@
 # prompts.py
-
+from pathlib import Path
+import mimetypes
 import sqlite3
 from database.core.paths import DB_NAME_TXT
 
@@ -187,7 +188,6 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
-
 def prompt_document():
     print("\nInsert Document (type 'exit' to cancel)")
     doc_id = prompt_input("Document ID (leave blank for auto): ", optional=True)
@@ -206,15 +206,44 @@ def prompt_document():
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H, optional): ", optional=True)
     if author == "EXIT":
         return None
-    # file path omitted -> None
+
+    # NEW: ask for a path, read bytes, capture name & MIME
+    file_path_str = prompt_input("Path to file (optional): ", optional=True)
+    if file_path_str == "EXIT":
+        return None
+
+    file_bytes = None
+    file_name = None
+    mime_type = None
+
+    if file_path_str:
+        p = Path(file_path_str).expanduser()
+        if p.is_file():
+            try:
+                # optional: size guard
+                max_bytes = 50 * 1024 * 1024
+                if p.stat().st_size > max_bytes:
+                    print("⚠️  File is too large; skipping file.")
+                else:
+                    file_bytes = p.read_bytes()
+                    file_name = p.name
+                    mime_type = mimetypes.guess_type(p.name)[0] or "application/octet-stream"
+            except Exception as e:
+                print(f"⚠️  Could not read file: {e}. Leaving file as None.")
+        else:
+            print("⚠️  File not found; leaving file as None.")
+
     return {
-        "doc_id": doc_id,
+        "doc_id": doc_id or None,
         "title": title,
         "description": description,
-        "file": None,
+        "file": file_bytes,          # BLOB or None
         "version": version,
-        "author": author or None
+        "author": author or None,
+        "file_name": file_name,      # NEW
+        "mime_type": mime_type       # NEW
     }
+
 def prompt_delete_table():
     print("\nDelete Table (type 'exit' to cancel)")
     table_name = prompt_input("Table Name: ")
