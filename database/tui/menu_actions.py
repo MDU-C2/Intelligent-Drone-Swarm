@@ -12,6 +12,7 @@ import database.tui.prompts as prompts
 from ..tui.delete_preview import preview_delete, print_preview, perform_delete
 from database.core.paths import DB_NAME_TXT, JSON_DUMP, CSV_DIR
 from pathlib import Path
+#from database.core.db_utilities import db_utilities
 
 def handle_insert_goal(inserter):
     data = prompts.prompt_goal()
@@ -100,14 +101,14 @@ def handle_sysreq_children(inserter):
         print("✅ Successfully connected System Requirement to Subsystem Requirement!")
     else:
         print("Connection cancelled.")
-
-def handle_subsys_join_item(inserter):
-    data = prompts.prompt_subsys_join_item()
+        
+def handle_delete_table(other):
+    data = prompts.prompt_delete_table()
     if data:
-        inserter.insert_subsys_join_item(**data)
-        print("✅ Successfully connected Item to Subsystem Requirement!")
+        other.delete_table(**data)
+        print("✅ Table deleted successfully!")
     else:
-        print("Connection cancelled.")
+        print("Deletion failed.")
 
 def handle_v_join_documents(inserter):
     data = prompts.prompt_V_join_documents()
@@ -186,9 +187,8 @@ def handle_delete_with_preview():
     print("  4) Subsystem requirement")
     print("  5) V&V method")
     print("  6) Document")
-    print("  7) Item")
-    print("  8) Quality requirement")
-    choice = input("Enter 1-8: ").strip()
+    print("  7) Quality requirement")
+    choice = input("Enter 1-7: ").strip()
 
     mapping = {
         "1": ("goal", "Goal ID"),
@@ -197,8 +197,7 @@ def handle_delete_with_preview():
         "4": ("subsystem", "Sub Req ID"),
         "5": ("method", "Method ID"),
         "6": ("document", "Doc ID"),
-        "7": ("item", "Item ID"),
-        "8": ("quality", "Quality Req ID"),
+        "7": ("quality", "Quality Req ID"),
     }
     if choice not in mapping:
         print("Invalid choice.")
