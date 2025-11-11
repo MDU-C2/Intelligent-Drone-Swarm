@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-04T15:01:31Z",
+    "exported_at": "2025-11-11T14:55:34Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -14,14 +14,16 @@
       "rows": []
     },
     "documents": {
-      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   \n        )",
+      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            file_name TEXT,\n            mime_type TEXT\n        )",
       "columns": [
         "doc_id",
         "title",
         "description",
         "file",
         "version",
-        "author"
+        "author",
+        "file_name",
+        "mime_type"
       ],
       "rows": []
     },
@@ -84,7 +86,7 @@
           "swarm_req_id": "SW-04",
           "requirement": "The swarm shall employ a consensus mechanism that ensures correct collective behaviour, even if at least one agent provides incorrect data.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "",
           "author": "C.N",
           "verification_status": "Accepted",
@@ -97,7 +99,7 @@
           "swarm_req_id": "SW-05",
           "requirement": "The swarm shall reach a collective decision for each task that requires coordination.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "",
           "author": "C.N",
           "verification_status": "Accepted",
@@ -123,7 +125,7 @@
           "swarm_req_id": "SW-07",
           "requirement": "When local conditions of an agent require immediate action,the swarm shall allow the agent to make independent decisions",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "Since the swarm has no leader, agents should be able to make independent decision when necessary.",
           "author": "C.N",
           "verification_status": "Accepted",
@@ -437,7 +439,7 @@
           "sub_req_id": "CON-02",
           "requirement": "The consensus sub-module shall define the procedures that agents will follow to reach a common understanding of the mission plan.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": null,
           "author": "C.N",
           "verification_status": "TBR",
