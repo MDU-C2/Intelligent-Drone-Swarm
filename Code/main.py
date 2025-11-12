@@ -10,8 +10,10 @@ from gym_pybullet_drones.FLA402.avoidance import avoidance_from_drones
 from gym_pybullet_drones.FLA402.avoidance import avoidance_from_borders
 from gym_pybullet_drones.FLA402.avoidance import get_all_positions
 from gym_pybullet_drones.FLA402.retasking import RetaskingSystem
-from gym_pybullet_drones.FLA402.tables import get_all_health_codes, get_health_name
+from gym_pybullet_drones.FLA402.tables import get_health_name
 from gym_pybullet_drones.FLA402.market import MarketSystem
+from gym_pybullet_drones.FLA402.subject import SubjectManager
+from gym_pybullet_drones.FLA402.subject import SubjectManager
 
 #NUM_D
 # RONES = 4
@@ -97,9 +99,22 @@ def main(num_agents = 4, grid_size = 4):
         helipad_radius=formation_radius 
     )
 
+    
+
     charged_complete = [False] * num_agents  # True once the drone has been charged successfully
     search_offset = (offset_x, offset_y)
     area = SearchArea(grid_size=(grid_size, grid_size), section_size=1.5, home=search_offset)
+
+    # After area and env initialization
+    subject_mgr = SubjectManager(env, area, urdf_path=r"C:\Users\yonat\gym-pybullet-drones\gym_pybullet_drones\FLA402\human_urdf\human_urdf\unnamed\urdf\unnamed.urdf")
+    subject_pos = subject_mgr.spawn_random_subject()
+    # Spawn subject
+    subject_found = False
+    voting_active = False
+    verification_targets = {}   # which drones fly where during voting
+    votes = []
+    helpers = []
+
     return_reason = [""] * num_agents   # reason for returning home
     battery_return_start = {}           # tracks timestamp when battery-change started
     battery_late = set()                # drones that exceeded 1 min charge time
@@ -185,7 +200,61 @@ def main(num_agents = 4, grid_size = 4):
         for i, drone in enumerate(swarm):
             state = drone.update()
             current_pos = np.array(state[0:3])
-            
+
+            if (
+                not subject_found
+                and not voting_active
+                and not returning_home
+                and controller.search_active
+                and current_section[i] is not None
+                and subject_pos is not None
+                and t > 20
+            ):
+
+                drone_xy = np.array(current_pos[:2])
+                subject_xy = np.array(subject_pos[:2])
+                dist_to_subject = np.linalg.norm(drone_xy - subject_xy)
+
+
+                if dist_to_subject < 0.4:
+                    subject_found = True
+                    drone.subject_found = 1
+                    controller.middle_text = (
+                        f"Drone {i} detected possible subject at {np.round(subject_pos[:2], 2)}!"
+                    )
+                    print(controller.middle_text)
+
+                    # Choose 3 closest helper drones
+                    dists = [
+                        (j, np.linalg.norm(
+                            np.array(swarm[j].position[:2]) - np.array(subject_pos[:2])
+                        ))
+                        for j in range(num_agents) if j != i
+                    ]
+                    dists.sort(key=lambda x: x[1])
+                    helpers = [idx for idx, _ in dists[:3]]
+                    print(f"[Subject] Drones {helpers} assigned to verify subject")
+
+                    controller.voting_text = (
+                        "Subject verification started\n"
+                        f"Candidate position: {np.round(subject_pos[:2], 2)}\n"
+                        f"Verifiers: {helpers}\n"
+                    )
+
+                    # Assign verification targets around the subject
+                    verification_targets = {}
+                    angles = [0, 120, 240]
+                    for k, drone_id in enumerate(helpers):
+                        # NEW (targets at hover z)
+                        offx = np.cos(np.radians(angles[k])) * 0.5
+                        offy = np.sin(np.radians(angles[k])) * 0.5
+                        verification_targets[drone_id] = np.array([subject_pos[0] + offx,
+                                                                subject_pos[1] + offy,
+                                                                FLY_HEIGHT])
+                    voting_active = True
+                    votes = []
+
+
             if i in controller.charged_drones:
                 print(f"[MAIN] Drone {i} recharged — rejoining mission.")
                 controller.charged_drones.remove(i)
@@ -322,18 +391,34 @@ def main(num_agents = 4, grid_size = 4):
                 print(f"[Ping] drone {msg['ID']} at {msg['Pos']} | Time: {msg['Timer']}s")
                 last_broadcast[i] = t
 
-            # --- Return-home behavior ---
+           #return home
             if returning_home:
-                target_pos = np.array([home_targets[i][0], home_targets[i][1], FLY_HEIGHT])
-                diff = target_pos - current_pos
-                dist = np.linalg.norm(diff)
-                if dist > 0.05:
-                    next_pos = current_pos + diff * 0.3  # smooth flight home
-                else:
-                    next_pos = target_pos
-                rpm = drone.step_toward(next_pos)
-                actions[i, :] = rpm
-                continue
+                for i, drone in enumerate(swarm):
+                    if crashed[i]:
+                        continue
+
+                    state = drone.update()
+                    current_pos = np.array(state[0:3])
+                    target_pos = np.array([home_targets[i][0], home_targets[i][1], FLY_HEIGHT])
+                    diff = target_pos - current_pos
+                    dist = np.linalg.norm(diff)
+
+                    if dist > 0.05:
+                        direction = diff / (dist + 1e-6)
+                        speed_scale = np.clip(dist / 3.0, 0.3, 1.0)
+                        move_dist = min(dist, MAX_SPEED * speed_scale / CTRL_FREQ * 6)
+                        next_pos = current_pos + direction * move_dist
+                    else:
+                        next_pos = target_pos
+
+                    next_pos[2] = FLY_HEIGHT
+                    rpm = drone.step_toward(next_pos)
+                    actions[i, :] = rpm
+
+                env.step(actions)
+                time.sleep(1 / CTRL_FREQ)
+                continue  # skip normal mission logic during return phase
+
 
             # --- Normal search behavior ---
             if current_targets[i] is None:
@@ -351,6 +436,95 @@ def main(num_agents = 4, grid_size = 4):
                 current_section[i] = cell_id
                 last_reach_time[i] = time.time()  # prevent initial hover pause
                 print(f"drone {i} → new section {cell_id}")
+
+            # --- Voting phase ---
+            if voting_active:
+                for j in verification_targets.keys():
+                    target = verification_targets[j]
+
+                    # --- XY-only distance (ignore z) ---
+                    diff_xy = target[:2] - swarm[j].position[:2]
+                    dist = np.linalg.norm(diff_xy)
+
+                    if dist > 0.25:  # tolerance for "in position"
+                        # Smooth, faster approach but stable
+                        direction = diff_xy / (dist + 1e-6)
+                        # faster than before; tune 1.2–2.0 as you like
+                        move_dist = min(dist, MAX_SPEED / CTRL_FREQ * 1.6)
+                        next_xy = swarm[j].position[:2] + direction * move_dist
+                        next_pos = np.array([next_xy[0], next_xy[1], FLY_HEIGHT])
+                        rpm = swarm[j].step_toward(next_pos)
+                        actions[j, :] = rpm
+                    else:
+                        # Register vote once
+                        if j not in [v["drone_id"] for v in votes]:
+                            votes.append({"drone_id": j, "vote": "YES"})
+                            msg = f"Drone {j} votes YES at {np.round(swarm[j].position[:2], 2)}"
+                            print(msg)
+                            controller.voting_text += msg + "\n"
+
+                        # Hold a stable hover after voting
+                        hover_target = np.array([swarm[j].position[0], swarm[j].position[1], FLY_HEIGHT])
+                        rpm = swarm[j].step_toward(hover_target)
+                        actions[j, :] = rpm
+
+
+                # ✅ Continue normal search for *other drones*
+                for k in range(num_agents):
+                    if k not in verification_targets and not crashed[k]:
+                        # Only run search if they have targets
+                        if current_targets[k] is not None and path_progress[k] < len(current_targets[k]):
+                            target_pos = current_targets[k][path_progress[k]]
+                            diff = np.array(target_pos) - swarm[k].position
+                            dist = np.linalg.norm(diff)
+                            direction = diff / (dist + 1e-6)
+                            move_dist = min(dist, MAX_SPEED / CTRL_FREQ)
+                            next_pos = swarm[k].position + direction * move_dist
+
+                            # Apply light avoidance
+                            push_drones = avoidance_from_drones(
+                                swarm[k].position, all_positions, k, radius=0.5, gain=0.3, max_push=0.4
+                            )
+                            push_border = avoidance_from_borders(
+                                swarm[k].position, (grid_size, grid_size), 1.5, search_offset,
+                                margin=0.3, gain=0.5, max_push=0.4
+                            )
+                            next_pos += 0.5 * (push_drones + push_border)
+                            next_pos[2] = FLY_HEIGHT
+
+                            rpm = swarm[k].step_toward(next_pos)
+                            actions[k, :] = rpm
+                        
+                            # Advance waypoint if close
+                            if dist < WAYPOINT_TOLERANCE:
+                                if time.time() - last_reach_time[k] > HOVER_TIME:
+                                    path_progress[k] += 1
+                                    last_reach_time[k] = time.time()
+                                # If this drone has no remaining section, hold position
+                        else:
+                            hover_target = np.array([swarm[k].position[0], swarm[k].position[1], FLY_HEIGHT])
+                            rpm = swarm[k].step_toward(hover_target)
+                            actions[k, :] = rpm
+
+                # --- Check if all helper drones have voted ---
+                if len(votes) >= len(verification_targets):
+                    print("[Subject] Voting complete!")
+                    controller.middle_text = "✅ Subject confirmed! All drones returning home."
+                    controller.voting_text += "✅ Subject confirmed — returning home.\n"
+
+                    # Log info
+                    total_time = round(time.time() - start_time, 1)
+                    controller.middle_text += f"\nSubject confirmed at {np.round(subject_pos[:2], 2)} | Time: {total_time}s"
+
+                    # Trigger return phase
+                    returning_home = True
+                    voting_active = False
+
+                # Step simulation and continue to next frame
+                env.step(actions)
+                time.sleep(1 / CTRL_FREQ)
+                continue
+
 
             # If drone has finished its tasks, just hover and wait
             if current_targets[i] is None:
@@ -452,7 +626,7 @@ def main(num_agents = 4, grid_size = 4):
         if all(c.searched for c in area.sections) and not returning_home:
             print("The search area is searched! drones will return home together...")
             returning_home = True
-            time.sleep(1.5)  # small pause before returning
+            time.sleep(0.4)  # small pause before returning
 
         if returning_home:
             distances = []
@@ -464,7 +638,7 @@ def main(num_agents = 4, grid_size = 4):
                 distances.append(dist)
             
 
-            if len(distances) == 0 or all(d < 0.2 for d in distances):  # ← inside same block now
+            if len(distances) == 0 or all(d < 0.5 for d in distances):  # ← inside same block now
                 print("All drones returned home. Mission complete!")
                  # Gradually descend to z=0
 
@@ -479,6 +653,14 @@ def main(num_agents = 4, grid_size = 4):
                         next_pos = current_pos + 0.2 * (target_pos - current_pos)
                         rpm = drone.step_toward(next_pos)
                         actions[i, :] = rpm
+
+                        # Safety: fill any unassigned drones with hover commands
+                    for idx in range(num_agents):
+                        if np.all(actions[idx] == 0):
+                            state = swarm[idx].update()
+                            hover_target = np.array([state[0], state[1], FLY_HEIGHT])
+                            rpm = swarm[idx].step_toward(hover_target)
+                            actions[idx, :] = rpm
                     env.step(actions)
                     time.sleep(1 / CTRL_FREQ)
 
@@ -499,9 +681,10 @@ def main(num_agents = 4, grid_size = 4):
                     # Stop all motion
                     p.resetBaseVelocity(env.DRONE_IDS[i], [0, 0, 0], [0, 0, 0], physicsClientId=env.CLIENT)
 
-                print("✅ All drones landed and motors shut down.")
+                print("All drones landed and motors shut down.")
                 controller.search_active = False
                 controller.simulation_running = False
+
                 break
 
 

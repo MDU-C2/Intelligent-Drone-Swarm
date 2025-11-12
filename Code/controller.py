@@ -10,11 +10,13 @@ mission_aborted = False
 # Shared text for GUI
 broadcast_text = ""
 assignment_text = ""
+voting_text = ""             
 # Fault injection & health feedback
 injected_fault = None      # (drone_id, health_code)
 middle_text = ""           # Text from test.py for GUI display
-home_ready = []  # list of booleans, same length as number of drones
-charged_drones = set()  # track drones that have been charged
+home_ready = []            # list of booleans, same length as number of drones
+charged_drones = set()     # track drones that have been charged
+
 
 
 

@@ -147,11 +147,23 @@ class DroneControlUI(QWidget):
         market_layout.addWidget(self.market_label)
         market_layout.addWidget(self.market_display)
 
+        # Voting display (generic consensus / verification log)
+        voting_layout = QVBoxLayout()
+        self.voting_label = QLabel("Voting")
+        self.voting_label.setStyleSheet("font-weight: bold; font-size: 14px; color: #7733ff;")
+        self.voting_display = QTextEdit()
+        self.voting_display.setReadOnly(True)
+        self.voting_display.setPlaceholderText("Voting events and consensus results will appear here...")
+        voting_layout.addWidget(self.voting_label)
+        voting_layout.addWidget(self.voting_display)
+
+        # Add all columns
         info_layout.addLayout(left_layout)
         info_layout.addLayout(middle_layout)
         info_layout.addLayout(right_layout)
         info_layout.addLayout(searched_layout)
         info_layout.addLayout(market_layout)
+        info_layout.addLayout(voting_layout)
 
         layout.addLayout(info_layout)
 
@@ -207,6 +219,9 @@ class DroneControlUI(QWidget):
 
         if hasattr(controller, "market_text"):
             self.market_display.setPlainText(controller.market_text)
+
+        if hasattr(controller, "voting_text"):
+            self.voting_display.setPlainText(controller.voting_text)
 
         # Show latest health/retasking info
         if hasattr(controller, "middle_text"):
