@@ -14,6 +14,7 @@ from gym_pybullet_drones.FLA402.tables import get_health_name
 from gym_pybullet_drones.FLA402.market import MarketSystem
 from gym_pybullet_drones.FLA402.subject import SubjectManager
 from gym_pybullet_drones.FLA402.subject import SubjectManager
+from PyQt5.QtWidgets import QMessageBox, QApplication
 
 #NUM_D
 # RONES = 4
@@ -108,9 +109,17 @@ def main(num_agents = 4, grid_size = 4):
     # After area and env initialization
     subject_mgr = SubjectManager(env, area, urdf_path=r"C:\Users\yonat\gym-pybullet-drones\gym_pybullet_drones\FLA402\human_urdf\human_urdf\unnamed\urdf\unnamed.urdf")
     subject_pos = subject_mgr.spawn_random_subject()
+    # cache which section the subject is in (nearest center works well)
+    subject_section_id = min(
+        range(len(area.sections)),
+        key=lambda sid: np.linalg.norm(
+            np.array(area.sections[sid].position) - np.array(subject_pos[:2])
+        )
+    )
     # Spawn subject
     subject_found = False
     voting_active = False
+    detecting_drone_id = None
     verification_targets = {}   # which drones fly where during voting
     votes = []
     helpers = []
@@ -216,13 +225,29 @@ def main(num_agents = 4, grid_size = 4):
                 dist_to_subject = np.linalg.norm(drone_xy - subject_xy)
 
 
-                if dist_to_subject < 0.4:
+                is_subject_section_assigned_to_me = (
+                current_section[i] == subject_section_id and
+                area.sections[subject_section_id].assigned_drone == i
+                )   
+
+                # Optional: still require we're in search mode and not already voting
+                if (
+                    not subject_found
+                    and not voting_active
+                    and not returning_home
+                    and controller.search_active
+                    and current_section[i] is not None
+                    and is_subject_section_assigned_to_me           
+                    and dist_to_subject < 0.4                       # your tuned radius
+                ):
                     subject_found = True
+                    detecting_drone_id = i          # keep your “hover while voting” behavior
                     drone.subject_found = 1
                     controller.middle_text = (
                         f"Drone {i} detected possible subject at {np.round(subject_pos[:2], 2)}!"
                     )
                     print(controller.middle_text)
+                    detecting_drone_id = i  # remember which drone made the detection
 
                     # Choose 3 closest helper drones
                     dists = [
@@ -234,7 +259,7 @@ def main(num_agents = 4, grid_size = 4):
                     dists.sort(key=lambda x: x[1])
                     helpers = [idx for idx, _ in dists[:3]]
                     print(f"[Subject] Drones {helpers} assigned to verify subject")
-
+                    
                     controller.voting_text = (
                         "Subject verification started\n"
                         f"Candidate position: {np.round(subject_pos[:2], 2)}\n"
@@ -519,6 +544,22 @@ def main(num_agents = 4, grid_size = 4):
                     # Trigger return phase
                     returning_home = True
                     voting_active = False
+                        # --- Highlight the section where the subject was found ---
+                    # Find which section center is closest to subject position
+                    min_dist = float("inf")
+                    subject_section = None
+                    for sec in area.sections:
+                        dist_to_section = np.linalg.norm(np.array(sec.position) - np.array(subject_pos[:2]))
+                        if dist_to_section < min_dist:
+                            min_dist = dist_to_section
+                            subject_section = sec
+
+                    if subject_section:
+                        # Turn that section gold (yellowish)
+                        env.mark_section_as_searched(subject_section.position, color=(1, 0.84, 0))
+                        print(f"[Subject] Located in section {subject_section.id}")
+                        controller.middle_text += f"\nSubject located in Section {subject_section.id}"
+
 
                 # Step simulation and continue to next frame
                 env.step(actions)
@@ -638,8 +679,8 @@ def main(num_agents = 4, grid_size = 4):
                 distances.append(dist)
             
 
-            if len(distances) == 0 or all(d < 0.5 for d in distances):  # ← inside same block now
-                print("All drones returned home. Mission complete!")
+            if len(distances) == 0 or all(d < 1.8 for d in distances):  # ← inside same block now
+                print("All drones are returning home.")
                  # Gradually descend to z=0
 
                 for _ in range(int(CTRL_FREQ * 30)):  # ~30 seconds descent
@@ -670,20 +711,38 @@ def main(num_agents = 4, grid_size = 4):
                         continue
                     state = drone.update()
                     current_pos = np.array(state[0:3])
-                    if current_pos[2] > 0.05:
+                    if current_pos[2] > 0.2:
                         # Force final descent
                         p.resetBasePositionAndOrientation(
                             env.DRONE_IDS[i],
-                            [home_targets[i][0], home_targets[i][1], 0.05],
+                            [home_targets[i][0], home_targets[i][1], 0.1],
                             [0, 0, 0, 1],
                             physicsClientId=env.CLIENT
                         )
                     # Stop all motion
                     p.resetBaseVelocity(env.DRONE_IDS[i], [0, 0, 0], [0, 0, 0], physicsClientId=env.CLIENT)
 
-                print("All drones landed and motors shut down.")
+                print("All drones landed and motors shut down. Mission complete!")
                 controller.search_active = False
                 controller.simulation_running = False
+                summary_msg = f"""
+
+                Position: {np.round(subject_pos[:2], 2)}
+                Section: {subject_section.id if subject_section else 'Unknown'}
+                Time to find: {round(total_time, 1)} seconds
+                """
+
+                try:
+                    app = QApplication.instance()
+                    if app is None:
+                        app = QApplication(sys.argv)
+                    msg_box = QMessageBox()
+                    msg_box.setWindowTitle("Mission Summary")
+                    msg_box.setText(summary_msg)
+                    msg_box.setStandardButtons(QMessageBox.Ok)
+                    msg_box.exec_()
+                except Exception as e:
+                    print(f"[GUI] Could not open summary window: {e}")
 
                 break
 
