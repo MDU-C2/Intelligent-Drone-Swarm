@@ -27,7 +27,7 @@ pip3 install -e . # if needed, `sudo apt install build-essential` to install `gc
 
 ```sh
 cd gym_pybullet_drones/examples/
-python3 pid.py # position and velocity reference
-python3 pid_velocity.py # desired velocity reference
+python pid.py # position and velocity reference
+python pid_velocity.py # desired velocity reference
 ```
 
