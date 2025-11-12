@@ -8,32 +8,28 @@ from gym_pybullet_drones.envs.CtrlAviary import CtrlAviary
 #section_size = 1.0
 
 class SearchAreaAviary(CtrlAviary):
-
     def __init__(self,
                  grid_size=(10, 10),
                  section_size=1.0,
                  home_position=(0, 0),
-                 search_area_offset=(5, 0),  
+                 search_area_offset=(5, 0),
+                 helipad_radius=0.6,
                  *args, **kwargs):
-        """
-        grid_size : tuple(int, int)
-            Number of grid cells along X and Y.
-        section_size : float
-            Size (meters) of each grid square.
-        home_position : tuple(float, float)
-            The XY position of the home/start point.
-        """
+        
         self.grid_size = grid_size
         self.section_size = section_size
         self.home_position = home_position
-        self.search_area_offset = search_area_offset  # store it
+        self.search_area_offset = search_area_offset
+        self.helipad_radius = helipad_radius 
 
         super().__init__(*args, **kwargs)
 
         self._create_green_ground()
-        self._create_search_area_overlay()  # <--- add this line
+        self._create_search_area_overlay()
         self._create_grid_lines()
         self._create_helipad(self.home_position)
+
+
 
     def _create_green_ground(self):
         """Loads and colors the ground plane green."""
@@ -132,14 +128,15 @@ class SearchAreaAviary(CtrlAviary):
         half_y = width_y * self.section_size / 2
         
     def _create_helipad(self, position=(0, 0, 0)):
-        """Creates a simple circular helipad marker."""
+        """Creates a circular helipad that scales with swarm size."""
+        # Increase size multiplier for stronger visual effect
+        radius = max(0.6, self.helipad_radius * 1.2)
+        print(f"[ENV] Creating helipad with visual radius = {radius:.2f} (helipad_radius={self.helipad_radius:.2f})")
 
-        radius = 0.6
         height = 0.02
-        base_color = [0.2, 0.2, 0.2, 1]  # dark gray pad
-        border_color = [1, 1, 1, 1]      # white border
+        base_color = [0.2, 0.2, 0.2, 1]
+        border_color = [1, 1, 1, 1]
 
-        # Main pad surface
         pad_visual = p.createVisualShape(
             shapeType=p.GEOM_CYLINDER,
             radius=radius,
@@ -148,7 +145,6 @@ class SearchAreaAviary(CtrlAviary):
             physicsClientId=self.CLIENT
         )
 
-        # Spawn the helipad
         p.createMultiBody(
             baseMass=0,
             baseVisualShapeIndex=pad_visual,
@@ -156,7 +152,6 @@ class SearchAreaAviary(CtrlAviary):
             physicsClientId=self.CLIENT
         )
 
-        # Draw circular border
         for angle in range(0, 360, 10):
             a1 = np.radians(angle)
             a2 = np.radians(angle + 10)
@@ -166,13 +161,37 @@ class SearchAreaAviary(CtrlAviary):
                 border_color, 2, 0, physicsClientId=self.CLIENT
             )
 
-        # Add white "H" text
+        # Scale text size proportionally
         p.addUserDebugText(
             "H",
-            [position[0] - 0.15, position[1] - 0.2, 0.05],
+            [position[0] - 0.3 * radius, position[1] - 0.3 * radius, 0.05],
             textColorRGB=[1, 1, 1],
-            textSize=2,
+            textSize=max(2, radius * 1.2),
             lifeTime=0,
             physicsClientId=self.CLIENT
         )
+    
+    def mark_section_as_searched(self, cell_center, color=(0, 1, 0)):
+        """
+        Overlays a green box at the given cell center to indicate it has been searched.
+        """
+        x, y = cell_center
+        half_extent = self.section_size / 2.0 * 0.95  # slightly smaller to fit within grid lines
+
+        visual_shape = p.createVisualShape(
+            shapeType=p.GEOM_BOX,
+            halfExtents=[half_extent, half_extent, 0.001],
+            rgbaColor=[color[0], color[1], color[2], 0.6],  # semi-transparent green
+            physicsClientId=self.CLIENT
+        )
+
+        p.createMultiBody(
+            baseMass=0,
+            baseVisualShapeIndex=visual_shape,
+            basePosition=[x, y, 0.002],  # slightly above the white area
+            physicsClientId=self.CLIENT
+        )
+
+
+
 
