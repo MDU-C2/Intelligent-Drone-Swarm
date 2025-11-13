@@ -1,5 +1,4 @@
 # Beginner‑Friendly Guide to the Database
-TESTTEST
 This README walks you through setting up, using, exporting, and verifying our SQLite requirements database — even if you’ve never touched SQLite or Python before.
 
 ### NOTE
