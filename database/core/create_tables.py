@@ -149,7 +149,9 @@ class create_tables:
             description VARCHAR NOT NULL,
             file BLOB,
             version INTEGER,
-            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   
+            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
+            file_name TEXT,
+            mime_type TEXT
         )
         """
         self._ensure("documents", create_sql)

@@ -142,15 +142,17 @@ class insert_functions:
         )
         return method_id
 
-    def insert_documents(self, doc_id, title, description, file=None, version=None, author=None):
+    def insert_documents(self, doc_id, title, description,
+                     file=None, version=None, author=None,
+                     file_name=None, mime_type=None):
         if not doc_id:
             doc_id = self._next_id("documents", "doc_id")
         self.cursor.execute(
             """
-            INSERT INTO documents (doc_id, title, description, file, version, author)
-            VALUES (?,?,?,?,?,?)
+            INSERT INTO documents (doc_id, title, description, file, version, author, file_name, mime_type)
+            VALUES (?,?,?,?,?,?,?,?)
             """,
-            (doc_id, title, description, file, version, author)
+            (doc_id, title, description, file, version, author, file_name, mime_type)
         )
         return doc_id
 

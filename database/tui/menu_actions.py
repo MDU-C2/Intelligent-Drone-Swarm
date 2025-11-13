@@ -3,7 +3,8 @@
 Handlers for TUI actions to keep run_database.py uncluttered.
 Each handler prints its own success/error messages.
 """
-
+from database.dataman.export_tools import export_document_file  # we'll add this helper next
+import sqlite3
 from ..dataman.export_tools import export_db_to_json_interactive, export_db_to_csv_interactive
 from ..dataman.safe_restore import safe_restore_from_json
 from ..app.verify_roundtrip import run_roundtrip_check
@@ -61,6 +62,39 @@ def handle_insert_document(inserter):
         print("✅ Document inserted successfully!")
     else:
         print("Insertion cancelled.")
+
+def handle_export_document_file():
+    """
+    Ask the user for a Document ID and export its BLOB to the 'exported_docs/' folder.
+    """
+    db_path = DB_NAME_TXT.read_text().strip()
+
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    cur.execute("SELECT doc_id, title FROM documents ORDER BY doc_id;")
+    docs = cur.fetchall()
+    conn.close()
+
+    if not docs:
+        print("\nNo documents found in the database.")
+        return
+
+    print("\nAvailable documents:")
+    for i, (doc_id, title) in enumerate(docs, start=1):
+        print(f"{i:2d}. {doc_id} — {title}")
+
+    choice = input("\nEnter number of document to export (or 'exit' to cancel): ").strip()
+    if choice.lower() == "exit":
+        return
+
+    if not choice.isdigit() or not (1 <= int(choice) <= len(docs)):
+        print("Invalid choice.")
+        return
+
+    doc_id = docs[int(choice) - 1][0]
+
+    # Call our export helper
+    export_document_file(db_path, doc_id, output_dir="exported_docs")
 
 def handle_insert_vv_method(inserter):
     data = prompts.prompt_vv_method()

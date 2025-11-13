@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-04T15:01:31Z",
+    "exported_at": "2025-11-12T14:34:33Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -14,14 +14,16 @@
       "rows": []
     },
     "documents": {
-      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   \n        )",
+      "create_sql": "CREATE TABLE documents (\n            doc_id VARCHAR PRIMARY KEY NOT NULL,\n            title VARCHAR NOT NULL,\n            description VARCHAR NOT NULL,\n            file BLOB,\n            version INTEGER,\n            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),\n            file_name TEXT,\n            mime_type TEXT\n        )",
       "columns": [
         "doc_id",
         "title",
         "description",
         "file",
         "version",
-        "author"
+        "author",
+        "file_name",
+        "mime_type"
       ],
       "rows": []
     },
@@ -84,7 +86,7 @@
           "swarm_req_id": "SW-04",
           "requirement": "The swarm shall employ a consensus mechanism that ensures correct collective behaviour, even if at least one agent provides incorrect data.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "",
           "author": "C.N",
           "verification_status": "Accepted",
@@ -97,7 +99,7 @@
           "swarm_req_id": "SW-05",
           "requirement": "The swarm shall reach a collective decision for each task that requires coordination.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "",
           "author": "C.N",
           "verification_status": "Accepted",
@@ -123,10 +125,348 @@
           "swarm_req_id": "SW-07",
           "requirement": "When local conditions of an agent require immediate action,the swarm shall allow the agent to make independent decisions",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": "Since the swarm has no leader, agents should be able to make independent decision when necessary.",
           "author": "C.N",
           "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-02",
+          "requirement": "When the staff is in the landing area, the swarm hover at a distance of atleast 40 m away from the landing area.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-03",
+          "requirement": "When the swarm finds the subject, agents shall avoid flying above the subject.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-04",
+          "requirement": "When the subject is confirmed to be found, the swarm shall fly atleast 50m away from the subject.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-06",
+          "requirement": "Agents shall have a 25m buffer zone around them.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-07",
+          "requirement": "If agents' buffer zones overlap then the agents whose buffer zones are oerlapping shall move away from each other.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-08",
+          "requirement": "If position data of an agent in the swarm is delayed, then that culprit agent shall increase its buffer zone by atleast 20m.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-09",
+          "requirement": "If position data of an agent in the swarm is uncertain, then that culprit agent shall increase its buffer zone by atleast 20m.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-10",
+          "requirement": "If flight capacity of an agent in the swarm is decreased, then that culprit agent shall increase its buffer zone by atleast 20m.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-11",
+          "requirement": "If communication of an agent in the swarm is delayed, then that culprit agent shall increase its buffer zone by atleast 20m.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-12",
+          "requirement": "Agents shall fly a minimum of 15m above ground.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-13",
+          "requirement": "Agent shall avoid  obstacles.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-14",
+          "requirement": "When the mission is in progress, Agent shall use sensors  to detect stationary obstacles. Rationale:for situational awareness",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-15",
+          "requirement": "When the mission is in progress, Agent shall use sensors for situational awareness to detect air obstacles.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-16",
+          "requirement": "Swarm shall operate in areas with a population < 5 people per km^2.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-17",
+          "requirement": "If agents communication is lost, agent shall return to base.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-18",
+          "requirement": "If agents power unit is degraded, agent shall return to base if possible.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-19",
+          "requirement": "If agent battery power is below 50%, agent shall return to base.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-20",
+          "requirement": "If agent flight is unstable, agent shall return to base.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-21",
+          "requirement": "While an agent is in searching state, the agent shall fly at an altitude between 15-20 m above ground.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-23",
+          "requirement": "The operational volume shall have add 50m to all sides as a bufferzone",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-24",
+          "requirement": "If an agent enters the operational areas buffer zone, the agent shall return to the operational area",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-25",
+          "requirement": "If an agent leaves the operational areas buffer zone, the agent shall land",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-05",
+          "requirement": "When the mission is in progress, swarm agents shall send out location updates periodically to other agents in the same swarm.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-01",
+          "requirement": "When the staff is atleast 20m away from the swarm, the swarm shall proced with startup sequence.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-22",
+          "requirement": "While an agent is in transition state, agent shall stay between 25-40m above ground.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "swarm_req_id": "SR-26",
+          "requirement": "Agents shall fly a maxsimum of 50m above ground",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
@@ -176,6 +516,126 @@
           "id": 7,
           "goal_id": "G-11",
           "swarm_req_id": "SW-07"
+        },
+        {
+          "id": 8,
+          "goal_id": "SG-01",
+          "swarm_req_id": "SR-01"
+        },
+        {
+          "id": 9,
+          "goal_id": "SG-01",
+          "swarm_req_id": "SR-02"
+        },
+        {
+          "id": 10,
+          "goal_id": "SG-02",
+          "swarm_req_id": "SR-03"
+        },
+        {
+          "id": 11,
+          "goal_id": "SG-02",
+          "swarm_req_id": "SR-04"
+        },
+        {
+          "id": 12,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-05"
+        },
+        {
+          "id": 13,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-06"
+        },
+        {
+          "id": 14,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-07"
+        },
+        {
+          "id": 15,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-08"
+        },
+        {
+          "id": 16,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-09"
+        },
+        {
+          "id": 17,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-10"
+        },
+        {
+          "id": 18,
+          "goal_id": "SG-03",
+          "swarm_req_id": "SR-11"
+        },
+        {
+          "id": 19,
+          "goal_id": "SG-04",
+          "swarm_req_id": "SR-12"
+        },
+        {
+          "id": 20,
+          "goal_id": "SG-04",
+          "swarm_req_id": "SR-13"
+        },
+        {
+          "id": 21,
+          "goal_id": "SG-06",
+          "swarm_req_id": "SR-16"
+        },
+        {
+          "id": 22,
+          "goal_id": "SG-07",
+          "swarm_req_id": "SR-17"
+        },
+        {
+          "id": 23,
+          "goal_id": "SG-07",
+          "swarm_req_id": "SR-18"
+        },
+        {
+          "id": 24,
+          "goal_id": "SG-07",
+          "swarm_req_id": "SR-19"
+        },
+        {
+          "id": 25,
+          "goal_id": "SG-07",
+          "swarm_req_id": "SR-20"
+        },
+        {
+          "id": 26,
+          "goal_id": "SG-09",
+          "swarm_req_id": "SR-21"
+        },
+        {
+          "id": 27,
+          "goal_id": "SG-08",
+          "swarm_req_id": "SR-22"
+        },
+        {
+          "id": 28,
+          "goal_id": "SG-11",
+          "swarm_req_id": "SR-23"
+        },
+        {
+          "id": 29,
+          "goal_id": "SG-09",
+          "swarm_req_id": "SR-24"
+        },
+        {
+          "id": 30,
+          "goal_id": "SG-10",
+          "swarm_req_id": "SR-25"
+        },
+        {
+          "id": 31,
+          "goal_id": "SG-05",
+          "swarm_req_id": "SR-26"
         }
       ]
     },
@@ -299,6 +759,116 @@
           "origin": "G-04",
           "priority": "Mandatory",
           "rationale": "Collective decision-making implies the absence of a central controller, requiring agents to operate autonomously. Therefore, agents must be capable of making independent decisions when necessary, including the ability to self-remove from the swarm in response to failure, inefficiency, or conflict with global objectives.",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-01",
+          "goal_description": "All staff must be safe in all operational phases.",
+          "stakeholder": "Safety Manager",
+          "origin": "FHA (PSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-02",
+          "goal_description": "Agents should not pose any threat to the subject.",
+          "stakeholder": "Safety Manager",
+          "origin": "ARC (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-03",
+          "goal_description": "Agents should not cause a collision with each other, minimum distance from each other 30 m.",
+          "stakeholder": "Safety Manager",
+          "origin": "contaiment requirements (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-04",
+          "goal_description": "Agents should not collide with ground or ground obstacles, minimum altitude 15m.",
+          "stakeholder": "Safety Manager",
+          "origin": "ARC (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-05",
+          "goal_description": "Agents should not collide with third parties in the air, max altitude above ground 50 m",
+          "stakeholder": "Safety Manager",
+          "origin": "ARC (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-06",
+          "goal_description": "The swarm should only fly in rural areas.",
+          "stakeholder": "Safety Manager",
+          "origin": "IGRC (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-07",
+          "goal_description": "Damaged agent should return home if damage is critical or battery low.",
+          "stakeholder": "Safety Manager",
+          "origin": "FHA (PSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-08",
+          "goal_description": "The agents should move at different altitudes depending on the task, searching 15-20m, moving from one sector to another, 25-40m.",
+          "stakeholder": "Safety Manager",
+          "origin": "contaiment requirements (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-09",
+          "goal_description": "The probability of the failure condition “UA leaving the operational volume” shall be less than 10-3/Flight Hour (FH).",
+          "stakeholder": "Safety Manager",
+          "origin": "contaiment requirements (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-10",
+          "goal_description": "When the UA leaves the operational volume, an immediate end of the flight must be initiated through a combination of procedures/processes and/or available technical means.",
+          "stakeholder": "Safety Manager",
+          "origin": "contaiment requirements (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
+          "satisfaction_status": "Pending",
+          "method_id": null
+        },
+        {
+          "goal_id": "SG-11",
+          "goal_description": "The Ground Risk Buffer must at least adhere to the 1:1 principle.",
+          "stakeholder": "Safety Manager",
+          "origin": "contaiment requirements (FSA)",
+          "priority": "Mandatory",
+          "rationale": "",
           "satisfaction_status": "Pending",
           "method_id": null
         }
@@ -437,7 +1007,7 @@
           "sub_req_id": "CON-02",
           "requirement": "The consensus sub-module shall define the procedures that agents will follow to reach a common understanding of the mission plan.",
           "priority": "Mandatory",
-          "effect": "Concensus",
+          "effect": "Consensus",
           "rationale": null,
           "author": "C.N",
           "verification_status": "TBR",
@@ -1358,6 +1928,136 @@
           "id": 21,
           "swarm_req_id": "SW-07",
           "sys_req_id": "PM-21"
+        },
+        {
+          "id": 22,
+          "swarm_req_id": "SR-01",
+          "sys_req_id": "SSR-01"
+        },
+        {
+          "id": 23,
+          "swarm_req_id": "SR-02",
+          "sys_req_id": "SSR-02"
+        },
+        {
+          "id": 24,
+          "swarm_req_id": "SR-02",
+          "sys_req_id": "SSR-03"
+        },
+        {
+          "id": 25,
+          "swarm_req_id": "SR-03",
+          "sys_req_id": "SSR-04"
+        },
+        {
+          "id": 26,
+          "swarm_req_id": "SR-04",
+          "sys_req_id": "SSR-05"
+        },
+        {
+          "id": 27,
+          "swarm_req_id": "SR-05",
+          "sys_req_id": "SSR-06"
+        },
+        {
+          "id": 28,
+          "swarm_req_id": "SR-06",
+          "sys_req_id": "SSR-07"
+        },
+        {
+          "id": 29,
+          "swarm_req_id": "SR-07",
+          "sys_req_id": "SSR-08"
+        },
+        {
+          "id": 30,
+          "swarm_req_id": "SR-08",
+          "sys_req_id": "SSR-09"
+        },
+        {
+          "id": 31,
+          "swarm_req_id": "SR-09",
+          "sys_req_id": "SSR-10"
+        },
+        {
+          "id": 32,
+          "swarm_req_id": "SR-10",
+          "sys_req_id": "SSR-11"
+        },
+        {
+          "id": 33,
+          "swarm_req_id": "SR-11",
+          "sys_req_id": "SSR-12"
+        },
+        {
+          "id": 34,
+          "swarm_req_id": "SR-12",
+          "sys_req_id": "SSR-13"
+        },
+        {
+          "id": 35,
+          "swarm_req_id": "SR-14",
+          "sys_req_id": "SSR-14"
+        },
+        {
+          "id": 36,
+          "swarm_req_id": "SR-15",
+          "sys_req_id": "SSR-15"
+        },
+        {
+          "id": 37,
+          "swarm_req_id": "SR-16",
+          "sys_req_id": "SSR-16"
+        },
+        {
+          "id": 38,
+          "swarm_req_id": "SR-17",
+          "sys_req_id": "SSR-17"
+        },
+        {
+          "id": 39,
+          "swarm_req_id": "SR-18",
+          "sys_req_id": "SSR-18"
+        },
+        {
+          "id": 40,
+          "swarm_req_id": "SR-19",
+          "sys_req_id": "SSR-19"
+        },
+        {
+          "id": 41,
+          "swarm_req_id": "SR-20",
+          "sys_req_id": "SSR-20"
+        },
+        {
+          "id": 42,
+          "swarm_req_id": "SR-21",
+          "sys_req_id": "SSR-21"
+        },
+        {
+          "id": 43,
+          "swarm_req_id": "SR-22",
+          "sys_req_id": "SSR-22"
+        },
+        {
+          "id": 44,
+          "swarm_req_id": "SR-23",
+          "sys_req_id": "SSR-23"
+        },
+        {
+          "id": 45,
+          "swarm_req_id": "SR-24",
+          "sys_req_id": "SSR-24"
+        },
+        {
+          "id": 46,
+          "swarm_req_id": "SR-25",
+          "sys_req_id": "SSR-25"
+        },
+        {
+          "id": 47,
+          "swarm_req_id": "SR-26",
+          "sys_req_id": "SSR-26"
         }
       ]
     },
@@ -2040,6 +2740,370 @@
           "rationale": "",
           "author": "C.N",
           "verification_status": "Accepted",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-01",
+          "requirement": "The protocol module shall define the procedures that will be taken so that all agents sart in a safe way.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-02",
+          "requirement": "The protocol module shall define the procedures that agents shall take when aproaching landing area.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-03",
+          "requirement": "The protocol module shall define the distance from the landing area when staff are present.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-04",
+          "requirement": "The protocol module shall define the procedures that agents shall take when subject is found.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-05",
+          "requirement": "The protocol module shall define the distance frome the subject when subject is found.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-06",
+          "requirement": "The protocol module shall define the ruels for agents broadcasting thier position.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-07",
+          "requirement": "The protocol module shall define the buffer zone for all agents.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-08",
+          "requirement": "The protocol module shall define the prcedures that will be taken when agent buffer zones overlap.",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-09",
+          "requirement": "The protocol module shall define the prcedures that will be taken when agent position data is delayed",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-10",
+          "requirement": "The protocol module shall define the prcedures that will be taken when agent position data is uncertain",
+          "priority": "Mandatory",
+          "effect": "",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-11",
+          "requirement": "The protocol module shall define the prcedures that will be taken when agent flight capacity is decreased",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-12",
+          "requirement": "The protocol module shall define the prcedures that will be taken when agent communication is delayed",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-13",
+          "requirement": "The protocol module shall define the minimum hight above ground for all agents",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-14",
+          "requirement": "The protocol module shall define the procedures that agents shall take when avoiding stationary obstacles",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-15",
+          "requirement": "The protocol module shall define the procedures that agents shall take when avoiding air obstacles",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-16",
+          "requirement": "The protocol module shall define the operational volume based on input",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-17",
+          "requirement": "The protocol module shall define the procedures that agents shall take when agent comunication is lost",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-18",
+          "requirement": "The protocol module shall define the procedures that agents shall take when agent power unit is degraded",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-19",
+          "requirement": "The protocol module shall define the procedures that agents shall take when agent battery is below 50%",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-20",
+          "requirement": "The protocol module shall define the procedures that agents shall take when agent flight is unstable",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-21",
+          "requirement": "The protocol module shall define the maximum and minimum altitudes for searching state",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-22",
+          "requirement": "The protocol module shall define the maximum and minimum altitudes for transsition state",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-23",
+          "requirement": "The protocol module shall define the the buffur zone of the operational volume",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-24",
+          "requirement": "The protocol module shall define the procedures that agents shall take when entering the operational volume buffer zone",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-25",
+          "requirement": "The protocol module shall define the procedures that agents shall take when leaving the operational volumes buffer zone outer border",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
+          "verifier": "E.Z",
+          "validation_status": "Pending",
+          "vv_method": null,
+          "comment": null
+        },
+        {
+          "parent_id": null,
+          "sys_req_id": "SSR-26",
+          "requirement": "The protocol module shall define the maxsimum hight above ground for all agents",
+          "priority": "Mandatory",
+          "effect": "Safety",
+          "rationale": "",
+          "author": "E.M",
+          "verification_status": "TBR",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
