@@ -4,7 +4,7 @@ import sqlite3
 import mimetypes
 from ..dataman.db_json_bridge import dump_db_to_json
 from ..dataman.export_db_to_csv import export_db_to_csv
-from database.core.paths import DATA_DIR, JSON_DUMP, CSV_DIR
+from database.core.paths import DATA_DIR, JSON_DUMP, CSV_DIR, DB_NAME_TXT
 
 def export_db_to_json_interactive(db_name: str) -> None:
     """
@@ -19,9 +19,19 @@ def export_db_to_csv_interactive() -> None:
     """
     Export all tables → CSVs into a fixed folder:
         database/data/csv_exports/
+    And also export all document BLOBs into:
+        database/data/csv_exports/documents/
     """
     CSV_DIR.mkdir(parents=True, exist_ok=True)
     export_db_to_csv(str(CSV_DIR))  # delimiter=';' already set in your exporter
+
+    # NEW: export all document files alongside the CSVs
+    try:
+        _export_all_documents_to_csv_folder()
+    except Exception as e:
+        # Don't break CSV export if docs fail – just warn
+        print(f"⚠️ Document export failed: {e}")
+
     print(f"✅ Exported CSVs → {CSV_DIR}")
 
 def _ext_from_mime(mime: str | None) -> str:
@@ -30,6 +40,53 @@ def _ext_from_mime(mime: str | None) -> str:
     # guess_extension may return None or odd variants; guard it
     ext = mimetypes.guess_extension(mime) or ""
     return ext if ext else ".bin"
+
+def _export_all_documents_to_csv_folder() -> None:
+    """
+    Export every document BLOB in the 'documents' table into
+    database/data/csv_exports/documents/
+    (or whatever CSV_DIR is configured to).
+
+    Each file is named by export_document_file(), using the stored
+    file_name/mime_type/title.
+    """
+    # Ensure we have an active DB
+    if not DB_NAME_TXT.exists():
+        print(f"⚠️ {DB_NAME_TXT} not found — skipping document export.")
+        return
+
+    db_path = DB_NAME_TXT.read_text().strip()
+    if not db_path:
+        print("⚠️ db_name.txt is empty — skipping document export.")
+        return
+
+    docs_dir = CSV_DIR / "documents"
+    docs_dir.mkdir(parents=True, exist_ok=True)
+
+    # Collect all document IDs
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    try:
+        cur.execute("SELECT doc_id FROM documents ORDER BY doc_id;")
+        rows = cur.fetchall()
+    except sqlite3.Error as e:
+        print(f"⚠️ Could not query documents table: {e}")
+        conn.close()
+        return
+
+    conn.close()
+
+    if not rows:
+        print("ℹ️ No documents found — nothing to export.")
+        return
+
+    print(f"\n→ Exporting {len(rows)} document file(s) to {docs_dir} …")
+
+    for (doc_id,) in rows:
+        # Ensure doc_id is passed as string (export_document_file expects str)
+        export_document_file(str(db_path), str(doc_id), output_dir=str(docs_dir))
+
+    print(f"✅ Exported {len(rows)} document file(s) → {docs_dir}")
 
 def export_document_file(db_path: str, doc_id: str, output_dir: str = ".") -> Path | None:
     """
