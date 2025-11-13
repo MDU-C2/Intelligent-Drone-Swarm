@@ -66,7 +66,7 @@ def main():
             print("21: Export Document File")
             print("22: Exit")
 
-            choice = input("===  Enter choice (1-21): ").strip()
+            choice = input("===  Enter choice (1-22): ").strip()
 
             try:
                 if choice == INSERT_GOAL:
