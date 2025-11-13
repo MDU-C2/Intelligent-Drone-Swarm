@@ -34,7 +34,6 @@ def export_db_to_csv_interactive() -> None:
 
     print(f"✅ Exported CSVs → {CSV_DIR}")
 
-
 def _ext_from_mime(mime: str | None) -> str:
     if not mime:
         return ".bin"
