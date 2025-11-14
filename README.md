@@ -5,9 +5,9 @@
 This is a minimalist refactoring of the original `gym-pybullet-drones` repository, designed for compatibility with [`gymnasium`](https://github.com/Farama-Foundation/Gymnasium), [`stable-baselines3` 2.0](https://github.com/DLR-RM/stable-baselines3/pull/1327), and SITL [`betaflight`](https://github.com/betaflight/betaflight)/[`crazyflie-firmware`](https://github.com/bitcraze/crazyflie-firmware/).
 
 ## Intellignet Replanning Drone Swarm
-An intelligent replanning drone swarm was created for this project work. Inorder to run it and try it out, follow the instruction bellow. 
-## Installation
+An intelligent replanning drone swarm was created for this project. To run and test it, follow the instructions below.
 
+## Installation
 Tested on Intel x64/Ubuntu 22.04 and Apple Silicon/macOS 14.1.
 
 ```sh
