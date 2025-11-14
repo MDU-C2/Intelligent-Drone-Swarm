@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-14T14:33:49Z",
+    "exported_at": "2025-11-14T14:57:03Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -564,7 +564,7 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
@@ -577,7 +577,7 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
@@ -590,7 +590,7 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
@@ -642,7 +642,7 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
           "validation_status": "Pending",
           "vv_method": null,
