@@ -14,20 +14,19 @@ git clone https://github.com/utiasDSL/gym-pybullet-drones.git
 cd gym-pybullet-drones/
 
 conda create -n drones python=3.10
-conda activate drones
+conda activate drones # 'drones' is the name you will call your envirnoment, but you can change it to whatever you want. 
 
 pip3 install --upgrade pip
 pip3 install -e . # if needed, `sudo apt install build-essential` to install `gcc` and build `pybullet`
-
+pip install PyQt5
 ```
 
 ## Use
-
-### PID control examples
-
 ```sh
-cd gym_pybullet_drones/examples/
-python pid.py # position and velocity reference
-python pid_velocity.py # desired velocity reference
+git clone https://github.com/MDU-C2/Intelligent-Drone-Swarm.git
+cd Intelligent-Drone-Swarm/simulation/code/
+
+python gui.py
 ```
+
 
