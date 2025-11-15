@@ -739,8 +739,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "M-02"
         },
         {
           "goal_id": "G-08",
