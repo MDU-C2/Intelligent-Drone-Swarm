@@ -25,7 +25,11 @@ pip install PyQt5
 ```sh
 git clone https://github.com/MDU-C2/Intelligent-Drone-Swarm.git
 cd Intelligent-Drone-Swarm/simulation/code/
+# Before running the simulation, you will have to change the path to the subject.
+# 1. Open the main.py file.
+# 2. line 124, change the path there to the path of where you stored the .urdf file (you can find the file in the folder Object(.urdf files).
 
+# Once that is done, you can now run the gui.py file to run the simulation.
 python gui.py
 ```
 
