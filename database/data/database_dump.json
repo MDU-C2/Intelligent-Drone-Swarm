@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-19T10:04:08Z",
+    "exported_at": "2025-11-19T10:04:56Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -2980,7 +2980,7 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
+          "validation_status": "Verified",
           "vv_method": null,
           "comment": null
         },
