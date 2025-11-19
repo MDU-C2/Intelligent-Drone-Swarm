@@ -2994,7 +2994,7 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
+          "validation_status": "Verified",
           "vv_method": null,
           "comment": null
         },
@@ -3008,7 +3008,7 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
+          "validation_status": "Verified",
           "vv_method": null,
           "comment": null
         },
