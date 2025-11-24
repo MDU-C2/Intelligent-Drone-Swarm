@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-16T14:52:27Z",
+    "exported_at": "2025-11-24T12:13:40Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -584,8 +584,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -597,8 +597,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -610,8 +610,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -623,8 +623,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -636,8 +636,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -649,8 +649,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -662,8 +662,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-02",
           "comment": null
         },
         {
@@ -675,8 +675,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -688,8 +688,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -701,8 +701,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -714,8 +714,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -727,8 +727,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -740,8 +740,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -753,8 +753,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -766,8 +766,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -779,8 +779,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -792,8 +792,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -805,8 +805,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -818,8 +818,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -831,8 +831,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -844,8 +844,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -857,8 +857,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -870,8 +870,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -883,8 +883,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -896,8 +896,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -909,8 +909,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -922,8 +922,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -935,8 +935,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -948,8 +948,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -961,8 +961,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -974,8 +974,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -987,8 +987,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         },
         {
@@ -1000,8 +1000,8 @@
           "author": "E.M",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-05",
           "comment": null
         }
       ]
@@ -1191,8 +1191,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-02",
@@ -1201,8 +1201,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-03",
@@ -1211,8 +1211,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-04",
@@ -1221,8 +1221,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "A decentralised protocol means that the swarm has no leader and hence should be able to make collective decisions.",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-05",
@@ -1231,8 +1231,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-06",
@@ -1241,8 +1241,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-07",
@@ -1261,8 +1261,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-09",
@@ -1271,8 +1271,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-10",
@@ -1281,8 +1281,8 @@
           "origin": "Kaos model",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "G-11",
@@ -1291,8 +1291,8 @@
           "origin": "G-04",
           "priority": "Mandatory",
           "rationale": "Collective decision-making implies the absence of a central controller, requiring agents to operate autonomously. Therefore, agents must be capable of making independent decisions when necessary, including the ability to self-remove from the swarm in response to failure, inefficiency, or conflict with global objectives.",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-09"
         },
         {
           "goal_id": "SG-01",
@@ -1301,8 +1301,8 @@
           "origin": "FHA (PSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-02",
@@ -1311,8 +1311,8 @@
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-03",
@@ -1321,8 +1321,8 @@
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-04",
@@ -1331,8 +1331,8 @@
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-05",
@@ -1341,8 +1341,8 @@
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-06",
@@ -1351,8 +1351,8 @@
           "origin": "IGRC (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-07",
@@ -1361,8 +1361,8 @@
           "origin": "FHA (PSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-08",
@@ -1371,8 +1371,8 @@
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-09",
@@ -1381,8 +1381,8 @@
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-10",
@@ -1391,8 +1391,8 @@
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         },
         {
           "goal_id": "SG-11",
@@ -1401,8 +1401,8 @@
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
           "rationale": "",
-          "satisfaction_status": "Pending",
-          "method_id": null
+          "satisfaction_status": "Satisfied",
+          "method_id": "VVP-06"
         }
       ]
     },
@@ -2965,8 +2965,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -2979,8 +2979,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -2993,8 +2993,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3007,8 +3007,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3021,8 +3021,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3035,8 +3035,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3049,8 +3049,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3063,8 +3063,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3077,8 +3077,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3091,8 +3091,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3105,8 +3105,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3119,8 +3119,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3133,8 +3133,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3147,8 +3147,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3161,8 +3161,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3175,8 +3175,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3189,8 +3189,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3203,8 +3203,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3217,8 +3217,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3231,8 +3231,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3245,8 +3245,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3257,10 +3257,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3271,10 +3271,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3285,10 +3285,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3299,10 +3299,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3313,10 +3313,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3327,10 +3327,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3341,10 +3341,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3355,10 +3355,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3369,10 +3369,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3383,10 +3383,10 @@
           "effect": "",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3397,10 +3397,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3411,10 +3411,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3425,10 +3425,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3439,10 +3439,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3453,10 +3453,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3467,10 +3467,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3481,10 +3481,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3495,10 +3495,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3509,10 +3509,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3523,10 +3523,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3537,10 +3537,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3551,10 +3551,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3565,10 +3565,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3579,10 +3579,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3593,10 +3593,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3607,10 +3607,10 @@
           "effect": "Safety",
           "rationale": "",
           "author": "E.M",
-          "verification_status": "TBR",
+          "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3623,8 +3623,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         },
         {
@@ -3637,8 +3637,8 @@
           "author": "C.N",
           "verification_status": "Accepted",
           "verifier": "E.Z",
-          "validation_status": "Pending",
-          "vv_method": null,
+          "validation_status": "Verified",
+          "vv_method": "VVP-03",
           "comment": null
         }
       ]
