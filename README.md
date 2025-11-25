@@ -7,7 +7,9 @@
 # Intelligent Replanning Drone Swarm (IRDS)
 *Intelligent Replanning Protocol for a Fail-Operational Drone Swarm*
 
-Contributors to this project listed [here](CONTRIBUTORS.md)
+[Contributors in this project](CONTRIBUTORS.md)
+
+[Commonly used terms in the project](commonly-used-terms.md)
 
 ## Introduction
 This project addresses the implementation of swarm-level coordination logic that uses detailed health information from all UAVs in the swarm to ensure the overall mission can continue with maximum efficiency, even when individual UAVs are compromised.
