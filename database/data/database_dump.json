@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-24T12:54:23Z",
+    "exported_at": "2025-11-25T08:13:59Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -1319,7 +1319,7 @@
         },
         {
           "goal_id": "SG-02",
-          "goal_description": "Agents should not pose any threat to the subject.",
+          "goal_description": "Agents should avoid posing any threat to the subject.",
           "stakeholder": "Safety Manager",
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
@@ -1329,7 +1329,7 @@
         },
         {
           "goal_id": "SG-03",
-          "goal_description": "Agents should not cause a collision with each other, minimum distance from each other 30 m.",
+          "goal_description": "Agents should avoid collisions with each other, minimum distance from each other 30 m.",
           "stakeholder": "Safety Manager",
           "origin": "contaiment requirements (FSA)",
           "priority": "Mandatory",
@@ -1339,7 +1339,7 @@
         },
         {
           "goal_id": "SG-04",
-          "goal_description": "Agents should not collide with ground or ground obstacles, minimum altitude 15m.",
+          "goal_description": "Agents should avoid collisions with ground or ground obstacles, minimum altitude 15m.",
           "stakeholder": "Safety Manager",
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
@@ -1349,7 +1349,7 @@
         },
         {
           "goal_id": "SG-05",
-          "goal_description": "Agents should not collide with third parties in the air, max altitude above ground 50 m",
+          "goal_description": "Agents should avoid collisions with third parties in the air, max altitude above ground 50 m",
           "stakeholder": "Safety Manager",
           "origin": "ARC (FSA)",
           "priority": "Mandatory",
@@ -1466,6 +1466,21 @@
           "gloss_id": 8,
           "prefix": "D-",
           "meaning": "Diagrams from draw.io"
+        },
+        {
+          "gloss_id": 9,
+          "prefix": "SG-",
+          "meaning": "Safety Goals derived from safety activities"
+        },
+        {
+          "gloss_id": 10,
+          "prefix": "SR-",
+          "meaning": "Safety requirements on agent level"
+        },
+        {
+          "gloss_id": 11,
+          "prefix": "SSR-",
+          "meaning": "System safety requirements pretaining to protocol safety requirements"
         }
       ]
     },
