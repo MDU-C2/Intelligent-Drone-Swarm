@@ -112,43 +112,43 @@ def build_graph(include_methods=True, include_docs=True):
                 )
             for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="goal_id")
-                G.add_node(child, type="verification_method")
+                G.add_node(child, type="vv_method")
                 G.add_edge(parent, child)
 
             # swarm_req_id -> method_id
             db.cursor.execute( # type: ignore
                 """
-                SELECT swarm_req_id, verification_method FROM drone_swarm_requirements
-                WHERE swarm_req_id IS NOT NULL AND verification_method IS NOT NULL
+                SELECT swarm_req_id, vv_method FROM drone_swarm_requirements
+                WHERE swarm_req_id IS NOT NULL AND vv_method IS NOT NULL
                 """
                 )
             for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="swarm_req_id")
-                G.add_node(child, type="verification_method")
+                G.add_node(child, type="vv_method")
                 G.add_edge(parent, child)
 
             # sys_req_id -> method_id
             db.cursor.execute( # type: ignore
                 """
-                SELECT sys_req_id, verification_method FROM system_requirements
-                WHERE sys_req_id IS NOT NULL AND verification_method IS NOT NULL
+                SELECT sys_req_id, vv_method FROM system_requirements
+                WHERE sys_req_id IS NOT NULL AND vv_method IS NOT NULL
                 """
                 )
             for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="sys_req_id")
-                G.add_node(child, type="verification_method")
+                G.add_node(child, type="vv_method")
                 G.add_edge(parent, child)
 
-            # sub_req_id -> verification_method
+            # sub_req_id -> vv_method
             db.cursor.execute( # type: ignore
                 """
-                SELECT sub_req_id, verification_method FROM subsystem_requirements
-                WHERE sub_req_id IS NOT NULL AND verification_method IS NOT NULL
+                SELECT sub_req_id, vv_method FROM subsystem_requirements
+                WHERE sub_req_id IS NOT NULL AND vv_method IS NOT NULL
                 """
                 )
             for parent, child in db.cursor.fetchall(): # type: ignore
                 G.add_node(parent, type="sub_req_id")
-                G.add_node(child, type="verification_method")
+                G.add_node(child, type="vv_method")
                 G.add_edge(parent, child)
             
         if include_docs:
@@ -170,17 +170,17 @@ def build_graph(include_methods=True, include_docs=True):
             if gid in G.nodes:
                 G.nodes[gid]["status"] = status
 
-        db.cursor.execute("SELECT swarm_req_id, verification_status FROM drone_swarm_requirements") # type: ignore
+        db.cursor.execute("SELECT swarm_req_id, validation_status FROM drone_swarm_requirements") # type: ignore
         for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        db.cursor.execute("SELECT sys_req_id, verification_status FROM system_requirements") # type: ignore
+        db.cursor.execute("SELECT sys_req_id, validation_status FROM system_requirements") # type: ignore
         for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
 
-        db.cursor.execute("SELECT sub_req_id, verification_status FROM subsystem_requirements") # type: ignore
+        db.cursor.execute("SELECT sub_req_id, validation_status FROM subsystem_requirements") # type: ignore
         for sid, status in db.cursor.fetchall(): # type: ignore
             if sid in G.nodes:
                 G.nodes[sid]["status"] = status
@@ -246,17 +246,17 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
     num_nodes = len(H.nodes)
 
     width = max(num_nodes / 2, 8)
-    height = max(depth * 1.5, 6)
+    height = max(depth * 1, 6)
     plt.figure(figsize=(width, height))
 
-    node_size = max(1500 - num_nodes * 20, 500)
-    font_size = max(9 - int(num_nodes / 50), 6)
+    node_size = max(1300 - num_nodes * 15, 600)
+    font_size = max(4 - int(num_nodes / 65), 5)
 
-    horiz_width = min(1.0, 0.5 + num_nodes / 50)
-    adjusted_width = horiz_width * (1 - 2 * h_padding)
+    horiz_width = min(1.0, 0.5 + num_nodes / 100)
+    adjusted_width = horiz_width * (1 - 5 * h_padding)
     xcenter = 0.5
 
-    pos = hierarchy_pos(H, root=root, vert_loc=1, vert_gap=0.02, width=adjusted_width * 10, xcenter=xcenter)
+    pos = hierarchy_pos(H, root=root, vert_loc=1, vert_gap=0.002, width=adjusted_width * 100, xcenter=xcenter)
 
     for node in pos:
         pos[node] = (pos[node][0] * (1 - 2 * h_padding) + h_padding, pos[node][1])
@@ -301,7 +301,7 @@ def plot_subgraph(G, root, save=False, h_padding=0.05, v_padding=0.05, max_depth
         "swarm_req_id": "gray",
         "sys_req_id": "darkgrey",
         "sub_req_id": "lightgrey",
-        "verification_method": "blanchedalmond",
+        "vv_method": "blanchedalmond",
         "method_id": "blanchedalmond",
         "doc_id": "moccasin"
     }

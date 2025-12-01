@@ -43,6 +43,17 @@ def export_db_to_csv(output_dir: str | None = None):
             db.cursor.execute(f"SELECT * FROM {table}") # type: ignore
             rows = db.cursor.fetchall() # type: ignore
 
+            # Strip BLOB column from documents table
+            if table == "documents" and "file" in columns:
+                file_idx = columns.index("file")
+                # Remove that column from the header
+                columns = [col for i, col in enumerate(columns) if i != file_idx]
+                # Remove that column from every row
+                rows = [
+                    tuple(val for i, val in enumerate(row) if i != file_idx)
+                    for row in rows
+                ]
+
             out_path = os.path.join(output_dir, f"{table}.csv")
             with open(out_path, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f, delimiter=';')  # semicolon delimiter

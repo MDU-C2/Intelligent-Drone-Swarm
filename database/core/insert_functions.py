@@ -10,9 +10,8 @@ class insert_functions:
         self.PREFIX_INFO = {
             "goals": ("G", 2),
             "drone_swarm_requirements": ("SW", 2),
-            "system_requirements": ("SYS", 2),
+            "system_requirements": ("PM", 2),
             "subsystem_requirements": ("SS", 2),
-            "item": ("I", 2),
             "test_and_verification": ("M", 2),
             "documents": ("D", 2),
             "quality_requirements": ("QR", 2)
@@ -43,12 +42,12 @@ class insert_functions:
         return f"{prefix}-{str(nxt).zfill(width)}"
 
     # --- Validation helpers ---
-    def validate_author_reviewer(self, author, reviewer):
-        if author == reviewer:
-            raise ValueError("Author and reviewer must be different to ensure unbiased review.")
+    def validate_author_verifier(self, author, verifier):
+        if author == verifier:
+            raise ValueError("Author and verifier must be different to ensure unbiased review.")
 
-    def validate_verification(self, verification_status, verification_method):
-        if verification_status != "Pending" and not verification_method:
+    def validate_verification(self, validation_status, vv_method):
+        if validation_status != "Pending" and not vv_method:
             raise ValueError("Verification method must be provided if status is not pending.")
 
     # --- insert functions below (unchanged except for ID handling) ---
@@ -69,79 +68,67 @@ class insert_functions:
         return goal_id
 
     def insert_drone_swarm_requirements(self, swarm_req_id, requirement, priority,
-                                        effect, rationale, author, review_status,
-                                        reviewer, verification_status, verification_method=None, comment=None):
+                                        effect, rationale, author, verification_status,
+                                        verifier, validation_status, vv_method=None, comment=None):
         if not swarm_req_id:
             swarm_req_id = self._next_id("drone_swarm_requirements", "swarm_req_id")
         
-        self.validate_author_reviewer(author, reviewer)
-        self.validate_verification(verification_status, verification_method)
+        self.validate_author_verifier(author, verifier)
+        self.validate_verification(validation_status, vv_method)
 
         self.cursor.execute(
             """
             INSERT INTO drone_swarm_requirements
             (swarm_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
             VALUES (?,?,?,?,?,?,?,?,?,?,?)
             """,
             (swarm_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
         )
         return swarm_req_id
 
     def insert_system_requirements(self, parent_id, sys_req_id, requirement,
-                                   priority, effect, rationale, author, review_status,
-                                   reviewer, verification_status, verification_method=None, comment=None):
+                                   priority, effect, rationale, author, verification_status,
+                                   verifier, validation_status, vv_method=None, comment=None):
         if not sys_req_id:
             sys_req_id = self._next_id("system_requirements", "sys_req_id")
         
-        self.validate_author_reviewer(author, reviewer)
-        self.validate_verification(verification_status, verification_method)
+        self.validate_author_verifier(author, verifier)
+        self.validate_verification(validation_status, vv_method)
 
         self.cursor.execute(
             """
             INSERT INTO system_requirements
             (parent_id, sys_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (parent_id, sys_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
         )
         return sys_req_id
 
     def insert_subsystem_requirements(self, parent_id, sub_req_id, requirement,
-                                      priority, effect, rationale, author, review_status,
-                                      reviewer, verification_status, verification_method=None, comment=None):
+                                      priority, effect, rationale, author, verification_status,
+                                      verifier, validation_status, vv_method=None, comment=None):
         if not sub_req_id:
             sub_req_id = self._next_id("subsystem_requirements", "sub_req_id")
         
-        self.validate_author_reviewer(author, reviewer)
-        self.validate_verification(verification_status, verification_method)
+        self.validate_author_verifier(author, verifier)
+        self.validate_verification(validation_status, vv_method)
 
         self.cursor.execute(
             """
             INSERT INTO subsystem_requirements
             (parent_id, sub_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             (parent_id, sub_req_id, requirement, priority, effect, rationale, author,
-             review_status, reviewer, verification_status, verification_method, comment)
+             verification_status, verifier, validation_status, vv_method, comment)
         )
         return sub_req_id
-
-    def insert_item(self, item_id, item_name):
-        if not item_id:
-            item_id = self._next_id("item", "item_id")
-        self.cursor.execute(
-            """
-            INSERT INTO item (item_id, item_name)
-            VALUES (?,?)
-            """,
-            (item_id, item_name)
-        )
-        return item_id
 
     def insert_test_and_verification(self, method_id, description, method_type):
         if not method_id:
@@ -155,15 +142,17 @@ class insert_functions:
         )
         return method_id
 
-    def insert_documents(self, doc_id, title, description, file=None, version=None, author=None):
+    def insert_documents(self, doc_id, title, description,
+                     file=None, version=None, author=None,
+                     file_name=None, mime_type=None):
         if not doc_id:
             doc_id = self._next_id("documents", "doc_id")
         self.cursor.execute(
             """
-            INSERT INTO documents (doc_id, title, description, file, version, author)
-            VALUES (?,?,?,?,?,?)
+            INSERT INTO documents (doc_id, title, description, file, version, author, file_name, mime_type)
+            VALUES (?,?,?,?,?,?,?,?)
             """,
-            (doc_id, title, description, file, version, author)
+            (doc_id, title, description, file, version, author, file_name, mime_type)
         )
         return doc_id
 
@@ -215,14 +204,6 @@ class insert_functions:
             (sys_req_id, sub_req_id)
         )
     
-    def insert_subsys_join_item(self, item_id, sub_req_id):
-        self.cursor.execute(
-            """
-            INSERT INTO subsys_join_item (item_id, sub_req_id)
-            VALUES (?,?)
-            """,
-            (item_id, sub_req_id)
-        )
     
     def insert_V_join_documents(self, method_id, doc_id):
         self.cursor.execute(

@@ -12,23 +12,23 @@ INSERT_GOAL = "1"
 INSERT_DRONE_SWARM_REQ = "2"
 INSERT_SYS_REQ = "3"
 INSERT_SUBSYS_REQ = "4"
-INSERT_ITEM = "5"
-INSERT_DOCUMENT = "6"
-INSERT_VV_METHOD = "7"
-INSERT_QUALITY_REQ = "8"
-INSERT_GOAL_CHILDREN = "9"
-INSERT_SWARM_REQ_CHILDREN = "10"
-INSERT_SYSREQ_CHILDREN = "11"
-INSERT_SUBSYS_JOIN_ITEM = "12"
-INSERT_V_JOIN_DOCS = "13"
-INSERT_ID_GLOSSARY = "14"
-PLOT_TREE = "15"
-SEARCH_DB = "16"
-UPDATE_DB_ROW = "17"
-DELETE_DB_ROW = "18"
-EXPORT_TO_JSON = "19"
-RESTORE_FROM_JSON = "20"
-EXPORT_TO_CSV = "21"
+INSERT_DOCUMENT = "5"
+INSERT_VV_METHOD = "6"
+INSERT_QUALITY_REQ = "7"
+INSERT_GOAL_CHILDREN = "8"
+INSERT_SWARM_REQ_CHILDREN = "9"
+INSERT_SYSREQ_CHILDREN = "10"
+INSERT_V_JOIN_DOCS = "11"
+DELETE_TABLE = "12"
+INSERT_ID_GLOSSARY = "13"
+PLOT_TREE = "14"
+SEARCH_DB = "15"
+UPDATE_DB_ROW = "16"
+DELETE_DB_ROW = "17"
+EXPORT_TO_JSON = "18"
+RESTORE_FROM_JSON = "19"
+EXPORT_TO_CSV = "20"
+EXPORT_DOC = "21"
 EXIT = "22"
 
 VERIFY_ROUNDTRIP = "23"
@@ -47,23 +47,23 @@ def main():
             print("2:  Insert a Drone Swarm Requirement")
             print("3:  Insert a System Requirement")
             print("4:  Insert a Subsystem Requirement")
-            print("5:  Insert an Item")
-            print("6:  Insert a Document")
-            print("7:  Insert a V&V Method")
-            print("8:  Insert Quality Requirement")
-            print("9:  Connect Drone Swarm Requirement to Goal")
-            print("10: Connect System Requirement to Drone Swarm Requirement")
-            print("11: Connect System Requiement to Subsystem Requirement")
-            print("12: Connect Item to Subsystem Requirement")
-            print("13: Connect Document to V&V Method")
-            print("14: Add ID to Glossary")
-            print("15: Plot tree")
-            print("16: Search in Database")
-            print("17: Update row in Database")
-            print("18: Delete row in Database")
-            print("19: Export DB → JSON")
-            print("20: How to restore JSON → DB")
-            print("21: Export DB → CSV")
+            print("5:  Insert a Document")
+            print("6:  Insert a V&V Method")
+            print("7:  Insert Quality Requirement")
+            print("8:  Connect Drone Swarm Requirement to Goal")
+            print("9:  Connect System Requirement to Drone Swarm Requirement")
+            print("10: Connect System Requirement to Subsystem Requirement")
+            print("11: Connect Document to V&V Method")
+            print("12: Delete table")
+            print("13: Add ID to Glossary")
+            print("14: Plot tree")
+            print("15: Search in Database")
+            print("16: Update row in Database")
+            print("17: Delete row in Database")
+            print("18: Export DB → JSON")
+            print("19: How to restore JSON → DB")
+            print("20: Export DB → CSV")
+            print("21: Export Document File")
             print("22: Exit")
 
             choice = input("===  Enter choice (1-22): ").strip()
@@ -80,9 +80,6 @@ def main():
 
                 elif choice == INSERT_SUBSYS_REQ:
                     menu.handle_insert_subsystem(inserter)
-
-                elif choice == INSERT_ITEM:
-                    menu.handle_insert_item(inserter)
 
                 elif choice == INSERT_DOCUMENT:
                     menu.handle_insert_document(inserter)
@@ -102,8 +99,8 @@ def main():
                 elif choice == INSERT_SYSREQ_CHILDREN:
                     menu.handle_sysreq_children(inserter)
 
-                elif choice == INSERT_SUBSYS_JOIN_ITEM:
-                    menu.handle_subsys_join_item(inserter)
+                elif choice == DELETE_TABLE:
+                    menu.handle_delete_table(other)
 
                 elif choice == INSERT_V_JOIN_DOCS:
                     menu.handle_v_join_documents(inserter)
@@ -135,6 +132,10 @@ def main():
 
                 elif choice == EXPORT_TO_CSV:
                     menu.handle_export_csv()
+                
+                elif choice == EXPORT_DOC:
+                    menu.handle_export_document_file()
+
 
                 elif choice == EXIT:
                     print("Exiting script.")
