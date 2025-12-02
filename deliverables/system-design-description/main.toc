@@ -36,7 +36,7 @@
 \contentsline {subsection}{\numberline {4.4}Representative Operational Scenarios}{16}{subsection.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.1}Swarm Registration at Initial Start-Up}{16}{subsubsection.4.4.1}%
 \contentsline {subsubsection}{\numberline {4.4.2}Search Area Division}{17}{subsubsection.4.4.2}%
-\contentsline {subsubsection}{\numberline {4.4.3}Initial Sectors Assigned}{17}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.3}Initial Sectors Assigned}{18}{subsubsection.4.4.3}%
 \contentsline {subsubsection}{\numberline {4.4.4}Agent Join After Mission Start}{18}{subsubsection.4.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.5}Agent Rejoin}{18}{subsubsection.4.4.5}%
 \contentsline {subsubsection}{\numberline {4.4.6}Agent Health Degrades}{18}{subsubsection.4.4.6}%

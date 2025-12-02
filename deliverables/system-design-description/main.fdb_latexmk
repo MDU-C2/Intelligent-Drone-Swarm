@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1764687158.88833 "main.aux" "main.bbl" "main" 1764687161.92109 0
+["bibtex main"] 1764688304.72367 "main.aux" "main.bbl" "main" 1764688307.87715 0
   "./refs.bib" 1764687114 16613 7192669dc3a8fb153caf91652c679525 ""
   "C:/Program Files/MiKTeX/bibtex/bib/ieeetran/IEEEabrv.bib" 1440617548 20898 a5d2167c380db7dfff810b085c77ed63 ""
   "C:/Program Files/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1764687161 36584 30538ad96642cb6edfab559d8f07c7aa "pdflatex"
+  "main.aux" 1764688306 36584 1c812bf5636bf0926e1500d1e5ae2a6e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1764687159.10834 "c:/Users/Andrea/Documents/GitHub/Intelligent-Drone-Swarm/deliverables/system-design-description/main.tex" "main.pdf" "main" 1764687161.92175 0
+["pdflatex"] 1764688304.95049 "c:/Users/Andrea/Documents/GitHub/Intelligent-Drone-Swarm/deliverables/system-design-description/main.tex" "main.pdf" "main" 1764688307.87789 0
   "C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768654 2172 fd0c924230362ff848a33632ed45dc23 ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/ptmb8r.tfm" 1136768654 4524 6bce29db5bc272ba5f332261583fee9c ""
@@ -217,7 +217,7 @@
   "c:/Users/Andrea/Documents/GitHub/Intelligent-Drone-Swarm/deliverables/system-design-description/main.tex" 1764687155 1107 197d78bec1cbfc7f3fb7a8800dc16c8c ""
   "figures/IDS-logo-black-text.png" 1764684356 40428 8841d144c2b63bffb988d8705b125492 ""
   "figures/MDU_logotyp.png" 1764684356 20845 4cc66cfd789f97e224151bb382d2951b ""
-  "figures/System-Design/SD-01_BDD - Protocol Context 1.0.png" 1764684356 17813 bd4ef59026d14ca62f2de9978c304ea2 ""
+  "figures/System-Design/SD-01_BDD - Protocol Context 2.0.png" 1764688193 33984 b295a0ee8f135dd1b23b6d8b282d203f ""
   "figures/System-Design/SD-02_BDD - UAV 1.0.png" 1764684356 10028 1e413106ff81f9e018ffd486093b73d5 ""
   "figures/System-Design/SD-03_AD - Swarm Registration 2.0.png" 1764684356 41630 8df46f31f457e43b0ce490b852309186 ""
   "figures/System-Design/SD-04_AD - Search Area Division 1.0.png" 1764684356 16447 176644f2c99c093964e969d04fc47541 ""
@@ -241,19 +241,19 @@
   "figures/signature-em.jpg" 1764684356 35917 da474f2b5ba1968f75360724417dc69e ""
   "figures/signature-ymb.png" 1764684356 13367 bc0d4bc62087518469f8b1aedb00d818 ""
   "figures/state flow diagram-even better.png" 1764684356 138384 6166ec6f37fe3979ad3112b9fd6a5583 ""
-  "main.aux" 1764687161 36584 30538ad96642cb6edfab559d8f07c7aa "pdflatex"
-  "main.bbl" 1764687159 1316 3afb12fcd1c07f9451c4ab439d0d6b32 "bibtex main"
+  "main.aux" 1764688306 36584 1c812bf5636bf0926e1500d1e5ae2a6e "pdflatex"
+  "main.bbl" 1764688304 1316 3afb12fcd1c07f9451c4ab439d0d6b32 "bibtex main"
   "main.gls" 0 -1 0 ""
-  "main.lof" 1764687161 4939 adcf40fd5fa8c3fb6664ae028049f252 "pdflatex"
-  "main.out" 1764687161 15829 e813c56bd6c39bee6fc2a6994481187e "pdflatex"
+  "main.lof" 1764688307 4939 adcf40fd5fa8c3fb6664ae028049f252 "pdflatex"
+  "main.out" 1764688307 15829 e813c56bd6c39bee6fc2a6994481187e "pdflatex"
   "main.tex" 1764687155 1107 197d78bec1cbfc7f3fb7a8800dc16c8c ""
-  "main.toc" 1764687161 13441 724c312990517bb6b0764434d22c66a5 "pdflatex"
+  "main.toc" 1764688307 13441 73dc75887c5d0b0e796e5155e3bfb203 "pdflatex"
   "preamble.tex" 1764687114 2937 6048e12ad0733ef74cc360a58c16e21a ""
   "sections/1-introduction.tex" 1764687114 6041 754ff51c70d6867541c3096187a65a80 ""
   "sections/10-future-work.tex" 1764687114 8167 a13870729ca4ec2a5e0ecb0605c64f3f ""
   "sections/2-goals-reqs.tex" 1764687114 8855 7b729d4dc8931fb76ad7478a4c263202 ""
-  "sections/3-system-context.tex" 1764687114 12794 ad257d367bc658e6d87ebb86f41040f5 ""
-  "sections/4-system-overview.tex" 1764687114 11634 ca2b9bafb3f53553d55c7e3eec5d8830 ""
+  "sections/3-system-context.tex" 1764688301 12794 c458c97b6d0e6de02e961e3c0ec77fe7 ""
+  "sections/4-system-overview.tex" 1764688301 11374 929ae6a557fd4d4f88dc7551936feb43 ""
   "sections/5-system-architecture.tex" 1764687114 26324 58078fe64eb3058964de3282aa901786 ""
   "sections/6-rumour-mill.tex" 1764687114 17168 cf081fc4b3539ef565151e6e99af106d ""
   "sections/7-sector-allocation.tex" 1764687114 15566 d606186cc194fed6351139058a4a42bf ""

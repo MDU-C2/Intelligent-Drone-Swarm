@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 15:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 16:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1012,12 +1012,12 @@ Overfull \hbox (20.50374pt too wide) in paragraph at lines 3--4
  []
 
 [7]) [8] (sections/3-system-context.tex [9] [10] [11]
-<figures/System-Design/SD-01_BDD - Protocol Context 1.0.png, id=637, 852.18375pt x 441.65pt>
-File: figures/System-Design/SD-01_BDD - Protocol Context 1.0.png Graphic file (type png)
-<use figures/System-Design/SD-01_BDD - Protocol Context 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 1.0.png  used on input line 242.
-(pdftex.def)             Requested size: 483.69687pt x 250.68507pt.
-) [12] [13 <./figures/System-Design/SD-01_BDD - Protocol Context 1.0.png (PNG copy)>] (sections/4-system-overview.tex [14] [15]
+<figures/System-Design/SD-01_BDD - Protocol Context 2.0.png, id=637, 934.49126pt x 585.18625pt>
+File: figures/System-Design/SD-01_BDD - Protocol Context 2.0.png Graphic file (type png)
+<use figures/System-Design/SD-01_BDD - Protocol Context 2.0.png>
+Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 2.0.png  used on input line 242.
+(pdftex.def)             Requested size: 483.69687pt x 302.89671pt.
+) [12] [13 <./figures/System-Design/SD-01_BDD - Protocol Context 2.0.png (PNG copy)>] (sections/4-system-overview.tex [14] [15]
 <figures/System-Design/SD-03_AD - Swarm Registration 2.0.png, id=703, 684.5575pt x 770.88pt>
 File: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png Graphic file (type png)
 <use figures/System-Design/SD-03_AD - Swarm Registration 2.0.png>
@@ -1032,7 +1032,7 @@ Package pdftex.def Info: figures/System-Design/SD-04_AD - Search Area Division 1
 <figures/System-Design/SD-20_AD - Initial Sectors 1.0.png, id=718, 644.4075pt x 790.955pt>
 File: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-20_AD - Initial Sectors 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 134.
+Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 132.
 (pdftex.def)             Requested size: 338.58632pt x 415.59554pt.
  [17 <./figures/System-Design/SD-04_AD - Search Area Division 1.0.png (PNG copy)>] [18 <./figures/System-Design/SD-20_AD - Initial Sectors 1.0.png (PNG copy)>]) [19] (sections/5-system-architecture.tex
 <figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png, id=780, 790.955pt x 831.105pt>
@@ -1249,7 +1249,7 @@ pdfTeX warning (dest): name{glo:agent} has been referenced but does not exist, r
 pdfTeX warning (dest): name{glo:bdd} has been referenced but does not exist, replaced by a fixed one
 
  <C:\Users\Andrea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (60 pages, 1078920 bytes).
+Output written on main.pdf (60 pages, 1094868 bytes).
 PDF statistics:
  1395 PDF objects out of 1440 (max. 8388607)
  364 named destinations out of 1000 (max. 500000)
