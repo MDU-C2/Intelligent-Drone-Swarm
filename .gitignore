@@ -1,1 +1,16 @@
 __pycache__/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.ist
+*.lof
+*.log
+*.out
+*.synctex.gz
+*.toc
+main.pdf
