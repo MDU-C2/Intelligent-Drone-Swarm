@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 15:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 15:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -759,7 +759,7 @@ Package: glossary-tree 2025/11/09 v4.9 (NLCT)
 \glo@main@file=\write5
 \openout5 = `main.glo'.
 
-Package glossaries Info: Writing glossary file main.glo on input line 12.
+Package glossaries Info: Writing glossary file main.glo on input line 11.
 ) (C:\Program Files\MiKTeX\tex/latex/acronym\acronym.sty
 Package: acronym 2025/01/17 v1.50 Support for acronyms (Tobias Oetiker)
  (C:\Program Files\MiKTeX\tex/latex/bigfoot\suffix.sty
@@ -863,28 +863,28 @@ LaTeX Info: Redefining \labelcpageref on input line 2370.
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count417
-)
-No file main.aux.
+) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 5.
+LaTeX Font Info:    ... okay on input line 5.
+
 -- Lines per column: 52 (approximate, difference = 6.784pt).
 (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -905,7 +905,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 6.
+Package hyperref Info: Link coloring ON on input line 5.
+ (main.out) (main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
@@ -952,18 +953,18 @@ Package caption Info: End \AtBeginDocument code.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 (sections/title-page.tex
-<figures/MDU_logotyp.png, id=6, 629.35126pt x 376.40625pt>
+<figures/MDU_logotyp.png, id=320, 629.35126pt x 376.40625pt>
 File: figures/MDU_logotyp.png Graphic file (type png)
 <use figures/MDU_logotyp.png>
-Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 5.
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 4.
 (pdftex.def)             Requested size: 128.0374pt x 76.57794pt.
-<figures/IDS-logo-black-text.png, id=8, 1106.63437pt x 602.25pt>
+<figures/IDS-logo-black-text.png, id=322, 1106.63437pt x 602.25pt>
 File: figures/IDS-logo-black-text.png Graphic file (type png)
 <use figures/IDS-logo-black-text.png>
-Package pdftex.def Info: figures/IDS-logo-black-text.png  used on input line 10.
+Package pdftex.def Info: figures/IDS-logo-black-text.png  used on input line 9.
 (pdftex.def)             Requested size: 128.0374pt x 69.67542pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--45
+Underfull \hbox (badness 10000) in paragraph at lines 43--44
 
  []
 
@@ -971,1673 +972,183 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \openout4 = `main.ist'.
 
 {C:/Users/Andrea/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc} <./figures/MDU_logotyp.png> <./figures/IDS-logo-black-text.png>]) (sections/review-page.tex
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 11.
-
-
-LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 15.
-
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 29.
-<figures/signature-em.jpg, id=20, 380.92313pt x 185.19188pt>
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 10.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 28.
+<figures/signature-em.jpg, id=335, 380.92313pt x 185.19188pt>
 File: figures/signature-em.jpg Graphic file (type jpg)
 <use figures/signature-em.jpg>
-Package pdftex.def Info: figures/signature-em.jpg  used on input line 33.
+Package pdftex.def Info: figures/signature-em.jpg  used on input line 32.
 (pdftex.def)             Requested size: 56.9055pt x 27.66454pt.
-<figures/signature-ymb.png, id=21, 210.03468pt x 91.09032pt>
+<figures/signature-ymb.png, id=336, 210.03468pt x 91.09032pt>
 File: figures/signature-ymb.png Graphic file (type png)
 <use figures/signature-ymb.png>
-Package pdftex.def Info: figures/signature-ymb.png  used on input line 35.
+Package pdftex.def Info: figures/signature-ymb.png  used on input line 34.
 (pdftex.def)             Requested size: 56.9055pt x 24.67949pt.
 
-Overfull \hbox (14.0303pt too wide) in paragraph at lines 29--38
+Overfull \hbox (14.0303pt too wide) in paragraph at lines 28--37
  [][] 
  []
 
 
-Overfull \hbox (1.6273pt too wide) in paragraph at lines 45--62
+Overfull \hbox (1.6273pt too wide) in paragraph at lines 44--61
  [][] 
  []
 
-) [1 <./figures/signature-em.jpg> <./figures/signature-ymb.png>]
-No file main.toc.
+) [1 <./figures/signature-em.jpg> <./figures/signature-ymb.png>] (main.toc [2])
 \tf@toc=\write7
 \openout7 = `main.toc'.
 
-[2]
-No file main.lof.
+ [3] (main.lof)
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
-[3
 
-]
 No file main.gls.
 [4
 
-] (sections/1-introduction.tex [5]
-
-LaTeX Warning: Reference `sec:goals' on page 1 undefined on input line 47.
-
-
-LaTeX Warning: Reference `sec:goals' on page 6 undefined on input line 47.
-
-
-LaTeX Warning: Reference `sec:system-context' on page 1 undefined on input line 49.
-
-
-LaTeX Warning: Reference `sec:system-context' on page 6 undefined on input line 49.
-
-
-LaTeX Warning: Reference `sec:system-overview' on page 1 undefined on input line 51.
-
-
-LaTeX Warning: Reference `sec:system-overview' on page 6 undefined on input line 51.
-
-
-LaTeX Warning: Reference `sec:system-architecture' on page 1 undefined on input line 53.
-
-
-LaTeX Warning: Reference `sec:system-architecture' on page 6 undefined on input line 53.
-
-
-LaTeX Warning: Reference `sec:rumour-mill' on page 1 undefined on input line 55.
-
-
-LaTeX Warning: Reference `sec:rumour-mill' on page 6 undefined on input line 55.
-
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 57.
-
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 6 undefined on input line 57.
-
-
-LaTeX Warning: Reference `sec:task-role' on page 1 undefined on input line 59.
-
-
-LaTeX Warning: Reference `sec:task-role' on page 6 undefined on input line 59.
-
-
-LaTeX Warning: Reference `sec:safety-reliability' on page 1 undefined on input line 61.
-
-
-LaTeX Warning: Reference `sec:safety-reliability' on page 6 undefined on input line 61.
-
-
-LaTeX Warning: Reference `sec:future-work' on page 1 undefined on input line 63.
-
-
-LaTeX Warning: Reference `sec:future-work' on page 6 undefined on input line 63.
-
-) [6] (sections/2-goals-reqs.tex
-
-LaTeX Warning: Citation `rm' on page 7 undefined on input line 4.
-
-
-Overfull \hbox (20.50374pt too wide) in paragraph at lines 4--5
+] (sections/1-introduction.tex [5]) [6] (sections/2-goals-reqs.tex
+Overfull \hbox (20.50374pt too wide) in paragraph at lines 3--4
 \T1/ptm/m/n/11 tions are kept in four arte-facts (goals, drone_swarm_requirements, sys-tem_requirements, sub-sys-tem_requirements)
  []
 
-sections/2-goals-reqs.tex:29: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.29 \subsubsection{Requirements Structure}
-                                           
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/2-goals-reqs.tex:29: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.29 \subsubsection{Requirements Structure}
-                                           
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[7]
-sections/2-goals-reqs.tex:65: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.65 \subsubsection{Traceability}
-                                 
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/2-goals-reqs.tex:65: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.65 \subsubsection{Traceability}
-                                 
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `tab:matrix' on page 1 undefined on input line 74.
-
-) [8] (sections/3-system-context.tex
-sections/3-system-context.tex:22: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.22 ...ubsection{Search Manager (Human Operator)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/3-system-context.tex:22: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.22 ...ubsection{Search Manager (Human Operator)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/3-system-context.tex:38: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.38 ...bsection{SwarmInterface (External System)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/3-system-context.tex:38: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.38 ...bsection{SwarmInterface (External System)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/3-system-context.tex:62: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.62 \subsubsection{Agents (UAVs)}
-                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/3-system-context.tex:62: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.62 \subsubsection{Agents (UAVs)}
-                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[9]
-sections/3-system-context.tex:82: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.82 \subsubsection{Fault Management Unit}
-                                          
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/3-system-context.tex:82: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.82 \subsubsection{Fault Management Unit}
-                                          
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/3-system-context.tex:96: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.96 \subsubsection{Environment}
-                                
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/3-system-context.tex:96: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.96 \subsubsection{Environment}
-                                
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[10] [11]
-<figures/System-Design/SD-01_BDD - Protocol Context 1.0.png, id=134, 852.18375pt x 441.65pt>
+[7]) [8] (sections/3-system-context.tex [9] [10] [11]
+<figures/System-Design/SD-01_BDD - Protocol Context 1.0.png, id=637, 852.18375pt x 441.65pt>
 File: figures/System-Design/SD-01_BDD - Protocol Context 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-01_BDD - Protocol Context 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 1.0.png  used on input line 243.
+Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 1.0.png  used on input line 242.
 (pdftex.def)             Requested size: 483.69687pt x 250.68507pt.
-) [12] [13 <./figures/System-Design/SD-01_BDD - Protocol Context 1.0.png (PNG copy)>] (sections/4-system-overview.tex
-sections/4-system-overview.tex:12: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.12 \subsubsection{Decentralisation}
-                                     
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:12: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.12 \subsubsection{Decentralisation}
-                                     
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:19: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.19 \subsubsection{Collective Adaptation}
-                                          
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:19: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.19 \subsubsection{Collective Adaptation}
-                                          
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:33: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.33 \subsubsection{Fault Tolerance}
-                                    
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:33: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.33 \subsubsection{Fault Tolerance}
-                                    
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[14]
-sections/4-system-overview.tex:56: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.56 \subsubsection{Rumour Mill (Consensus Layer)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:56: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.56 \subsubsection{Rumour Mill (Consensus Layer)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:61: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.61 ...Sector Allocation Market (Workload Layer)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:61: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.61 ...Sector Allocation Market (Workload Layer)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:66: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.66 ...Task \& Role Allocation (Behaviour Layer)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:66: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.66 ...Task \& Role Allocation (Behaviour Layer)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[15]
-sections/4-system-overview.tex:114: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.114 ...n{Swarm Registration at Initial Start-Up}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:114: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.114 ...n{Swarm Registration at Initial Start-Up}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-03_AD - Swarm Registration 2.0.png, id=210, 684.5575pt x 770.88pt>
+) [12] [13 <./figures/System-Design/SD-01_BDD - Protocol Context 1.0.png (PNG copy)>] (sections/4-system-overview.tex [14] [15]
+<figures/System-Design/SD-03_AD - Swarm Registration 2.0.png, id=703, 684.5575pt x 770.88pt>
 File: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png Graphic file (type png)
 <use figures/System-Design/SD-03_AD - Swarm Registration 2.0.png>
-Package pdftex.def Info: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png  used on input line 117.
+Package pdftex.def Info: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png  used on input line 116.
 (pdftex.def)             Requested size: 338.58632pt x 381.28683pt.
-sections/4-system-overview.tex:122: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.122 \subsubsection{Search Area Division}
-                                          
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:122: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.122 \subsubsection{Search Area Division}
-                                          
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-04_AD - Search Area Division 1.0.png, id=213, 463.7325pt x 529.98pt>
+<figures/System-Design/SD-04_AD - Search Area Division 1.0.png, id=706, 463.7325pt x 529.98pt>
 File: figures/System-Design/SD-04_AD - Search Area Division 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-04_AD - Search Area Division 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-04_AD - Search Area Division 1.0.png  used on input line 125.
+Package pdftex.def Info: figures/System-Design/SD-04_AD - Search Area Division 1.0.png  used on input line 124.
 (pdftex.def)             Requested size: 241.84843pt x 276.39986pt.
-[16 <./figures/System-Design/SD-03_AD - Swarm Registration 2.0.png (PNG copy)>]
-sections/4-system-overview.tex:130: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.130 \subsubsection{Initial Sectors Assigned}
-                                              
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:130: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.130 \subsubsection{Initial Sectors Assigned}
-                                              
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-20_AD - Initial Sectors 1.0.png, id=227, 644.4075pt x 790.955pt>
+ [16 <./figures/System-Design/SD-03_AD - Swarm Registration 2.0.png (PNG copy)>]
+<figures/System-Design/SD-20_AD - Initial Sectors 1.0.png, id=718, 644.4075pt x 790.955pt>
 File: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-20_AD - Initial Sectors 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 135.
+Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 134.
 (pdftex.def)             Requested size: 338.58632pt x 415.59554pt.
-[17 <./figures/System-Design/SD-04_AD - Search Area Division 1.0.png (PNG copy)>]
-sections/4-system-overview.tex:141: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.141 ...ubsection{Agent Join After Mission Start}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:141: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.141 ...ubsection{Agent Join After Mission Start}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:144: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.144 \subsubsection{Agent Rejoin}
-                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:144: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.144 \subsubsection{Agent Rejoin}
-                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:148: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.148 \subsubsection{Agent Health Degrades}
-                                           
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:148: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.148 \subsubsection{Agent Health Degrades}
-                                           
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:160: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.160 \subsubsection{Sector Completed}
-                                      
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:160: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.160 \subsubsection{Sector Completed}
-                                      
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[18 <./figures/System-Design/SD-20_AD - Initial Sectors 1.0.png (PNG copy)>]
-sections/4-system-overview.tex:170: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.170 \subsubsection{Subject Found and Confirmed}
-                                                 
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:170: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.170 \subsubsection{Subject Found and Confirmed}
-                                                 
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/4-system-overview.tex:181: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.181 ...section{Agent Returns for Battery Change}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/4-system-overview.tex:181: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.181 ...section{Agent Returns for Battery Change}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-) [19] (sections/5-system-architecture.tex
-
-LaTeX Warning: Reference `fig:bdd-context' on page 1 undefined on input line 13.
-
-sections/5-system-architecture.tex:25: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.25 ...ection{Swarm \& Neighbourhood Composition}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:25: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.25 ...ection{Swarm \& Neighbourhood Composition}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/5-system-architecture.tex:44: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.44 ...{Neighbourhood Formation at Mission Start}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:44: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.44 ...{Neighbourhood Formation at Mission Start}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png, id=290, 790.955pt x 831.105pt>
+ [17 <./figures/System-Design/SD-04_AD - Search Area Division 1.0.png (PNG copy)>] [18 <./figures/System-Design/SD-20_AD - Initial Sectors 1.0.png (PNG copy)>]) [19] (sections/5-system-architecture.tex
+<figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png, id=780, 790.955pt x 831.105pt>
 File: figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png  used on input line 47.
+Package pdftex.def Info: figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png  used on input line 46.
 (pdftex.def)             Requested size: 386.95897pt x 406.59825pt.
-[20]
-sections/5-system-architecture.tex:53: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.53 ...{Neighbourhood updates after join/re-join}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:53: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.53 ...{Neighbourhood updates after join/re-join}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png, id=302, 606.265pt x 623.32875pt>
+ [20]
+<figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png, id=789, 606.265pt x 623.32875pt>
 File: figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png  used on input line 56.
+Package pdftex.def Info: figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png  used on input line 55.
 (pdftex.def)             Requested size: 386.95897pt x 397.85426pt.
-[21 <./figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png (PNG copy)>]
-sections/5-system-architecture.tex:62: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.62 \subsubsection{Overlapping Neighbourhoods}
-                                               
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:62: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.62 \subsubsection{Overlapping Neighbourhoods}
-                                               
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/5-system-architecture.tex:78: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.78 ...ourhood Recalculation on Failure or Leave}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:78: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.78 ...ourhood Recalculation on Failure or Leave}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[22 <./figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png (PNG copy)>]
-
-LaTeX Warning: Reference `fig:bdd-uav' on page 1 undefined on input line 92.
-
-
-LaTeX Warning: Reference `fig:IBD-agent' on page 1 undefined on input line 92.
-
-<figures/System-Design/SD-10_IBD - Agent 1.0.png, id=320, 989.6975pt x 282.05376pt>
+ [21 <./figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png (PNG copy)>] [22 <./figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png (PNG copy)>]
+<figures/System-Design/SD-10_IBD - Agent 1.0.png, id=807, 989.6975pt x 282.05376pt>
 File: figures/System-Design/SD-10_IBD - Agent 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-10_IBD - Agent 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-10_IBD - Agent 1.0.png  used on input line 96.
+Package pdftex.def Info: figures/System-Design/SD-10_IBD - Agent 1.0.png  used on input line 95.
 (pdftex.def)             Requested size: 483.69687pt x 137.84602pt.
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 97.
-
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 97.
-
-
-LaTeX Warning: Reference `fig:bdd-protocol' on page 1 undefined on input line 115.
-
-<figures/System-Design/SD-13_BDD - Protocol 1.0.png, id=327, 1264.725pt x 382.42876pt>
+<figures/System-Design/SD-13_BDD - Protocol 1.0.png, id=817, 1264.725pt x 382.42876pt>
 File: figures/System-Design/SD-13_BDD - Protocol 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-13_BDD - Protocol 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-13_BDD - Protocol 1.0.png  used on input line 119.
+Package pdftex.def Info: figures/System-Design/SD-13_BDD - Protocol 1.0.png  used on input line 118.
 (pdftex.def)             Requested size: 483.69687pt x 146.25809pt.
-[23 <./figures/System-Design/SD-10_IBD - Agent 1.0.png (PNG copy)>]
-<figures/System-Design/SD-16_IBD - Protocol 1.0.png, id=344, 944.52875pt x 282.05376pt>
+ [23 <./figures/System-Design/SD-10_IBD - Agent 1.0.png (PNG copy)>]
+<figures/System-Design/SD-16_IBD - Protocol 1.0.png, id=830, 944.52875pt x 282.05376pt>
 File: figures/System-Design/SD-16_IBD - Protocol 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-16_IBD - Protocol 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-16_IBD - Protocol 1.0.png  used on input line 126.
+Package pdftex.def Info: figures/System-Design/SD-16_IBD - Protocol 1.0.png  used on input line 125.
 (pdftex.def)             Requested size: 483.69687pt x 144.44373pt.
-
-sections/5-system-architecture.tex:131: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.131 \subsubsection{Sub-modules}
-                                 
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:131: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.131 \subsubsection{Sub-modules}
-                                 
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[24 <./figures/System-Design/SD-13_BDD - Protocol 1.0.png (PNG copy)> <./figures/System-Design/SD-16_IBD - Protocol 1.0.png (PNG copy)>]
-sections/5-system-architecture.tex:181: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.181 ...section{Internal Interfaces \& Flowports}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:181: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.181 ...section{Internal Interfaces \& Flowports}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png, id=357, 549.05125pt x 201.75375pt>
+ [24 <./figures/System-Design/SD-13_BDD - Protocol 1.0.png (PNG copy)> <./figures/System-Design/SD-16_IBD - Protocol 1.0.png (PNG copy)>]
+<figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png, id=841, 549.05125pt x 201.75375pt>
 File: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png  used on input line 184.
+Package pdftex.def Info: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png  used on input line 183.
 (pdftex.def)             Requested size: 338.58632pt x 124.41798pt.
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 185.
-
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 185.
-
-<figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png, id=362, 1205.50375pt x 328.22626pt>
+<figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png, id=848, 1205.50375pt x 328.22626pt>
 File: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png  used on input line 191.
+Package pdftex.def Info: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png  used on input line 190.
 (pdftex.def)             Requested size: 483.69687pt x 131.69385pt.
-[25 <./figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png (PNG copy)> <./figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png (PNG copy)>]
-
-LaTeX Warning: Reference `fig:ibd-protocolBB' on page 1 undefined on input line 203.
-
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 203.
-
-sections/5-system-architecture.tex:207: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.207 ...nt $\leftrightarrow$ Agent Communication}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:207: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.207 ...nt $\leftrightarrow$ Agent Communication}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/5-system-architecture.tex:243: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.243 ...rightarrow$ SwarmInterface Communication}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:243: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.243 ...rightarrow$ SwarmInterface Communication}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `subsubsec:init-event' on page 1 undefined on input line 254.
-
-sections/5-system-architecture.tex:258: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.258 \subsubsection{Pulse Mechanism}
-                                     
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:258: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.258 \subsubsection{Pulse Mechanism}
-                                     
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[26]
-sections/5-system-architecture.tex:291: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.291 \subsubsection{Static Information}
-                                        
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:291: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.291 \subsubsection{Static Information}
-                                        
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-14_IBD - StaticInfo 1.0.png, id=381, 643.40375pt x 261.97874pt>
+ [25 <./figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png (PNG copy)> <./figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png (PNG copy)>] [26]
+<figures/System-Design/SD-14_IBD - StaticInfo 1.0.png, id=868, 643.40375pt x 261.97874pt>
 File: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-14_IBD - StaticInfo 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png  used on input line 303.
+Package pdftex.def Info: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png  used on input line 302.
 (pdftex.def)             Requested size: 338.58632pt x 137.86868pt.
-[27 <./figures/System-Design/SD-14_IBD - StaticInfo 1.0.png (PNG copy)>]
-sections/5-system-architecture.tex:310: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.310 \subsubsection{Dynamic Information}
-                                         
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/5-system-architecture.tex:310: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.310 \subsubsection{Dynamic Information}
-                                         
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `fig:datatypes' on page 1 undefined on input line 315.
-
-
-LaTeX Warning: Reference `fig:datatypes' on page 1 undefined on input line 328.
-
-<figures/System-Design/SD-05_DataTypes 1.0.png, id=395, 1024.82875pt x 328.22626pt>
+ [27 <./figures/System-Design/SD-14_IBD - StaticInfo 1.0.png (PNG copy)>]
+<figures/System-Design/SD-05_DataTypes 1.0.png, id=882, 1024.82875pt x 328.22626pt>
 File: figures/System-Design/SD-05_DataTypes 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-05_DataTypes 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-05_DataTypes 1.0.png  used on input line 362.
+Package pdftex.def Info: figures/System-Design/SD-05_DataTypes 1.0.png  used on input line 361.
 (pdftex.def)             Requested size: 435.32422pt x 139.42169pt.
-[28]
-<figures/System-Design/SD-06_RumourOrigins 1.0.png, id=402, 1285.80376pt x 407.5225pt>
+ [28]
+<figures/System-Design/SD-06_RumourOrigins 1.0.png, id=888, 1285.80376pt x 407.5225pt>
 File: figures/System-Design/SD-06_RumourOrigins 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-06_RumourOrigins 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-06_RumourOrigins 1.0.png  used on input line 369.
+Package pdftex.def Info: figures/System-Design/SD-06_RumourOrigins 1.0.png  used on input line 368.
 (pdftex.def)             Requested size: 483.69687pt x 153.29936pt.
-<figures/System-Design/SD-07_RumourSources 1.0.png, id=403, 1426.32875pt x 388.45125pt>
+<figures/System-Design/SD-07_RumourSources 1.0.png, id=889, 1426.32875pt x 388.45125pt>
 File: figures/System-Design/SD-07_RumourSources 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-07_RumourSources 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-07_RumourSources 1.0.png  used on input line 376.
+Package pdftex.def Info: figures/System-Design/SD-07_RumourSources 1.0.png  used on input line 375.
 (pdftex.def)             Requested size: 483.69687pt x 131.72789pt.
-<figures/System-Design/SD-08_RumourOpinions 1.0.png, id=404, 824.07875pt x 446.66875pt>
+<figures/System-Design/SD-08_RumourOpinions 1.0.png, id=890, 824.07875pt x 446.66875pt>
 File: figures/System-Design/SD-08_RumourOpinions 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-08_RumourOpinions 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-08_RumourOpinions 1.0.png  used on input line 383.
+Package pdftex.def Info: figures/System-Design/SD-08_RumourOpinions 1.0.png  used on input line 382.
 (pdftex.def)             Requested size: 483.69687pt x 262.17596pt.
  [29 <./figures/System-Design/SD-05_DataTypes 1.0.png (PNG copy)> <./figures/System-Design/SD-06_RumourOrigins 1.0.png (PNG copy)> <./figures/System-Design/SD-07_RumourSources 1.0.png (PNG copy)>]
-<figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png, id=415, 1105.12875pt x 381.425pt>
+<figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png, id=898, 1105.12875pt x 381.425pt>
 File: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png  used on input line 415.
+Package pdftex.def Info: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png  used on input line 414.
 (pdftex.def)             Requested size: 435.32422pt x 150.24509pt.
  [30 <./figures/System-Design/SD-08_RumourOpinions 1.0.png (PNG copy)>]
-<figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png, id=425, 480.79625pt x 101.37875pt>
+<figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png, id=906, 480.79625pt x 101.37875pt>
 File: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png  used on input line 422.
+Package pdftex.def Info: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png  used on input line 421.
 (pdftex.def)             Requested size: 290.22107pt x 61.19588pt.
-<figures/System-Design/SD-21_IBD - Communication Context 1.0.png, id=430, 1044.90375pt x 650.43pt>
+<figures/System-Design/SD-21_IBD - Communication Context 1.0.png, id=911, 1044.90375pt x 650.43pt>
 File: figures/System-Design/SD-21_IBD - Communication Context 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-21_IBD - Communication Context 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-21_IBD - Communication Context 1.0.png  used on input line 448.
+Package pdftex.def Info: figures/System-Design/SD-21_IBD - Communication Context 1.0.png  used on input line 447.
 (pdftex.def)             Requested size: 483.69687pt x 301.09705pt.
-
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 449.
-
-
-LaTeX Warning: Reference `fig:flowspec' on page 1 undefined on input line 449.
-
-) [31 <./figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png (PNG copy)> <./figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png (PNG copy)>] [32 <./figures/System-Design/SD-21_IBD - Communication Context 1.0.png (PNG copy)>] (sections/6-rumour-mill.tex
-
-LaTeX Warning: Reference `subsubsec:init-event' on page 1 undefined on input line 20.
-
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 22.
-
-
-LaTeX Warning: Reference `sec:task-role' on page 1 undefined on input line 22.
-
-[33]
-sections/6-rumour-mill.tex:54: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.54 \subsubsection{Origin Rumours}
-                                   
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:54: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.54 \subsubsection{Origin Rumours}
-                                   
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/6-rumour-mill.tex:69: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.69 \subsubsection{Source Rumours}
-                                   
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:69: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.69 \subsubsection{Source Rumours}
-                                   
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/6-rumour-mill.tex:82: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.82 \subsubsection{Opinion Rumours}
-                                    
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:82: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.82 \subsubsection{Opinion Rumours}
-                                    
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/6-rumour-mill.tex:95: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.95 ...subsection{Rumour Mill as Named Mechanism}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:95: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.95 ...subsection{Rumour Mill as Named Mechanism}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `subsec:rumour-lifecycle' on page 1 undefined on input line 96.
-
-[34]
-<figures/System-Design/SD-17_AD - Rumour Mill 1.0.png, id=474, 726.715pt x 663.47874pt>
+) [31 <./figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png (PNG copy)> <./figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png (PNG copy)>] [32 <./figures/System-Design/SD-21_IBD - Communication Context 1.0.png (PNG copy)>] (sections/6-rumour-mill.tex [33] [34]
+<figures/System-Design/SD-17_AD - Rumour Mill 1.0.png, id=953, 726.715pt x 663.47874pt>
 File: figures/System-Design/SD-17_AD - Rumour Mill 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-17_AD - Rumour Mill 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-17_AD - Rumour Mill 1.0.png  used on input line 107.
+Package pdftex.def Info: figures/System-Design/SD-17_AD - Rumour Mill 1.0.png  used on input line 106.
 (pdftex.def)             Requested size: 386.95897pt x 353.29224pt.
-
-
-LaTeX Warning: Reference `subsec:consens-threshold' on page 1 undefined on input line 133.
-
-[35 <./figures/System-Design/SD-17_AD - Rumour Mill 1.0.png (PNG copy)>]
-sections/6-rumour-mill.tex:151: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.151 ...n{Events Using the Full Rumour Lifecycle}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:151: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.151 ...n{Events Using the Full Rumour Lifecycle}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/6-rumour-mill.tex:187: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.187 ...tialisation Events Bypassing Rumour Mill}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:187: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.187 ...tialisation Events Bypassing Rumour Mill}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[36]
-
-LaTeX Warning: Reference `sec:safety-reliability' on page 1 undefined on input line 237.
-
-sections/6-rumour-mill.tex:254: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.254 \subsubsection{Degraded Health Event}
-                                           
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:254: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.254 \subsubsection{Degraded Health Event}
-                                           
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[37]
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 262.
-
-sections/6-rumour-mill.tex:267: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.267 \subsubsection{Subject Found Event}
-                                         
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/6-rumour-mill.tex:267: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.267 \subsubsection{Subject Found Event}
-                                         
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-) [38] (sections/7-sector-allocation.tex
-
-LaTeX Warning: Reference `sec:rumour-mill' on page 1 undefined on input line 15.
-
-
-LaTeX Warning: Reference `sec:task-role' on page 1 undefined on input line 17.
-
-[39]
-sections/7-sector-allocation.tex:87: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.87 \subsubsection{Initial Bidding Process}
-                                            
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:87: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.87 \subsubsection{Initial Bidding Process}
-                                            
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/7-sector-allocation.tex:90: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.90 \subsubsection{Guaranteed First Sector}
-                                            
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:90: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.90 \subsubsection{Guaranteed First Sector}
-                                            
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/7-sector-allocation.tex:101: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.101 \subsubsection{Initial Auction Loop}
-                                          
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:101: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.101 \subsubsection{Initial Auction Loop}
-                                          
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[40]
+ [35 <./figures/System-Design/SD-17_AD - Rumour Mill 1.0.png (PNG copy)>] [36] [37]) [38] (sections/7-sector-allocation.tex [39] [40]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 149.
+            Default family used instead on input line 148.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 149.
-
-sections/7-sector-allocation.tex:156: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.156 \subsubsection{Avoiding Double Assignment}
-                                                
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:156: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.156 \subsubsection{Avoiding Double Assignment}
-                                                
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/7-sector-allocation.tex:168: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.168 ...idding after agent removal or completion}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:168: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.168 ...idding after agent removal or completion}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/7-sector-allocation.tex:173: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.173 ...tion{Sector Release from Degraded Agents}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:173: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.173 ...tion{Sector Release from Degraded Agents}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[41]
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 182.
-
-sections/7-sector-allocation.tex:187: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.187 ...or Release from Failed or Missing Agents}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:187: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.187 ...or Release from Failed or Missing Agents}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/7-sector-allocation.tex:203: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.203 ...ubsection{Re-bidding on Released Sectors}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/7-sector-allocation.tex:203: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.203 ...ubsection{Re-bidding on Released Sectors}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `subsec:ownership' on page 1 undefined on input line 208.
-
-
-LaTeX Warning: Reference `sec:task-role' on page 1 undefined on input line 232.
-
-) [42] [43] (sections/8-task-role.tex
-Overfull \hbox (13.6026pt too wide) in paragraph at lines 2--2
+            Default family used instead on input line 148.
+ [41]) [42] [43] (sections/8-task-role.tex
+Overfull \hbox (13.6026pt too wide) in paragraph at lines 1--1
 |[]\T1/ptm/m/n/24 Agent Task & Role Al-lo-ca-tion (Be-haviour Layer)| 
  []
 
 
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 6.
-
-
-LaTeX Warning: Reference `subsec:agent-budget' on page 1 undefined on input line 20.
-
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 25.
-
-sections/8-task-role.tex:33: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.33 \subsubsection{Primary Roles}
-                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/8-task-role.tex:33: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.33 \subsubsection{Primary Roles}
-                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/8-task-role.tex:50: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.50 ...ion{Secondary Roles (for Degraded Agents)}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/8-task-role.tex:50: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.50 ...ion{Secondary Roles (for Degraded Agents)}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-Overfull \hbox (10.57599pt too wide) in paragraph at lines 53--54
+Overfull \hbox (10.57599pt too wide) in paragraph at lines 52--53
 []\T1/ptm/m/n/11 The agent po-si-tions it-self to im-prove com-mu-ni-ca-tion cov-er-age be-tween other agents and/or the SwarmInter-
  []
 
-sections/8-task-role.tex:63: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.63 \subsubsection{Terminal or Restricted Roles}
-                                                 
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/8-task-role.tex:63: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.63 \subsubsection{Terminal or Restricted Roles}
-                                                 
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
 [44] [45] [46]
-sections/8-task-role.tex:215: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.215 \subsubsection{State Diagram}
-                                   
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/8-task-role.tex:215: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.215 \subsubsection{State Diagram}
-                                   
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/state flow diagram-even better.png, id=678, 852.93657pt x 508.90125pt>
+<figures/state flow diagram-even better.png, id=1147, 852.93657pt x 508.90125pt>
 File: figures/state flow diagram-even better.png Graphic file (type png)
 <use figures/state flow diagram-even better.png>
-Package pdftex.def Info: figures/state flow diagram-even better.png  used on input line 218.
+Package pdftex.def Info: figures/state flow diagram-even better.png  used on input line 217.
 (pdftex.def)             Requested size: 483.69687pt x 288.60133pt.
-sections/8-task-role.tex:223: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.223 ...ctivity model: moving to the next sector}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/8-task-role.tex:223: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.223 ...ctivity model: moving to the next sector}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[47 <./figures/state flow diagram-even better.png>]
-
-LaTeX Warning: Reference `sec:sector-alloc' on page 1 undefined on input line 229.
-
-
-LaTeX Warning: Reference `sec:rumour-mill' on page 1 undefined on input line 229.
-
-
-LaTeX Warning: Reference `sec:safety-reliability' on page 1 undefined on input line 264.
-
-) [48] (sections/9-safety.tex
-
-LaTeX Warning: Reference `sec:formal-fault-tolerance-model' on page 1 undefined on input line 41.
-
-[49]
-
-LaTeX Warning: Reference `subsubsec:pulse-content' on page 1 undefined on input line 53.
-
-sections/9-safety.tex:57: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.57 \subsubsection{Pulse-Based Failure Detection}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:57: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.57 \subsubsection{Pulse-Based Failure Detection}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `subsubsec:sector-release-from-failed' on page 1 undefined on input line 67.
-
-
-LaTeX Warning: Reference `subsec:state-machine' on page 1 undefined on input line 74.
-
-sections/9-safety.tex:105: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.105 ...section{Neighbourhood Size and Structure}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:105: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.105 ...section{Neighbourhood Size and Structure}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/9-safety.tex:111: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.111 ...{Rumour Mechanics within a Neighbourhood}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:111: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.111 ...{Rumour Mechanics within a Neighbourhood}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-[50]
-sections/9-safety.tex:122: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.122 ...ion{Tolerance of One Byzantine Neighbour}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:122: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.122 ...ion{Tolerance of One Byzantine Neighbour}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/9-safety.tex:133: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.133 ...g Neighbourhoods and System-Level Bounds}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:133: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.133 ...g Neighbourhoods and System-Level Bounds}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-sections/9-safety.tex:148: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.148 ...tionship to Consensus Threshold $\alpha$}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/9-safety.tex:148: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.148 ...tionship to Consensus Threshold $\alpha$}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Reference `subsec:consens-threshold' on page 1 undefined on input line 149.
-
-[51] [52]) [53] (sections/10-future-work.tex [54] [55]) [56] (main.bbl
+ [47 <./figures/state flow diagram-even better.png>]) [48] (sections/9-safety.tex [49] [50] [51] [52]) [53] (sections/10-future-work.tex [54] [55]) [56] (main.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `eng'. Using the pattern for
 ** the default language instead.
@@ -2645,94 +1156,15 @@ LaTeX Warning: Reference `subsec:consens-threshold' on page 1 undefined on input
 ** loaded for the language `eng'. Using the pattern for
 ** the default language instead.
 ) [57] (sections/appendix.tex
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 9.
-
-
-LaTeX Warning: Reference `tab:uav-HW-names' on page 1 undefined on input line 9.
-
-sections/appendix.tex:13: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.13 \subsubsection*{Hardware Components Overview}
-                                                  
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/appendix.tex:13: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.13 \subsubsection*{Hardware Components Overview}
-                                                  
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 21.
-
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 21.
-
-
-LaTeX Warning: Reference `fig:bdd-uav' on page 1 undefined on input line 21.
-
-
-LaTeX Warning: Reference `fig:bdd-uav' on page 1 undefined on input line 21.
-
-
-Overfull \hbox (8.53592pt too wide) in paragraph at lines 35--35
+Overfull \hbox (8.53592pt too wide) in paragraph at lines 34--34
 []|[]| 
  []
 
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 40.
-
-
-LaTeX Warning: Reference `fig:bdd-uav' on page 1 undefined on input line 40.
-
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 40.
-
-
-LaTeX Warning: Reference `fig:bdd-uav' on page 1 undefined on input line 40.
-
-sections/appendix.tex:48: Missing number, treated as zero.
-<to be read again> 
-                   \relax 
-l.48 \subsubsection*{UAV Hardware BDD}
-                                      
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-sections/appendix.tex:48: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   \relax 
-l.48 \subsubsection*{UAV Hardware BDD}
-                                      
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-<figures/System-Design/SD-02_BDD - UAV 1.0.png, id=796, 705.63625pt x 361.35pt>
+<figures/System-Design/SD-02_BDD - UAV 1.0.png, id=1258, 705.63625pt x 361.35pt>
 File: figures/System-Design/SD-02_BDD - UAV 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-02_BDD - UAV 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-02_BDD - UAV 1.0.png  used on input line 52.
+Package pdftex.def Info: figures/System-Design/SD-02_BDD - UAV 1.0.png  used on input line 51.
 (pdftex.def)             Requested size: 386.95897pt x 198.15866pt.
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 53.
-
-
-LaTeX Warning: Citation `LuizNotPublished' on page 58 undefined on input line 53.
-
 )
 
 ** Conference Paper **
@@ -2747,37 +1179,21 @@ Before submitting the final camera ready copy, remember to:
 
 [58
 
- <./figures/System-Design/SD-02_BDD - UAV 1.0.png (PNG copy)>] 
+ <./figures/System-Design/SD-02_BDD - UAV 1.0.png (PNG copy)>] [59] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  E813C56BD6C39BEE6FC2A6994481187E;15829.
-
-Package lastpage Warning: Rerun to get the references right on input line 52.
-
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: E813C56BD6C39BEE6FC2A6994481187E;15829.
  ) 
 Here is how much of TeX's memory you used:
- 37299 strings out of 467871
- 728053 string characters out of 5428440
- 1186935 words of memory out of 5000000
- 65278 multiletter control sequences out of 15000+600000
+ 37392 strings out of 467871
+ 729898 string characters out of 5428440
+ 1188937 words of memory out of 5000000
+ 65360 multiletter control sequences out of 15000+600000
  737641 words of font info for 160 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,18n,107p,2611b,814s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2785,37 +1201,13 @@ Here is how much of TeX's memory you used:
 pdfTeX warning (dest): name{glo:uuid} has been referenced but does not exist, replaced by a fixed one
 
 
-pdfTeX warning (dest): name{glo:ibd} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:actdia} has been referenced but does not exist, replaced by a fixed one
-
-
 pdfTeX warning (dest): name{glo:adhoc} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:bdd} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:fmu} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:sector} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{glo:hotregion} has been referenced but does not exist, replaced by a fixed one
 
 
-pdfTeX warning (dest): name{glo:searcharea} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:agent} has been referenced but does not exist, replaced by a fixed one
-
-
 pdfTeX warning (dest): name{glo:subject} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:searchmana} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{glo:secmarket} has been referenced but does not exist, replaced by a fixed one
@@ -2827,15 +1219,39 @@ pdfTeX warning (dest): name{glo:rumourmill} has been referenced but does not exi
 pdfTeX warning (dest): name{glo:sar} has been referenced but does not exist, replaced by a fixed one
 
 
+pdfTeX warning (dest): name{glo:irds} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:ibd} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:sector} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:searcharea} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:actdia} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:searchmana} has been referenced but does not exist, replaced by a fixed one
+
+
 pdfTeX warning (dest): name{glo:uav} has been referenced but does not exist, replaced by a fixed one
 
 
-pdfTeX warning (dest): name{glo:irds} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{glo:fmu} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:agent} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:bdd} has been referenced but does not exist, replaced by a fixed one
 
  <C:\Users\Andrea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (59 pages, 999247 bytes).
+Output written on main.pdf (60 pages, 1078920 bytes).
 PDF statistics:
- 928 PDF objects out of 1000 (max. 8388607)
- 363 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1395 PDF objects out of 1440 (max. 8388607)
+ 364 named destinations out of 1000 (max. 500000)
+ 775 words of extra memory for PDF output out of 10000 (max. 10000000)
 

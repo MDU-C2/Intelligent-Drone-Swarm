@@ -40,7 +40,7 @@
 \contentsline {subsubsection}{\numberline {4.4.4}Agent Join After Mission Start}{18}{subsubsection.4.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.5}Agent Rejoin}{18}{subsubsection.4.4.5}%
 \contentsline {subsubsection}{\numberline {4.4.6}Agent Health Degrades}{18}{subsubsection.4.4.6}%
-\contentsline {subsubsection}{\numberline {4.4.7}Sector Completed}{18}{subsubsection.4.4.7}%
+\contentsline {subsubsection}{\numberline {4.4.7}Sector Completed}{19}{subsubsection.4.4.7}%
 \contentsline {subsubsection}{\numberline {4.4.8}Subject Found and Confirmed}{19}{subsubsection.4.4.8}%
 \contentsline {subsubsection}{\numberline {4.4.9}Agent Returns for Battery Change}{19}{subsubsection.4.4.9}%
 \contentsline {section}{\numberline {5}System Architecture}{20}{section.5}%

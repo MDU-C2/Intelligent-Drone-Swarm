@@ -21,14 +21,14 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{rm}
-C.~Namatovu, \emph{Requirements Management Plan}, Intelligent Replanning Drone
-  Swarm, Oct. 4 2025, {Version 1.0}.
-
 \bibitem{LuizNotPublished}
 L.~Giacomissi, Z.~Yigit, M.~Shakarna, S.~Saleemi, I.~Tomasic, and H.~Forsberg,
   ``\BIBforeignlanguage{eng}{Design of a fail-operational swarm of drones for
   search and rescue missions},'' \emph{\BIBforeignlanguage{eng}{Not
   Published}}, 2025.
+
+\bibitem{rm}
+C.~Namatovu, \emph{Requirements Management Plan}, Intelligent Replanning Drone
+  Swarm, Oct. 4 2025, {Version 1.0}.
 
 \end{thebibliography}
