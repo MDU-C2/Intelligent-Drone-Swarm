@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-11-25T08:13:59Z",
+    "exported_at": "2025-12-02T11:09:48Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -1481,6 +1481,21 @@
           "gloss_id": 11,
           "prefix": "SSR-",
           "meaning": "System safety requirements pretaining to protocol safety requirements"
+        },
+        {
+          "gloss_id": 12,
+          "prefix": "E-",
+          "meaning": "Evidence"
+        },
+        {
+          "gloss_id": 13,
+          "prefix": "SD-",
+          "meaning": "System Design"
+        },
+        {
+          "gloss_id": 14,
+          "prefix": "VVP-",
+          "meaning": "Verification & Validation Protocol"
         }
       ]
     },
