@@ -1,0 +1,104 @@
+% !TeX root = ../main.tex
+\section{Goals \& Requirements Overview}
+\label{sec:goals}
+This section summarises the goals and requirements that drive the IRDS protocol module. Detailed specifications are kept in four artefacts (goals, drone\_swarm\_requirements, system\_requirements, subsystem\_requirements) \cite{rm}; only the most relevant elements are repeated here. The aim is to show what the system must achieve at the project, swarm, protocol, and sub-module levels, and how these requirements shape the architectural and behavioural design choices in the rest of this document.
+
+\subsection{Goals \& Requirements Overview}
+The goals and requirements are maintained in the following artefacts:
+\begin{itemize}
+    \item goals - project goals derived from stakeholder needs and the KAOS method.
+    \item drone\_swarm\_requirements - swarm-level behavioural and safety requirements.
+    \item system\_requirements - requirements allocated to the IRDS protocol module as a system.
+    \item subsystem\_requirements - requirements allocated to the internal sub-modules of the protocol.
+\end{itemize}
+
+\subsection{Project Goals}
+The project goals in goals capture what the IRDS system of systems is intended to achieve at a high level. Key examples include:
+\begin{itemize}
+    \item G-01 - Assign an appropriate task to each agent at the start of the mission.
+    \item G-02 - When an agent fails, automatically reassign its tasks to other functional agents when resources permit.
+    \item G-03 - Maintain correct swarm behaviour despite failure or inconsistent output from single agents.
+    \item G-04 / G-05 - Reach collective decisions for tasks that require coordination and ensure that the search area is distributed among agents.
+    \item G-08 / G-09 - Maintain mission continuity and recover from agent failures under the chosen protocol.
+    \item G-11 / SG-01 - Allow agents to make individual decisions when appropriate while maintaining staff safety in all operational phases.
+\end{itemize}
+The IRDS protocol module contributes to these goals primarily through its three main functional areas: Rumour Mill (decentralised consensus on mission state and events), Sector Allocation Market (distribution of search sectors based on mission priorities and agent state), and Task \& Role Allocation (mapping sector ownership and health status into concrete agent behaviour).
+
+\vspace{0.2cm}
+
+\subsubsection{Requirements Structure}
+%\subsection{Swarm-level Requirements}
+%\subsection{Protocol Module Requirements}
+%\subsection{Internal Sub-module Requirements}
+The requirements are organised in three main layers that correspond to different responsibility levels in the architecture:
+\begin{itemize}
+    \item Swarm-level requirements (drone\_swarm\_requirements.csv)
+    \item[] These requirements (e.g. SW-01-SW-07, SR-02-SR-07) describe how the swarm as a whole shall behave. Examples include:
+    \begin{itemize}
+        \item[$\circ$] Assigning tasks to all agents when a mission starts (SW-01).
+        \item[$\circ$] Reallocating work when agents degrade or fail (SW-02, SW-03).
+        \item[$\circ$] Employing a consensus mechanism that maintains correct behaviour even when at least one agent provides incorrect data (SW-04, SW-05).
+        \item[$\circ$] Coordinating agents so that they cover different parts of the Search Area (SW-06).
+        \item[$\circ$] Allowing agents to make independent local decisions when immediate action is required (SW-07).
+        \item[$\circ$] Maintaining safety distances and buffer zones around agents and staff (e.g. SR-02-SR-07).
+    \end{itemize}
+    \item System-level protocol requirements (system\_requirements.csv)
+    \item[] These requirements (PM-01-PM-xx) define what the IRDS protocol module as a system shall do, for example:
+    \begin{itemize}
+        \item[$\circ$] Define procedures to keep all agents aware of the prevailing mission state (PM-01).
+        \item[$\circ$] Define procedures for sharing the mission plan and assigning tasks to agents based on the plan and their capabilities (PM-02, PM-03, PM-06).
+        \item[$\circ$] Define how agents communicate their capabilities and the message formats used for this communication (PM-04, PM-05).
+    \end{itemize}
+    \item Subsystem-level protocol requirements (subsystem\_requirements.csv)
+    \item[] These requirements are allocated to internal sub-modules of the protocol (Consensus, Information, Messaging, State Instruction, etc.). Examples include:
+    \begin{itemize}
+        \item[$\circ$] CON-01 / CON-02 - the Consensus sub-module shall specify how agents confirm agreement on the prevailing mission state and how they reach a common understanding of the mission plan.
+        \item[$\circ$] INF-01-INF-03 - the Information sub-module shall define the content and structure of mission state data and the mission plan, and how agents retrieve this information.
+        \item[$\circ$] MSG-01 / MSG-02 - the Messaging sub-module shall define communication rules for transmitting mission state and mission plan data between agents.
+        \item[$\circ$] SIS-01 - the State Instruction sub-module shall define how instructions are derived from the current mission state and issued to agents.
+    \end{itemize}
+\end{itemize}
+In the architectural view adopted in this document, the IRDS protocol module is primarily responsible for satisfying the system-level and subsystem-level requirements, and for contributing to the swarm-level requirements that concern coordination, consensus, and task allocation. Low-level flight behaviour, obstacle avoidance, and detailed motion control requirements are delegated to the UAV flight systems (e.g. FCU, ODU, CAU), which are treated as external components.
+
+\vspace{0.2cm}
+
+\subsubsection{Traceability}
+A detailed mapping from goals and requirements to design elements is maintained in the project’s requirements artefacts and supporting traceability tables. At a high level:
+\begin{itemize}
+    \item Swarm-level requirements such as SW-01-SW-07 and SR-02-SR-07 are addressed by the swarm context (Section 2), the system overview (Section 3), the Sector Allocation Market (Section 6), and the Agent Task \& Role Allocation layer (Section 7)
+    \item System-level protocol requirements (PM-xx) are mainly realised by the architecture described in Section 4, the Rumour Mill protocol in Section 5, and the Sector Allocation Market and Task \& Role Allocation layers in Sections 6 and 7.
+    \item Subsystem-level requirements (CON-xx, INF-xx, MSG-xx, SIS-xx) correspond to the internal sub-modules of the protocol module described in Sections 4 and 5.
+\end{itemize}
+The full traceability matrix is maintained outside this document and can be consulted for detailed one-to-one mappings between individual requirements and specific design artefacts.
+
+\Cref{tab:matrix} provides a small sample of the full requirements-design traceability matrix, illustrating how selected goals and requirements are realised by specific architectural elements and sections in this document.
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\begin{hyphenrules}{nohyphenation}
+\renewcommand{\arraystretch}{1.4}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|P{2.2cm}|P{5cm}|P{8cm}|}
+        \hline
+        \textbf{Requirement ID} & \textbf{Short description} & \textbf{Realised by design elements / sections} \\
+        \hline
+        SW-01 & All agents shall be assigned a task at mission start. & 3 System Overview; 4.3 Agent Architecture; 6 Sector Allocation Market; 7 Agent Task \& Role Allocation \\
+        \hline
+        SW-07 & Agents shall be able to take local decisions when necessary. & 3.2 UAV Platform and Flight Systems; 4.2 External Components; 8.3 Safety and Local Emergency Behaviour \\
+        \hline
+        SR-03 & The swarm shall maintain separation and safety buffer zones. & 2.3 Swarm Context; 3.2 UAV Platform and Flight Systems; 8.3 Pulse Safety Mechanism and Buffer Zones \\
+        \hline
+        PM-01 & Protocol shall keep all agents aware of mission state. & 4 Protocol Module Architecture; 5 Rumour Mill Protocol; 5.4 Event Dissemination and Convergence \\
+        \hline
+        PM-03 & Protocol shall support task assignment based on capabilities. & 4.3 Agent Architecture; 6 Sector Allocation Market; 7 Task \& Role Allocation \\
+        \hline
+        CON-01 & Consensus sub-module shall define agreement on mission state. & 4.4 Consensus Sub-module; 5.2 Rumour Model; 8.5 Formal Fault Tolerance Model \\
+        \hline
+        MSG-02 & Messaging shall provide reliable delivery of critical updates. & 4.6 Communication Model; 5.3 Message Types; 5.5 Reliability and Acknowledgement Strategy \\
+        \hline
+    \end{tabular}
+    \caption{Sample requirements-design traceability.}
+    \label{tab:matrix}
+\end{table}
+\renewcommand{\arraystretch}{1.0}
+\end{hyphenrules}

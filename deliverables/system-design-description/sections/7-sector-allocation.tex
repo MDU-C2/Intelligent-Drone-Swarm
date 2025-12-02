@@ -1,0 +1,232 @@
+% !TeX root = ../main.tex
+\section{Sector Allocation Market (Workload Layer)}
+%6  Sector Allocation Market (Workload Layer)
+\label{sec:sector-alloc}
+%The Sector Allocation Market determines which agent is responsible for which sector at any given time. It uses a market-based mechanism where agents bid for sectors based on their current battery level, position, and sector probabilities. All allocation decisions are confirmed using the Rumour Mill to ensure that sector ownership is consistent across the swarm.
+
+The \gls{secmarket} determines which agent is responsible for which \glspl{sector} at any given time by distributing search workload across the swarm using simple market-like rules:
+\begin{itemize}
+    \item Sectors have costs.
+    \item Agents have budgets.
+    \item Agents “buy” sectors they can search efficiently.
+    \item Agents release sectors when they can no longer search reliably.
+\end{itemize}
+
+All changes in sector ownership are confirmed through the \gls{rumourmill} (\Cref{sec:rumour-mill}), so that all agents eventually agree on who owns which sector.
+
+The Sector Allocation Market operates only on workload distribution (who searches which sectors). It does not itself decide the concrete behaviour of the agent, which is handled by the Task \& Role Allocation layer (\Cref{sec:task-role}) based on sector ownership and health status.
+
+\subsection{Market Overview \& Rationale}
+Instead of using a static or centrally assigned mapping of sectors to agents, the protocol module uses a distributed market approach where:
+\begin{itemize}
+    \item Each sector has a \textbf{value} determined by its probability (importance).
+    \item Each agent has a \textbf{budget} that reflects its energy levels and possible workload.
+    \item Each agent evaluates the cost of a sector using a \textbf{personal cost function}. %(e.g. probability + distance).
+    %\item Every agent wants high-value sectors.
+    \item \color{red}Sectors are bid for in order of importance (highest probability first).\color{black}
+    \item Agents bid for sectors they can search efficiently.
+    \item Degraded agents release sectors that they can no longer search reliably.
+    \item Healthy agents take over released sectors through new bids.
+    \item Agents generate rumour events when they want to acquire or release sectors.
+    \item Final ownership decisions are made through the Rumour Mill.
+\end{itemize}
+
+\noindent This approach allows the swarm to:
+\begin{itemize}
+    \item Balance workload dynamically.
+    \item Prioritise high-probability areas.
+    \item Adapt to changing agent health and positions.
+    \item Continue operating even when agents fail or leave the swarm.
+    \item Tend to have sectors handled by agents that are nearby and have enough battery.
+    \item Have no single assignment authority that can fail; all agents participate.
+\end{itemize}
+
+This \gls{secmarket} yields a simple but flexible mechanism that fits on top of broadcast communication and the Rumour Mill.
+
+
+\subsection{Sector Cost}
+Each sector S is assigned a cost that reflects both how important it is and how hard it is for a particular agent to search it.
+
+The value of a sector is calculated by the SwarmInterface, where the SwarmInterface:
+\begin{enumerate}
+    \item Receives \glspl{hotregion} from the \gls{searchmana}.
+    \item Divides the \gls{searcharea} into rectangular sectors.
+    \item Assigns a probability to each sector based on the Hot Regions.
+\end{enumerate}
+From the probability, each sector is then given a value where high-probability sectors receive a higher value, and low-probability sectors receive a lower value. This encourages the Sector Allocation Market to favour assigning high-probability sectors to agents.
+
+Thereafter, for each agent A and sector S, an an additional cost component is computed based on the distance between the centre of A’s initial sector and the centre of S. Agents use this cost when deciding which sectors to bid for.
+
+Future work must decide the exact algorithm for this.
+
+\subsection{Agent Budgets \& Budget Dynamics}
+\label{subsec:agent-budget}
+Each agent A is assigned a budget B$_A$, which is primarily based on its battery level. The budget represents how many and which sectors the agent can afford to purchase. At mission start (or when joining), an agent’s initial budget is set based on its available battery meaning that higher battery has a larger budget, and lower battery has a smaller budget.
+
+Budget dynamics follow these rules:
+\begin{itemize}
+    \item When agent A successfully purchases a \gls{sector} S through the \gls{secmarket}, B$_A$ decreases by the cost of S.
+    \item When agent A finishes searching sector S and confirms completion via the \gls{rumourmill}, B$_A$ increases by the cost of S (but does not go over what is allowed by the battery level).
+    \item Agent A may only bid on sectors if its remaining budget is sufficient to cover the sector’s cost.
+\end{itemize}
+
+In the current design, it is assumed that agents behave non-maliciously with respect to their own budget variables, i.e., agents do not intentionally corrupt their budgets or attempt to bid on sectors they cannot afford. Handling behaviours that target budget manipulation is left as future work.
+
+\subsection{Initial Sector Allocation}
+The initial sector allocation aims to:
+\begin{itemize}
+    \item Ensure that each agent has at least one sector to search.
+    \item Provide good coverage in high-probability areas.
+    \item Establish initial positions for neighbourhood computation.
+\end{itemize}
+
+The process consists of two phases: Guaranteed First Sector and Initial Auction Loop.
+
+\vspace{0.2cm}
+
+\subsubsection{Initial Bidding Process}
+\color{red}Activity diagram showing the process of bidding for sectors after initial sectors have been given\color{black}
+
+\subsubsection{Guaranteed First Sector}
+Each agent is assigned at least one sector purchased at the sector's value, without going through the full bidding process. This initial mapping:
+\begin{itemize}
+    \item Uses probability information (favour high-probability regions).
+    %\item takes into account agent starting positions where available,
+    \item Ensures that every agent starts with something to do.
+\end{itemize}
+The positions of these initial sectors are also used as the basis for neighbourhood formation (one agent + its three closest neighbours) and sector costs.
+
+\vspace{0.2cm}
+
+\subsubsection{Initial Auction Loop}
+After the first sector, agents may attempt to purchase additional sectors using the Sector Allocation Market:
+\begin{enumerate}
+    \item Each agent evaluates which sectors are attractive based on its cost function and remaining budget.
+    \item For each candidate sector S, the agent creates an Origin rumour expressing an intention to buy S (using an appropriate msgID).
+    \item Neighbours interpret this bid and broadcast Source rumours evaluating:
+    \begin{itemize}
+        \item Whether S is currently unassigned or conflicts with another owner,
+        \item whether the bidding agent’s budget appears sufficient,
+        \item any other validity conditions.
+    \end{itemize}
+    \item Once any agent sees three Source rumours for this Origin rumour, it creates an Opinion rumour summarising the interpretation (e.g. “bid valid” or “bid invalid”).
+    \item The bidding agent collects Opinions until the consensus threshold $\alpha$ is met, then decides whether the bid succeeded.
+    \item The bidding agent broadcasts a decision-Origin announcing the outcome (e.g. “I own sector S” or “bid rejected”).
+\end{enumerate}
+This process repeats until agents run out of budget. Unassigned sectors keep ownerID = 0 and remain available for future bidding.
+
+\subsection{Ownership Changes via Rumour Mill}
+\label{subsec:ownership}
+All changes in \gls{sector} ownership (initial purchases, reassignments, and releases) are confirmed through the Rumour Mill to avoid conflicting views. A typical sequence for a successful purchase of sector S by agent A is:
+%A typical sector purchase by agent A for sector S proceeds as:
+\begin{enumerate}
+    \item Origin (bid)
+    \begin{itemize}
+        \item A broadcasts an Origin: ''I (A) want to purchase sector S.''
+        \item This Origin uses a specific msgID that indicates a sector bid.
+    \end{itemize}
+    \item Sources (validation), i.e., 
+    \begin{itemize}
+        \item Neighbours that receive the Origin evaluate the bid based on their local information:
+        \begin{itemize}
+            \item[$\circ$] Current owner of S (if any).
+            %\item A's budget (as known in AgentInfo).
+            \item[$\circ$] Any conflicting bids they have observed.
+        \end{itemize}
+        \item Each neighbour broadcasts a Source saying, for example, ''Bid from A on S is valid.''
+    \end{itemize}
+    \item Opinion (summary)
+    \begin{itemize}
+        \item Once an agent has three Source rumours for this Origin rumour, it broadcasts an Opinion summarising the outcome (e.g. “A should own S” or “A should not own S”).
+    \end{itemize}
+    \item Decision at A
+    \begin{itemize}
+        \item A collects Opinions until it has received Opinions from at least $\alpha$ fraction of agents (e.g. 70\% in this example).
+        \item A makes a local decision: bid success or failure.
+    \end{itemize}
+    \item Decision-Origin (announcement)
+    \begin{itemize}
+        \item A broadcasts a new Origin announcing the decision, where success → ownerID(S) := A and A’s budget is reduced, and failure → no change to ownerID(S).
+    \end{itemize}
+\end{enumerate}
+All agents update their SectorInfo and budgets accordingly. Because the final ownership decision is always announced via a decision-Origin, all agents converge on a consistent view of sector ownership.
+
+\vspace{0.2cm}
+
+\subsubsection{Avoiding Double Assignment}
+The use of \gls{rumourmill} for each ownership change prevents double assignment (two agents believing that they own the same sector):
+\begin{itemize}
+    \item Conflicting bids are detected in the Source stage when agents see multiple bids for the same sector.
+    \item Opinions summarise the outcome of these conflicting interpretations.
+    \item The originator’s decision is only accepted once it is announced in a decision-Origin that the swarm sees.
+\end{itemize}
+Because all agents eventually receive the same decision-Origin, they cannot permanently disagree about who owns a sector.
+
+\subsection{Reallocation Due to Degradation or Failure}
+When an agent becomes degraded or fails the \gls{secmarket} must quickly reassign its sectors to maintain search coverage.
+
+\subsubsection{Re-bidding after agent removal or completion}
+\color{red}Activity diagram showing the process of sector bidding after agents have left swarm or have finished searching all their sectors\color{black}
+
+\vspace{0.2cm}
+
+\subsubsection{Sector Release from Degraded Agents}
+When an agent becomes degraded (e.g. bad\_sensor state):
+\begin{enumerate}
+    \item The agent’s \acrshort{fmu} triggers a health event.
+    \item The agent releases its sector and starts a Rumour Mill event with an Origin describing its degraded state.
+    \item Neighbours of the agent interpret it and broadcast Sources confirming the degraded state
+    \item Any agent (including neighbours) that receives three Sources updates A’s sectors to unassigned, and creates an Opinion rumour (e.g. ”A should become relay”).
+    \item The agent collects Opinion rumours; Once Opinion rumours from$\geq \alpha$ fraction of agents have arrived, the agent internally decides to switch to secondary\_task (e.g. relay).
+    \item The agent broadcasts a decision-Origin announcing its new role.
+    \item The Sector Allocation Market (\Cref{sec:sector-alloc}) reassigns A’s sectors to other agents through bidding.
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\subsubsection{Sector Release from Failed or Missing Agents}
+\label{subsubsec:sector-release-from-failed}
+If an agent A fails or disappears (e.g. pulse timeout):
+\begin{enumerate}
+    \item Neighbours detect missing pulse and create Sources: “Agent A is no longer a member of swarm.”
+    \item All agents, after receiving three sources, vote locally on whether Agent A should be considered a member or not.
+    \item If considered not a member, all agent A's sectors are treated as released.
+    \item SectorInfo entries for sectors formerly owned by A are updated to ownerID = 0.
+    %\item Sources and Opinions confirm that X is missing or failed.
+    %\item Once the decision is made, X is removed from AgentInfo lists, and its sectors are treated as released.
+    %\item SectorInfo entries for sectors formerly owned by X are updated to ownerID = 0.
+\end{enumerate}
+Again, these sectors become candidates for new bids by healthy agents.
+
+\vspace{0.2cm}
+
+\subsubsection{Re-bidding on Released Sectors}
+%Healthy agents monitor SectorInfo:
+Agents monitor SectorInfo:
+\begin{itemize}
+    \item When a sector’s ownerID becomes 0, it is considered available.
+    \item Agents with sufficient budget and good cost for that sector may initiate new bids using the process in \Cref{subsec:ownership}.
+    \item Over time, released sectors are redistributed to agents best able to search them.
+\end{itemize}
+This provides automatic replanning: the swarm reorganises its workload in response to agent degradation and failure without central control.
+
+\subsection{Failed Auctions \& Recovery}
+Broadcast communication is lossy; messages may be dropped or delayed. As a result, a bidding agent might not receive enough Opinions within a reasonable time, or some agents may temporarily disagree about whether a bid is still active. To handle this, simple recovery strategies can be used:
+\begin{itemize}
+    \item Timeout and retry – if the bidder does not receive enough Opinion rumours within a timeout, it may rebroadcast the bid Origin rumour.
+    \item Backoff – after repeated failures, the agent may de-prioritise bidding for that \gls{sector} and focus on others.
+    \item Problem-sector flagging – sectors that repeatedly fail auctions can be flagged for special handling or manual inspection (future work).
+\end{itemize}
+These strategies do not change the conceptual design of the \gls{secmarket}, but are important for a robust implementation. The exact policies for handling such cases can be tuned in simulation and are considered an area for future refinement.
+
+\subsection{Summary of Market Properties}
+The Sector Allocation Market provides the following properties:
+\begin{itemize}
+    \item Dynamic workload distribution: Sectors are continuously reassigned as agents join, degrade, fail, or complete tasks.
+    \item Priority to important sectors: High-probability sectors carry higher values and tend to attract more bids.
+    \item Energy awareness: Budgets and distance-based costs encourage agents to take on work they can realistically perform.
+    \item Consistency: All ownership changes are confirmed via the \gls{rumourmill}, avoiding double assignment.
+    \item Decentralisation: No central scheduler is required; agents make local bidding decisions.
+    \item Implementation simplicity: The mechanism uses simple arithmetic and broadcast messages, making it suitable for resource-constrained UAVs.
+\end{itemize}
+The output of this Sector Allocation Market—who owns which sectors—feeds directly into the Agent Task \& Role Allocation layer (\Cref{sec:task-role}), which decides how each agent behaves based on its current responsibilities and health state.
