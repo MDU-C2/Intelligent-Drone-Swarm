@@ -1,6 +1,6 @@
 {
   "meta": {
-    "exported_at": "2025-12-02T11:09:48Z",
+    "exported_at": "2025-12-02T14:01:12Z",
     "source_db": "local.db"
   },
   "tables": {
@@ -599,7 +599,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-02",
@@ -612,7 +612,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-03",
@@ -625,7 +625,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-04",
@@ -638,7 +638,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-05",
@@ -651,7 +651,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-06",
@@ -664,7 +664,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SW-07",
@@ -677,7 +677,7 @@
           "verifier": "E.Z",
           "validation_status": "Verified",
           "vv_method": "VVP-02",
-          "comment": null
+          "comment": "VVP-01"
         },
         {
           "swarm_req_id": "SR-02",
