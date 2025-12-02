@@ -448,12 +448,12 @@ Rumours ensure that important events and decisions are eventually known by all a
 
 The \gls{secmarket} and Task \& Role logic run on top of this communication fabric to allocate work and determine agent behaviours.
 
-
+In \cref{fig:ibd-comm-context}, even though flowports are named P2P\_Rx / P2P\_Tx in the diagram, they conceptually represent broadcast send/receive on a shared channel. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-21_IBD - Communication Context 1.0.png}
-    \caption{\textit{(SD-21)} \acrshort{ibd} over communication context. Even though flowports are named P2P\_Rx / P2P\_Tx in the diagram, they conceptually represent broadcast send/receive on a shared channel. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.}
+    \caption{\textit{(SD-21)} \acrshort{ibd} over communication context. }
     \label{fig:ibd-comm-context}
 \end{figure}
 %Will insert an IBD here later. The IBD will describe the connections between SwarmInterface, Swarm, Agent, and Protocol.
