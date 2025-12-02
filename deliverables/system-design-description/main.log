@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 16:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.2)  2 DEC 2025 17:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1011,128 +1011,142 @@ Overfull \hbox (20.50374pt too wide) in paragraph at lines 3--4
 \T1/ptm/m/n/11 tions are kept in four arte-facts (goals, drone_swarm_requirements, sys-tem_requirements, sub-sys-tem_requirements)
  []
 
-[7]) [8] (sections/3-system-context.tex [9] [10] [11]
-<figures/System-Design/SD-01_BDD - Protocol Context 2.0.png, id=637, 934.49126pt x 585.18625pt>
+[7]) [8] (sections/3-system-context.tex [9] [10] [11] [12]
+<figures/System-Design/SD-01_BDD - Protocol Context 2.0.png, id=653, 934.49126pt x 624.3325pt>
 File: figures/System-Design/SD-01_BDD - Protocol Context 2.0.png Graphic file (type png)
 <use figures/System-Design/SD-01_BDD - Protocol Context 2.0.png>
-Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 2.0.png  used on input line 242.
-(pdftex.def)             Requested size: 483.69687pt x 302.89671pt.
-) [12] [13 <./figures/System-Design/SD-01_BDD - Protocol Context 2.0.png (PNG copy)>] (sections/4-system-overview.tex [14] [15]
-<figures/System-Design/SD-03_AD - Swarm Registration 2.0.png, id=703, 684.5575pt x 770.88pt>
+Package pdftex.def Info: figures/System-Design/SD-01_BDD - Protocol Context 2.0.png  used on input line 254.
+(pdftex.def)             Requested size: 483.69687pt x 323.1591pt.
+) [13 <./figures/System-Design/SD-01_BDD - Protocol Context 2.0.png (PNG copy)>] (sections/4-system-overview.tex [14] [15]
+<figures/System-Design/SD-03_AD - Swarm Registration 2.0.png, id=689, 684.5575pt x 770.88pt>
 File: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png Graphic file (type png)
 <use figures/System-Design/SD-03_AD - Swarm Registration 2.0.png>
-Package pdftex.def Info: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png  used on input line 116.
-(pdftex.def)             Requested size: 338.58632pt x 381.28683pt.
-<figures/System-Design/SD-04_AD - Search Area Division 1.0.png, id=706, 463.7325pt x 529.98pt>
+Package pdftex.def Info: figures/System-Design/SD-03_AD - Swarm Registration 2.0.png  used on input line 117.
+(pdftex.def)             Requested size: 386.95897pt x 435.75975pt.
+<figures/System-Design/SD-04_AD - Search Area Division 1.0.png, id=692, 463.7325pt x 529.98pt>
 File: figures/System-Design/SD-04_AD - Search Area Division 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-04_AD - Search Area Division 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-04_AD - Search Area Division 1.0.png  used on input line 124.
-(pdftex.def)             Requested size: 241.84843pt x 276.39986pt.
+Package pdftex.def Info: figures/System-Design/SD-04_AD - Search Area Division 1.0.png  used on input line 125.
+(pdftex.def)             Requested size: 193.47578pt x 221.11827pt.
  [16 <./figures/System-Design/SD-03_AD - Swarm Registration 2.0.png (PNG copy)>]
-<figures/System-Design/SD-20_AD - Initial Sectors 1.0.png, id=718, 644.4075pt x 790.955pt>
+<figures/System-Design/SD-20_AD - Initial Sectors 1.0.png, id=705, 644.4075pt x 790.955pt>
 File: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-20_AD - Initial Sectors 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 132.
-(pdftex.def)             Requested size: 338.58632pt x 415.59554pt.
- [17 <./figures/System-Design/SD-04_AD - Search Area Division 1.0.png (PNG copy)>] [18 <./figures/System-Design/SD-20_AD - Initial Sectors 1.0.png (PNG copy)>]) [19] (sections/5-system-architecture.tex
-<figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png, id=780, 790.955pt x 831.105pt>
+Package pdftex.def Info: figures/System-Design/SD-20_AD - Initial Sectors 1.0.png  used on input line 133.
+(pdftex.def)             Requested size: 290.22107pt x 356.2282pt.
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 142.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+ [17 <./figures/System-Design/SD-04_AD - Search Area Division 1.0.png (PNG copy)> <./figures/System-Design/SD-20_AD - Initial Sectors 1.0.png (PNG copy)>]
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 152.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+ [18]) [19] (sections/5-system-architecture.tex
+<figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png, id=770, 790.955pt x 831.105pt>
 File: figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png>
 Package pdftex.def Info: figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png  used on input line 46.
 (pdftex.def)             Requested size: 386.95897pt x 406.59825pt.
  [20]
-<figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png, id=789, 606.265pt x 623.32875pt>
+<figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png, id=779, 606.265pt x 623.32875pt>
 File: figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png>
 Package pdftex.def Info: figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png  used on input line 55.
 (pdftex.def)             Requested size: 386.95897pt x 397.85426pt.
  [21 <./figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png (PNG copy)>] [22 <./figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png (PNG copy)>]
-<figures/System-Design/SD-10_IBD - Agent 1.0.png, id=807, 989.6975pt x 282.05376pt>
+<figures/System-Design/SD-10_IBD - Agent 1.0.png, id=798, 989.6975pt x 282.05376pt>
 File: figures/System-Design/SD-10_IBD - Agent 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-10_IBD - Agent 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-10_IBD - Agent 1.0.png  used on input line 95.
+Package pdftex.def Info: figures/System-Design/SD-10_IBD - Agent 1.0.png  used on input line 96.
 (pdftex.def)             Requested size: 483.69687pt x 137.84602pt.
-<figures/System-Design/SD-13_BDD - Protocol 1.0.png, id=817, 1264.725pt x 382.42876pt>
+ [23 <./figures/System-Design/SD-10_IBD - Agent 1.0.png (PNG copy)>]
+<figures/System-Design/SD-13_BDD - Protocol 1.0.png, id=814, 1264.725pt x 382.42876pt>
 File: figures/System-Design/SD-13_BDD - Protocol 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-13_BDD - Protocol 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-13_BDD - Protocol 1.0.png  used on input line 118.
+Package pdftex.def Info: figures/System-Design/SD-13_BDD - Protocol 1.0.png  used on input line 120.
 (pdftex.def)             Requested size: 483.69687pt x 146.25809pt.
- [23 <./figures/System-Design/SD-10_IBD - Agent 1.0.png (PNG copy)>]
-<figures/System-Design/SD-16_IBD - Protocol 1.0.png, id=830, 944.52875pt x 282.05376pt>
+<figures/System-Design/SD-16_IBD - Protocol 1.0.png, id=817, 944.52875pt x 282.05376pt>
 File: figures/System-Design/SD-16_IBD - Protocol 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-16_IBD - Protocol 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-16_IBD - Protocol 1.0.png  used on input line 125.
+Package pdftex.def Info: figures/System-Design/SD-16_IBD - Protocol 1.0.png  used on input line 127.
 (pdftex.def)             Requested size: 483.69687pt x 144.44373pt.
  [24 <./figures/System-Design/SD-13_BDD - Protocol 1.0.png (PNG copy)> <./figures/System-Design/SD-16_IBD - Protocol 1.0.png (PNG copy)>]
-<figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png, id=841, 549.05125pt x 201.75375pt>
+<figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png, id=832, 549.05125pt x 201.75375pt>
 File: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png  used on input line 183.
+Package pdftex.def Info: figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png  used on input line 186.
 (pdftex.def)             Requested size: 338.58632pt x 124.41798pt.
-<figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png, id=848, 1205.50375pt x 328.22626pt>
+<figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png, id=834, 1205.50375pt x 328.22626pt>
 File: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png  used on input line 190.
+Package pdftex.def Info: figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png  used on input line 194.
 (pdftex.def)             Requested size: 483.69687pt x 131.69385pt.
  [25 <./figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png (PNG copy)> <./figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png (PNG copy)>] [26]
-<figures/System-Design/SD-14_IBD - StaticInfo 1.0.png, id=868, 643.40375pt x 261.97874pt>
+<figures/System-Design/SD-14_IBD - StaticInfo 1.0.png, id=854, 643.40375pt x 261.97874pt>
 File: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-14_IBD - StaticInfo 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png  used on input line 302.
+Package pdftex.def Info: figures/System-Design/SD-14_IBD - StaticInfo 1.0.png  used on input line 306.
 (pdftex.def)             Requested size: 338.58632pt x 137.86868pt.
  [27 <./figures/System-Design/SD-14_IBD - StaticInfo 1.0.png (PNG copy)>]
-<figures/System-Design/SD-05_DataTypes 1.0.png, id=882, 1024.82875pt x 328.22626pt>
+<figures/System-Design/SD-05_DataTypes 1.0.png, id=868, 1024.82875pt x 328.22626pt>
 File: figures/System-Design/SD-05_DataTypes 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-05_DataTypes 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-05_DataTypes 1.0.png  used on input line 361.
+Package pdftex.def Info: figures/System-Design/SD-05_DataTypes 1.0.png  used on input line 365.
 (pdftex.def)             Requested size: 435.32422pt x 139.42169pt.
  [28]
-<figures/System-Design/SD-06_RumourOrigins 1.0.png, id=888, 1285.80376pt x 407.5225pt>
+<figures/System-Design/SD-06_RumourOrigins 1.0.png, id=874, 1285.80376pt x 407.5225pt>
 File: figures/System-Design/SD-06_RumourOrigins 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-06_RumourOrigins 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-06_RumourOrigins 1.0.png  used on input line 368.
+Package pdftex.def Info: figures/System-Design/SD-06_RumourOrigins 1.0.png  used on input line 372.
 (pdftex.def)             Requested size: 483.69687pt x 153.29936pt.
-<figures/System-Design/SD-07_RumourSources 1.0.png, id=889, 1426.32875pt x 388.45125pt>
+<figures/System-Design/SD-07_RumourSources 1.0.png, id=875, 1426.32875pt x 388.45125pt>
 File: figures/System-Design/SD-07_RumourSources 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-07_RumourSources 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-07_RumourSources 1.0.png  used on input line 375.
+Package pdftex.def Info: figures/System-Design/SD-07_RumourSources 1.0.png  used on input line 379.
 (pdftex.def)             Requested size: 483.69687pt x 131.72789pt.
-<figures/System-Design/SD-08_RumourOpinions 1.0.png, id=890, 824.07875pt x 446.66875pt>
+<figures/System-Design/SD-08_RumourOpinions 1.0.png, id=876, 824.07875pt x 446.66875pt>
 File: figures/System-Design/SD-08_RumourOpinions 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-08_RumourOpinions 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-08_RumourOpinions 1.0.png  used on input line 382.
+Package pdftex.def Info: figures/System-Design/SD-08_RumourOpinions 1.0.png  used on input line 386.
 (pdftex.def)             Requested size: 483.69687pt x 262.17596pt.
- [29 <./figures/System-Design/SD-05_DataTypes 1.0.png (PNG copy)> <./figures/System-Design/SD-06_RumourOrigins 1.0.png (PNG copy)> <./figures/System-Design/SD-07_RumourSources 1.0.png (PNG copy)>]
-<figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png, id=898, 1105.12875pt x 381.425pt>
+ [29 <./figures/System-Design/SD-05_DataTypes 1.0.png (PNG copy)> <./figures/System-Design/SD-06_RumourOrigins 1.0.png (PNG copy)> <./figures/System-Design/SD-07_RumourSources 1.0.png (PNG copy)>] [30 <./figures/System-Design/SD-08_RumourOpinions 1.0.png (PNG copy)>]
+<figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png, id=889, 1105.12875pt x 381.425pt>
 File: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png  used on input line 414.
+Package pdftex.def Info: figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png  used on input line 420.
 (pdftex.def)             Requested size: 435.32422pt x 150.24509pt.
- [30 <./figures/System-Design/SD-08_RumourOpinions 1.0.png (PNG copy)>]
-<figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png, id=906, 480.79625pt x 101.37875pt>
+<figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png, id=892, 480.79625pt x 101.37875pt>
 File: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png  used on input line 421.
+Package pdftex.def Info: figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png  used on input line 427.
 (pdftex.def)             Requested size: 290.22107pt x 61.19588pt.
-<figures/System-Design/SD-21_IBD - Communication Context 1.0.png, id=911, 1044.90375pt x 650.43pt>
+ [31 <./figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png (PNG copy)> <./figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png (PNG copy)>]
+<figures/System-Design/SD-21_IBD - Communication Context 1.0.png, id=901, 1044.90375pt x 650.43pt>
 File: figures/System-Design/SD-21_IBD - Communication Context 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-21_IBD - Communication Context 1.0.png>
-Package pdftex.def Info: figures/System-Design/SD-21_IBD - Communication Context 1.0.png  used on input line 447.
+Package pdftex.def Info: figures/System-Design/SD-21_IBD - Communication Context 1.0.png  used on input line 455.
 (pdftex.def)             Requested size: 483.69687pt x 301.09705pt.
-) [31 <./figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png (PNG copy)> <./figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png (PNG copy)>] [32 <./figures/System-Design/SD-21_IBD - Communication Context 1.0.png (PNG copy)>] (sections/6-rumour-mill.tex [33] [34]
-<figures/System-Design/SD-17_AD - Rumour Mill 1.0.png, id=953, 726.715pt x 663.47874pt>
+) [32 <./figures/System-Design/SD-21_IBD - Communication Context 1.0.png (PNG copy)>] (sections/6-rumour-mill.tex [33] [34]
+<figures/System-Design/SD-17_AD - Rumour Mill 1.0.png, id=939, 726.715pt x 663.47874pt>
 File: figures/System-Design/SD-17_AD - Rumour Mill 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-17_AD - Rumour Mill 1.0.png>
 Package pdftex.def Info: figures/System-Design/SD-17_AD - Rumour Mill 1.0.png  used on input line 106.
 (pdftex.def)             Requested size: 386.95897pt x 353.29224pt.
- [35 <./figures/System-Design/SD-17_AD - Rumour Mill 1.0.png (PNG copy)>] [36] [37]) [38] (sections/7-sector-allocation.tex [39] [40]
+ [35 <./figures/System-Design/SD-17_AD - Rumour Mill 1.0.png (PNG copy)>] [36] [37]) [38] (sections/7-sector-allocation.tex [39]
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 89.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+ [40]
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 148.
+            Default family used instead on input line 153.
 LaTeX Info: Symbol \textrightarrow not provided by
             font family ptm in TS1 encoding.
-            Default family used instead on input line 148.
- [41]) [42] [43] (sections/8-task-role.tex
+            Default family used instead on input line 153.
+ [41] [42]) [43] (sections/8-task-role.tex
 Overfull \hbox (13.6026pt too wide) in paragraph at lines 1--1
 |[]\T1/ptm/m/n/24 Agent Task & Role Al-lo-ca-tion (Be-haviour Layer)| 
  []
@@ -1143,28 +1157,35 @@ Overfull \hbox (10.57599pt too wide) in paragraph at lines 52--53
  []
 
 [44] [45] [46]
-<figures/state flow diagram-even better.png, id=1147, 852.93657pt x 508.90125pt>
-File: figures/state flow diagram-even better.png Graphic file (type png)
-<use figures/state flow diagram-even better.png>
-Package pdftex.def Info: figures/state flow diagram-even better.png  used on input line 217.
-(pdftex.def)             Requested size: 483.69687pt x 288.60133pt.
- [47 <./figures/state flow diagram-even better.png>]) [48] (sections/9-safety.tex [49] [50] [51] [52]) [53] (sections/10-future-work.tex [54] [55]) [56] (main.bbl
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 217.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 224.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+File: figures/MDU_logotyp.png Graphic file (type png)
+<use figures/MDU_logotyp.png>
+Package pdftex.def Info: figures/MDU_logotyp.png  used on input line 231.
+(pdftex.def)             Requested size: 193.47578pt x 115.71407pt.
+ [47] [48]) [49] (sections/9-safety.tex [50] [51] [52] [53]) [54] (sections/10-future-work.tex [55] [56]) [57] (main.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `eng'. Using the pattern for
 ** the default language instead.
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `eng'. Using the pattern for
 ** the default language instead.
-) [57] (sections/appendix.tex
+) [58] (sections/appendix.tex
 Overfull \hbox (8.53592pt too wide) in paragraph at lines 34--34
 []|[]| 
  []
 
-<figures/System-Design/SD-02_BDD - UAV 1.0.png, id=1258, 705.63625pt x 361.35pt>
+<figures/System-Design/SD-02_BDD - UAV 1.0.png, id=1255, 705.63625pt x 361.35pt>
 File: figures/System-Design/SD-02_BDD - UAV 1.0.png Graphic file (type png)
 <use figures/System-Design/SD-02_BDD - UAV 1.0.png>
 Package pdftex.def Info: figures/System-Design/SD-02_BDD - UAV 1.0.png  used on input line 51.
-(pdftex.def)             Requested size: 386.95897pt x 198.15866pt.
+(pdftex.def)             Requested size: 338.58632pt x 173.38538pt.
 )
 
 ** Conference Paper **
@@ -1177,9 +1198,9 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[58
+[59
 
- <./figures/System-Design/SD-02_BDD - UAV 1.0.png (PNG copy)>] [59] 
+ <./figures/System-Design/SD-02_BDD - UAV 1.0.png (PNG copy)>] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (main.aux)
  ***********
@@ -1190,10 +1211,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: E813C56BD6C39BEE6FC2A6994481187E;15829.
  ) 
 Here is how much of TeX's memory you used:
- 37392 strings out of 467871
- 729898 string characters out of 5428440
- 1188937 words of memory out of 5000000
- 65360 multiletter control sequences out of 15000+600000
+ 37431 strings out of 467871
+ 730450 string characters out of 5428440
+ 1188437 words of memory out of 5000000
+ 65393 multiletter control sequences out of 15000+600000
  737641 words of font info for 160 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  89i,18n,107p,2611b,814s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1204,10 +1225,16 @@ pdfTeX warning (dest): name{glo:uuid} has been referenced but does not exist, re
 pdfTeX warning (dest): name{glo:adhoc} has been referenced but does not exist, replaced by a fixed one
 
 
+pdfTeX warning (dest): name{glo:fmu} has been referenced but does not exist, replaced by a fixed one
+
+
 pdfTeX warning (dest): name{glo:hotregion} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{glo:subject} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:searchmana} has been referenced but does not exist, replaced by a fixed one
 
 
 pdfTeX warning (dest): name{glo:secmarket} has been referenced but does not exist, replaced by a fixed one
@@ -1222,6 +1249,15 @@ pdfTeX warning (dest): name{glo:sar} has been referenced but does not exist, rep
 pdfTeX warning (dest): name{glo:irds} has been referenced but does not exist, replaced by a fixed one
 
 
+pdfTeX warning (dest): name{glo:uav} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:statedia} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{glo:agent} has been referenced but does not exist, replaced by a fixed one
+
+
 pdfTeX warning (dest): name{glo:ibd} has been referenced but does not exist, replaced by a fixed one
 
 
@@ -1234,24 +1270,12 @@ pdfTeX warning (dest): name{glo:searcharea} has been referenced but does not exi
 pdfTeX warning (dest): name{glo:actdia} has been referenced but does not exist, replaced by a fixed one
 
 
-pdfTeX warning (dest): name{glo:searchmana} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:uav} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:fmu} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{glo:agent} has been referenced but does not exist, replaced by a fixed one
-
-
 pdfTeX warning (dest): name{glo:bdd} has been referenced but does not exist, replaced by a fixed one
 
  <C:\Users\Andrea\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (60 pages, 1094868 bytes).
+Output written on main.pdf (60 pages, 983910 bytes).
 PDF statistics:
- 1395 PDF objects out of 1440 (max. 8388607)
- 364 named destinations out of 1000 (max. 500000)
- 775 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1389 PDF objects out of 1440 (max. 8388607)
+ 370 named destinations out of 1000 (max. 500000)
+ 770 words of extra memory for PDF output out of 10000 (max. 10000000)
 

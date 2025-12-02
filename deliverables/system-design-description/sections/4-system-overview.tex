@@ -111,17 +111,18 @@ The following scenarios illustrate how the layers work together.
 \vspace{0.2cm}
 
 \subsubsection{Swarm Registration at Initial Start-Up}
+\Cref{fig:ad-swarm-reg} does not cover agents joining the swarm after mission start.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-03_AD - Swarm Registration 2.0.png}
-    \caption{\textit{(SD-03)} \gls{actdia} of swarm registration at initial start-up. This activity diagram does not cover agents joining the swarm after mission start.}
-    \label{fig:Q5RMtrace}
+    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-03_AD - Swarm Registration 2.0.png}
+    \caption{\textit{(SD-03)} \gls{actdia} of swarm registration at initial start-up.}
+    \label{fig:ad-swarm-reg}
 \end{figure}
 
 \subsubsection{Search Area Division}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figures/System-Design/SD-04_AD - Search Area Division 1.0.png}
+    \includegraphics[width=0.4\linewidth]{figures/System-Design/SD-04_AD - Search Area Division 1.0.png}
     \caption{\textit{(SD-04)} \gls{actdia} of dividing a \gls{searcharea} into \glspl{sector}.}
     \label{fig:ad-searcharea-division}
 \end{figure}
@@ -129,18 +130,30 @@ The following scenarios illustrate how the layers work together.
 \subsubsection{Initial Sectors Assigned}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-20_AD - Initial Sectors 1.0.png}
+    \includegraphics[width=0.6\linewidth]{figures/System-Design/SD-20_AD - Initial Sectors 1.0.png}
     \caption{\textit{(SD-20)} \gls{actdia} of assigning initial \glspl{sector}.}
     \label{fig:ad-initial-sectors}
 \end{figure}
 
 
-\subsubsection{Agent Join After Mission Start}
-\color{red}Activity diagram showing the process of agents joining after mission start\color{black}
+\subsubsection{New Agent Join After Mission Start}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figures/MDU_logotyp.png}
+    \caption{\textit{(SD-22)} \gls{actdia} showing the process of agents joining after mission start.}
+    \label{fig:ad-new-agent}
+\end{figure}
 
 \subsubsection{Agent Rejoin}
 %Agent re-joining after temporary loss
-\color{red}Activity diagram showing the process of agents re-joining after mission start\color{black}
+\color{red}\color{black}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figures/MDU_logotyp.png}
+    \caption{\textit{(SD-23)} \gls{actdia} showing the process of agents re-joining the swarm.}
+    \label{fig:ad-agent-rejoin}
+\end{figure}
+
 
 \subsubsection{Agent Health Degrades}
 \begin{enumerate}

@@ -235,11 +235,23 @@ A \textbf{new} agent B must perform a registration procedure:
     \item Synchronise with the swarm state.
 \end{enumerate}
 
+\newpage
+
 \subsection{System Context Diagram}
 \label{subsec:context-diagram}
+\Cref{fig:bdd-context} depicts that:
+\begin{itemize}
+    \item One swarm contains four to 255 agents.
+    \item One \gls{agent} contains one \acrshort{fmu}. 
+    \item \acrshortpl{uav} inherit from agent, meaning that \acrshortpl{uav} must contain \acrshortpl{fmu}. 
+    \item Each agent acts according to a state machine. 
+    \item Each agent executes the protocol module. 
+    \item The protocol module carries out a set of behaviours. 
+    \item \glspl{searchmana} use a Swarm Interface to interact with a swarm.
+\end{itemize}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-01_BDD - Protocol Context 2.0.png}
-    \caption{\textit{(SD-01)} \acrfull{bdd} of which systems the protocol is related to. One swarm contains four to 255 agents, and one \gls{agent} contains one \acrshort{fmu}. \acrshortpl{uav} inherit from agent, meaning that \acrshortpl{uav} must contain \acrshortpl{fmu}. Each agent executes the protocol. The protocol carries out a set of behaviours. \glspl{searchmana} use a Swarm Interface to interact with a swarm.}
+    \caption{\textit{(SD-01)} \acrfull{bdd} of which systems and diagrams the protocol module is related to.}
     \label{fig:bdd-context}
 \end{figure}

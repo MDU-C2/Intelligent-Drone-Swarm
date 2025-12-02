@@ -72,7 +72,8 @@ Neighbourhoods do not perform any internal voting. Each neighbour independently:
 %\subsubsection{Neighbourhood Operation}
 Each agent forms a neighbourhood with its three geographically closest peers (based on assigned initial sectors). Neighbourhoods overlap, provide multiple independent Source rumour for each Origin rumour, and serve as the initial ''cross-check'' group for validating events.
 
-\vspace{0.2cm}
+%\vspace{0.2cm}
+\newpage
 
 \subsubsection{Neighbourhood Recalculation on Failure or Leave}
 Neighbourhoods must be updated when:
@@ -88,12 +89,12 @@ Neighbourhoods do not vote as a group; Each neighbour independently creates Sour
 
 
 \subsection{Agent Architecture}
-Each agent is a \acrshort{uav} equipped with standard flight systems (example found in \cref{fig:bdd-uav}) and a protocol module for swarm-level coordination. A simplified \acrfull{ibd} (\cref{fig:IBD-agent}) models the internal structure relevant for the protocol module.
+Each agent is a \acrshort{uav} equipped with standard flight systems (example found in \cref{fig:bdd-uav}) and a protocol module for swarm-level coordination. A simplified \acrfull{ibd} (\cref{fig:IBD-agent}) models the internal structure relevant for the protocol module. Even though flowports are named P2P\_Rx / P2P\_Tx in \cref{fig:IBD-agent}, they conceptually represent broadcast send/receive on a shared channel. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-10_IBD - Agent 1.0.png}
-    \caption{\textit{(SD-10)} \acrshort{ibd} of \glspl{agent}' internal structure. Even though flowports are named P2P\_Rx / P2P\_Tx in the diagram, they conceptually represent broadcast send/receive on a shared channel. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.}
+    \caption{\textit{(SD-10)} \acrshort{ibd} of \glspl{agent}' internal structure.}
     \label{fig:IBD-agent}
 \end{figure}
 
@@ -109,14 +110,15 @@ Moreover, inside each agent, the protocol module contains:
 
 The protocol module communicates with the FMU (to receive health states), the swarm communication module (to send and receive messages), and a local interface to flight/navigation systems (to request high-level actions).
 
-\subsection{Protocol Module Structure}
+\newpage
 
-A simplified architecture of the protocol is defined by \cref{fig:bdd-protocol}. 
+\subsection{Protocol Module Structure}
+A simplified architecture of the protocol is defined by \cref{fig:bdd-protocol}, where DynamicInfo holds lists containing information about \glspl{agent} in the swarm (where the first index is always the \gls{agent} itself) and about \glspl{sector}, and StaticInfo holds enumerations of message types, health statuses, and tasks.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-13_BDD - Protocol 1.0.png}
-    \caption{\textit{(SD-13)} \acrshort{bdd} of which main parts the protocol module contains. DynamicInfo holds lists containing information about \glspl{agent} in the swarm (where the first index is always the \gls{agent} itself) and about \glspl{sector}. StaticInfo holds enumerations of message types, health statuses, and tasks.}
+    \caption{\textit{(SD-13)} \acrshort{bdd} of which main parts the protocol module contains.}
     \label{fig:bdd-protocol}
 \end{figure}
 
@@ -178,17 +180,19 @@ The protocol module consists of several submodules that relate to each other thr
 \end{itemize}
 
 \subsubsection{Internal Interfaces \& Flowports}
+In \cref{fig:ibd-protocolBB}, flowports named ui\_Rx and ui\_Tx are to receive broadcasts from and broadcast to SwarmInterface, flowports named P2P\_Rx and P2P\_Tx are to receive broadcasts from and broadcast to other \glspl{agent}, and the flowport named faultManUnit is for receiving messages from the \acrshort{fmu}. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png}
-    \caption{\textit{(SD-15)} Blackbox view of the protocol. Flowports named ui\_Rx and ui\_Tx are to receive broadcasts from and broadcast to SwarmInterface. Flowports named P2P\_Rx and P2P\_Tx are to receive broadcasts from and broadcast to other \glspl{agent}. The flowport named faultManUnit is for receiving messages from the \acrshort{fmu}. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.}
+    \caption{\textit{(SD-15)} Blackbox view of the protocol. }
     \label{fig:ibd-protocolBB}
 \end{figure}
 
+In \Cref{fig:flowspec}, ROr means Rumour Origin, RS means Rumour Source, and ROp means Rumour Opinion.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png}
-    \caption{\textit{(SD-09)} Flow specification for flowports. ROr means Rumour Origin, RS means Rumour Source, and ROp means Rumour Opinion.}
+    \caption{\textit{(SD-09)} Flow specification for flowports.}
     \label{fig:flowspec}
 \end{figure}
 
@@ -384,6 +388,8 @@ Dynamic information includes:
     \label{fig:opinions}
 \end{figure}
 
+\newpage
+
 \subsection{External Interface Architecture}
 The \gls{searchmana} interacts with the swarm through the SwarmInterface, where the core interactions are:
 \begin{itemize}
@@ -426,6 +432,8 @@ Note that only the high-level interface between SwarmInterface and the protocol 
 The SwarmInterface aggregates protocol module events into human-readable information, such as ''Agent A requests battery replacement'' or ''Agent B degraded'', to allow the \gls{searchmana} to prepare appropriate actions (e.g. swapping batteries when an agent returns to base).
 
 From the protocol module perspective, the SwarmInterface provides an input channel for high-level commands and mission configuration (initial \gls{sector} map, Hot Regions), and an output channel for aggregated swarm status and event reports.
+
+\newpage
 
 \subsection{Communication Context}
 The communication context summarises how all the previously described elements fit together:
