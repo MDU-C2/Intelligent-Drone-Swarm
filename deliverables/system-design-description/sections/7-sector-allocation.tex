@@ -46,7 +46,7 @@ This \gls{secmarket} yields a simple but flexible mechanism that fits on top of 
 \subsection{Sector Cost}
 Each sector S is assigned a cost that reflects both how important it is and how hard it is for a particular agent to search it.
 
-The value of a sector is calculated by the SwarmInterface, where the SwarmInterface:
+The value of a sector is calculated by the SwarmInterface (\cref{fig:ad-searcharea-division}), where the SwarmInterface:
 \begin{enumerate}
     \item Receives \glspl{hotregion} from the \gls{searchmana}.
     \item Divides the \gls{searcharea} into rectangular sectors.
@@ -54,9 +54,9 @@ The value of a sector is calculated by the SwarmInterface, where the SwarmInterf
 \end{enumerate}
 From the probability, each sector is then given a value where high-probability sectors receive a higher value, and low-probability sectors receive a lower value. This encourages the Sector Allocation Market to favour assigning high-probability sectors to agents.
 
-Thereafter, for each agent A and sector S, an an additional cost component is computed based on the distance between the centre of A’s initial sector and the centre of S. Agents use this cost when deciding which sectors to bid for.
+Thereafter, for each agent A and sector S, an an additional cost component is computed based on the distance between A's position at the time of entering bidding state and the centre of S. Agents use this cost when deciding which sectors to bid for.
 
-Future work must decide the exact algorithm for this.
+Future work must decide the exact cost algorithm.
 
 \subsection{Agent Budgets \& Budget Dynamics}
 \label{subsec:agent-budget}
@@ -100,26 +100,23 @@ The positions of these initial sectors are also used as the basis for neighbourh
 \newpage
 
 \subsubsection{Initial Bidding Process}
-After the first sector, agents may attempt to purchase additional sectors using the Sector Allocation Market:
-\begin{enumerate}
-    \item Each agent evaluates which sectors are attractive based on its cost function and remaining budget.
-    \item For each candidate sector S, the agent creates an Origin rumour expressing an intention to buy S (using an appropriate msgID).
-    \item Neighbours interpret this bid and broadcast Source rumours evaluating:
-    \begin{itemize}
-        \item Whether S is currently unassigned or conflicts with another owner,
-        \item whether the bidding agent’s budget appears sufficient,
-        \item any other validity conditions.
-    \end{itemize}
-    \item Once any agent sees three Source rumours for this Origin rumour, it creates an Opinion rumour summarising the interpretation (e.g. “bid valid” or “bid invalid”).
-    \item The bidding agent collects Opinions until the consensus threshold $\alpha$ is met, then decides whether the bid succeeded.
-    \item The bidding agent broadcasts a decision-Origin announcing the outcome (e.g. “I own sector S” or “bid rejected”).
-\end{enumerate}
-This process repeats until agents run out of budget. Unassigned sectors keep ownerID = 0 and remain available for future bidding.
-In \cref{fig:ad-initial-market}, agents purchase sectors until they no longer have enough budget.
+After the first sector, agents may attempt to purchase additional sectors using the Sector Allocation Market, as depicted in \cref{fig:ad-initial-market}. 
+Sector costs are calculated locally by each agent that wants to bid for sectors, and the agents then evaluate which sectors are attractive based 
+on costs and remaining budget. Then, for each candidate sector S, an agent creates an Origin rumour expressing its intention to buy S (using an 
+appropriate msgID). Neighbours of an originator use their local information (e.g., whether the sector is currently unassigned or conflicts with 
+another owner) to determine if the originator's bid is valid and broadcast Source rumours based on their interpretation. Any agent can then 
+pick up those Source rumours to determine if the bid is valid, and agents that are not originators interpret the Source rumours and broadcasts 
+Opinion rumours about sector ownership. Originators collect Opinion rumours about each sector they have bid for until the consensus 
+threshold $\alpha$ is met, and then determine if their purchase was successful. Winning agents broadcast decision-Origins to announce the 
+outcome (e.g. “I own sector S” or “bid rejected”).
+
+This process repeats until agents run out of budget, or until there are no more sectors to bid for. 
+
+Unassigned sectors keep ownerID = 0 and remain available for future bidding.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-19_AD - Initial Sector Allocation Market 1.0.png}
-    \caption{\textit{(SD-19)} \gls{actdia} showing the process of bidding for sectors after initial sectors have been assigned.}
+    \caption{\textit{(SD-19)} \gls{actdia} showing the initial bidding process after initial sectors have been assigned.}
     \label{fig:ad-initial-market}
 \end{figure}
 
