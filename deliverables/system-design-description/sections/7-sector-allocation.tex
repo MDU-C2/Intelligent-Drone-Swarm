@@ -60,13 +60,18 @@ Future work must decide the exact algorithm for this.
 
 \subsection{Agent Budgets \& Budget Dynamics}
 \label{subsec:agent-budget}
-Each agent A is assigned a budget B$_A$, which is primarily based on its battery level. The budget represents how many and which sectors the agent can afford to purchase. At mission start (or when joining), an agent’s initial budget is set based on its available battery meaning that higher battery has a larger budget, and lower battery has a smaller budget.
+Each agent has two budget factors:
+\begin{itemize}
+    \item MaxBudget: Based on remaining flight time, i.e., longer flight time has a higher budget ceiling, and shorter flight time has a lower budget ceiling.
+    \item CurrentBudget: How much budget is left to spend on sector purchases.
+\end{itemize}
+%is assigned a budget B$_A$, which is primarily based on its battery level. The budget represents how many and which sectors the agent can afford to purchase. At mission start (or when joining), an agent’s initial budget is set based on its available battery meaning that higher battery has a larger budget, and lower battery has a smaller budget.
 
 Budget dynamics follow these rules:
 \begin{itemize}
-    \item When agent A successfully purchases a \gls{sector} S through the \gls{secmarket}, B$_A$ decreases by the cost of S.
-    \item When agent A finishes searching sector S and confirms completion via the \gls{rumourmill}, B$_A$ increases by the cost of S (but does not go over what is allowed by the battery level).
-    \item Agent A may only bid on sectors if its remaining budget is sufficient to cover the sector’s cost.
+    \item When agent A successfully purchases a \gls{sector} S through the \gls{secmarket}, CurrentBudget decreases by the cost of S.
+    \item When agent A finishes searching sector S and confirms completion via the \gls{rumourmill}, CurrentBudget increases by the cost of S (but does not go over MaxBudget).
+    \item Agent A may only bid on sectors if its CurrentBudget is sufficient to cover the sector’s cost.
 \end{itemize}
 
 In the current design, it is assumed that agents behave non-maliciously with respect to their own budget variables, i.e., agents do not intentionally corrupt their budgets or attempt to bid on sectors they cannot afford. Handling behaviours that target budget manipulation is left as future work.
@@ -79,32 +84,22 @@ The initial sector allocation aims to:
     \item Establish initial positions for neighbourhood computation.
 \end{itemize}
 
-The process consists of two phases: Guaranteed First Sector and Initial Auction Loop.
-
-%\vspace{0.2cm}
-\newpage
-
-\subsubsection{Initial Bidding Process}
-In \cref{fig:ad-initial-market}, agents purchase sectors until they no longer have enough budget.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-19_AD - Initial Sector Allocation Market 1.0.png}
-    \caption{\textit{(SD-19)} \gls{actdia} showing the process of bidding for sectors after initial sectors have been assigned.}
-    \label{fig:ad-initial-market}
-\end{figure}
-
-\subsubsection{Guaranteed First Sector}
-Each agent is assigned at least one sector purchased at the sector's value, without going through the full bidding process. This initial mapping:
-\begin{itemize}
-    \item Uses probability information (favour high-probability regions).
-    %\item takes into account agent starting positions where available,
-    \item Ensures that every agent starts with something to do.
-\end{itemize}
-The positions of these initial sectors are also used as the basis for neighbourhood formation (one agent + its three closest neighbours) and sector costs.
+The process consists of two phases: Guaranteed First Sector and Initial Bidding Process.
 
 \vspace{0.2cm}
 
-\subsubsection{Initial Auction Loop}
+\subsubsection{Guaranteed First Sector}
+Each agent is allocated one sector by the SwarmInterface, i.e., no bidding is performed by the agents for their first sectors. This initial allocation (\cref{fig:ad-initial-sectors}):
+\begin{itemize}
+    \item Uses probability information (favours high-value sectors).
+    %\item takes into account agent starting positions where available,
+    \item Ensures that each agent starts with something to do.
+\end{itemize}
+The positions of these initial sectors are also used as the basis for neighbourhood formation (one agent + its three closest neighbours).
+
+\newpage
+
+\subsubsection{Initial Bidding Process}
 After the first sector, agents may attempt to purchase additional sectors using the Sector Allocation Market:
 \begin{enumerate}
     \item Each agent evaluates which sectors are attractive based on its cost function and remaining budget.
@@ -120,6 +115,14 @@ After the first sector, agents may attempt to purchase additional sectors using 
     \item The bidding agent broadcasts a decision-Origin announcing the outcome (e.g. “I own sector S” or “bid rejected”).
 \end{enumerate}
 This process repeats until agents run out of budget. Unassigned sectors keep ownerID = 0 and remain available for future bidding.
+In \cref{fig:ad-initial-market}, agents purchase sectors until they no longer have enough budget.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-19_AD - Initial Sector Allocation Market 1.0.png}
+    \caption{\textit{(SD-19)} \gls{actdia} showing the process of bidding for sectors after initial sectors have been assigned.}
+    \label{fig:ad-initial-market}
+\end{figure}
+
 
 \subsection{Ownership Changes via Rumour Mill}
 \label{subsec:ownership}
