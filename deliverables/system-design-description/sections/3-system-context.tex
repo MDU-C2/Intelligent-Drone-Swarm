@@ -138,7 +138,7 @@ The protocol module design relies on the following assumptions:
         \item[$\circ$] The maximum is capped by 8-bit (one byte) AgentID space.
     \end{itemize}
     \item Each agent knows its own ID and can uniquely identify others.
-    \item AgentID = 0 reserved for \gls{searchmana}.
+    \item One AgentID is reserved for the SwarmInterface and by extension the \gls{searchmana}.
     \item Neighbourhood definition:
     \begin{itemize}
         \item[$\circ$] Each agent forms a neighbourhood using the three geographically closest agents, determined by initial \gls{sector} assignment.
@@ -215,7 +215,7 @@ The protocol module supports dynamic and staggered agent deployment to support r
     \item Disconnect temporarily due to communication loss.
     \item Rejoin after recovery.
 \end{itemize}
-A \textbf{returning} agent A must perform a registration procedure:
+A \textbf{returning} agent A must perform a registration procedure (see \cref{fig:ad-agent-rejoin}):
 \begin{enumerate}
     \item Announce its presence through an Origin rumour to agents that were considered neighbours by A.
     \item Receive Source rumours from those neighbours concerning if A has received membership.
@@ -224,7 +224,7 @@ A \textbf{returning} agent A must perform a registration procedure:
     \item Request sector allocation.
     \item Synchronise with the swarm state.
 \end{enumerate}
-A \textbf{new} agent B must perform a registration procedure:
+A \textbf{new} agent B must perform a registration procedure (se \cref{fig:ad-new-agent}):
 \begin{enumerate}
     \item Before deployment, receive information from the SwarmInterface to populate its AgentInfo and SectorInfo lists, and receive information on possible neighbours.
     \item Announce its presence through an Origin rumour to agents the SwarmInterface assigned as possible neighbours.
