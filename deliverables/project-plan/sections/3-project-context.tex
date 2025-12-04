@@ -1,0 +1,112 @@
+\section{Project Context \& Stakeholders}
+
+% Main Roles: CE, RM, SM, VVM, QCM
+% Support Roles: 
+% - Requirements Engineer
+% - System Architect
+% - Software/Hardware Architect
+% - Software/Hardware Designer
+% - Developer / System Developer
+% - Tester (Software/Hardware Tester)
+% - Quality Engineer
+% - Configuration Engineer
+% - Safety Engineer
+
+\subsection{Team Members}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Name} & \textbf{Main Role} & \textbf{Support Role} \\
+        \hline
+        Andrea Haglund & \acrfull{ce} & \\
+        \hline
+        Claire Namatovu & \acrfull{rm} & \\
+        \hline
+        Emily Zainali & \acrfull{vvm} & \\
+        \hline
+        Esaias Målqvist & \acrfull{sm} & \\
+        \hline
+        Yonatan Michael Beyene & \acrfull{qcm} & \\
+        \hline
+    \end{tabular}
+    \caption{Team members}
+    \label{tab:team-members}
+\end{table}
+
+\vspace{0.5cm}
+
+\subsection{Stakeholders}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        \textbf{Name} & \textbf{Role} & \textbf{Responsibilities} & \textbf{Contact Info} \\
+        \hline
+        Luiz Giacomossi & \makecell{Project Owner} & \makecell{Defines project objectives,\\ approves scope and decisions,\\ ensures expected value} & luiz.giacomossi@mdu.se \\
+        \hline
+        Luciana Provenzano & \makecell{Course Coordinator} & \makecell{Ensures compliance with course\\ framework, provides academic\\ oversight, evaluates results} & luciana.provenzano@mdu.se \\
+        \hline
+        Julieth Castellanos & Project Advisor & \makecell{Provides guidance and feedback,\\ supports theory application,\\ ensures academic standards} & julieth.castellanos@mdu.se \\
+        \hline
+    \end{tabular}
+    \caption{Stakeholders}
+    \label{tab:stakeholders}
+\end{table}
+
+\vspace{0.5cm}
+
+\subsection{SWOT Analysis}
+\textbf{Strengths}
+\begin{itemize}
+    \item All team members are deeply committed to this project.
+    \item The team collectively has a good level of competency and knowledge.
+    \item Team members have previous experiences that are advantageous for this project.
+\end{itemize}
+\textbf{Weaknesses}
+\begin{itemize}
+    \item Lack of experience in project planning and management.
+    \item Time constraint.
+    \item Lack of hardware specification.
+\end{itemize}
+\textbf{Opportunities}
+\begin{itemize}
+    \item \acrfull{uav} swarm \acrfull{sar} is a not deeply explored area.
+    \item Opportunity to broaden team members’ professional networks.
+\end{itemize}
+\textbf{Threats}
+\begin{itemize}
+    \item Sudden illness among team members.
+\end{itemize}
+
+\newpage
+\subsection{Dependencies \& External Factors}
+%- External factors (regulations, course guidelines)
+%- Dependencies on other systems or resources
+%- High-level risks or assumptions
+This project is influenced by several external factors and dependencies that may affect scheduling, risk, or deliverables:
+\begin{itemize}
+    \item Deadlines, Working Days and Hours
+    \begin{itemize}
+        \item[$\circ$] This project must align with submission deadlines and seminar dates.
+        \item[$\circ$] Delays in intermediate activities (e.g., requirements validation and simulation results) could affect final delivery.
+        \item[$\circ$] The project schedule is based on regular weekdays and standard working hours, and work is assumed to progress only during these periods, excluding weekends and public holidays.
+        \item[$\circ$] Any deviations (e.g., reduced team availability) could delay milestone achievement.
+    \end{itemize}
+    \item Simulation Software Availability
+    \begin{itemize}
+        \item[$\circ$] This project depends on access to a specific \acrshort{uav} simulation software (gym-pybullets-drones) that will be modified according to project needs.
+        \item[$\circ$] If modification of the software is delayed, testing may be delayed or scaled back to adhere to delivery dates.
+    \end{itemize}
+    \item Reference to \acrshort{uav} Specifications
+    \begin{itemize}
+        \item[$\circ$] Requirements and performance constraints are based on \href{https://harrisaerial.com/carrier-drones/carrier-h6hl/}{Harris Aerial’s Carrier H6HL} specifications.
+        \item[$\circ$] If those specifications are updated or incomplete, assumptions may have to be revised.
+    \end{itemize}
+    \item External Regulations \& Standards
+    \begin{itemize}
+        \item[$\circ$] Although no physical \acrshort{uav} will be built, simulations must still follow standard \acrshort{uav} safety and performance guidelines for validity.
+        \item[$\circ$] Changes in regulatory requirements may impact this project.
+    \end{itemize}
+\end{itemize}
+Several of these dependencies and external factors present potential risks to this project’s timeline and quality. For example, delays in modification of the simulation software could directly impact milestone achievement. These risks, along with mitigation strategies, are further detailed in \nameref{section:risk}.

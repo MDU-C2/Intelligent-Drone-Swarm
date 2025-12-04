@@ -1,0 +1,47 @@
+\documentclass[11pt, conference, onecolumn]{IEEEtran}
+
+\input{preamble}
+
+\begin{document}
+    \input{sections/title-page}
+    \newpage
+    
+    % For page numbering 
+    \thispagestyle{plain}
+    \pagestyle{plain}
+    
+    \input{sections/review-page}
+    \newpage
+    
+    \tableofcontents 
+    \clearpage
+    \printglossaries
+    \newpage
+
+    \input{sections/1-introduction}
+    \newpage
+    \input{sections/2-related-documents}
+    \newpage
+    \input{sections/3-project-context}
+    \newpage
+    \input{sections/4-scope}
+    \newpage
+    \input{sections/5-methodology}
+    \newpage
+    \input{sections/6-org-comm}
+    \newpage
+    \input{sections/7-milestones-sprints}
+    \newpage
+    \input{sections/8-risk-analysis}
+    \newpage
+    \input{sections/9-approvals}
+    \newpage
+    
+    % Select the IEEEtran style
+    \bibliographystyle{IEEEtran}
+    % Include bibliography file
+    \bibliography{IEEEabrv, refs}
+    \clearpage % To have appendix start on new page
+    
+    \input{sections/appendix}
+\end{document}
