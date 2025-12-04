@@ -1,9 +1,9 @@
 \section{Goals \& Requirements Overview}
 \label{sec:goals}
-This section summarises the goals and requirements that drive the IRDS protocol module. Detailed specifications are kept in four artefacts (goals, drone\_swarm\_requirements, system\_requirements, subsystem\_requirements) \cite{rm}; only the most relevant elements are repeated here. The aim is to show what the system must achieve at the project, swarm, protocol, and sub-module levels, and how these requirements shape the architectural and behavioural design choices in the rest of this document.
+This section summarises the goals and requirements that drive the IRDS protocol module. Detailed specifications are kept in four artefacts (goals, drone\_swarm\_requirements, system\_requirements, subsystem\_requirements in the project's requirements database) \cite{rm}; only the most relevant elements are repeated here. The aim is to show what the system must achieve at the project, swarm, protocol, and sub-module levels, and how these requirements shape the architectural and behavioural design choices in the rest of this document.
 
 \subsection{Goals \& Requirements Overview}
-The goals and requirements are maintained in the following artefacts:
+The goals and requirements are maintained in the following main artefacts in the requirements database:
 \begin{itemize}
     \item goals - project goals derived from stakeholder needs and the KAOS method.
     \item drone\_swarm\_requirements - swarm-level behavioural and safety requirements.
@@ -12,7 +12,7 @@ The goals and requirements are maintained in the following artefacts:
 \end{itemize}
 
 \subsection{Project Goals}
-The project goals in goals capture what the IRDS system of systems is intended to achieve at a high level. Key examples include:
+The project goals in \textit{goals} capture what the IRDS System of Systems is intended to achieve at a high level. Key examples include:
 \begin{itemize}
     \item G-01 - Assign an appropriate task to each agent at the start of the mission.
     \item G-02 - When an agent fails, automatically reassign its tasks to other functional agents when resources permit.
@@ -31,24 +31,24 @@ The IRDS protocol module contributes to these goals primarily through its three 
 %\subsection{Internal Sub-module Requirements}
 The requirements are organised in three main layers that correspond to different responsibility levels in the architecture:
 \begin{itemize}
-    \item Swarm-level requirements (drone\_swarm\_requirements.csv)
+    \item Swarm-level requirements (drone\_swarm\_requirements)
     \item[] These requirements (e.g. SW-01-SW-07, SR-02-SR-07) describe how the swarm as a whole shall behave. Examples include:
     \begin{itemize}
-        \item[$\circ$] Assigning tasks to all agents when a mission starts (SW-01).
-        \item[$\circ$] Reallocating work when agents degrade or fail (SW-02, SW-03).
-        \item[$\circ$] Employing a consensus mechanism that maintains correct behaviour even when at least one agent provides incorrect data (SW-04, SW-05).
-        \item[$\circ$] Coordinating agents so that they cover different parts of the Search Area (SW-06).
-        \item[$\circ$] Allowing agents to make independent local decisions when immediate action is required (SW-07).
-        \item[$\circ$] Maintaining safety distances and buffer zones around agents and staff (e.g. SR-02-SR-07).
+        \item[$\circ$] SW-01 - Assigning tasks to all agents when a mission starts.
+        \item[$\circ$] SW-02 / SW-03 - Reallocating work when agents degrade or fail.
+        \item[$\circ$] SW-04 / SW-05 - Employing a consensus mechanism that maintains correct behaviour even when at least one agent provides incorrect data.
+        \item[$\circ$] SW-06 - Coordinating agents so that they cover different parts of the Search Area.
+        \item[$\circ$] SW-07 - Allowing agents to make independent local decisions when immediate action is required.
+        \item[$\circ$] SR-02-SR-07 - Maintaining safety distances and buffer zones around agents and staff .
     \end{itemize}
-    \item System-level protocol requirements (system\_requirements.csv)
+    \item System-level protocol requirements (system\_requirements)
     \item[] These requirements (PM-01-PM-xx) define what the IRDS protocol module as a system shall do, for example:
     \begin{itemize}
-        \item[$\circ$] Define procedures to keep all agents aware of the prevailing mission state (PM-01).
-        \item[$\circ$] Define procedures for sharing the mission plan and assigning tasks to agents based on the plan and their capabilities (PM-02, PM-03, PM-06).
-        \item[$\circ$] Define how agents communicate their capabilities and the message formats used for this communication (PM-04, PM-05).
+        \item[$\circ$] PM-01 - Define procedures to keep all agents aware of the prevailing mission state.
+        \item[$\circ$] PM-02 / PM-03 / PM-06 - Define procedures for sharing the mission plan and assigning tasks to agents based on the plan and their capabilities.
+        \item[$\circ$] PM-04, PM-05 - Define how agents communicate their capabilities and the message formats used for this communication.
     \end{itemize}
-    \item Subsystem-level protocol requirements (subsystem\_requirements.csv)
+    \item Subsystem-level protocol requirements (subsystem\_requirements)
     \item[] These requirements are allocated to internal sub-modules of the protocol (Consensus, Information, Messaging, State Instruction, etc.). Examples include:
     \begin{itemize}
         \item[$\circ$] CON-01 / CON-02 - the Consensus sub-module shall specify how agents confirm agreement on the prevailing mission state and how they reach a common understanding of the mission plan.
@@ -62,7 +62,7 @@ In the architectural view adopted in this document, the IRDS protocol module is 
 \vspace{0.2cm}
 
 \subsubsection{Traceability}
-A detailed mapping from goals and requirements to design elements is maintained in the project’s requirements artefacts and supporting traceability tables. At a high level:
+A detailed mapping from goals and requirements to design elements is maintained in the project’s requirements database. At a high level:
 \begin{itemize}
     \item Swarm-level requirements such as SW-01-SW-07 and SR-02-SR-07 are addressed by the swarm context (Section 2), the system overview (Section 3), the Sector Allocation Market (Section 6), and the Agent Task \& Role Allocation layer (Section 7)
     \item System-level protocol requirements (PM-xx) are mainly realised by the architecture described in Section 4, the Rumour Mill protocol in Section 5, and the Sector Allocation Market and Task \& Role Allocation layers in Sections 6 and 7.
