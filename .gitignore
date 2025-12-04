@@ -13,4 +13,6 @@ __pycache__/
 *.out
 *.synctex.gz
 *.toc
+*.glg
+*.gls
 main.pdf
