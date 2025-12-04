@@ -1,7 +1,7 @@
 \section{System Overview}
 \label{sec:system-overview}
 %The protocol module enables a \acrshort{uav} swarm to autonomously coordinate, share information, and re-plan mission execution in response to agent health degradation or other operational events.
-This section provides a high-level behavioural overview of the IRDS protocol module and how it coordinates the swarm during a mission. It explains the design philosophy behind the protocol, introduces the three core functional layers (Rumour Mill, Sector Allocation Market, and Agent Task \& Role Allocation), and describes the overall operational workflow at an intuitive level. Detailed structural decomposition and low-level protocol mechanics are intentionally deferred to Sections 5–8; the focus here is on how the main concepts fit together to produce the desired swarm behaviour.
+This section provides a high-level behavioural overview of the IRDS protocol module and how it coordinates the swarm during a mission. It explains the design philosophy behind the protocol, introduces the three core functional layers (Rumour Mill, Sector Allocation Market, and Agent Task \& Role Allocation), and describes the overall operational workflow at an intuitive level. Detailed structural decomposition and low-level protocol mechanics are intentionally deferred to Sections \ref{sec:system-architecture} to \ref{sec:task-role}; the focus here is on how the main concepts fit together to produce the desired swarm behaviour.
 
 \subsection{Design Philosophy}
 The protocol module is designed around three guiding principles: Decentralisation, collective adaptation, and fault tolerance.
@@ -39,9 +39,9 @@ The protocol module uses the following to tolerate Byzantine faults:
     \item Neighbourhoods (each agent + its three closest neighbours) as basic rumour propagation groups.
     \item A rumour lifecycle that
     \begin{itemize}
-        \item[$\circ$] requires three independent Source rumours before an agent A interprets the event from agent Y through internal voting, and
+        \item[$\circ$] requires three independent Source rumours before an agent A interprets the event from agent B through internal voting, and
         \item[$\circ$] after event interpretation, agent A possibly broadcasts an Opinion, where
-        \item[$\circ$] agent Y (the originator) receives Opinions up to a certain consensus threshold $\alpha$ before making a final decision.
+        \item[$\circ$] agent B (the originator) receives Opinions up to a certain consensus threshold $\alpha$ before making a final decision.
     \end{itemize}
 \end{itemize}
 This design localises the impact of faulty agents and supports safe mission continuation despite individual failures.
@@ -53,17 +53,17 @@ The protocol can be decomposed into several core functional layers:
 \vspace{0.2cm}
 
 \subsubsection{Rumour Mill (Consensus Layer)}
-The Rumour Mill is the decentralised consensus mechanism used by the swarm to reach shared agreement about mission events (e.g. “Agent A is degraded”, “Sector S is completed”) and the decisions that follow from them (e.g. “Agent A should become relay”, “Agent A owns sector S”). Each agent broadcasts and interprets rumours about events, and converges to decisions based on multiple, independent confirmations from its neighbourhood. The full rumour types, message formats, and lifecycle are described in Section 6.
+The Rumour Mill is the decentralised consensus mechanism used by the swarm to reach shared agreement about mission events (e.g. “Agent A is degraded”, “Sector S is completed”) and the decisions that follow from them (e.g. “Agent A should become relay”, “Agent A owns sector S”). Each agent broadcasts and interprets rumours about events, and converges to decisions based on multiple, independent confirmations from its neighbourhood. The full rumour types, message formats, and lifecycle are described in \Cref{sec:rumour-mill}.
 
 \vspace{0.2cm}
 
 \subsubsection{Sector Allocation Market (Workload Layer)}
-The Sector Allocation Market decides which agent is responsible for which sectors. It uses information about sector value and location, agent health and workload, and current sector ownership to distribute work and rebalance it when agents degrade or fail. The market operates on top of the Rumour Mill, so all changes in sector ownership are agreed via rumour-based consensus. The detailed market model and bidding process are described in Section 7.
+The Sector Allocation Market decides which agent is responsible for which sectors. It uses information about sector value and location, agent health and workload, and current sector ownership to distribute work and rebalance it when agents degrade or fail. The market operates on top of the Rumour Mill, so all changes in sector ownership are agreed via rumour-based consensus. The detailed market model and bidding process are described in \Cref{sec:sector-alloc}.
 
 \vspace{0.2cm}
 
 \subsubsection{Agent Task \& Role Allocation (Behaviour Layer)}
-The Agent Task \& Role Allocation layer determines what each agent actually does at any given time. It maps sector ownership (from the Sector Allocation Market), health status (from the FMU), and Search Manager commands (via the SwarmInterface) into roles and tasks such as searcher, relay, return, or failed. These roles drive the agent’s state machine and resulting flight behaviour. The state machine and role logic are described in detail in Section 8.
+The Agent Task \& Role Allocation layer determines what each agent actually does at any given time. It maps sector ownership (from the Sector Allocation Market), health status (from the FMU), and Search Manager commands (via the SwarmInterface) into roles and tasks such as searcher, relay, return, or failed. These roles drive the agent’s state machine and resulting flight behaviour. The state machine and role logic are described in detail in \Cref{sec:task-role}.
 
 \subsection{High-Level Operational Workflow}
 %This loop runs continuously for the duration of the mission, allowing the swarm to adapt to failures and changes.
@@ -114,7 +114,7 @@ The following scenarios illustrate how the layers work together.
 \Cref{fig:ad-swarm-reg} does not cover agents joining the swarm after mission start.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-03_AD - Swarm Registration 2.0.png}
+    \includegraphics[width=\linewidth]{figures/System-Design/SD-03_AD - Swarm Registration 2.0.png}
     \caption{\textit{(SD-03)} \gls{actdia} of swarm registration at initial start-up.}
     \label{fig:ad-swarm-reg}
 \end{figure}
@@ -122,7 +122,7 @@ The following scenarios illustrate how the layers work together.
 \subsubsection{Search Area Division}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figures/System-Design/SD-04_AD - Search Area Division 1.0.png}
+    \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-04_AD - Search Area Division 1.0.png}
     \caption{\textit{(SD-04)} \gls{actdia} of dividing a \gls{searcharea} into \glspl{sector}.}
     \label{fig:ad-searcharea-division}
 \end{figure}
@@ -130,7 +130,7 @@ The following scenarios illustrate how the layers work together.
 \subsubsection{Initial Sectors Assigned}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/System-Design/SD-20_AD - Initial Sectors 1.0.png}
+    \includegraphics[width=\linewidth]{figures/System-Design/SD-20_AD - Initial Sectors 1.0.png}
     \caption{\textit{(SD-20)} \gls{actdia} of assigning initial \glspl{sector}.}
     \label{fig:ad-initial-sectors}
 \end{figure}
@@ -139,17 +139,19 @@ The following scenarios illustrate how the layers work together.
 \subsubsection{New Agent Join After Mission Start}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figures/MDU_logotyp.png}
+    \includegraphics[width=1.1\linewidth]{figures/System-Design/SD-22_AD - Agent Join After Mission Start 1.0.png}
     \caption{\textit{(SD-22)} \gls{actdia} showing the process of agents joining after mission start.}
     \label{fig:ad-new-agent}
 \end{figure}
+
+\newpage
 
 \subsubsection{Agent Rejoin}
 %Agent re-joining after temporary loss
 \color{red}\color{black}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figures/MDU_logotyp.png}
+    \includegraphics[width=0.4\linewidth]{figures/System-Design/SD-23_AD - Agent Rejoin 1.0.png}
     \caption{\textit{(SD-23)} \gls{actdia} showing the process of agents re-joining the swarm.}
     \label{fig:ad-agent-rejoin}
 \end{figure}
