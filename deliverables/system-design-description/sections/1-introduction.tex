@@ -28,7 +28,9 @@ The reader is expected to have basic familiarity with UAV systems, distributed c
 \subsection{System Overview}
 The IRDS protocol module is a decentralised coordination and replanning system for UAV swarms performing Search and Rescue (SAR) missions. Each UAV hosts an instance of the protocol module, which enables the swarm to assign work, react to degraded agent health, and maintain mission continuity without relying on a single central controller. The protocol interacts with a SwarmInterface component that exposes high-level commands from the \gls{searchmana} (such as mission start, search area, and hot regions) and reports back swarm status and key events.
 
-Conceptually, the protocol module is organised into three functional layers. The Rumour Mill layer provides decentralised consensus on mission state and significant events. The Sector Allocation Market layer uses this shared state to distribute search sectors and rebalance work when agents degrade or fail. The Agent Task \& Role Allocation layer translates sector ownership and agent health into concrete roles and tasks that each UAV executes through its onboard flight systems. This document specifies the behaviour and architecture of the protocol module at this conceptual level, while treating low-level flight control, detailed sensing, and physical communication mechanisms as external to the system.
+Conceptually, the protocol module is organised into three functional layers. The Rumour Mill layer provides decentralised consensus on mission state and significant events. The Sector Allocation Market layer uses this shared state to distribute search sectors and rebalance work when agents degrade or fail. The Agent Task \& Role Allocation layer translates sector ownership and agent health into concrete roles and tasks that each UAV executes through its onboard flight systems. 
+
+This document specifies the behaviour and architecture of the protocol module at a conceptual level, while treating low-level flight control, detailed sensing, and physical communication mechanisms as external to the system.
 
 \newpage
 
