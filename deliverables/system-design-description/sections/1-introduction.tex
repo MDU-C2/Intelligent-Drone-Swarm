@@ -1,6 +1,8 @@
 \section{Introduction}
 \label{sec:intro}
-The \acrfull{irds} protocol module is a decentralised coordination and replanning system for \acrfull{uav} swarms in \acrfull{sar} missions. Each UAV runs an instance of the protocol, allowing the swarm to continue operating when individual agents degrade or fail, without relying on a central controller. This document gives a conceptual design of the protocol module: it describes the context and goals of the system, the architectural structure, the Rumour Mill consensus mechanism, the Sector Allocation Market, the Agent Task \& Role Allocation layer, and the safety and fault-tolerance model.
+The \acrfull{irds} protocol module is a decentralised coordination and replanning system for \acrfull{uav} swarms in \acrfull{sar} missions. Each UAV runs an instance of the protocol module, allowing the swarm to continue operating when individual \glspl{agent} degrade or fail, without relying on a central controller. 
+
+This document gives a conceptual design of the protocol module: It describes the context and goals of the system, the architectural structure, the Rumour Mill consensus mechanism, the Sector Allocation Market, the Agent Task \& Role Allocation layer, and the safety and fault-tolerance model.
 
 \subsection{Purpose}
 This document describes the conceptual design of the IRDS protocol module and serves as a reusable technical specification for future work. It explains:
@@ -24,7 +26,7 @@ This document is intended for:
 The reader is expected to have basic familiarity with UAV systems, distributed coordination concepts, and general principles of software and system architecture.
 
 \subsection{System Overview}
-The IRDS protocol module is a decentralised coordination and replanning system for UAV swarms performing Search and Rescue (SAR) missions. Each UAV hosts an instance of the protocol module, which enables the swarm to assign work, react to degraded agent health, and maintain mission continuity without relying on a single central controller. The protocol interacts with a SwarmInterface component that exposes high-level commands from the Search Manager (such as mission start, search area, and hot regions) and reports back swarm status and key events.
+The IRDS protocol module is a decentralised coordination and replanning system for UAV swarms performing Search and Rescue (SAR) missions. Each UAV hosts an instance of the protocol module, which enables the swarm to assign work, react to degraded agent health, and maintain mission continuity without relying on a single central controller. The protocol interacts with a SwarmInterface component that exposes high-level commands from the \gls{searchmana} (such as mission start, search area, and hot regions) and reports back swarm status and key events.
 
 Conceptually, the protocol module is organised into three functional layers. The Rumour Mill layer provides decentralised consensus on mission state and significant events. The Sector Allocation Market layer uses this shared state to distribute search sectors and rebalance work when agents degrade or fail. The Agent Task \& Role Allocation layer translates sector ownership and agent health into concrete roles and tasks that each UAV executes through its onboard flight systems. This document specifies the behaviour and architecture of the protocol module at this conceptual level, while treating low-level flight control, detailed sensing, and physical communication mechanisms as external to the system.
 
