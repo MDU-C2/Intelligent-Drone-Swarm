@@ -1,6 +1,6 @@
 \section{System Architecture}
 \label{sec:system-architecture}
-This section describes the structural architecture of the IRDS protocol module and its surroundings. It identifies the main components, their internal sub-modules, and the interfaces through which they interact with one another and with external systems such as the SwarmInterface and the UAV flight stack. The section also introduces the communication model and information model used by the protocol. Together, these views provide the static foundation on which the dynamic behaviours in Sections 6–8 are defined.
+This section describes the structural architecture of the IRDS protocol module and its surroundings. It identifies the main components, their internal sub-modules, and the interfaces through which they interact with one another and with external systems such as the SwarmInterface and the UAV flight stack. The section also introduces the communication model and information model used by the protocol. Together, these views provide the static foundation on which the dynamic behaviours in Sections \ref{sec:rumour-mill} to \ref{sec:task-role} are defined.
 
 \subsection{Architecture Context}
 At the top level, the IRDS architecture consists of:
@@ -11,6 +11,7 @@ At the top level, the IRDS architecture consists of:
 \end{itemize}
 The System Context Diagram (\cref{fig:bdd-context}) shows this context:
 \begin{itemize}
+    \item The IRDS System of Systems interacts with the environment.
     \item The Search Manager interacts only with the SwarmInterface.
     \item The SwarmInterface exchanges messages with the swarm as a whole.
     \item The swarm is modelled as a composition of agents.
@@ -36,14 +37,14 @@ If an individual agent fails or leaves, the remaining agents:
     \item Release and reallocate its \glspl{sector} via the Sector Allocation Market.
     \item Continue the mission without requiring any central reconfiguration.
 \end{itemize}
-Each agent maintains a neighbourhood of exactly four agents in total consisting of itself and its three geographically closest agents (where ''closest'' is defined using the centres of each agent’s initial \glspl{sector}).
+Each fully operational agent maintains a neighbourhood of four fully operational agents in total consisting of itself and its three geographically closest agents (where ''closest'' is defined using the centres of each agent’s initial \glspl{sector}), and any partially operational agents.
 
 \vspace{0.2cm}
 
 \subsubsection{Neighbourhood Formation at Mission Start}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png}
+    \includegraphics[width=\linewidth]{figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png}
     \caption{\textit{(SD-24)} \gls{actdia} showing the process of neighbourhood formation after initial sectors have been assigned.}
     \label{fig:ad-initial-neighbourhoods}
 \end{figure}
@@ -70,7 +71,7 @@ Neighbourhoods do not perform any internal voting. Each neighbour independently:
     \item broadcasts a Source.
 \end{itemize}
 %\subsubsection{Neighbourhood Operation}
-Each agent forms a neighbourhood with its three geographically closest peers (based on assigned initial sectors). Neighbourhoods overlap, provide multiple independent Source rumour for each Origin rumour, and serve as the initial ''cross-check'' group for validating events.
+Each fully operational agent forms a neighbourhood with its three geographically closest fully operational peers (based on assigned initial sectors), and possibly absorbs partially operational agents into its neighbourhood. Neighbourhoods overlap, provide multiple independent Source rumour for each Origin rumour, and serve as the initial ''cross-check'' group for validating events.
 
 %\vspace{0.2cm}
 \newpage
@@ -83,7 +84,7 @@ Neighbourhoods must be updated when:
     \item A new agent joins the swarm.
     \item An agent rejoins the swarm.
 \end{itemize}
-In these cases, each affected agent recomputes its three closest neighbours based on the latest available sector or position information. This ensures that neighbourhoods maintain their size (1 + 3) and that cross-checking coverage remains consistent.
+In these cases, each affected agent that is fully operational recomputes its three closest fully operational neighbours based on the latest available sector or position information. This ensures that neighbourhoods maintain their size (1 + 3) and that cross-checking coverage remains consistent.
 
 Neighbourhoods do not vote as a group; Each neighbour independently creates Source rumours. The requirement to receive three Source rumours before interpeting an event and possibly broadcasting an Opinion gives each neighbourhood a built-in tolerance to some faulty behaviour, provided that no neighbourhood contains too many faulty agents.
 
@@ -113,11 +114,11 @@ The protocol module communicates with the FMU (to receive health states), the sw
 \newpage
 
 \subsection{Protocol Module Structure}
-A simplified architecture of the protocol is defined by \cref{fig:bdd-protocol}, where DynamicInfo holds lists containing information about \glspl{agent} in the swarm (where the first index is always the \gls{agent} itself) and about \glspl{sector}, and StaticInfo holds enumerations of message types, health statuses, and tasks.
+A simplified architecture of the protocol is defined by \cref{fig:bdd-protocol}, where DynamicInfo holds lists containing information about \glspl{agent} in the swarm (where the first index is always the \gls{agent} itself), information about \glspl{sector} and neighbourhoods, and StaticInfo holds enumerations of message types, health statuses, and tasks.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-13_BDD - Protocol 1.0.png}
+    \includegraphics[width=1.1\linewidth]{figures/System-Design/SD-13_BDD - Protocol 1.0.png}
     \caption{\textit{(SD-13)} \acrshort{bdd} of which main parts the protocol module contains.}
     \label{fig:bdd-protocol}
 \end{figure}
@@ -147,7 +148,7 @@ The protocol module consists of several submodules that relate to each other thr
         %\item[$\circ$] Maintaining the lifecycle of the Rumour Mill.
         \item[$\circ$] Tracking active Origin rumours and their Source rumours and Opinion rumours.
         \item[$\circ$] Determining when enough Source rumours exist to interpret the event and to possibly form an Opinion rumour.
-        \item[$\circ$] Tracking Opinion rumours and detect when the chosen consensus threshold $\alpha$ (e.g. 70\% in examples) is reached for a given Origin.
+        \item[$\circ$] Tracking Opinion rumours and detect when the chosen consensus threshold $\alpha$ (70\% in examples) is reached for a given Origin.
         \item[] Consensus handles events such as:
         \item[$\circ$] ''Three Sources reached for rumour R'' $\rightarrow$ trigger to vote on truth, and create an Opinion or update local information.
         \item[$\circ$] ''Consensus threshold reached for rumour R at originator'' $\rightarrow$ trigger to make a decision.
@@ -162,14 +163,15 @@ The protocol module consists of several submodules that relate to each other thr
     \end{itemize}
     \item StateInstructions, responsible for:
     \begin{itemize}
-        \item[$\circ$] Implementing the agent’s state machine (start, task, search, found, confirmed, bad\_sensor, secondary\_task, return, failed).
-        \item[$\circ$] Mapping health status, sector ownership, and commands into roles (search, relay, return, etc.).
+        \item[$\circ$] Implementing the agent’s state machine (Initialising, FullyOperational, PartiallyOperational, Failed).
+        \item[$\circ$] Mapping health status, sector ownership, and commands into roles (PrimarySearch, SecondaryRelay, Return, etc.).
         \item[$\circ$] Triggering sector releases and task changes when roles change.
     \end{itemize}
     \item DynamicInfo, responsible for 
     \begin{itemize}
         \item[$\circ$] Maintain AgentInfo list: members, neighbours, positions, health statuses, tasks, subjectFound, subjectLocation.
         \item[$\circ$] Maintain SectorInfo list: owner, corners, value, searched flag, cost.
+        \item[$\circ$] Maintain Neighbourhood info: owner, neighbours. 
         \item[$\circ$] Maintaining the agent's budget (maxBudget, budgetRoof, currentBudget).
     \end{itemize}
     \item StaticInfo, responsible for:
@@ -188,6 +190,8 @@ In \cref{fig:ibd-protocolBB}, flowports named ui\_Rx and ui\_Tx are to receive b
     \label{fig:ibd-protocolBB}
 \end{figure}
 
+\newpage
+
 In \Cref{fig:flowspec}, ROr means Rumour Origin, RS means Rumour Source, and ROp means Rumour Opinion.
 \begin{figure}[H]
     \centering
@@ -195,8 +199,6 @@ In \Cref{fig:flowspec}, ROr means Rumour Origin, RS means Rumour Source, and ROp
     \caption{\textit{(SD-09)} Flow specification for flowports.}
     \label{fig:flowspec}
 \end{figure}
-
-\newpage
 
 \subsection{Communication Model}
 The protocol module uses a broadcast-based wireless communication model, which means that when an agent broadcasts a message, all agents within range can receive it, assuming no interference or packet loss.
@@ -221,12 +223,12 @@ Agents exchange information by broadcasting messages on a shared channel. Typica
     \item Source rumours, such as:
     \begin{itemize}
         \item[$\circ$] Originator no longer a member of the swarm.
-        \item[$\circ$] Join/rejoin announcements for an Originator.
+        \item[$\circ$] Join/rejoin attempts of an Originator.
         \item[$\circ$] Subject found.
     \end{itemize}
     \item Opinion rumours, such as:
     \begin{itemize}
-        \item[$\circ$] Agent X won bid for sector Y.
+        \item[$\circ$] Agent A won bid for sector S.
         \item[$\circ$] Originator should become a communication relay.
         \item[$\circ$] The number of members in the swarm.
     \end{itemize}
@@ -246,13 +248,13 @@ The protocol module does not assume that every broadcast reaches every agent, in
 \subsubsection{Agent $\leftrightarrow$ SwarmInterface Communication}
 The SwarmInterface participates in the same broadcast channel as the swarm, broadcasting and receiving messages such as:
 \begin{itemize}
-    \item Initialisation data (e.g. initial sector map, intended swarm size).
+    \item Initialisation data (e.g. initial sector map, intended swarm size, initial neighbourhoods).
     \item High-level commands (start mission).
     \item Swarm status updates (health changes, return requests, Subject found).
     \item Perceived number of agents in swarm.
     \item Perceived number of sectors.
 \end{itemize}
-From the protocol module perspective, these messages are just additional broadcasts with specific msgIDs that indicate that they originate from the SwarmInterface.
+From the protocol module perspective, these messages are just additional broadcasts with specific msgIDs and agentID that indicate that they originate from the SwarmInterface.
 
 Most operational commands injected by the SwarmInterface are turned into Origin rumours and processed by the \gls{rumourmill}. A small number of initialisation messages (see \Cref{subsubsec:init-event}) are treated as trusted inputs and do not trigger the rumour lifecycle.
 
@@ -260,7 +262,7 @@ Note that the communication between the swarm and SwarmInterface is conceptual i
 
 \subsubsection{Pulse Mechanism}
 \label{subsubsec:pulse-content}
-Each agent periodically broadcasts a pulse containing their AgentID, position, and timestamp of when that position was measured.
+Each agent periodically broadcasts a pulse containing their AgentID, position, and timestamp of when that position was measured (see ROr\_Pulse in \cref{fig:origins}).
 
 Any agent within range can receive the pulse and update its AgentInfo. Pulses are used to:
 \begin{itemize}
@@ -278,7 +280,7 @@ Each agent maintains two main categories of information:
     \item Dynamic information – updated at runtime, including:
     \begin{itemize}
         \item[$\circ$] Known agents and their statuses (AgentInfo),
-        \item[$\circ$] neighbourhood memberships,
+        \item[$\circ$] neighbourhoods,
         \item[$\circ$] known sectors, their owners, and cost (SectorInfo),
         \item[$\circ$] budget
         \item[$\circ$] sector bids,
@@ -289,7 +291,8 @@ Static information defines the ''vocabulary'' and structure of the protocol modu
 
 \label{subsec:stat-dyn}
 
-\vspace{0.2cm}
+%\vspace{0.2cm}
+\newpage
 
 \subsubsection{Static Information}
 Static information is defined before the mission, is identical for every agent, and does not change at runtime. Static Information includes:
@@ -308,7 +311,7 @@ Static information is defined before the mission, is identical for every agent, 
     \label{fig:ibd-statinfo}
 \end{figure}
 
-\newpage
+\vspace{0.5cm}
 
 \subsubsection{Dynamic Information}
 Dynamic information is updated throughout the mission and stored locally on each agent, and ensures that each agent can make decisions based on its own up-to-date local view, while the \gls{rumourmill} works to keep these local views consistent across the swarm.
@@ -337,7 +340,7 @@ Dynamic information includes:
         \item[$\circ$] sw: Latitude and longitude of south-west corner of sector S.
         \item[$\circ$] se: Latitude and longitude of sector X's south-east corner.
         \item[$\circ$] value: Value based on the probability that the \gls{subject} will be found in sector S. Probability is based on \glspl{hotregion}.
-        \item cost: Cost of the sector.
+        \item[$\circ$] cost: Cost of the sector.
         \item[$\circ$] searched: TRUE if ownerID has finished searching sector S, otherwise FALSE.
     \end{itemize}
     %\item Rumour state: active Origins, received Sources, formed Opinions.
@@ -345,18 +348,17 @@ Dynamic information includes:
     %\item State machine state: current agent state (search, relay, return, etc.).
     \item Budget:
     \begin{itemize}
-        \item[$\circ$] maxBudget: Static value of the max value of the owner's budget.
-        \item[$\circ$] budgetRoof: Maximum spending allowance for the owner, based on the owner's battery level.
+        %\item[$\circ$] maxBudget: Static value of the max value of the owner's budget.
+        %\item[$\circ$] budgetRoof: Maximum spending allowance for the owner, based on the owner's battery level.
+        \item[$\circ$] maxBudget: Maximum budget allowed for the owner, based on the owner's remaining flight time.
         \item[$\circ$] currentBudget: Current value of the owner's budget.
-    \end{itemize}\color{red}
-    \item SectorCost entries (per sector):
-    \begin{itemize}
-        \item[$\circ$] sectorID: Unique ID of sector S.
-        \item[$\circ$] value: Value based on the probability that the Subject will be found in sector X. Probability is based on Hot Regions.
-        \item[$\circ$] initSector: Latitude and longitude of the first initial sector of the owner.
-        \item[$\circ$] cost: Cost (f(distance, value)) of sector X based on value and initSector. Calculated by TaskAllocation.
     \end{itemize}
-\end{itemize}\color{black}
+    \item Neighbourhoods (per known agent):
+    \begin{itemize}
+        \item[$\circ$] neighbourhoodID: Unique ID of neighbourhood, corresponds to the ID of the agent that ''owns'' the neighbourhood.
+        \item[$\circ$] neighbours: agent IDs that are seen as neighbours by the neighbourhood owner.
+    \end{itemize}
+\end{itemize}
 
 
 \subsection{Information Model \& Data Types}
@@ -431,7 +433,7 @@ Note that only the high-level interface between SwarmInterface and the protocol 
 
 The SwarmInterface aggregates protocol module events into human-readable information, such as ''Agent A requests battery replacement'' or ''Agent B degraded'', to allow the \gls{searchmana} to prepare appropriate actions (e.g. swapping batteries when an agent returns to base).
 
-From the protocol module perspective, the SwarmInterface provides an input channel for high-level commands and mission configuration (initial \gls{sector} map, Hot Regions), and an output channel for aggregated swarm status and event reports.
+From the protocol module perspective, the SwarmInterface provides an input channel for high-level commands and mission configuration (initial \gls{sector} map, Hot Regions, initial neighbourhoods), and an output channel for aggregated swarm status and event reports. Initial mission set up can be seen in \cref{fig:ad-swarm-reg}
 
 \newpage
 
@@ -442,17 +444,13 @@ The communication context summarises how all the previously described elements f
     \item Agents communicate with the SwarmInterface on the same shared wireless channel to receive mission configurations, updates, and to report events.
 \end{itemize}
 
-Neighbourhoods provide the local structure that seeds rumour propagation.
-
-Rumours ensure that important events and decisions are eventually known by all agents.
-
-The \gls{secmarket} and Task \& Role logic run on top of this communication fabric to allocate work and determine agent behaviours.
+Neighbourhoods provide the local structure that seeds rumour propagation, and rumours ensure that important events and decisions are eventually known by all agents. The \gls{secmarket} and Task \& Role logic run on top of this communication fabric to allocate work and determine agent behaviours.
 
 In \cref{fig:ibd-comm-context}, even though flowports are named P2P\_Rx / P2P\_Tx in the diagram, they conceptually represent broadcast send/receive on a shared channel. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-21_IBD - Communication Context 1.0.png}
+    \includegraphics[width=1.1\linewidth]{figures/System-Design/SD-21_IBD - Communication Context 1.0.png}
     \caption{\textit{(SD-21)} \acrshort{ibd} over communication context. }
     \label{fig:ibd-comm-context}
 \end{figure}
