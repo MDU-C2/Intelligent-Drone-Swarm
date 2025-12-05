@@ -176,7 +176,7 @@ The \gls{rumourmill} is used for almost all operational events that require swar
     \begin{itemize}
         \item[$\circ$] New agent join. 
         \item[$\circ$] Agent rejoin.
-        \item[$\circ$] Agent missing (detected through pulse timeout).
+        \item[$\circ$] Agent missing \textit{(detected through pulse timeout, and is announced using a Source rumour)}.
     \end{itemize}
     \item \gls{secmarket}-related events:
     \begin{itemize}
@@ -195,15 +195,16 @@ Most commands are translated into \gls{rumourmill} events so that the entire swa
 \begin{itemize}
     \item The initial intended number of agents in the swarm.
     \item The initial \gls{searcharea} and sector division (the sector map).
+    \item The initial neighbourhoods.
 \end{itemize}
 After initialisation, all further operational updates and decisions use the Rumour Mill.
 
 \subsection{Consensus Threshold \& Parameters}
 \label{subsec:consens-threshold}
 %There are two kinds of consensus thresholds: $\alpha$ and $\beta$.
-Interpretation of and decisions based on Source rumours are made once three Source rumours have been received and an internal vote has been done. This is based on the principles of triple modular redundancy.
+Interpretation of and decisions based on Source rumours are made once three Source rumours have been received and an internal vote has been done (based on the principles of triple modular redundancy), this parameter can be adjusted to increase the amount of Byzantine faults that can be handled.
 
-The originator decides once it has collected enough Opinion rumours for a particular Origin rumour. The required fraction of Opinion rumours is denoted as $\alpha$, where:
+Agents that have broadcasted Origin rumours that require Opinion rumours must collect enough Opinion rumours for that particular Origin rumour. The required fraction of Opinion rumours is denoted as $\alpha$, where:
 \begin{equation*}
     0.5 < \alpha < 1
 \end{equation*}
@@ -216,6 +217,8 @@ In this document, 70\% is used as an illustrative example, meaning that the orig
     \item How quickly the swarm must respond to events.
 \end{itemize}
 Determining an appropriate threshold $\alpha$ for deployment is left for future work and should be investigated through simulation or analysis. The examples in this document use 70\% purely for concreteness.
+
+\vspace{0.5cm}
 
 \subsection{Properties of the Rumour Mill}
 The \gls{rumourmill} provides several desirable properties for the protocol module:
@@ -230,9 +233,9 @@ The \gls{rumourmill} provides several desirable properties for the protocol modu
     \end{itemize}
     \item Eventual Consistency:
     \begin{itemize}
-        \item[$\circ$] Messages are broadcast in a lossy network; not all agents hear all messages immediately.
+        \item[$\circ$] Messages are broadcast in a lossy network; Not all agents hear all messages immediately.
         \item[$\circ$] However, Origins, Sources, and Opinions are rebroadcast and spread over time.
-        \item[$\circ$] Provided that communication is occasionally available, all non-faulty agents eventually receive the decision-Origin and converge on the same view of the event.
+        \item[$\circ$] Provided that communication is occasionally available, all non-faulty agents eventually receive Sources or decision-Origins and converge on the same view of the event.
     \end{itemize}
     \item Fault Tolerance:% (Informal)
     \begin{itemize}
@@ -258,11 +261,11 @@ These scenarios show how the Rumour Mill links local observations to swarm-wide,
 
 \subsubsection{Degraded Health Event}
 \begin{enumerate}
-    \item \acrshort{fmu} on agent A detects bad\_sensor.
-    \item A releases its sectors and broadcasts an Origin: ''I (A) am degraded: bad\_sensor.''
+    \item \acrshort{fmu} on agent A detects a bad sensor (e.g., bad LiDAR).
+    \item A releases its sectors and broadcasts an Origin: ''I (A) am degraded: bad LiDAR.''
     \item Neighbours of A interpret it and broadcast Sources confirming the degraded state.
-    \item Any agent (including neighbours of A) that receives three Sources updates A's sectors to unassigned, and creates an Opinion rumour (e.g. ''A should release its sectors and become relay'').
-    \item A collects Opinion rumours; Once Opinion rumours from $\geq \alpha$ fraction of agents have arrived, A internally decides to switch to secondary\_task (e.g. relay).
+    \item Any agent (including neighbours of A) that receives three Sources updates A's sectors to unassigned, and creates an Opinion rumour (e.g. ''A should release its sectors and become SecondaryRelay'').
+    \item A collects Opinion rumours; Once Opinion rumours from $\geq \alpha$ fraction of agents have arrived, A internally decides to switch to SecondaryRelay.
     \item A broadcasts a decision-Origin announcing its new role.
     \item The \gls{secmarket} (\Cref{sec:sector-alloc}) reassigns A’s sectors to other agents through bidding.
 \end{enumerate}
@@ -272,9 +275,9 @@ These scenarios show how the Rumour Mill links local observations to swarm-wide,
 \subsubsection{Subject Found Event}
 \begin{enumerate}
     \item Agent A detects the \gls{subject} at location L and broadcasts an Origin: ''Subject found at L.''
-    \item Neighbours receive the Origin rumour and go to L to confirm that the subject is at L.
-    \item Neighbours broadcast Source rumours based on their findings (e.g. ''Subject not found at L'' or ''Subject found at L'').
-    \item Once any agent has three Sources (including originator and neighbours), it interprets the event by either continuing its current task (''Subject not found at L'') or updating their state machines to enter roles appropriate for mission completion (usually return to base).
+    \item Neighbours of A receive the Origin rumour and those who are \textbf{fully functional} go to L to confirm that the subject is at L.
+    \item Confirming neighbours (i.e. fully functional agents) broadcast Source rumours based on their findings (e.g. ''Subject not found at L'' or ''Subject found at L'').
+    \item Once any agent has three Sources (including originator and neighbours), it interprets the event by either continuing its current task (''Subject not found at L'') or updating their state machines to enter roles appropriate for mission completion (Returning).
 \end{enumerate}
 
 
