@@ -172,8 +172,10 @@ Each agent has the following main states and subsequent roles (sub-states):
     \end{itemize}
 \end{itemize}
 
-\subsubsection{State Diagram}
+\vspace{2cm}
 
+\subsubsection{State Diagram}
+Larger versions of \cref{fig:stateflow,fig:fully-op,fig:partially-op} can be found in \cite{SD-18,SD-27,SD-26}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figures/System-Design/SD-18_SD - Agent Stateflow 2.0.png}
@@ -195,10 +197,8 @@ Each agent has the following main states and subsequent roles (sub-states):
     \label{fig:partially-op}
 \end{figure}
 
-Larger version of.
-
-\subsubsection{Activity model: moving to the next sector}
-\color{red}Activity diagram showing the process of an agent moving on to its next sector when it has finished searching a sector. Will include broadcast of "sector X finished"\color{black}
+%\subsubsection{Activity model: moving to the next sector}
+%\color{red}Activity diagram showing the process of an agent moving on to its next sector when it has finished searching a sector. Will include broadcast of "sector X finished"\color{black}
 
 \newpage
 
@@ -216,14 +216,14 @@ Examples of emergent behaviours include:
     \item Coherent Mission Termination:
     \begin{itemize}
         \item[$\circ$] When the \gls{subject} is confirmed found, Source rumours are broadcast.
-        \item[$\circ$] All agents update their state machines to transition to return (or other appropriate end-of-mission roles).
+        \item[$\circ$] All agents update their state machines to transition to return.
         \item[$\circ$] The swarm thus terminates the search phase in a coordinated way without conflicting behaviours.
     \end{itemize}
     \item Self-Healing After Failures
     \begin{itemize}
         \item[$\circ$] Missing pulses cause suspected failures to be raised via the \gls{rumourmill}.
         \item[$\circ$] Once a failure is confirmed, the failed agent's sectors are released and reallocated.
-        \item[$\circ$] Neighbourhoods are recomputed to maintain the 1 + 3 structure where possible.
+        \item[$\circ$] Neighbourhoods are recomputed to maintain the 1 + 3 structure of fully operational agents.
         \item[$\circ$] Information about the failed agent (e.g. role, sectors, health) is cleaned up in AgentInfo.
     \end{itemize}
 \end{itemize}
@@ -232,10 +232,10 @@ As a result, the swarm can heal from local failures and continue its mission usi
 \subsection{Safety-Oriented Role Restrictions}
 Role allocation is also used to enforce safety constraints, for example:
 \begin{itemize}
-    \item[$\circ$] Agents in bad\_sensor or other degraded states cannot perform primary search of critical \glspl{sector}.
+    \item[$\circ$] Agents in PartiallyOperational cannot perform primary search of \glspl{sector}.
     \item[$\circ$] Agents in failed state must not rejoin the swarm without a proper registration sequence.
     \item[$\circ$] Agents in return should not acquire new sectors until after maintenance and rejoin, if at all.
 \end{itemize}
-These policy-level restrictions, combined with the state machine, ensure that degraded or failed agents do not perform unsafe or misleading actions. Their impact on the mission is limited to safe behaviours (e.g. relay) or removal from the swarm.
+These policy-level restrictions, combined with the state machine, ensure that degraded or failed agents do not perform unsafe or misleading actions. Their impact on the mission is limited to safe behaviours (e.g. SecondaryRelay) or removal from the swarm.
 
 Further safety analysis of these behaviours is provided in \Cref{sec:safety-reliability}.
