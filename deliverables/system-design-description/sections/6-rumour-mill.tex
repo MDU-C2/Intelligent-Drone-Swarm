@@ -26,11 +26,11 @@ All protocol module messages are broadcast over a shared wireless channel, meani
     \item msgID: Type identifier for the message.
     \item senderID: ID of the agent that broadcast the message.
 \end{itemize}
-Additional fields depend on the rumour type and event type (e.g. sectorID, healthStatus).
+Additional fields depend on the rumour type and event type (e.g. sectorID, healthStatus), see \cref{fig:origins,fig:sources,fig:opinions}.
 
 The msgID field is especially important as it tells the protocol which internal handler to call and therefore what to do with the message, for example, different msgIDs may distinguish between:
 \begin{itemize}
-    \item Health-related Origins (e.g. degraded, bad\_sensor).
+    \item Health-related Origins (e.g. degraded health such as failed LiDAR or low battery).
     \item Sector-related messages (bids, releases, and completions).
     \item Subject-related messages (found, confirmation).
     \item Search Manager commands injected through the SwarmInterface.
@@ -57,6 +57,7 @@ An Origin rumour represents a local observation or decision made by an agent. Ex
     \item ''I have completed \gls{sector} S.''
     \item ''\Gls{subject} found at location L.''
     \item ''I want to purchase sector S.''
+    \item ''I am now the owner of sector S'' (after having received enough relevant Opinion rumours).
     %\item ''Neighbour Y is no longer a member of the swarm.''
     \item ''Search Manager issued command C.''
 \end{itemize}
@@ -83,11 +84,11 @@ When an agent receives \textbf{three} Source rumours referring to the same Origi
 
 An Opinion rumour expresses a recommended action or conclusion, for example:
 \begin{itemize}
-    \item ''Agent A should change to secondary\_task (relay).''
+    \item ''Agent A should change to SecondaryRelay.''
     \item ''Agent A should return to base.''
-    \item ''Agent A is now the owner of sector S.''
+    \item ''Agent A may become the owner of sector S.''
 \end{itemize}
-Opinion rumours are broadcast to the swarm. They summarise the local view built up from multiple Sources and are used by originators to make a final decision.
+Opinion rumours are broadcast to the swarm. They summarise the local view built up from multiple Sources and are used by originators to make a final decision that is announced through a new Origin rumour.
 
 \vspace{0.2cm}
 
@@ -101,50 +102,53 @@ All consensus-related behaviour in the protocol module is built on this mechanis
 \subsection{Rumour Lifecycle}
 \label{subsec:rumour-lifecycle}
 %6.4.1 Activity model for handling incoming and outgoing rumours
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-17_AD - Rumour Mill 1.0.png}
-    \caption{\textit{(SD-17)} \gls{actdia} showing the sequence of actions a protocol module takes upon receiving or generating rumours.}
-    \label{fig:ad-rumour-mill}
-\end{figure}
-
 The lifecycle of rumours allows the swarm to converge on consistent decisions without any agent having special authority. The complete lifecycle of a rumour-based decision consists of five phases:
 \begin{enumerate}
     \item Event $\rightarrow$ Origin
     \begin{enumerate}
         \item An agent detects or generates an event (e.g. FMU health change, sector completion, subject found).
-        \item It creates an Origin rumour and broadcasts it to its neighbours.
+        \item The agent, referred to as the originator, creates an Origin rumour and broadcasts it to agents in its neighbourhood.
+        \item[$\circ$] \textit{Other agents can pick up this Origin rumour, but since all agents know all neighbourhoods they know if the Origin rumour is meant for them or not.}
     \end{enumerate}
     \item Origin $\rightarrow$ Sources
     \begin{enumerate}
-        \item Each neighbour independently interprets the Origin.
-        \item It creates a Source rumour and broadcasts it to the swarm.
+        \item Agents in the originator's neighbourhood each independently interpret the Origin rumour.
+        \item The neighbours individually create Source rumours and broadcast them to the swarm.
+        \item[$\circ$] \textit{Agent A knows its Origin rumour has been received by ''hearing'' these Source rumours.}
     \end{enumerate}
     \item Sources $\rightarrow$ Opinions
     \begin{enumerate}
-        \item Any agent who has received three Source rumours (from three distinct agents) considers that it has enough information to interpret the event.
+        \item Any agent, including neighbours but \textbf{not} the originator, who has received three Source rumours from three distinct agents (one of whom may be itself) considers that it has enough information to interpret the event.
         \item It makes a decision, and possibly creates an Opinion rumour and broadcasts it.
-        \item[] Note that any agent (not just the originator or its direct neighbours) can reach the ''three Sources'' threshold, come to a decision, and possibly broadcast an Opinion rumour.
+        %\item[] Note that any agent (not just the originator or its direct neighbours) can reach the ''three Sources'' threshold, come to a decision, and possibly broadcast an Opinion rumour.
     \end{enumerate}
     \item Opinions $\rightarrow$ Decision at the Originator
     \begin{enumerate}
-        \item The originator collects Opinions broadcast by the swarm.
-        \item Once the originator has received Opinions from at least a certain fraction of the swarm (the consensus threshold, see \Cref{subsec:consens-threshold}), it makes an internal decision.
+        \item The originator collects Opinion rumours broadcast by other agents in the swarm.
+        \item Once the originator has received Opinion rumours from at least a certain fraction of the swarm (the consensus threshold $\alpha$, see \Cref{subsec:consens-threshold}), it makes an internal decision.
         \item The decision may include changes such as:
         \begin{itemize}
-            \item ''I will switch to secondary\_task (relay).''
+            \item ''I will switch to SecondaryRelay.''
             \item ''I will return to base.''
             \item ''I am now owner of sector S.''
         \end{itemize}
-        \item[] The decision is made locally at the originator; no single Opinion decides the outcome, and no external authority is required.
+        \item[$\circ$] \textit{The decision is made locally at the originator; no single Opinion rumour decides the outcome, and no external authority is required.}
     \end{enumerate}
     \item Decision $\rightarrow$ New Origin (Decision Announcement)
     \begin{enumerate}
-        \item After deciding, and if needed, the originator broadcasts a new Origin that describes the decision (e.g. ''I will return home'', ''I have switched to secondary\_task'').
+        \item After deciding, and if needed, the originator broadcasts a new Origin that describes the decision (e.g. ''I will return home'', ''I have switched to SecondaryRelay'').
         \item Other agents update their local state (AgentInfo, SectorInfo, state machine, etc.) according to the decision.
-        \item[] This closes the rumour cycle. All agents now have a consistent view of the event and its outcome, subject to message delivery.
+        \item[$\circ$] This closes the rumour cycle. All agents now have a consistent view of the event and its outcome, subject to message delivery.
     \end{enumerate}
 \end{enumerate}
+\newpage
+\Cref{fig:ad-rumour-mill} depicts the process of a rumour lifecycle through an Activity Diagram.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/System-Design/SD-17_AD - Rumour Mill 1.0.png}
+    \caption{\textit{(SD-17)} \gls{actdia} showing the sequence of actions a protocol module takes upon receiving or generating rumours.}
+    \label{fig:ad-rumour-mill}
+\end{figure}
 
 \subsection{Trigger Events}
 \subsubsection{Events Using the Full Rumour Lifecycle}
@@ -152,7 +156,7 @@ The \gls{rumourmill} is used for almost all operational events that require swar
 \begin{itemize}
     \item FMU-driven health events:
     \begin{itemize}
-        \item[$\circ$] Degraded health (e.g. bad\_sensor).
+        \item[$\circ$] Degraded health (e.g. failed LiDAR).
         \item[$\circ$] Low battery (when it implies behaviour changes).
         \item[$\circ$] Critical failure (where possible).
     \end{itemize}
