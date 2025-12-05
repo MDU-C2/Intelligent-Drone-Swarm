@@ -13,7 +13,7 @@ The Rumour Mill serves two main purposes:
     \item Shared interpretation of events
     \item[] When an event occurs (e.g. ''Agent A has degraded health''), the swarm needs a consistent answer to ''what actually happened?''.
     \item Shared decisions linked to those events
-    \item[] Once the event is interpreted, the swarm needs to decide how to react (e.g. ''Agent A should become relay'').
+    \item[] Once the event is interpreted, the swarm needs to decide how to react (e.g. ''Agent A should switch to SecondaryRelay'').
 \end{enumerate}
 
 The Rumour Mill is used for almost all operational decisions that require swarm-wide agreement. A small set of initialisation-time inputs from the \gls{searchmana} are treated as trusted and do not use the full rumour lifecycle (see \Cref{subsubsec:init-event}).
@@ -150,6 +150,8 @@ The lifecycle of rumours allows the swarm to converge on consistent decisions wi
     \label{fig:ad-rumour-mill}
 \end{figure}
 
+\vspace{0.2cm}
+
 \subsection{Trigger Events}
 \subsubsection{Events Using the Full Rumour Lifecycle}
 The \gls{rumourmill} is used for almost all operational events that require swarm-wide agreement. Typical trigger events include:
@@ -167,8 +169,8 @@ The \gls{rumourmill} is used for almost all operational events that require swar
     \end{itemize}
     \item Subject-related events:
     \begin{itemize}
-        \item[$\circ$] Subject found.
-        \item[$\circ$] Subject confirmation.
+        \item[$\circ$] Subject found \textit{(request for confirmation from neighbours)}.
+        %\item[$\circ$] Subject confirmation.
     \end{itemize}
     \item Agent membership events:
     \begin{itemize}
