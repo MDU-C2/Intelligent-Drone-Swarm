@@ -24,67 +24,81 @@
 
 %Provides a clear record for evaluation and auditing.
 
+
+
 \begin{table}[H]
     \centering
-    \begin{tabular}{|c|l|c|c|c|}
+    \begin{tabular}{|p{1cm}|p{6cm}|p{1.8cm}|p{3cm}|p{1.8cm}|}
         \hline
-        \textbf{Item ID} & \textbf{Item Title} & \textbf{Responsible} & \textbf{Approval Method} & \textbf{Status} \\
+        \textbf{ID} & \textbf{Title} & \textbf{Responsible} & \textbf{Approval Method} & \textbf{Status} \\
         \hline
-        CE-01 & Project Plan & \acrshort{ce} & Review & Pending \\
+        CE-01 & Pre-Study & \acrshort{ce} & Review & Approved \\
         \hline
-        CE-02 & System Description & \acrshort{ce} & Review &  Pending \\
+        CE-02 & Project Plan & \acrshort{ce} & Review & Approved \\
         \hline
-        CE-03 & System Architecture & \acrshort{ce} & Review &  Pending \\
+        %CE-03 & \makecell{System Description\\ (Baseline – Current system before solution)} & \acrshort{ce} \\
+        %\hline
+        CE-04 & System Design Description & \acrshort{ce}  & Review & Approved \\
         \hline
-        CE-04 & Final Report & \acrshort{ce} & Review &  Pending \\
+        CE-05 & Final Report & \acrshort{ce}  & Review & Approved \\
         \hline
-        CE-05 & Presentation & \acrshort{ce} & Review &  Pending \\
+        %CE-06 & Presentation & Deliverable & \acrshort{ce} \\
+        %\hline
+        %CE-07 & Release Notes & Artefact & \acrshort{qcm} \\
+        %\hline
+        CM-01 & Configuration Management Plan & \acrshort{qcm}  & Review & Approved \\
         \hline
-        CM-01 & Configuration Management Plan & \acrshort{qcm} & Review &  Pending \\
+        %CM-02 & Configuration Change Requests & Artefact & \acrshort{qcm} \\
+        %\hline
+        QM-01 & Quality Management Plan & \acrshort{qcm}  & Review & Approved \\
         \hline
-        CM-02 & Configuration Log Report & \acrshort{qcm} & Review &  Pending \\
+        %QM-02 & Quality Review Protocols & Artefact & \acrshort{qcm} \\
+        %\hline
+        RM-01 & Requirements Management Plan & \acrshort{rm} & Review & Approved \\
         \hline
-        QM-01 & Quality Management Plan & \acrshort{qcm} & Review &  Pending \\
+        RM-02 & Requirements Specification & \acrshort{rm} & Review & Approved \\
         \hline
-        QM-02 & Review Protocols & \acrshort{qcm} & Review &  Pending \\
+        RM-03 & Requirements Specification Guide & \acrshort{rm} & Review & Approved \\
         \hline
-        QM-03 & Review Report & \acrshort{qcm} & Review &  Pending \\
+        SM-01 & Safety Management Plan & \acrshort{sm} & Review & Approved \\
         \hline
-        QM-04 & Quality Impact Report & \acrshort{qcm} & Review &  Pending \\
+        SM-02 & Preliminary Safety Assurance Case & \acrshort{sm} & Review & Approved \\
         \hline
-        RM-01 & Requirements Management Plan & \acrshort{rm} & Review &  Pending \\
+        SM-03 & Preliminary Safety Assessment & \acrshort{sm} & Review & Approved \\
         \hline
-        RM-02 & Requirements Specification & \acrshort{rm} & Review &  Pending \\
+        SM-04 & Flight Safety Assessment & \acrshort{sm} & Review & Approved \\
         \hline
-        SM-01 & Safety Management Plan & \acrshort{sm} & Review &  Pending \\
+        SM-05 & Safety Assessment & \acrshort{sm} & Review & Approved \\
         \hline
-        SM-02 & Preliminary Safety Analysis & \acrshort{sm} & Review &  Pending \\
+        SM-06 & Safety Goals \& Requirements & \acrshort{sm} & Review & Approved \\
         \hline
-        SM-03 & Flight Safety Analysis & \acrshort{sm} & Review &  Pending \\
+        SM-07 & Safety Assurance Case & \acrshort{sm} & Review & Approved \\
         \hline
-        SM-04 & Safety Analysis & \acrshort{sm} & Review &  Pending \\
+        VV-01 & Verification \& Validation Management Plan & \acrshort{vvm} & Review & Approved \\
         \hline
-        SM-05 & Safety Goals & \acrshort{sm} & Review &  Pending \\
-        \hline
-        VV-01 & Verification \& Validation Management Plan & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-11 & Design Specification & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-25 & Risk Analysis & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-26 & Validation Protocols & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-27 & Verification Protocols & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-28 & Test Specification & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-29 & Validation Report & \acrshort{vvm} & Review &  Pending \\
-        \hline
-        VV-30 & Verification Report & \acrshort{vvm} & Review &  Pending \\
+        %VV-02 & Requirements Checklist & Artefact & \acrshort{vvm} \\
+        %\hline
+        %VV-03 & Safety Requirements Verification & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-04 & Safety Goals Verification & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-05 & Verification Drone Swarm Requirements & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-06 & System Requirements Verification & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-07 & Subsystem Requirements Verification & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-10 & System Design Network Diagram & Artefact & \acrshort{vvm} \\
+        %\hline
+        %VV-11 & Test Case Drone Swarm Requirements & Deliverable & \acrshort{vvm} \\
+        %\hline
+        %VV-12 & Verification \& Validation System Design & Deliverable & \acrshort{vvm} \\
+        %\hline
+        VV-13 & Test Specification & \acrshort{vvm} & Review & Approved \\
         \hline
     \end{tabular}
-    \caption{Items needing approval.}
-    \label{tab:approvals}
+    \caption{Deliverables.}
+    \label{tab:deliverables}
 \end{table}
 
 
