@@ -53,12 +53,12 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("drone_swarm_requirements", create_sql)
@@ -68,7 +68,7 @@ class create_tables:
         CREATE TABLE goal_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             goal_id VARCHAR NOT NULL,
-            swarm_req_id VARCHAR UNIQUE NOT NULL,
+            swarm_req_id VARCHAR NOT NULL,
             FOREIGN KEY (goal_id) REFERENCES goals (goal_id) ON DELETE CASCADE,
             FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements(swarm_req_id) ON DELETE CASCADE
         )
@@ -85,13 +85,13 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
             FOREIGN KEY (parent_id) REFERENCES system_requirements (sys_req_id) ON DELETE SET NULL,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("system_requirements", create_sql)
@@ -101,7 +101,7 @@ class create_tables:
         CREATE TABLE swarm_req_children (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             swarm_req_id VARCHAR  NOT NULL,
-            sys_req_id VARCHAR UNIQUE NOT NULL,
+            sys_req_id VARCHAR NOT NULL,
             FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
             FOREIGN KEY (swarm_req_id) REFERENCES drone_swarm_requirements (swarm_req_id) ON DELETE CASCADE
         )
@@ -118,13 +118,13 @@ class create_tables:
             effect VARCHAR NOT NULL,
             rationale VARCHAR,
             author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
-            review_status TEXT CHECK (review_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
-            reviewer TEXT CHECK (reviewer IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
-            verification_status TEXT CHECK (verification_status IN ('Pending','Failed','Verified','Inconclusive')),
-            verification_method VARCHAR,
+            verification_status TEXT CHECK (verification_status IN ('TBR','Reviewed','Accepted', 'Rejected')),
+            verifier TEXT CHECK (verifier IN ('E.Z','C.N','Y.M.B','E.M','A.H','TBR')),
+            validation_status TEXT CHECK (validation_status IN ('Pending','Failed','Verified','Inconclusive')),
+            vv_method VARCHAR,
             comment VARCHAR,
             FOREIGN KEY (parent_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE SET NULL,
-            FOREIGN KEY (verification_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
+            FOREIGN KEY (vv_method) REFERENCES test_and_verification (method_id) ON DELETE SET NULL
         )
         """
         self._ensure("subsystem_requirements", create_sql)
@@ -134,33 +134,12 @@ class create_tables:
         CREATE TABLE sysreq_children(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             sys_req_id VARCHAR NOT NULL,
-            sub_req_id VARCHAR UNIQUE NOT NULL,
+            sub_req_id VARCHAR NOT NULL,
             FOREIGN KEY (sys_req_id) REFERENCES system_requirements (sys_req_id) ON DELETE CASCADE,
             FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE
         )
         """
         self._ensure("sysreq_children", create_sql)
-
-    def create_subsys_join_item_table(self):
-        create_sql = """
-        CREATE TABLE subsys_join_item (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            item_id VARCHAR NOT NULL,
-            sub_req_id VARCHAR UNIQUE NOT NULL,   
-            FOREIGN KEY (item_id) REFERENCES item (item_id) ON DELETE CASCADE,
-            FOREIGN KEY (sub_req_id) REFERENCES subsystem_requirements (sub_req_id) ON DELETE CASCADE              
-        )
-        """
-        self._ensure("subsys_join_item", create_sql)
-
-    def create_item_table(self):
-        create_sql = """
-        CREATE TABLE item (
-            item_id VARCHAR PRIMARY KEY NOT NULL,
-            item_name VARCHAR NOT NULL
-        )
-        """
-        self._ensure("item", create_sql)
 
     def create_documents_table(self):
         create_sql = """
@@ -170,7 +149,9 @@ class create_tables:
             description VARCHAR NOT NULL,
             file BLOB,
             version INTEGER,
-            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H'))   
+            author TEXT CHECK (author IN ('E.Z','C.N','Y.M.B','E.M','A.H')),
+            file_name TEXT,
+            mime_type TEXT
         )
         """
         self._ensure("documents", create_sql)
@@ -231,8 +212,6 @@ class create_tables:
             self.create_drone_swarm_requirements_table()
             self.create_system_requirements_table()
             self.create_subsystem_requirements_table()
-            self.create_item_table()
-            self.create_subsys_join_item_table()
             self.create_sysreq_children_table()
             self.create_swarm_req_children_table()
             
