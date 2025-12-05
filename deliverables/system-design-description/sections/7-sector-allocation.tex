@@ -5,9 +5,10 @@
 
 The \gls{secmarket} determines which agent is responsible for which \glspl{sector} at any given time by distributing search workload across the swarm using simple market-like rules:
 \begin{itemize}
-    \item Sectors have costs.
+    \item Sectors have values.
+    %\item Sectors have discounts.
     \item Agents have budgets.
-    \item Agents “buy” sectors they can search efficiently.
+    \item Agents ''purchase'' sectors they can search efficiently.
     \item Agents release sectors when they can no longer search reliably.
 \end{itemize}
 
@@ -20,10 +21,11 @@ Instead of using a static or centrally assigned mapping of sectors to agents, th
 \begin{itemize}
     \item Each sector has a \textbf{value} determined by its probability (importance).
     \item Each agent has a \textbf{budget} that reflects its energy levels and possible workload.
+    \item Each agent evaluates the distance to a sector using a \textbf{personal discount function}.
+    \item Each agent evaluates the desirability of a sector using a \textbf{personal desirability function}.
     \item Each agent evaluates the cost of a sector using a \textbf{personal cost function}. %(e.g. probability + distance).
     %\item Every agent wants high-value sectors.
-    \item \color{red}Sectors are bid for in order of importance (highest probability first).\color{black}
-    \item Agents bid for sectors they can search efficiently.
+    \item Each agent bid on sectors in order of greatest desirability, i.e., they bid for sectors they can search efficiently.
     \item Degraded agents release sectors that they can no longer search reliably.
     \item Healthy agents take over released sectors through new bids.
     \item Agents generate rumour events when they want to acquire or release sectors.
@@ -42,10 +44,9 @@ Instead of using a static or centrally assigned mapping of sectors to agents, th
 
 This \gls{secmarket} yields a simple but flexible mechanism that fits on top of broadcast communication and the Rumour Mill.
 
+\newpage
 
-\subsection{Sector Cost}
-Each sector S is assigned a cost that reflects both how important it is and how hard it is for a particular agent to search it.
-
+\subsection{Sector Discount, Desirability \& Cost}
 The value of a sector is calculated by the SwarmInterface (\cref{fig:ad-searcharea-division}), where the SwarmInterface:
 \begin{enumerate}
     \item Receives \glspl{hotregion} from the \gls{searchmana}.
@@ -55,6 +56,32 @@ The value of a sector is calculated by the SwarmInterface (\cref{fig:ad-searchar
 From the probability, each sector is then given a value where high-probability sectors receive a higher value, and low-probability sectors receive a lower value. This encourages the Sector Allocation Market to favour assigning high-probability sectors to agents.
 
 Thereafter, for each agent A and sector S, an an additional cost component is computed based on the distance between A's position at the time of entering bidding state and the centre of S. Agents use this cost when deciding which sectors to bid for.
+
+Each agent, when bidding for sectors, calculate their distance to each sector, and then assign the following values to all available sectors: Discount, desirability, and cost.
+
+Distance between an agent and a sector is calculated by subtracting the middle position of a sector from the Agent's position when entering Bidding state (\cref{fig:fully-op}):
+\begin{equation}
+    distance(S_i) = agentPos(x, y) - sectorMid(x_i, y_i)
+\end{equation}
+
+Discount is calculated by dividing distance with the diagonal length of the Search Area:
+\begin{equation}
+    discount(S_i) = 1 - \frac{|distance(S_i)|}{diagonal(SearchArea)}
+\end{equation}
+
+Desirability is calculated by multiplying a sector's value by its discount:
+\begin{equation}
+    desirability(S_i) = value(S_i) \times discount(S_i)
+\end{equation}
+
+Cost of a sector is calculated by using the sector's value, discount, and how much energy is spent per flown unit distance:
+\begin{equation}
+    cost(S_i) = value(S_i) \times (1-discount) + k \times distance
+\end{equation}
+
+
+
+sector S is assigned a cost that reflects both how important it is and how hard it is for a particular agent to search it.
 
 Future work must decide the exact cost algorithm.
 
