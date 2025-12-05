@@ -7,7 +7,7 @@ The Agent Task \& Role Allocation layer determines what each agent actually does
 This layer is implemented as a state machine inside each agent. While the Sector Allocation Market answers ''who owns which sectors?'', the Task \& Role layer answers ''what should this agent be doing right now?''.
 
 \subsection{From Sector Ownership to Tasks}
-For a healthy agent, its primary tasks are derived from the set of sectors it owns:
+For a healthy (fully operational) agent, its primary tasks are derived from the set of sectors it owns:
 \begin{itemize}
     \item Each owned sector S corresponds to a search task: fly to S, search S, and report completion.
     \item Tasks can be scheduled internally in some order (e.g. nearest-first or probability-weighted order).
@@ -19,7 +19,7 @@ For a healthy agent, its primary tasks are derived from the set of sectors it ow
         \item receives the budget refund for S when the completion decision is confirmed (\Cref{subsec:agent-budget}).
     \end{enumerate}
 \end{itemize}
-Thus, sector ownership drives the agent’s task queue. The Task \& Role layer connects: SectorInfo to a set of search tasks, health and decisions to whether the agent should continue searching, release sectors, or take on a new role.
+Thus, sector ownership drives the agent's task queue. The Task \& Role layer connects: SectorInfo to a set of search tasks, health and decisions to whether the agent should continue searching, release sectors, or take on a new role.
 
 After completing or releasing sectors, the agent can use the Sector Allocation Market (\Cref{sec:sector-alloc}) to bid for new sectors, creating new tasks.
 
@@ -30,44 +30,60 @@ Agents may operate in different roles depending on their health status, \gls{sec
 \vspace{0.2cm}
 
 \subsubsection{Primary Roles}
-\textbf{Searcher}
+Primary roles are allowed fully operational agents.
+
+\noindent\textbf{PrimarySearch}
 \begin{itemize}
-    \item The agent’s main role is to search assigned sectors.
+    \item The agent's main role is to search assigned sectors.
     \item It selects a sector from its task queue, navigates there, and executes the search.
     \item It reports sector completion via the Rumour Mill and moves on to the next task.
 \end{itemize}
-\noindent \textbf{Subject confirmer}
+\noindent \textbf{SubjectDetected}
 \begin{itemize}
     \item When an agent finds the \gls{subject}, it raises a ''Subject found'' event (Origin).
     \item It participates in the subsequent Rumour Mill cycle to confirm or reject the detection.
-    \item[] (Receiving neighbours go to the location and confirm the subject is there before broadcasting sources about subject found.)
-    \item Once the Subject is confirmed found, its role typically transitions to returning to base.
+    \item If the Subject is confirmed found, its role transitions to Returning.
+    \item If the subject is not confirmed found, its role transitions back to its previous role.
+\end{itemize}
+\noindent \textbf{SubjectConfirming}
+\begin{itemize}
+    \item Fully operational neighbours of an agent that has detected the subject go to the location to confirm if the subject is there.
+    \item If the subject is found by a neighbour, the neighbour broadcasts a Source rumour ''Subject found at location L''.
+    \item If the subject is not found by a neighbour, the neighbour broadcasts a Source rumor ''Subject not found at location L''.
+    \item If the Subject is confirmed found, all agents' roles transition to Returning.
+    \item If the subject is not confirmed found, the neighbours' roles transitions back to their previous roles.
 \end{itemize}
 
 \vspace{0.2cm}
 
 \subsubsection{Secondary Roles (for Degraded Agents)}
-\textbf{Communication relay}
+Secondary roles are allowed partially operational agents.
+
+\noindent\textbf{SecondaryRelay}
 \begin{itemize}
-    \item The agent positions itself to improve communication coverage between other agents and/or the SwarmInterface.
+    \item The agent positions itself to improve communication coverage between other agents and/or the \\SwarmInterface.
     \item It may hover in a location that bridges otherwise disconnected parts of the swarm.
     \item It continues to send and receive pulses and rumours, but does not perform primary search.
 \end{itemize}
-\noindent \textbf{Secondary searcher}
+\noindent \textbf{SecondarySearch}
 \begin{itemize}
     \item If the agent is partially degraded but still somewhat usable, it may be assigned less critical search tasks (e.g. low-probability sectors).
     \item The policies for when to allow this are design choices and can be tuned in future work.
 \end{itemize}
 
+\vspace{0.2cm}
+
 \subsubsection{Terminal or Restricted Roles}
-\textbf{Return}
+Terminal or restricted roles are allowed failed agents.
+
+\noindent\textbf{Returning}
 \begin{itemize}
-    \item The agent returns to base, typically due to low battery, mission completion, or explicit command.
-    \item Before returning, it releases its sectors via the \gls{secmarket}, so that other agents can take over.
+    \item The agent returns to base, typically due to low battery, mission completion, explicit command, or health too heavily degraded.
+    \item Before returning, it announces its return (if possible) through an Origin rumour, which lets the rest of the swarm know that the returning agent's sectors are available in the \gls{secmarket} and can therefore be taken over.
 \end{itemize}
 \textbf{Failed}
 \begin{itemize}
-    \item The agent has suffered a critical failure or emergency landing and is effectively out of service.
+    \item The agent has suffered a critical failure or must emergency land, meaning it is effectively out of service.
     \item It is removed as a member of the swarm after a \gls{rumourmill} decision based on missing pulses or explicit failure events.
     \item Its sectors are released and reallocated to other agents.
 \end{itemize}
@@ -76,28 +92,28 @@ These roles govern which actions are allowed for the agent and how it contribute
 \subsection{Role Selection Logic}
 Role selection is driven by three main inputs:
 \begin{itemize}
-    \item Health status from the \acrshort{fmu} (e.g. healthy, degraded, bad\_sensor, failed),
+    \item Health status from the \acrshort{fmu} (e.g. healthy, degraded, bad sensor, failed),
     \item Sector ownership (how many sectors the agent owns and their status),
     \item External or global decisions (e.g. \gls{searchmana} commands, \gls{subject} confirmed found, swarm-wide abort).
 \end{itemize}
 The IRDS protocol module provides the mechanisms (Rumour Mill and Sector Allocation Market) to coordinate these inputs; specific role policies can be tuned, but typical examples include:
 
 \begin{itemize}
-    \item Bad Sensor $\rightarrow$ Secondary Role + Sector Release
+    \item Bad Sensor $\rightarrow$ Sector Release + Secondary Role
     \begin{enumerate}
         \item FMU detects a bad sensor condition.
-        \item Agent releases its sectors and raises an Origin: ''I have bad\_sensor.''
+        \item Agent releases its sectors and raises an Origin: ''I have bad sensor.''
         \item Neighbours broadcast Sources confirming degradation.
-        \item Opinions form; once the consensus threshold is met, the agent decides to transition to a secondary role (for example, communication relay).
+        \item Opinions form; once the consensus threshold is met, the agent decides to transition to a secondary role (for example, SecondaryRelay).
         \item A decision-Origin is broadcast to announce this outcome.
-        \item[] Result: The degraded agent stops performing primary search but remains useful to the swarm.
+        \item[] Result: The degraded agent stops performing PrimarySearch but remains useful to the swarm.
     \end{enumerate}
-    \item Low Battery $\rightarrow$ Return + Sector Release
+    \item Low Battery $\rightarrow$ Sector Release + Returning
     \begin{enumerate}
         \item FMU detects that battery is below a safe threshold.
         \item Agent starts a Rumour Mill event indicating low battery and its intention to return.
-        \item Sources confirm that returning is appropriate.
-        \item The agent releases its sectors and transitions to the return role.
+        \item Sources confirm the Origin rumour has been received.
+        \item The agent releases its sectors and transitions to Returning.
         \item The SwarmInterface can display this event so the Search Manager can prepare a battery change.
         \item[] Result: The agent returns safely without leaving unfinished sectors ''dangling''.
     \end{enumerate}
@@ -107,7 +123,7 @@ The IRDS protocol module provides the mechanisms (Rumour Mill and Sector Allocat
         \item[] Neighbours go to the location and confirm the subject is there before broadcasting sources about subject found.
         \item The Rumour Mill confirms or rejects this event.
         %\item Once confirmed, the confirming agent broadcasts a decision-Origin: ''Subject found confirmed.''
-        \item All agents receive this decision and transition from search or task roles to return.
+        \item All agents receive this decision and transition to Returning.
         \item[] Result: The entire swarm reacts consistently when the mission objective has been achieved.
     \end{enumerate}
 \end{itemize}
@@ -117,98 +133,43 @@ Future work may extend this role selection logic by including neighbourhood sugg
 
 \subsection{Agent State Machine}
 \label{subsec:state-machine}
-The Agent Task \& Role Allocation layer is implemented as a state machine. Each agent transitions between states based on health events, \gls{sector} allocation, and \gls{rumourmill} decisions.
+The Agent Task \& Role Allocation layer is implemented as a state machine (\cref{fig:stateflow}). Each agent transitions between states based on health events, \gls{sector} allocation, and \gls{rumourmill} decisions.
 
-Each agent has the following key states:
+Each agent has the following main states and subsequent roles (sub-states):
 \begin{itemize}
-    \item start
+    \item \textbf{Initialising}: Agent initialises the protocol module and receives initial mission information (agents in swarm, list of sectors, neighbourhoods).
+    \item \textbf{FullyOperational}
+    \item[] Initialising transitions to FullyOperational if the agent is healthy, has all required equipment, and has received mission\_start. The initial role in FullyOperational is Bidding.
     \begin{itemize}
-        \item[$\circ$] Agent inactive
-        \item[$\circ$] Transitions to task upon initialisation or joining
+        \item[$\circ$] \textbf{Bidding}: Agent attempts to purchase available sectors.
+        \item[] Bidding transitions to TaskPlanning if the agent runs out of budget or there are no more available sectors for purchase.
+        \item[$\circ$] \textbf{TaskPlanning}: Agent plans in which order its owned sectors shall be searched.
+        \item[] The agent switches between TaskPlanning and PrimarySearch as long as the agent owns sectors to be searched.
+        \item[$\circ$] \textbf{PrimarySearch}: Agent actively searches an owned sector.
+        \item[] PrimarySearch transitions to SubjectDetected if the agent believes it has detected the subject.
+        \item[$\circ$] \textbf{SubjectDetected}: Agent has detected the Subject, has broadcasted an Origin rumour, and is waiting for confirmation.
+        \item[$\circ$] \textbf{SubjectConfirming}: Neighbour of an agent tries to confirm that the Subject has been found. Fully operational neighbours transition to SubjectConfirming from any role if an Origin for subject found has been received.
+        \item[] If the mission is being aborted, or the Subject is confirmed found, all agents transition to returning. If the Subject is confirmed not found, agents in SubjectDetected and SubjectConfirming transitions back to their previous roles.
+        \item[$\circ$] \textbf{Returning}: Agent returns to base.
     \end{itemize}
-    \item task
+    \item \textbf{PartiallyOperational}
+    \item[] Initialising transitions to PartiallyOperational if the agent is not healthy or does not have all required equipment, and has received mission\_start. The initial role in PartiallyOperational is AwaitingOpinions. FullyOperational transitions to PartiallyOperational if the FMU triggers a degraded health event.
     \begin{itemize}
-        \item[$\circ$] Receives assigned sectors
-        \item[$\circ$] Participates in bidding
-        \item[$\circ$] Waits for rumour confirmation
+        \item[$\circ$] (AwaitingOpinions: Agent waits for enough Opinion rumours to decide which secondary role to assume.)
+        \item[$\circ$] \textbf{SecondaryRelay}: Agent acts as a communication relay.
+        \item[$\circ$] \textbf{SecondarySearch}: Agent assists fully operational agents' searches.
+        \item[] If the mission is being aborted, or the Subject is confirmed found, all agents transition to returning.
+        \item[$\circ$] \textbf{Returning}: Agent returns to base.
     \end{itemize}
-    \item[] task transitions to:
+    \item \textbf{Failed}
+    \item[] FullyOperational or PartiallyOperational transition to Failed if the health status from the FMU indicate system failure.
     \begin{itemize}
-        \item[$\circ$] search when a sector becomes assigned
-        \item[$\circ$] secondary\_task if degraded
-        \item[$\circ$] return if failed or commanded by \gls{searchmana}
-        \item[$\circ$] failed if agent suffers critical failure
+        \item[] A failed agent enters Returning if a return flight is possible.
+        \item[$\circ$] \textbf{Returning}: Agent returns to base.
+        \item[] If a return flight is not possible for a failed agent, but emergency landing is, it transitions to EmergencyLanding.
+        \item[$\circ$] \textbf{EmergencyLanding}: Agent emergency lands because of critical failure.
+        \item[] If a failed agent cannot return or emergency land, it shuts down (final state).
     \end{itemize}
-    \item search
-    \begin{itemize}
-        \item[$\circ$] Actively searches assigned sector(s)
-        \item[$\circ$] Broadcasts completion via Origin
-        \item[$\circ$] Updates position, health, and pulses
-    \end{itemize}
-    \item[] search transitions to:
-    \begin{itemize}
-        \item[$\circ$] task when search is completed
-        \item[$\circ$] found if \gls{subject} is detected
-        \item[$\circ$] bad\_sensor if FMU detects sensor degradation
-        \item[$\circ$] return if commanded
-    \end{itemize}
-    \item found
-    \begin{itemize}
-        \item[$\circ$] Occurs when the agent detects the Subject
-        \item[$\circ$] Broadcasts Origin: ''Subject found''
-    \end{itemize}
-    \item[] found transitions to:
-    \begin{itemize}
-        \item[$\circ$] confirmed when receiving sources from neighbours
-    \end{itemize}
-    \item confirmed
-    \begin{itemize}
-        \item[$\circ$] All agents move to return state
-        \item[$\circ$] Mission ends or transitions to rescue operations
-    \end{itemize}
-    \item return
-    \begin{itemize}
-        \item[$\circ$] Agent returns to base
-        \item[$\circ$] Human operator may prepare battery replacement
-        \item[$\circ$] Full swarm may return (e.g., mission abort or confirmed subject found)
-    \end{itemize}
-    \item bad\_sensor
-    \begin{itemize}
-        \item[$\circ$] Triggered by FMU health output
-        \item[$\circ$] Agent broadcasts degraded health
-        \item[$\circ$] Drops sectors via rumour process
-    \end{itemize}
-    \item[] bad\_sensor transitions to:
-    \begin{itemize}
-        \item[$\circ$] secondary\_task
-        \item[$\circ$] or failed
-    \end{itemize}
-    \item secondary\_task
-    \item[] Agent performs a non-critical role, such as:
-    \begin{itemize}
-        \item[$\circ$] Communication relay.
-        \item[$\circ$] Secondary search.
-    \end{itemize}
-    \item[] secondary\_search transitions to:
-    \begin{itemize}
-        \item[$\circ$] return if battery low
-        \item[$\circ$] failed if further degradation occurs
-    \end{itemize}
-    \item failed
-    \begin{itemize}
-        \item[$\circ$] Critical degradation or emergency landing
-        \item[$\circ$] Agent informs neighbours (if possible)
-        \item[$\circ$] Leaves swarm
-        \item[$\circ$] Neighbourhoods recalculate
-        \item[$\circ$] Sectors re-enter auction pool
-    \end{itemize}
-\end{itemize}
-Transitions between these states are triggered by:
-\begin{itemize}
-    \item \acrshort{fmu} health outputs (e.g. bad\_sensor, low battery, failure),
-    \item \gls{rumourmill} decisions (e.g. \gls{subject} confirmed found, sector completion, global abort),
-    \item \gls{secmarket} events (e.g. no more sectors owned, sectors reallocated),
-    \item high-level commands via the SwarmInterface.
 \end{itemize}
 
 \subsubsection{State Diagram}
@@ -258,7 +219,7 @@ Examples of emergent behaviours include:
     \item Self-Healing After Failures
     \begin{itemize}
         \item[$\circ$] Missing pulses cause suspected failures to be raised via the \gls{rumourmill}.
-        \item[$\circ$] Once a failure is confirmed, the failed agent’s sectors are released and reallocated.
+        \item[$\circ$] Once a failure is confirmed, the failed agent's sectors are released and reallocated.
         \item[$\circ$] Neighbourhoods are recomputed to maintain the 1 + 3 structure where possible.
         \item[$\circ$] Information about the failed agent (e.g. role, sectors, health) is cleaned up in AgentInfo.
     \end{itemize}
