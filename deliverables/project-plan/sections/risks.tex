@@ -1,87 +1,86 @@
 \subsection{Identified Risks}
 %Source (Dependency / Factor)
-
+\begin{hyphenrules}{nohyphenation}
 \renewcommand{\arraystretch}{1.4}
 \begin{table}[H]
     \centering
     \footnotesize
-    \begin{tabular}{|c|l|l|c|c|l|}
+    \begin{tabular}{|p{1.1cm}|p{2.7cm}|p{1.6cm}|p{1.2cm}|p{1.7cm}|p{7cm}|}
         \hline
         \textbf{Risk ID} & \textbf{Risk Description} & \textbf{Source} & \textbf{Impact} & \textbf{Likelihood} & \textbf{Mitigation Strategy} \\
         \hline
-        R-01 & \makecell{Outdated or incomplete\\ UAV specifications} & \makecell{Reference UAV\\ Specifications} & Medium & Low & \makecell{Validate Carrier H6HL\\ specs early; adjust assumptions\\ if updates occur} \\
+        R-01 & Outdated or incomplete UAV specifications & Reference UAV Specifications & Medium & Low & Validate Carrier H6HL specs early; adjust assumptions if updates occur \\
         \hline
-        R-02 & \makecell{Regulatory changes\\ affecting UAV assumptions} & \makecell{External Regulations\\ \& Standards} & Low & Low & \makecell{Monitor relevant UAV\\ standards; adapt simulations\\ if required} \\
+        R-02 & Regulatory changes affecting UAV assumptions & External Regulations \& Standards & Low & Low & Monitor relevant UAV standards; adapt simulations if required \\
         \hline
-        R-03 & \makecell{Reduced progress\\ due to limited time} & Time Constraint & High & Medium & \makecell{Plan internal deadlines with\\ buffer time; avoid scheduling\\ critical activities in parallel} \\
+        R-03 & Reduced progress due to limited time & Time Constraint & High & Medium & Plan internal deadlines with buffer time; avoid scheduling critical activities in parallel \\
         \hline
-        R-04 & \makecell{Sudden illness\\ among team members} & \makecell{Health and Work\\ Environment} & Medium & Low & \makecell{Keep stress levels low,\\ Ensure breaks} \\
+        R-04 & Sudden illness among team members & Health and Work Environment & Medium & Low & Keep stress levels low, Ensure breaks \\
         \hline
-        R-05 & \makecell{Delayed ''Read Task\\ Description'' (TP-01)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-05 & Delayed ''Read Task Description'' (TP-01) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-06 & \makecell{Delayed ''Read\\ Previous Work'' (TP-02)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-06 & Delayed ''Read Previous Work'' (TP-02) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-07 & \makecell{Delayed ''Familiarize\\ with SORA'' (TP-03)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-07 & Delayed ''Familiarize with SORA'' (TP-03) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-08 & \makecell{Delayed ''Write\\ Role Descriptions'' (TP-04)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-08 & Delayed ''Write Role Descriptions'' (TP-04) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-09 & \makecell{Delayed ''Define\\ Project Goals'' (TP-06)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-09 & Delayed ''Define Project Goals'' (TP-06) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-10 & \makecell{Delayed ''Solution\\ Ideas'' (TP-07)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-10 & Delayed ''Solution Ideas'' (TP-07) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-11 & \makecell{Delayed ''Set up\\ Database'' (TP-08)} & \makecell{Time Estimation,\\ Programmer Availability} & High & Medium & \makecell{Adhere to project schedule,\\ plan work properly, more than\\ one person carries out the task} \\
+        R-11 & Delayed ''Set up Database'' (TP-08) & Time Estimation, Programmer Availability & High & Medium & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, plan work properly, more than one person carries out the task \\
         \hline
-        R-12 & \makecell{Delayed ''Requirements\\ Management Plan'' (TP-14)} & \acrshort{rm} & High & Low & Adhere to project schedule \\
+        R-12 & Delayed ''Requirements Management Plan'' (TP-14) & \acrshort{rm} & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-13 & \makecell{Delayed ''Enhance\\ Simulation Software'' (TI-01)} & Programmer Availability & High & Low & \makecell{Adhere to project schedule,\\ Start activity early} \\
+        R-13 & Delayed ''Enhance Simulation Software'' (TI-01) & Programmer Availability & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, Start activity early \\
         \hline
-        R-14 & \makecell{Delayed ''Drone\\ Swarm Requirements'' (TI-02)} & \makecell{Time Estimation,\\ Database issue} & High & Medium & \makecell{Adhere to project schedule,\\ more than one person carries\\ out the task} \\
-        \hline
-        R-15 & \makecell{Delayed ''System\\ Requirements'' (TI-03)} & \makecell{Time Estimation,\\ Database issue} & High & Medium & \makecell{Adhere to project schedule,\\ more than one person carries\\ out the task} \\
-        \hline
-        R-16 & \makecell{Delayed ''Item\\ Requirements'' (TI-05)} & \makecell{Time Estimation,\\ Database issue} & High & Low & \makecell{Adhere to project schedule,\\ more than one person carries\\ out the task} \\
-        \hline
-        R-17 & \makecell{Delayed ''Item\\ Design'' (TI-06)} & Time Estimation & High & Low & Adhere to project schedule \\
-        \hline
-        R-18 & \makecell{Delayed ''Item\\ Integration'' (TI-07)} & Time Estimation & High & Medium & \makecell{Adhere to project schedule,\\ more than one person carries\\ out the task} \\
-        \hline
-        R-19 & \makecell{Delayed ''System\\ Integration'' (TI-08)} & Time Estimation & High & Medium & Adhere to project schedule \\
-        \hline
-        R-20 & \makecell{Delayed ''Simulate\\ Solution'' (TI-09)} & \makecell{Time Estimation,\\ Simulation Software} & High & Low & Adhere to project schedule \\
-        \hline
-        R-21 & \makecell{Delayed ''Drone Swarm\\ Req. Validation'' (TV-03)} & Time Estimation & High & Low & Adhere to project schedule \\
-        \hline
-        R-22 & \makecell{Delayed ''System Req.\\ Validation'' (TV-04)} & Time Estimation & High & Low & Adhere to project schedule \\
-        \hline
-        R-23 & \makecell{Delayed ''Item Req.\\ Validation'' (TV-06)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-14 & Delayed ''Drone Swarm Requirements'' (TI-02) & Time Estimation, Database issue & High & Medium & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, more than one person carries out the task \\
         \hline
     \end{tabular}
     \caption{Risk Log}
     \label{tab:risk-log}
 \end{table}
 
-\begin{table}[H]
+    \begin{table}[H]
     \centering
     \footnotesize
-    \begin{tabular}{|c|l|l|c|c|l|}
+    \begin{tabular}{|p{1.1cm}|p{2.7cm}|p{1.6cm}|p{1.2cm}|p{1.7cm}|p{7cm}|}
         \hline
         \textbf{Risk ID} & \textbf{Risk Description} & \textbf{Source} & \textbf{Impact} & \textbf{Likelihood} & \textbf{Mitigation Strategy} \\
         \hline
-        R-24 & \makecell{Delayed ''Item\\ Verification'' (TV-08)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-15 & Delayed ''System Requirements'' (TI-03) & Time Estimation, Database issue & High & Medium & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, more than one person carries out the task \\
         \hline
-        R-25 & \makecell{Delayed ''System\\ Verification'' (TV-09)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-16 & Delayed ''Item Requirements'' (TI-05) & Time Estimation, Database issue & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, more than one person carries out the task \\
         \hline
-        R-26 & \makecell{Delayed ''Drone Swarm\\ Verification'' (TV-10)} & Time Estimation & High & Low & Adhere to project schedule \\
+        R-17 & Delayed ''Item Design'' (TI-06) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        R-27 & \makecell{Delayed\\ ''Presentation'' (TE-02)} & Time Estimation & High & High & \makecell{Adhere to project schedule,\\ work continuously with\\ presentation framework during project} \\
+        R-18 & Delayed ''Item Integration'' (TI-07) & Time Estimation & High & Medium & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task, more than one person carries out the task \\
         \hline
-        R-28 & \makecell{Delayed \\''Final Report'' (TE-03)} & \makecell{Time Estimation,\\ Delayed Deliverables} & High & High & \makecell{Adhere to project schedule,\\ work continuously with report\\ framework during project} \\
+        R-19 & Delayed ''System Integration'' (TI-08) & Time Estimation & High & Medium & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
         \hline
-        %1 & 2 & 3 & 4 & 5 & 6 \\
-        %\hline
+        R-20 & Delayed ''Simulate Solution'' (TI-09) & Time Estimation, Simulation Software & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-21 & Delayed ''Drone Swarm Req. Validation'' (TV-03) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-22 & Delayed ''System Req. Validation'' (TV-04) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-23 & Delayed ''Item Req. Validation'' (TV-06) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-24 & Delayed ''Item Verification'' (TV-08) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-25 & Delayed ''System Verification'' (TV-09) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-26 & Delayed ''Drone Swarm Verification'' (TV-10) & Time Estimation & High & Low & If time estimation is exceeded, a new deadline shall be implemented and within half of the next tasks allocated time. Additional support shall be given in order to complete the task \\
+        \hline
+        R-27 & Delayed ''Presentation'' (TE-02) & Time Estimation & High & High & If time is exceeded, set a new deadline within 1 day and add additional support to complete the task, work continuously with presentation framework during project \\
+        \hline
+        R-28 & Delayed ''Final Report'' (TE-03) & Time Estimation, Delayed Deliverables & High & High & If time is exceeded, set a new deadline within 1 day and add additional support to complete the task, work continuously with report framework during project \\
+        \hline
     \end{tabular}
     %\caption{Risk Log}
     %\label{tab:risk-log}
     \captionof*{table}{Table \ref{tab:risk-log}: Risk Log}
 \end{table}
 \renewcommand{\arraystretch}{1.0}
+\end{hyphenrules}
