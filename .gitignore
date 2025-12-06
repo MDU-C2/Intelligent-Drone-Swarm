@@ -16,4 +16,5 @@ __pycache__/
 *.glg
 *.gls
 .synctex(busy)
+documents/latex/*.pdf
 main.pdf
