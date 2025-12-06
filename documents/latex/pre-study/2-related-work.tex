@@ -1,9 +1,19 @@
 \section{Related Work}
 % Relevant work: distributed consensus algorithms (e.g., Paxos, Raft, Byzantine fault tolerance), UAV swarm resilience and cooperative autonomy, safety-critical systems, safety-critical dependability approaches in distributed systems.
+This project will build on three main strands of existing research:
+\begin{itemize}
+    \item UAV swarms for search and rescue and related coverage missions.
+    \item Distributed consensus and situation awareness in multi-agent systems.
+    \item Dynamic task allocation and communication architectures for UAV networks.
+\end{itemize}
+The works reviewed in this section were selected because they either address SAR-oriented swarm behaviour, propose mechanisms for consensus or cooperative decision-making among UAVs, or survey task allocation and communication patterns relevant to resilient swarm coordination.
 
+Together, these contributions provide the technical background for IRDS: They show how swarms can be organised, how information can be disseminated, and how tasks can be distributed. At the same time, they reveal important gaps with respect to health-aware, fail-operational replanning in SAR scenarios, where degraded agents must hand over responsibilities without compromising coverage or safety.
+
+The most relevant characteristics of the reviewed works, including their mission focus, coordination strategy, and treatment of failures, are summarised in \cref{tab:placeholder}. These works were chosen because they collectively cover cooperative SAR missions, dynamic task allocation in swarms, consensus formation in UAV networks, and communication architectures for flying ad-hoc networks, which are all directly related to the IRDS problem of dependable replanning.
 \begin{table}[H]
     \centering
-    \begin{tabular}{|B{0.7cm}|C{5cm}|C{4cm}|C{4cm}|}
+    \begin{tabular}{|B{0.7cm}|C{5cm}|C{5cm}|C{5cm}|}
         \hline
         \textbf{Year} & \textbf{Title} & \textbf{Main Focus} & \textbf{Relevance to \acrshort{irds}} \\
         \hline
@@ -30,9 +40,11 @@
         %1 & 2 & 3 & 4 \\
         %\hline
     \end{tabular}
-    \caption{Caption}
+    \caption{Previous work used as refenced in the project.}
     \label{tab:placeholder}
 \end{table}
+
+The following subsections summarise the most relevant findings and limitations.
 
 \subsection{Cooperative Search and Rescue with Drone Swarm}
 This paper presents a cooperative search-and-rescue (SAR) strategy using UAV swarms.
@@ -66,3 +78,6 @@ This review surveys dynamic task allocation methods for \acrshort{uav} swarms fa
 
 \subsection{UAV swarm communication and control architectures: a review}
 This paper reviews UAV swarm communication and control architectures by comparing centralised (ground-based) and \gls{adhoc} (\acrshort{fanet}) models. The paper discusses autonomy levels, swarm coordination algorithms, and the potential of 5G networks to improve UAV-to-UAV communication. The paper highlights the need for hybrid architectures that combine distributed decision-making with reliable infrastructure support to overcome range, latency, and scalability issues.
+
+\subsection{Summary}
+In summary, existing research demonstrates that UAV swarms can coordinate search patterns, maintain basic connectivity in flying ad-hoc networks, and perform dynamic task allocation under various assumptions. However, most SAR-oriented swarm solutions either assume fully functional agents or handle failures by removing compromised units without explicitly restructuring the mission. Consensus-oriented works focus on agreement but do not couple consensus with health-aware task reallocation, while task-allocation studies often neglect detailed models of agent health and fault propagation. None of the reviewed works provides an integrated, fail-operational replanning protocol that combines distributed consensus on degraded health events, dynamic redistribution of search sectors, and assignment of secondary roles to compromised agents in a SAR context. Addressing this gap is the central focus of the IRDS project.
