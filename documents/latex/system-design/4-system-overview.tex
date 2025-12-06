@@ -137,8 +137,8 @@ The following scenarios illustrate how the layers work together.
 
 \newpage
 
-\subsubsection{New Agent Join After Mission Start}
-A new agent must first be initialised (\cref{fig:ad-new-agent-init}) before flying to the search area and attempt to join the swarm (\cref{fig:ad-new-agent}). A larger version of \cref{fig:ad-new-agent} can be found in \cite{SD-22}.
+\subsubsection{Initialising New Agent After Mission Start}
+A new agent must first be initialised (\cref{fig:ad-new-agent-init}) before flying to the search area and attempt to join the swarm (\cref{fig:ad-new-agent}).
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{SD-29_AD - Initialise New Agent 1.0.png}
@@ -146,6 +146,10 @@ A new agent must first be initialised (\cref{fig:ad-new-agent-init}) before flyi
     \label{fig:ad-new-agent-init}
 \end{figure}
 
+\newpage
+
+\subsubsection{Agent Join After Mission Start}
+Any agent not a member of the swarm must perform the processes in \cref{fig:ad-new-agent}. A larger version of \cref{fig:ad-new-agent} can be found in \cite{SD-22}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{SD-22_AD - Agent Join After Mission Start 1.0.png}
@@ -155,7 +159,17 @@ A new agent must first be initialised (\cref{fig:ad-new-agent-init}) before flyi
 
 \newpage
 
+\subsubsection{New Agent Join}
+New agents joining the swarm must perform the activities in \cref{fig:ad-new-agent-init} and \cref{fig:ad-new-agent}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{SD-30_AD - New Agent Join 1.0.png}
+    \caption{\textit{(SD-30)} \gls{actdia} showing the process of \textbf{new} agents joining after mission start.}
+    \label{fig:ad-new-agent-join}
+\end{figure}
+
 \subsubsection{Agent Rejoin}
+Agents rejoining the swarm must first make their own suggestion of neighbourhood based on the neighbours they had before leaving the swarm, and then perform the activities in \cref{fig:ad-new-agent}.
 %Agent re-joining after temporary loss
 \color{red}\color{black}
 \begin{figure}[H]
@@ -165,6 +179,7 @@ A new agent must first be initialised (\cref{fig:ad-new-agent-init}) before flyi
     \label{fig:ad-agent-rejoin}
 \end{figure}
 
+\newpage
 
 \subsubsection{Agent Health Degrades}
 \begin{enumerate}
