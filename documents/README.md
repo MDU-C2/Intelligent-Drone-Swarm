@@ -8,7 +8,7 @@
 1. Get the LaTeX Workshop extension
 
 ### Get Glossary & References to Work
-1. Open a Terminal and run 
+1. In VSCode, open a Terminal and run 
 ```bash
 cd documents/latex
 ```
