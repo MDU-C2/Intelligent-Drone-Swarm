@@ -8,7 +8,7 @@
 1. Get the LaTeX Workshop extension
 
 ### Build glossary
-1. Open a Terminal and make sure you're in the correct folder (type `cd` followed by the start of the folder's name, then press TAB and then ENTER). Thereafter, run this command:
+1. Open a Terminal and make sure you're in the correct folder (type `cd` followed by the start of the folder's name, then press TAB and then ENTER). Thereafter, run this command (switch `main` to the name of your main LaTeX build file ):
 ```bash
 pdflatex main.tex
 ```
@@ -24,5 +24,3 @@ pdflatex main.tex
 ```bash
 pdflatex main.tex
 ```
-
-cd .\documents\
