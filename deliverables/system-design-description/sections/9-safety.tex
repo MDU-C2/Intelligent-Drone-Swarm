@@ -39,7 +39,7 @@ The protocol module assumes the following types of faults may occur:
     \item[] An agent may behave arbitrarily, including sending incorrect, inconsistent, or misleading information.
     \item[] IRDS is designed to tolerate one Byzantine fault per neighbourhood (details in \Cref{sec:formal-fault-tolerance-model}), provided faulty agents are not too clustered.
 \end{enumerate}
-The protocol is designed to tolerate one Byzantine fault per neighbourhood and multiple crash or omission faults swarm-wide.
+The protocol is designed to tolerate approximately one Byzantine fault per neighbourhood and multiple crash or omission faults swarm-wide.
 
 \subsection{Pulse Safety Mechanism}
 Pulses provide a simple, continuous check on agent presence (health status is assumed healthy unless a rumour states otherwise). Pulse messages support safety by enabling:
@@ -59,11 +59,11 @@ If an agent does not receive pulses from any of their neighbours for a configure
     \item Suspects that the neighbour, agent A, has failed or is unreachable,
     \item creates a Source rumour: ''Agent A no longer member of swarm'',
     \item participates in the \gls{rumourmill} to confirm or reject this Source rumour.
-    \item Once the Rumour Mill confirms that Y is missing or failed:
+    \item Once the Rumour Mill confirms that A is missing or failed:
     \begin{itemize}
-        \item[$\circ$] Y is set as no longer a member in AgentInfo,
-        \item[$\circ$] neighbourhoods are recalculated to exclude Y,
-        \item[$\circ$] sectors previously owned by Y are considered released and re-enter the \gls{secmarket} (\Cref{subsubsec:sector-release-from-failed}).
+        \item[$\circ$] A is set as no longer a member in AgentInfo,
+        \item[$\circ$] neighbourhoods are recalculated to exclude A and retain 1 + 3 formation of fully operational agents,
+        \item[$\circ$] sectors previously owned by A are considered released and re-enter the \gls{secmarket} (\Cref{subsubsec:sector-release-from-failed}).
     \end{itemize}
 \end{itemize}
 Thus, silent failures do not go unnoticed and their impact on search coverage is mitigated.
@@ -72,28 +72,30 @@ Thus, silent failures do not go unnoticed and their impact on search coverage is
 \subsection{Safety-Driven State Behaviour}
 The agent state machine (\Cref{subsec:state-machine}) is designed with safety in mind, where key transitions include:
 \begin{itemize}
-    \item Health degradation $\rightarrow$ restricted roles:
+    \item Health degradation $\rightarrow$ Secondary roles:
     \begin{itemize}
-        \item bad\_sensor $\rightarrow$ transition from search to secondary\_task, prevents faulty sensors from corrupting search results.
-        \item Release of \glspl{sector} via the Sector Allocation Market.
-        \item Stop performing primary search tasks.
+        \item[$\circ$] bad sensor $\rightarrow$ transition from PrimarySearch in FullyOperational to appropriate task in PartiallyOperational, prevents faulty sensors from corrupting search results.
+        \item[$\circ$] Release of \glspl{sector} via the Sector Allocation Market.
+        \item[$\circ$] Stop performing primary search tasks.
     \end{itemize}
-    \item Critical failure $\rightarrow$ failed:
+    \item Critical failure $\rightarrow$ transition to Failed:
     \begin{itemize}
-        \item Severe \acrshort{fmu} errors or complete communication loss $\rightarrow$ failed.
-        \item Removal of the agent from neighbourhoods and SectorInfo after Rumour Mill confirmation.
+        \item[$\circ$] Severe \acrshort{fmu} errors or complete communication loss $\rightarrow$ Failed, and possibly Returning or \\EmergencyLanding.
+        \item[$\circ$] Removal of the agent from neighbourhoods and SectorInfo after Rumour Mill confirmation.
     \end{itemize}
-    \item Low battery $\rightarrow$ return:
+    \item Low battery $\rightarrow$ PartiallyOperational/Returning:
     \begin{itemize}
-        \item Low-battery event $\rightarrow$ sector release, then return.
-        \item Prevents agents from dying silently in the field with sectors assigned.
+        \item[$\circ$] Low-battery event $\rightarrow$ sector release, then PartiallyOperational and Returning.
+        \item[$\circ$] Prevents agents from purchasing sectors and dying silently in the field with sectors assigned.
     \end{itemize}
-    \item Subject confirmation $\rightarrow$ return
+    \item Subject confirmation $\rightarrow$ Returning
     \begin{itemize}
-        \item Subject confirmed found $\rightarrow$ all agents transition towards return.
+        \item Subject confirmed found $\rightarrow$ all agents transition toward Returning.
     \end{itemize}
 \end{itemize}
 These transitions ensure that degraded agents limit their impact, failed agents are excluded from coordination, and resources and responsibilities are reallocated to healthy agents.
+
+\newpage
 
 \subsection{Formal Fault Tolerance Model}
 \label{sec:formal-fault-tolerance-model}
@@ -102,30 +104,32 @@ This subsection summarises the assumptions and reasoning behind the fault tolera
 \vspace{0.2cm}
 
 \subsubsection{Neighbourhood Size and Structure}
-Each agent forms a neighbourhood consisting of itself and its three geographically closest agents (based on initial sectors). Thus, each neighbourhood contains four agents in total (1 + 3).
-Each agent must be seen as a neighbour by at least three other agents.
+Each fully operational agent forms a neighbourhood consisting of itself and its three geographically closest (based on initial sectors) agents that are also fully operational. Thus, each neighbourhood contains four fully operational agents in total (1 + 3), along with any partially operational agents. 
+Four fully operational agents is required for subject confirmation to work as intended, and each agent must be seen as a neighbour by at least three other agents for missed pulses to be registered properly using the Rumour Mill.
 
-Neighbourhoods overlap, meaning that a given agent is the centre of its own neighbourhood, and is one of the three neighbours in three or more other agents’ neighbourhoods.
+Neighbourhoods overlap, meaning that a given agent is the centre of its own neighbourhood, and is one of at least three neighbours in three or more other agents' neighbourhoods.
 
 \subsubsection{Rumour Mechanics within a Neighbourhood}
 For a given event:
 \begin{itemize}
     \item The originator broadcasts an Origin rumour.
     \item Neighbour agents independently broadcast Source rumours interpreting that Origin rumour.
-    \item Any agent that receives three Source rumours for this Origin rumour can interpret the event through voting, and possibly creates an Opinion.
+    \item Any agent that receives three Source rumours for this Origin rumour can interpret the event through voting, and possibly broadcast an Opinion rumour.
 \end{itemize}
-Within the originator’s neighbourhood, there are up to three neighbour Source rumours (from its three neighbours), and potentially additional Source rumours from other agents as rumours propagate. To interpret an event and possibly broadcast an Opinion rumour, an agent needs three Source rumours, and those Source rumours may come from neighbours and/or other agents in the swarm.
+Within the originator's neighbourhood, there are at least three neighbour Source rumours (from its neighbours). To interpret an event and possibly broadcast an Opinion rumour, an agent needs three Source rumours from three distinct source agents, and those Source rumours may come from neighbours and/or other agents in the swarm - they are not required to come from the three distinct source agents, they might as well come from one agent in broadcasting range.
 
 \vspace{0.2cm}
 
 \subsubsection{Tolerance of One Byzantine Neighbour}
-Consider a single neighbourhood of 4 agents (A = originator, plus neighbours B, C, D), and assume at most one of these neighbours is Byzantine:
+Consider a single neighbourhood of 4 fully operational agents (A = originator, plus neighbours B, C, D), and assume at most one of these neighbours is Byzantine:
 \begin{itemize}
     \item In the worst case, one neighbour (say B) may send misleading or malicious Source rumours.
     \item The other two neighbours (C and D) are non-faulty and produce correct Source rumours.
     \item Any agent forming an Opinion based on three Source rumours will see at least two honest Source rumours out of the three.
 \end{itemize}
-Since Opinions are derived from multiple independent Source rumours, a single Byzantine neighbour cannot, by itself, force a consistently incorrect Opinion if the Opinion logic respects the majority of honest Source rumours. Therefore with neighbourhood size 4 (1 + 3), the design can tolerate one Byzantine agent per neighbourhood without corrupting the consensus process, assuming that Opinion formation logic is dominated by honest Source rumours.
+Since Opinions are derived from multiple independent Source rumours, a single Byzantine neighbour cannot, by itself, force a consistently incorrect 
+Opinion if the Opinion logic respects the majority of honest Source rumours. Therefore with neighbourhood size 4 (1 + 3), the design can tolerate one 
+Byzantine agent per neighbourhood without corrupting the consensus process, assuming that Opinion formation logic is dominated by honest Source rumours.
 
 \vspace{0.2cm}
 
@@ -138,7 +142,7 @@ A key constraint is for each neighbourhood N$_i$, the number of Byzantine agents
 \end{equation*}
 where B is the set of Byzantine agents.
 
-If this constraint holds, then each neighbourhood’s Opinions are dominated by honest Source rumours, swarm-wide consensus remains trustworthy, and the overall system remains safe, even with multiple Byzantine agents.
+If this constraint holds, then each neighbourhood's Opinions are dominated by honest Source rumours, swarm-wide consensus remains trustworthy, and the overall system remains safe, even with multiple Byzantine agents.
 
 Roughly speaking (and ignoring clustering effects), with N agents and neighbourhoods of size 4, the swarm can tolerate up to on the order of N/4 Byzantine agents \textbf{provided they are spread out} so that no neighbourhood contains more than one Byzantine agent. This is an approximation, not a strict bound, and a precise analysis is left for future work.
 
@@ -156,6 +160,8 @@ In this design, $\alpha$ is treated as a configurable parameter (70\% used in ex
     \item Communication reliability.
     \item Mission time constraints.
 \end{itemize}
+
+The exact value of $\alpha$ is left for future work.
 
 \subsection{Prevention of Contradictory Actions}
 
@@ -175,7 +181,7 @@ The combination of the \gls{rumourmill}, the \gls{secmarket}, and state machine 
     \end{itemize}
     \item Conflicting roles
     \begin{itemize}
-        \item[$\circ$] The state machine defines allowed transitions (e.g. from search to return, not both at once).
+        \item[$\circ$] The state machine defines allowed transitions (e.g. from PrimarySearch to Returning, not both at once).
         \item[$\circ$] Rumour Mill decisions (e.g. \gls{subject} confirmed, mission aborted) lead to consistent role changes across the swarm.
     \end{itemize}
 \end{itemize}
@@ -185,14 +191,14 @@ These mechanisms prevent the most dangerous inconsistencies during mission execu
 The protocol module assumes a lossy, broadcast communication channel, i.e., not every agent receives every message. However:
 \begin{itemize}
     \item Origins, Sources, Opinions, and decision-Origins are broadcast repeatedly over time,
-    \item neighbourhoods overlap, creating multiple paths for information to propagate,
-    \item agents maintain rumour state and can act on messages received later.
+    \item Neighbourhoods overlap, creating multiple paths for information to propagate.
+    \item Agents maintain rumour state and can act on messages received later.
 \end{itemize}
 Under these conditions:
 \begin{itemize}
-    \item all non-faulty agents will eventually receive the decision-Origin for each rumour,
-    \item their local AgentInfo and SectorInfo will converge to the same values,
-    \item their state machines will react consistently.
+    \item All non-faulty agents will eventually receive the decision-Origin for each rumour.
+    \item Their local AgentInfo and SectorInfo will converge to the same values.
+    \item Their state machines will react consistently.
 \end{itemize}
 This eventual consistency is sufficient for SAR missions where real-time, perfectly synchronised decisions are not strictly required, but coherent behaviour over time is.
 
@@ -206,8 +212,8 @@ The decentralised design of the protocol module offers several safety benefits:
     \end{itemize}
     \item Local containment of faults
     \begin{itemize}
-        \item[$\circ$] Faulty behaviour from one agent is limited by neighbourhood cross-checking and the need for multiple Source rumours and Opinions.
-        \item[$\circ$] Degraded agents are moved into secondary or terminal roles.
+        \item[$\circ$] Faulty behaviour from one agent is limited by neighbourhood cross-checking and the need for multiple Source rumours and Opinion rumours.
+        \item[$\circ$] Degraded agents are moved into PartiallyOperational or Failed.
     \end{itemize}
     \item Graceful scaling
     \begin{itemize}
@@ -216,7 +222,7 @@ The decentralised design of the protocol module offers several safety benefits:
     \end{itemize}
     \item Resilience to communication loss
     \begin{itemize}
-        \item[$\circ$] Because logic is local and rumour-based, temporary disconnects do not permanently break the system; agents can rejoin and resynchronise through the registration procedure.
+        \item[$\circ$] Because logic is local and rumour-based, temporary disconnects do not permanently break the system; Agents can rejoin and resynchronise through proper registration procedure.
     \end{itemize}
 \end{itemize}
 
