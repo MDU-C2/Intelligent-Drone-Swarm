@@ -24,3 +24,5 @@ pdflatex main.tex
 ```bash
 pdflatex main.tex
 ```
+
+cd .\documents\
