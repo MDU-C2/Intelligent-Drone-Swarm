@@ -44,7 +44,7 @@ Each fully operational agent maintains a neighbourhood of four fully operational
 \subsubsection{Neighbourhood Formation at Mission Start}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-24_AD - Initial Neighbourhoods 1.0.png}
+    \includegraphics[width=\linewidth]{SD-24_AD - Initial Neighbourhoods 1.0.png}
     \caption{\textit{(SD-24)} \gls{actdia} showing the process of neighbourhood formation after initial sectors have been assigned.}
     \label{fig:ad-initial-neighbourhoods}
 \end{figure}
@@ -53,7 +53,7 @@ Each fully operational agent maintains a neighbourhood of four fully operational
 \subsubsection{Neighbourhood updates after join/re-join}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/System-Design/SD-25_AD - Recalculate Neighbourhoods 1.0.png}
+    \includegraphics[width=0.8\linewidth]{SD-25_AD - Recalculate Neighbourhoods 1.0.png}
     \caption{\textit{(SD-25)} \gls{actdia} showing the process of neighbourhood updates after agents join or re-join after mission start.}
     \label{fig:ad-neighbourhood-updates}
 \end{figure}
@@ -94,7 +94,7 @@ Each agent is a \acrshort{uav} equipped with standard flight systems (example fo
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-10_IBD - Agent 1.0.png}
+    \includegraphics[width=\linewidth]{SD-10_IBD - Agent 1.0.png}
     \caption{\textit{(SD-10)} \acrshort{ibd} of \glspl{agent}' internal structure.}
     \label{fig:IBD-agent}
 \end{figure}
@@ -118,14 +118,14 @@ A simplified architecture of the protocol is defined by \cref{fig:bdd-protocol},
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\linewidth]{figures/System-Design/SD-13_BDD - Protocol 1.0.png}
+    \includegraphics[width=1.1\linewidth]{SD-13_BDD - Protocol 1.0.png}
     \caption{\textit{(SD-13)} \acrshort{bdd} of which main parts the protocol module contains.}
     \label{fig:bdd-protocol}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-16_IBD - Protocol 1.0.png}
+    \includegraphics[width=\linewidth]{SD-16_IBD - Protocol 1.0.png}
     \caption{\textit{(SD-16)} \acrshort{ibd} of the protocol module's main parts.}
     \label{fig:ibd-protocol}
 \end{figure}
@@ -185,7 +185,7 @@ The protocol module consists of several submodules that relate to each other thr
 In \cref{fig:ibd-protocolBB}, flowports named ui\_Rx and ui\_Tx are to receive broadcasts from and broadcast to SwarmInterface, flowports named P2P\_Rx and P2P\_Tx are to receive broadcasts from and broadcast to other \glspl{agent}, and the flowport named faultManUnit is for receiving messages from the \acrshort{fmu}. Flow specifications for the flowports can be seen in \cref{fig:flowspec}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-15_IBD - Protocol BlackBox 1.0.png}
+    \includegraphics[width=0.7\linewidth]{SD-15_IBD - Protocol BlackBox 1.0.png}
     \caption{\textit{(SD-15)} Blackbox view of the protocol. }
     \label{fig:ibd-protocolBB}
 \end{figure}
@@ -195,7 +195,7 @@ In \cref{fig:ibd-protocolBB}, flowports named ui\_Rx and ui\_Tx are to receive b
 In \Cref{fig:flowspec}, ROr means Rumour Origin, RS means Rumour Source, and ROp means Rumour Opinion.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-09_FlowSpecifications - RxTx 1.0.png}
+    \includegraphics[width=\linewidth]{SD-09_FlowSpecifications - RxTx 1.0.png}
     \caption{\textit{(SD-09)} Flow specification for flowports.}
     \label{fig:flowspec}
 \end{figure}
@@ -306,7 +306,7 @@ Static information is defined before the mission, is identical for every agent, 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/System-Design/SD-14_IBD - StaticInfo 1.0.png}
+    \includegraphics[width=0.7\linewidth]{SD-14_IBD - StaticInfo 1.0.png}
     \caption{\textit{(SD-14)} Examples of what StaticInfo contains.}
     \label{fig:ibd-statinfo}
 \end{figure}
@@ -364,28 +364,28 @@ Dynamic information includes:
 \subsection{Information Model \& Data Types}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/System-Design/SD-05_DataTypes 1.0.png}
+    \includegraphics[width=0.9\linewidth]{SD-05_DataTypes 1.0.png}
     \caption{\textit{(SD-05)} Datatypes used in the system.}
     \label{fig:datatypes}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-06_RumourOrigins 1.0.png}
+    \includegraphics[width=\linewidth]{SD-06_RumourOrigins 1.0.png}
     \caption{\textit{(SD-06)} Contents of Origin Rumours.}
     \label{fig:origins}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-07_RumourSources 1.0.png}
+    \includegraphics[width=\linewidth]{SD-07_RumourSources 1.0.png}
     \caption{\textit{(SD-07)} Contents of Source Rumours.}
     \label{fig:sources}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/System-Design/SD-08_RumourOpinions 1.0.png}
+    \includegraphics[width=\linewidth]{SD-08_RumourOpinions 1.0.png}
     \caption{\textit{(SD-08)} Contents of Opinion Rumours.}
     \label{fig:opinions}
 \end{figure}
@@ -419,14 +419,14 @@ Note that only the high-level interface between SwarmInterface and the protocol 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/System-Design/SD-11_BDD - SwarmInterface 1.0.png}
+    \includegraphics[width=0.9\linewidth]{SD-11_BDD - SwarmInterface 1.0.png}
     \caption{\textit{(SD-11)} \acrshort{bdd} of a conceptual design of the SwarmInterface.}
     \label{fig:bdd-swarmint}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/System-Design/SD-12_IBD - SwarmInterface BlackBox 1.0.png}
+    \includegraphics[width=0.6\linewidth]{SD-12_IBD - SwarmInterface BlackBox 1.0.png}
     \caption{\textit{(SD-12)} Blackbox view of the SwarmInterface.}
     \label{fig:ibd-swarmint}
 \end{figure}
@@ -450,7 +450,7 @@ In \cref{fig:ibd-comm-context}, even though flowports are named P2P\_Rx / P2P\_T
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\linewidth]{figures/System-Design/SD-21_IBD - Communication Context 1.0.png}
+    \includegraphics[width=1.1\linewidth]{SD-21_IBD - Communication Context 1.0.png}
     \caption{\textit{(SD-21)} \acrshort{ibd} over communication context. }
     \label{fig:ibd-comm-context}
 \end{figure}
