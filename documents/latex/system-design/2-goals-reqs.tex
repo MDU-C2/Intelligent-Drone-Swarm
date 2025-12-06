@@ -12,7 +12,7 @@ The goals and requirements are maintained in the following main artefacts in the
 \end{itemize}
 
 \subsection{Project Goals}
-The project goals in \textit{goals} capture what the IRDS System of Systems is intended to achieve at a high level. Key examples include:
+The project goals in \textit{goals} capture what the IRDS System of Systems (SoS) is intended to achieve at a high level. Key examples include:
 \begin{itemize}
     \item G-01 - Assign an appropriate task to each agent at the start of the mission.
     \item G-02 - When an agent fails, automatically reassign its tasks to other functional agents when resources permit.
@@ -62,13 +62,15 @@ In the architectural view adopted in this document, the IRDS protocol module is 
 \vspace{0.2cm}
 
 \subsubsection{Traceability}
-A detailed mapping from goals and requirements to design elements is maintained in the project’s requirements database. At a high level:
+A detailed mapping from goals and requirements to design elements is maintained in the project's requirements database. 
+
+A high level mapping from goals and requirements to sections in this document is the following:
 \begin{itemize}
     \item Swarm-level requirements such as SW-01-SW-07 and SR-02-SR-07 are addressed by the swarm context (Section 2), the system overview (Section 3), the Sector Allocation Market (Section 6), and the Agent Task \& Role Allocation layer (Section 7)
     \item System-level protocol requirements (PM-xx) are mainly realised by the architecture described in Section 4, the Rumour Mill protocol in Section 5, and the Sector Allocation Market and Task \& Role Allocation layers in Sections 6 and 7.
     \item Subsystem-level requirements (CON-xx, INF-xx, MSG-xx, SIS-xx) correspond to the internal sub-modules of the protocol module described in Sections 4 and 5.
 \end{itemize}
-The full traceability matrix is maintained outside this document and can be consulted for detailed one-to-one mappings between individual requirements and specific design artefacts.
+%The full traceability matrix is maintained outside this document and can be consulted for detailed one-to-one mappings between individual requirements and specific design artefacts.
 
 \Cref{tab:matrix} provides a small sample of the full requirements-design traceability matrix, illustrating how selected goals and requirements are realised by specific architectural elements and sections in this document.
 
