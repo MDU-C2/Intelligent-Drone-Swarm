@@ -27,10 +27,10 @@ In the current design, the SwarmInterface is a conceptual component. Future work
     \item Controls for sending high-level commands (start, pause, abort, area updates).
     \item Visualisation of swarm status:
     \begin{itemize}
-        \item Agent positions and health statuses.
-        \item Which sectors are assigned / in progress / completed.
-        \item Agents returning for battery change.
-        \item Subject found / confirmed events.
+        \item[$\circ$] Agent positions and health statuses.
+        \item[$\circ$] Which sectors are assigned / in progress / completed.
+        \item[$\circ$] Agents returning for battery change.
+        \item[$\circ$] Subject found / confirmed events.
     \end{itemize}
     \item Event logging, playback, and debugging tools.
 \end{itemize}
@@ -53,10 +53,8 @@ Currently, the protocol module defines limited secondary tasks for degraded agen
 
 Future enhancements may include:
 \begin{itemize}
-    \item Communication relay positioning:
-    \item[] Selecting optimal relay positions based on neighbourhood geometry or sector layout.
-    \item Search assistance:
-    \item[] Using partially degraded agents to search sectors owned by healthy agents.
+    \item Communication relay positioning: Selecting optimal relay positions based on neighbourhood geometry or sector layout.
+    \item Search assistance: Using partially degraded agents to search sectors owned by healthy agents.
 \end{itemize}
 
 Additionally, neighbourhoods may vote (via independent Sources) on where a degraded agent should position itself as a communication relay, improving cooperative performance.
