@@ -18,3 +18,6 @@ __pycache__/
 .synctex(busy)
 documents/latex/*.pdf
 main.pdf
+db_name.txt
+local.db
+.csv

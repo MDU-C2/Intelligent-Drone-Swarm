@@ -5,7 +5,7 @@ Preview & confirm deletes with cascade awareness.
 Assumes your updated schema:
 - Join tables CASCADE on delete
 - parent_id in system/subsystem uses ON DELETE SET NULL
-- verification_method/method_id uses ON DELETE SET NULL
+- vv_method/method_id uses ON DELETE SET NULL
 """
 
 from ..core.connect_database import connect_database
@@ -46,7 +46,7 @@ def preview_swarm(cur, swarm_req_id: str) -> Dict:
             "swarm_req_children": {"count": len(src), "sample": src[:10]},
         },
         "detach": {},  # none specific
-        "set_null": {} # verification_method is SET NULL but we don't need a count here
+        "set_null": {} # vv_method is SET NULL but we don't need a count here
     }
 
 
@@ -93,9 +93,9 @@ def preview_method(cur, method_id: str) -> Dict:
     vjd = _fetch_list(cur, "SELECT id, doc_id FROM V_join_documents WHERE method_id = ?", (method_id,))
     # SET NULL refs (we won’t list all, but show counts)
     g = _fetch_one(cur, "SELECT COUNT(*) FROM goals WHERE method_id = ?", (method_id,))
-    sw = _fetch_one(cur, "SELECT COUNT(*) FROM drone_swarm_requirements WHERE verification_method = ?", (method_id,))
-    sy = _fetch_one(cur, "SELECT COUNT(*) FROM system_requirements WHERE verification_method = ?", (method_id,))
-    ss = _fetch_one(cur, "SELECT COUNT(*) FROM subsystem_requirements WHERE verification_method = ?", (method_id,))
+    sw = _fetch_one(cur, "SELECT COUNT(*) FROM drone_swarm_requirements WHERE vv_method = ?", (method_id,))
+    sy = _fetch_one(cur, "SELECT COUNT(*) FROM system_requirements WHERE vv_method = ?", (method_id,))
+    ss = _fetch_one(cur, "SELECT COUNT(*) FROM subsystem_requirements WHERE vv_method = ?", (method_id,))
     return {
         "entity": ("test_and_verification", "method_id", method_id),
         "cascade_links": {
@@ -104,9 +104,9 @@ def preview_method(cur, method_id: str) -> Dict:
         "detach": {},
         "set_null": {
             "goals.method_id": g,
-            "drone_swarm_requirements.verification_method": sw,
-            "system_requirements.verification_method": sy,
-            "subsystem_requirements.verification_method": ss,
+            "drone_swarm_requirements.vv_method": sw,
+            "system_requirements.vv_method": sy,
+            "subsystem_requirements.vv_method": ss,
         }
     }
 

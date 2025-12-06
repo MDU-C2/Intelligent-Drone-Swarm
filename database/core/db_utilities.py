@@ -123,6 +123,8 @@ class db_utilities:
             (new_value, condition_value)
         )
         return self.cursor.rowcount
+    def delete_table(self, table_name):
+        self.cursor.execute(f"DROP TABLE IF EXISTS {table_name}")
 
     def interactive_search(self):
         try:

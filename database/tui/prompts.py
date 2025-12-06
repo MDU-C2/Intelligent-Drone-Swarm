@@ -1,5 +1,6 @@
 # prompts.py
-
+from pathlib import Path
+import mimetypes
 import sqlite3
 from database.core.paths import DB_NAME_TXT
 
@@ -55,12 +56,12 @@ def prompt_drone_swarm_requirement():
     print("\nEnter new drone swarm requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional): ", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
         "swarm_req_id": prompt_input("Swarm Req ID (leave blank for auto): ", optional=True),
@@ -69,10 +70,10 @@ def prompt_drone_swarm_requirement():
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale: "),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
@@ -82,25 +83,25 @@ def prompt_system_requirement():
     print("\nEnter System Requirement (type 'exit' to cancel):")
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional):", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
-        "parent_id": prompt_input("PARENT System Req ID: "),
+        "parent_id": prompt_input("PARENT System Req ID:", optional=True),
         "sys_req_id": prompt_input("System Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale: "),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
@@ -111,25 +112,25 @@ def prompt_subsystem_requirement():
 
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H): ")
     if author == "EXIT": return None
-    reviewer = prompt_input("Reviewer (different from author (TBR allowed)): ")
-    if reviewer == "EXIT": return None
-    verification_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
-    if verification_status == "EXIT": return None
-    verification_method = prompt_input("Verification method ID (optional): ", optional=True)
-    if verification_method == "EXIT": return None
+    verifier = prompt_input("Reviewer (different from author (TBR allowed)): ")
+    if verifier == "EXIT": return None
+    validation_status = prompt_input("Verification status (Pending/Failed/Verified/Inconclusive): ")
+    if validation_status == "EXIT": return None
+    vv_method = prompt_input("Verification method ID (optional):", optional=True)
+    if vv_method == "EXIT": return None
 
     data = {
-        "parent_id": prompt_input("PARENT Subsystem Req ID (optional): ", optional=True),
+        "parent_id": prompt_input("PARENT Subsystem Req ID (optional):", optional=True),
         "sub_req_id": prompt_input("Subsystem Req ID (leave blank for auto): ", optional=True),
         "requirement": prompt_input("Requirement description: "),
         "priority": prompt_input("Priority (Key/Mandatory/Optional): "),
         "effect": prompt_input("Effect: "),
         "rationale": prompt_input("Rationale (optional): ", optional=True),
         "author": author,
-        "review_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
-        "reviewer": reviewer,
-        "verification_status": verification_status,
-        "verification_method": verification_method,
+        "verification_status": prompt_input("Review status (TBR/Reviewed/Accepted/Rejected): "),
+        "verifier": verifier,
+        "validation_status": validation_status,
+        "vv_method": vv_method,
         "comment": prompt_input("Comment (optional): ", optional=True)
     }
     if "EXIT" in data.values(): return None
@@ -159,14 +160,6 @@ def prompt_sysreq_children():
     if sub_req_id == "EXIT": return None
     return {"sys_req_id": sys_req_id, "sub_req_id": sub_req_id}
 
-def prompt_subsys_join_item():
-    print("\nLink subsystem requirement and item (subsys_join_item table (type 'exit' to cancel)):")
-    item_id = prompt_input("Item ID: ")
-    if item_id == "EXIT": return None
-    sub_req_id = prompt_input("Subsystem Req ID: ")
-    if sub_req_id == "EXIT": return None
-    return {"item_id": item_id, "sub_req_id": sub_req_id}
-
 def prompt_V_join_documents():
     print("\nLink test/verification and document (V_join_documents table (type 'exit' to cancel)):")
     method_id = prompt_input("Method ID: ")
@@ -195,16 +188,6 @@ def prompt_id_glossary():
     if meaning == "EXIT": return None
     return {"prefix": prefix, "meaning": meaning}
 
-def prompt_item():
-    print("\nInsert Item (type 'exit' to cancel)")
-    item_id = prompt_input("Item ID (leave blank for auto): ", optional=True)
-    if item_id == "EXIT":
-        return None
-    item_name = prompt_input("Item Name: ")
-    if item_name == "EXIT":
-        return None
-    return {"item_id": item_id, "item_name": item_name}
-
 def prompt_document():
     print("\nInsert Document (type 'exit' to cancel)")
     doc_id = prompt_input("Document ID (leave blank for auto): ", optional=True)
@@ -223,15 +206,50 @@ def prompt_document():
     author = prompt_input("Author (E.Z/C.N/Y.M.B/E.M/A.H, optional): ", optional=True)
     if author == "EXIT":
         return None
-    # file path omitted -> None
+
+    # NEW: ask for a path, read bytes, capture name & MIME
+    file_path_str = prompt_input("Path to file (optional): ", optional=True)
+    if file_path_str == "EXIT":
+        return None
+
+    file_bytes = None
+    file_name = None
+    mime_type = None
+
+    if file_path_str:
+        p = Path(file_path_str).expanduser()
+        if p.is_file():
+            try:
+                # optional: size guard
+                max_bytes = 50 * 1024 * 1024 # 50 MB
+                if p.stat().st_size > max_bytes:
+                    print("⚠️  File is too large; skipping file.")
+                else:
+                    file_bytes = p.read_bytes()
+                    file_name = p.name
+                    mime_type = mimetypes.guess_type(p.name)[0] or "application/octet-stream"
+            except Exception as e:
+                print(f"⚠️  Could not read file: {e}. Leaving file as None.")
+        else:
+            print("⚠️  File not found; leaving file as None.")
+
     return {
         "doc_id": doc_id,
         "title": title,
         "description": description,
-        "file": None,
+        "file": file_bytes,          # BLOB or None
         "version": version,
-        "author": author or None
+        "author": author or None,
+        "file_name": file_name,
+        "mime_type": mime_type
     }
+
+def prompt_delete_table():
+    print("\nDelete Table (type 'exit' to cancel)")
+    table_name = prompt_input("Table Name: ")
+    if table_name == "EXIT":
+        return None
+    return {"table_name": table_name}
 
 def prompt_vv_method():
     print("\nInsert V&V Method (type 'exit' to cancel)")
