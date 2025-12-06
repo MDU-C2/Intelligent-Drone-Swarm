@@ -7,24 +7,22 @@
 1. Open VSCode
 1. Get the LaTeX Workshop extension
 
-### Build glossary
-1. Open a Terminal and make sure you're in the correct folder (type `cd` followed by the start of the folder's name, then press TAB and then ENTER). Thereafter, run this command (switch `main` to the name of your main LaTeX build file ):
+### Get Glossary & References to Work
+1. Open a Terminal and run 
+```bash
+cd documents/latex
+```
+1. In the same terminal, run 
 ```bash
 pdflatex main.tex
-```
-1. Then this command
-```bash
+bibtex main
 makeglossaries main
-```
-1. Then this command
-```bash
+pdflatex main.tex
 pdflatex main.tex
 ```
-1. Then this command
-```bash
-pdflatex main.tex
-```
+**NOTE**: Switch out `main` with the name of your file, e.g. `CE-04_system-design-description`
 
+## Command Snippets
 
 
 ```bash
