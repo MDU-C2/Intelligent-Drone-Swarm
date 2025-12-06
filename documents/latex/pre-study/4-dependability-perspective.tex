@@ -1,0 +1,29 @@
+\section{Dependability Perspective}
+
+
+The \acrshort{irds} project is focused on dependability, and the project's success depends on the swarm’s ability to complete \acrshort{sar} missions in uncertain and dynamic environments, even when individual \acrshortpl{uav} degrade. The following dependability properties are central to the project:
+\begin{itemize}
+    \item Reliability
+    \item Availability
+    \item Safety
+\end{itemize}
+
+Those attributes shall ensure that the replanning protocol design does not focus only on functionality, but also incorporates dependability as an objective. Each of the dependability properties mentioned are achieved by the project’s management plans (Safety, Quality, Requirements, V\&V, and Configuration) to guarantee consistency and traceability during the development process.
+
+\subsection{Reliability}
+The \acrshort{uav} swarm must continue to perform its \acrshort{sar} mission despite the loss or degradation of one or more \acrshortpl{uav}. Reliability will be achieved by implementing distributed consensus and task reallocation mechanisms that prevent mission failure when \glspl{agent} are compromised. The replanning protocol must tolerate both single-\acrshort{uav} faults and swarm-level faults. This includes graceful performance degradation when a \acrshort{uav} is partially functional and collective resilience when UAVs are lost. Fault injection in simulation will be used to validate the system’s robustness against such conditions.
+
+\subsection{Availability}
+The \acrshort{uav} swarm should remain operational as long as possible, ensuring that \acrshort{sar} coverage is maintained unless the number of failed drones reaches a critical threshold. The ability to retask degraded \acrshortpl{uav} as communication relays or in less demanding roles supports availability by ensuring continued contribution of partially functioning \glspl{agent}.
+
+\subsection{Safety}
+Replanning must not introduce unsafe behaviours, such as mid-air collisions or conflicting tasks. Safety shall be considered by following established standards (ARP4754A, ARP4761A, and SORA), and by defining safety requirements that prevent hazardous states.
+
+%Reliability
+%Availability
+%Maintainability %Maintainability - Går bort för att vi inte har ett fysiskt system.
+%Safety
+%(SECURITY)
+%Confidentiality in information security.
+%Integrity in information security.
+%Availability in information security.

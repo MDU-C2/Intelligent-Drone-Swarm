@@ -1,0 +1,43 @@
+\section{Introduction}
+\begin{itemize}
+    \item \textbf{Project title:} \acrfull{irds}.
+    \begin{itemize}
+        \item[] \textit{Orignal title: Intelligent Replanning Protocol for a Fail-Operational Drone Swarm.}
+    \end{itemize}
+    \item \textbf{Project owner:} Luiz Giacomossi
+\end{itemize}
+
+\subsection{Background}
+
+The \acrfull{irds} project will address the challenge of maintaining mission continuity in \acrfull{sar} operations when individual \acrfullpl{uav} suffer degraded health or fail entirely. Previous work by \cite{LuizNotPublished} established a high-level blueprint for a safety-driven conceptual architecture for a fail-operational \acrshort{uav} swarm intended for \acrshort{sar} missions. The architecture contained a \acrfull{fmu} to detect hardware component failures and broadcast a degraded health message across the swarm. The next step is to transform this information into a protocol for collective replanning.
+
+In dynamic and uncertain environments, conventional single-\acrshort{uav} fault tolerance is insufficient. Instead, swarms must demonstrate fail-operational behaviour by continuing their mission despite the loss or degradation of one or more \glspl{agent}. This requires distributed consensus, adaptive task allocation, and resilient communication. The project shall build on current research on swarm resilience, distributed consensus, and communication architectures while focusing on dependable design and validation.
+
+The \acrshort{irds} project builds on this foundation by transforming that degraded health message into swarm-level replanning logic to enable the swarm to continue its \acrshort{sar} effectively even when one or more \acrshortpl{uav} are degraded.
+
+To achieve this, the following challenges must be addressed:
+
+\begin{enumerate}
+    \item Distributed Consensus
+    \item Dynamic Task Allocation
+    \item Protocol Design
+    \item Validation
+\end{enumerate}
+
+The contribution of the project team will be to create a decentralised replanning protocol that allows a degraded \acrshort{uav} to hand over its tasks, assume a secondary role, and allow the swarm to reach consensus on what to do -- all validated in simulation with fault injection.
+
+\subsection{Purpose}
+
+The purpose of this pre-study is to establish the foundations for a decentralised replanning protocol that ensures \acrshort{sar} missions can continue with maximum effectiveness despite \acrshort{uav} degradation. This includes:
+\begin{itemize}
+    \item Review prior work on consensus, task allocation, and communication in \acrshort{uav} swarms.
+    \item Define the conceptual system description and dependability objectives.
+    \item Identify relevant standards and regulations to guide the project.
+    \item Outline planned activities, roles, and deliverables for the project.
+\end{itemize}
+
+\subsection{Scope}
+The scope of this project is limited to the design, simulation (using gym-pybullets-drone \cite{pybullets}), and validation and verification of the replanning protocol. The project will establish what the \acrshort{uav} swarm will do, not how to do it. Hardware implementation and certification are excluded. The replanning protocol will be validated using a modified version of the simulation software, using fault injection, to test the performance of the replanning protocol. The outcome will be a validated protocol design, documented processes, and assurance artefacts in accordance with the FLA402 course requirements and course guide \cite{study-guide}.
+
+
+%Struktur, introduktion (backgroound, purpose, scope), System Descirption, Related Work, Proposed Solution
