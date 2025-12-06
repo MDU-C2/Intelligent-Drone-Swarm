@@ -24,3 +24,13 @@ pdflatex main.tex
 ```bash
 pdflatex main.tex
 ```
+
+
+
+```bash
+pdflatex CE-04_system-design-description.tex
+bibtex CE-04_system-design-description
+makeglossaries CE-04_system-design-description
+pdflatex CE-04_system-design-description.tex
+pdflatex CE-04_system-design-description.tex
+```
