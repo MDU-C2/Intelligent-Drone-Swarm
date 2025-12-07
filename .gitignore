@@ -1,4 +1,23 @@
 __pycache__/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.ist
+*.lof
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.glg
+*.gls
+.synctex(busy)
+documents/latex/*.pdf
+main.pdf
 db_name.txt
 local.db
 .csv
