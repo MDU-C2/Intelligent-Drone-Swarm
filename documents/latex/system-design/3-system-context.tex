@@ -43,6 +43,8 @@ Responsibilities include:
     \item Allowing a \gls{searchmana} to draw Hot Regions on a map.
     \item Dividing a Search Area into rectangular \glspl{sector}.
     \item Assigning probability values to sectors based on marked Hot Regions.
+    \item Assigning initial sectors at initial mission set up.
+    \item Setting up initial neighbourhoods.
     \item Sending high-level commands to the swarm (e.g. mission start, pause, abort mission).
     \item Receiving and displaying aggregated swarm status such as:
     \begin{itemize}
@@ -117,7 +119,7 @@ The protocol module defines behaviour at the swarm coordination level. The follo
     \item Track dynamic information about agents and sectors.
     \item Pulse monitoring.
 \end{itemize}
-\newpage \noindent The following responsibilities fall outside the scope of the protocol:
+\noindent The following responsibilities fall outside the scope of the protocol:
 \begin{itemize}
     \item Low-level flight control (managed by the FCU).
     \item Navigation and GPS fusion.
