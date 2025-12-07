@@ -62,44 +62,5 @@ In the architectural view adopted in this document, the IRDS protocol module is 
 \vspace{0.2cm}
 
 \subsubsection{Traceability}
-A detailed mapping from goals and requirements to system design elements (SD-xx) is maintained in the project's requirements database. 
+A mapping from goals and requirements to system design elements (SD-xx) is maintained in the project's requirements database \cite{database}, and a mapping of requirements to sections in this document is maintained in \cite{trace-design}.
 
-A high level mapping from goals and requirements to sections in this document is the following:
-\begin{itemize}
-    \item Swarm-level requirements such as SW-01-SW-07 and SR-02-SR-07 are addressed by the swarm context (Section 2), the system overview (Section 3), the Sector Allocation Market (Section 6), and the Agent Task \& Role Allocation layer (Section 7)
-    \item System-level protocol requirements (PM-xx) are mainly realised by the architecture described in Section 4, the Rumour Mill protocol in Section 5, and the Sector Allocation Market and Task \& Role Allocation layers in Sections 6 and 7.
-    \item Subsystem-level requirements (CON-xx, INF-xx, MSG-xx, SIS-xx) correspond to the internal sub-modules of the protocol module described in Sections 4 and 5.
-\end{itemize}
-%The full traceability matrix is maintained outside this document and can be consulted for detailed one-to-one mappings between individual requirements and specific design artefacts.
-
-\Cref{tab:matrix} provides a small sample of the full requirements-design traceability matrix, illustrating how selected goals and requirements are realised by specific architectural elements and sections in this document.
-
-\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
-\begin{hyphenrules}{nohyphenation}
-\renewcommand{\arraystretch}{1.4}
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|P{2.2cm}|P{5cm}|P{8cm}|}
-        \hline
-        \textbf{Requirement ID} & \textbf{Short description} & \textbf{Realised by design elements / sections} \\
-        \hline
-        SW-01 & All agents shall be assigned a task at mission start. & 3 System Overview; 4.3 Agent Architecture; 6 Sector Allocation Market; 7 Agent Task \& Role Allocation \\
-        \hline
-        SW-07 & Agents shall be able to take local decisions when necessary. & 3.2 UAV Platform and Flight Systems; 4.2 External Components; 8.3 Safety and Local Emergency Behaviour \\
-        \hline
-        SR-03 & The swarm shall maintain separation and safety buffer zones. & 2.3 Swarm Context; 3.2 UAV Platform and Flight Systems; 8.3 Pulse Safety Mechanism and Buffer Zones \\
-        \hline
-        PM-01 & Protocol shall keep all agents aware of mission state. & 4 Protocol Module Architecture; 5 Rumour Mill Protocol; 5.4 Event Dissemination and Convergence \\
-        \hline
-        PM-03 & Protocol shall support task assignment based on capabilities. & 4.3 Agent Architecture; 6 Sector Allocation Market; 7 Task \& Role Allocation \\
-        \hline
-        CON-01 & Consensus sub-module shall define agreement on mission state. & 4.4 Consensus Sub-module; 5.2 Rumour Model; 8.5 Formal Fault Tolerance Model \\
-        \hline
-        MSG-02 & Messaging shall provide reliable delivery of critical updates. & 4.6 Communication Model; 5.3 Message Types; 5.5 Reliability and Acknowledgement Strategy \\
-        \hline
-    \end{tabular}
-    \caption{Sample requirements-design traceability.}
-    \label{tab:matrix}
-\end{table}
-\renewcommand{\arraystretch}{1.0}
-\end{hyphenrules}
