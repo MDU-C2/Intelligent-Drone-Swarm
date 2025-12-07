@@ -248,7 +248,7 @@ The protocol module does not assume that every broadcast reaches every agent, in
 \subsubsection{Agent $\leftrightarrow$ SwarmInterface Communication}
 The SwarmInterface participates in the same broadcast channel as the swarm, broadcasting and receiving messages such as:
 \begin{itemize}
-    \item Initialisation data (e.g. initial sector map, intended swarm size, initial neighbourhoods).
+    \item Initialisation data (e.g. initial sector map, intended swarm size, initial neighbourhoods, initial sector allocation).
     \item High-level commands (start mission).
     \item Swarm status updates (health changes, return requests, Subject found).
     \item Perceived number of agents in swarm.
@@ -400,6 +400,7 @@ The \gls{searchmana} interacts with the swarm through the SwarmInterface, where 
     \begin{itemize}
         \item[$\circ$] Initial Search Area.
         \item[$\circ$] Hot Regions.
+        %\item[$\circ$] List of Sectors (i.e., search area divided into sectors, and sectors valued using hot regions).
         \item[$\circ$] Mission start / pause / abort commands.
         \item[$\circ$] (potentially) mission updates.
     \end{itemize}
