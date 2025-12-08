@@ -43,3 +43,7 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 **NOTE**: Switch out `main` with the name of your file, e.g. `CE-01_pre-study.tex`
+
+## Useful Links
+- Font sizing: https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles
+- Math symbols: https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
