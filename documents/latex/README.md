@@ -10,7 +10,7 @@
     - Do not change how references are called, as this will create errors for other LaTeX projects.
 
 ## Template Files Used in all Projects
-*The following files must be copied to and used in all LaTex projects*
+*The following files in `templates` must be copied to and used in all LaTex projects*
 - `review-page.tex`
 - `title-page.tex`
 
@@ -25,7 +25,7 @@
 
 ## How to set up your project
 1. Put your main file (e.g., `CE-01_pre-study.tex` *(i.e., the file called `main.tex`on Overleaf)*) directly in the `latex` folder.
-1. Copy the code from `main-template.tex` to your main file.
+1. Copy the code from `template/main-template.tex` to your main file.
 1. Put all images in `latex/figures` in a folder specific for your project (e.g., `latex/figures/pre-study`).
 1. Put the rest of your files in a folder specific for your project (e.g., `latex/pre-study`).
 
