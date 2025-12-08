@@ -44,6 +44,32 @@ pdflatex main.tex
 ```
 **NOTE**: Switch out `main` with the name of your file, e.g. `CE-01_pre-study.tex`
 
+## Handy Code Snippets
+- Centered figure
+```bash
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/MDU_logotyp.png}
+    \caption{Text about the figure.}
+    \label{fig:unique-label}
+\end{figure}
+```
+- Centered table
+```bash
+\begin{table}[H]
+    \centering
+    \begin{tabular}{p{2cm}|p{2cm}}
+        \hline
+        Cell1 & Cell2 \\
+        \hline
+        Cell3 & Cell4\\
+        \hline
+    \end{tabular}
+    \caption{Text about the table.}
+    \label{tab:unique-label}
+\end{table}
+```
+
 ## Useful Links
 - Font sizing: https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles
 - Math symbols: https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
