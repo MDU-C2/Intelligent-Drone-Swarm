@@ -3,46 +3,35 @@
 \input{preamble}
 
 \begin{document}
-    \input{pre-study/title-page}
+
+    % TITLE PAGE & REVIEW PAGE
+    \input{your-project-folder/title-page}
+    \newpage
+    \thispagestyle{plain}   % For page numbering 
+    \pagestyle{plain}       % For page numbering 
+    \input{your-project-folder/review-page}
     \newpage
     
-    % For page numbering 
-    \thispagestyle{plain}
-    \pagestyle{plain}
-    
-    \input{pre-study/review-page}
-    \newpage
-    
-    \tableofcontents 
+    % TABLE OF CONTENTS AND GLOSSARY
+    \tableofcontents
     \clearpage
     \printglossaries
     \newpage
 
-    \input{pre-study/1-introduction}
+    % YOUR SECTIONS
+    \input{your-project-folder/introduction}
     \newpage
-    \input{pre-study/2-related-work}
+    \input{your-project-folder/method}
+
+    % REFERENCES
     \newpage
-    \input{pre-study/3-system-description-baseline}
-    %\input{pre-study/3-system-description}
-    \newpage
-    \input{pre-study/4-dependability-perspective}
-    \newpage
-    \input{pre-study/5-standards-regulations}
-    \newpage
-    \input{pre-study/6-planning-activities}
-    \newpage
-    \input{pre-study/7-roles-responsibilities}
-    \newpage
-    \input{pre-study/8-expected-outcomes}
-    \newpage
-    %\input{pre-study/9-review-quality-assurance}
-    %\newpage
-    
     % Select the IEEEtran style
     \bibliographystyle{IEEEtran}
     % Include bibliography file
     \bibliography{IEEEabrv, refs}
+
+    % APPENDIX 
     \clearpage % To have appendix start on new page
+    \input{your-project-folder/appendix}
     
-    \input{pre-study/appendix}
 \end{document}
