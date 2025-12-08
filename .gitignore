@@ -1,5 +1,3 @@
-__pycache__/
-
 # LaTeX build artifacts
 *.aux
 *.bbl
@@ -15,9 +13,13 @@ __pycache__/
 *.toc
 *.glg
 *.gls
-.synctex(busy)
+.synctex
 documents/latex/*.pdf
-main.pdf
+main.tex
+
+# Database
+__pycache__/
 db_name.txt
 local.db
-.csv
+database/*.csv
+database/*.png
