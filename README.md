@@ -11,6 +11,8 @@
 
 [Commonly used terms in the project](documents/cheat-sheets/commonly-used-terms.md)
 
+[GitHub Rules](github-rules.md)
+
 ## Introduction
 This project addressed the conceptual design of swarm-level coordination logic that uses detailed health information from all UAVs in a swarm to ensure the overall mission can continue with maximum efficiency, even when individual UAVs are compromised.
 
