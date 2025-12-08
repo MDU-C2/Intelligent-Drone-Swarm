@@ -62,14 +62,32 @@ pdflatex main.tex
         \hline
         Cell1 & Cell2 \\
         \hline
-        Cell3 & Cell4\\
+        Cell3 & Cell4 \\
         \hline
     \end{tabular}
     \caption{Text about the table.}
     \label{tab:unique-label}
 \end{table}
 ```
+- Centered and vertically stretched table
+```bash
+\renewcommand{\arraystretch}{1.4}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{p{2cm}|p{2cm}}
+            \hline
+            Cell1 & Cell2 \\
+            \hline
+            Cell3 & Cell4 \\
+            \hline
+        \end{tabular}
+        \caption{Text about the table.}
+        \label{tab:unique-label}
+    \end{table}
+\renewcommand{\arraystretch}{1.0}
+```
 
 ## Useful Links
 - Font sizing: https://www.overleaf.com/learn/latex/Font_sizes%2C_families%2C_and_styles
 - Math symbols: https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+- Tables: https://www.overleaf.com/learn/latex/Tables
