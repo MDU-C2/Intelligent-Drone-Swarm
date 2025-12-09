@@ -8,8 +8,8 @@
 - Teachers: Julieth Castellanos and Luiz Giacomossi
 
 ### Project Group Members
-- Andrea Haglund, Chief Engineer
-- Claire Namatovu, Requirements Manager
+- Andrea Haglund, Chief Engineer (<a href="mailto:andreahaglund@outlook.com">personal email</a>)
+- Claire Namatovu, Requirements Manager 
 - Emily Zainali, Validation & Verification Manager
 - Esaias Målqvist, Safety Manager
 - Yonatan Michael Beyene, Quality & Configuration Manager
