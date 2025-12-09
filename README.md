@@ -23,39 +23,43 @@ The project required students to design and validate a decentralised protocol fo
 Harris Aerial, Carrier H6HL: <a href ="https://harrisaerial.com/carrier-drones/carrier-h6hl/">Website</a>, <a href ="https://harrisaerial.com/wp-content/uploads/2025/09/H6HL_brochure_final_2025.pdf">Brochure</a>
 
 ## This repository contains
-- [Database](database) <i>(and database code)</i>
-- [Documents](documents)
+- [Database](database/) and database program
+- [Documents](documents/)
   - Pre-Study
   - System Design Description
   - Final Report
   - Release Notes
-  - [Cheat sheets](documents/cheat-sheets)
+  - [Cheat sheets](documents/cheat-sheets/)
     - Commonly used terms in the project
     - GitHub text formatting + adding/renaming folders
     - HTML text formatting
     - List of IDs used in the project
     - Quality checklist for reports
-  - [LaTeX](documents/latex)
+  - [LaTeX](documents/latex/)
     - Instructions on how to use LaTeX locally
     - Template files
     - LaTeX projects
-  - [Plans](documents/plans)
+  - [Plans](documents/plans/)
     - Project Plan
-    - Management Plans
-  - [Requirements](documents/requirements)
-    - PDF versions of the database
+    - Configuration Management Plan
+    - Quality Management Plan
+    - Requirements Management Plan
+    - Safety Management Plan
+    - Validation & Verification Management Plan
+  - [Requirements](documents/requirements/)
+    - PDF versions of the tables in the [database](database)
     - Requirements Specification Guide
     - Traceability Matrix: Requirements to System Design Elements
-  - [Safety](documents/safety)
+  - [Safety](documents/safety/)
     - Preliminary Safety Assurance Case
     - Preliminary Safety Assessment
     - Flight Safety Assessment
     - Safety Assessment
     - Safety Goals & Requirements
     - Safety Assurance Case
-  - [Validation & Verification](documents/validation-verification)
+  - [Validation & Verification](documents/validation-verification/)
     - Validations & Verifications
     - Test Specification
-- [Images](images) used in the project
-- [Swarm Simulation](swarm-simulation)
-  - Code files for simulating a swarm
+- [Images](images/) used in the project
+- [Swarm Simulation](swarm-simulation/)
+  - Program for simulating a swarm
